@@ -1,0 +1,61 @@
+\chapter{Fundamentação teórica}\label{cap_exemplos}
+
+\chapterprecis{Introdução sobre arquitetura de microserviços e DevOps, revisão da literatura.}\index{sinopse de capítulo}
+
+% ---
+\section{Arquitetura de microserviços}
+% ---
+
+Microserviços são uma abordagem arquitetônica e organizacional do desenvolvimento de software na qual o software consiste em pequenos serviços independentes que se comunicam usando APIs bem definidas. Esses serviços pertecem a pequenas equipes autossuficientes.
+
+A arquitetura de microserviços (AMS) está ganhando força no desenvolvimento e entrega de aplicações de software como um conjunto de pequenos serviços granulares que podem ser integrados por meio de mecanismos de comunicação leve, normalmente APIs RESTful [10]. Microserviços são componentes pequenos e facilmente entendíveis que possuem capacidades de negócio no meio dos serviços [11]. Esses serviços podem ser escalados independentemente (já que são desacoplados) pela implementação de \texttt{stacks} de tecnologias diferentes [2]. Muitos pesquisadores e praticantes dizem que AMS é uma evolução da Arquitetura orientada a serviços (AOS), como visto no contexto de serviços independentes/auto-suficientes e de natureza leve [12]. Por outro lado, AMS pode ser diferenciada da AOS em termos de compartilhamento de componentes, comunicação de serviços, mediação de serviços, e acesso remoto aos serviços [13]. 
+% AOS é construida com base na ideia de compartilhar o máximo possível, enquanto AMS, o mínimo possível [13, 14]. AMS usa um estilo coreografico para comunicação inter-serviços, enquanto AOS aplica um estilo de orquestração para coordenação de serviços. Para mediação de serviços, AMS usa a camada de API que atua como uma fachada para o serviço, enquanto AOS adota o conceito de um \texttt{middleware} mensageiro para coodenação de serviços. Além disso, AMS em grande parte depende do protocolo REST e mensageria simples como protocolo de acesso remoto ao serviço; entretanto, AOS consegue lidar com diferentes tipos de protocolo de acesso remoto, incluindo mensageria simples para acessar serviços remotos [13].
+
+De acordo com Fowler, M., existem alguns pré-requisitos para começar a aplicar a usar a arquitetura de microserviços em um projeto - Provisionamento rápido, monitamento básico, e entrega (deployment) rápido.
+
+
+
+All of these services and the infrastructures where the services are developed, tested, and deployed require robust automation to handle the number of the processes and velocity of change [19]. It is argued that DevOps can reduce the impact of the challenges related to MSA development and operations [20]
+
+DevOps is a culture that combines new or improved practices, processes, team structures and responsibilities, and tools to maximize the ability of an organization to deliver applications and services quickly [15, 22]. DevOps acts as a process framework that can be used for developing, deploying, and managing MSA [1]. The coexistence of microservices and DevOps enables reusability, decentralized data governance, automation, and built-in scalability [2]. MSA and DevOps have many common characteristics that make them a perfect fit for each other. For instance, DevOps practices and MSA promote the idea of decomposing large problems into smaller pieces and then address them through small cross-functional teams [23]. Containerized microservices can be realized independently because DevOps gives them a favor of continuous integration and deployment. Although it is not compulsory to design software systems based on MSA in DevOps, most of the challenges arisen in DevOps can be resolved by using MSA [17]. This combination is expected to increase the team’s throughput and the overall quality of the system [1, 23]. For example, with MSA and DevOps, Netflix and Amazon engineers can do hundreds of deployments each day [19]. The MSA and DevOps combination brings several other benefits, including frequent software release, reliability and scalability of systems, resilience in the case of failure, and management of decentralized teams to control the application development [24, 25]. Moreover, the DevOps toolchain helps to continually code, build, test, package, release, configure, and monitor the MSA based systems. Furthermore, both MSA and DevOps are designed to offer great agility and operational efficiency for an enterprise
+% ---
+\section{DevOps}
+\label{devops}
+% ---
+
+\index{citações!diretas}Utilize o ambiente \texttt{citacao} para incluir citações diretas com mais de três linhas:
+
+\begin{citacao}
+As citações diretas, no texto, com mais de três linhas, devem ser
+destacadas com recuo de 4 cm da margem esquerda, com letra menor que a do texto utilizado e sem as aspas. No caso de documentos datilografados, deve-se observar apenas o recuo \cite[5.3]{NBR10520:2002}.
+\end{citacao}
+
+Use o ambiente assim:
+
+\begin{verbatim}
+\begin{citacao}
+As citações diretas, no texto, com mais de três linhas [...] 
+deve-se observar apenas o recuo \cite[5.3]{NBR10520:2002}.
+\end{citacao}
+\end{verbatim}
+
+O ambiente \texttt{citacao} pode receber como parâmetro opcional um nome de
+idioma previamente carregado nas opções da classe (\autoref{sec-hifenizacao}). Nesse
+caso, o texto da citação é automaticamente escrito em itálico e a hifenização é
+ajustada para o idioma selecionado na opção do ambiente. Por exemplo:
+
+\begin{verbatim}
+\begin{citacao}[english]
+Text in English language in italic with correct hyphenation.
+\end{citacao}
+\end{verbatim}
+
+Tem como resultado:
+
+\begin{citacao}[english]
+Text in English language in italic with correct hyphenation.
+\end{citacao}
+
+\index{citações!simples}Citações simples, com até três linhas, devem ser
+incluídas com aspas. Observe que em \LaTeX as aspas iniciais são diferentes das
+finais: ``Amor é fogo que arde sem se ver''.
