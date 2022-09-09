@@ -1,17 +1,34 @@
 \chapter{Introdução}
 
-Este documento e seu código-fonte são exemplos de referência de uso da classe \textbf{abntex2} e do pacote \textbf{abntex2cite}. O documento exemplifica a elaboração de trabalho acadêmico (tese, dissertação e outros do gênero) produzido conforme a ABNT NBR 14724:2011 \emph{Informação e documentação - Trabalhos acadêmicos - Apresentação}.
+In recent years, the rise of the internet and the ubiquity of mobile computing have made it necessary for application developers to design their applications focusing on a lightweight, self-contained component.
 
-A expressão ``Modelo Canônico'' é utilizada para indicar que \abnTeX\ não é modelo específico de nenhuma universidade ou instituição, mas que implementa tão somente os requisitos das normas da ABNT. Uma lista completa das normas observadas pelo \abnTeX\ é apresentada em \citeonline{abntex2classe}.
+Developers need to deploy applications quickly and make changes to the application without a complete redeployment. This has led to a new development paradigm called "microservices," where an application is broken into a suite of small, independent units that perform their respective functions and communicate via APIs.
 
-Sinta-se convidado a participar do projeto \abnTeX! Acesse o site do projeto em \url{http://www.abntex.net.br/}. Também fique livre para conhecer, estudar, alterar e redistribuir o trabalho do \abnTeX, desde que os arquivos modificados tenham seus nomes alterados e que os créditos sejam dados aos autores originais, nos termos da ``The \LaTeX\ Project Public License''\footnote{\url{http://www.latex-project.org/lppl.txt}}.
+Although independent units, any number of these microservices may be pulled by the application to work together and achieve the desired results.
 
-Encorajamos que sejam realizadas customizações específicas deste exemplo para universidades e outras instituições --- como capas, folha de aprovação, etc. Porém, recomendamos que ao invés de se alterar diretamente os arquivos do \abnTeX, distribua-se arquivos com as respectivas customizações. Isso permite que futuras versões do \abnTeX~não se tornem automaticamente incompatíveis com as customizações promovidas. Consulte \citeonline{abntex2-wiki-como-customizar} para mais informações.
+For the past several years, we have been developing standards and practices for team development of large, complex systems using a layered, monolithic architecture. This is reflected in how we organize into teams, structure our solutions and source code control systems, and package and release our software. 
 
-Este documento deve ser utilizado como complemento dos manuais do \abnTeX\ \cite{abntex2classe,abntex2cite,abntex2cite-alf} e da classe \textsf{memoir} \cite{memoir}. 
+% (Familiar, B. (2015). What Is a Microservice?. In: Microservices, IoT, and Azure. Apress, Berkeley, CA. https://doi.org/10.1007/978-1-4842-1275-2_2)
 
-Esperamos, sinceramente, que o \abnTeX\ aprimore a qualidade do trabalho que você produzirá, de modo que o principal esforço seja concentrado no principal: na contribuição científica. 
+% ---
+\section{Objetivos}\label{sec-objetivos}
+% ---
 
-Equipe \abnTeX. 
+Esta seção descreve os objetivos do trabalho. Esta é a
+\autoref{sec-objetivos}. Veja os objetivos específicos em \autoref{sec-objetivos-especificos}.
 
-Lauro César Araujo
+\subsection{Objetivo geral}\label{sec-objetivo-geral}
+
+Modelar uma implementação de arquitetura de microserviços, baseado nas práticas DevOps.
+
+\subsection{Objetivos específicos}\label{sec-objetivos-especificos}
+
+- Reunir práticas comuns na implementação de microserviços;
+
+- Analisar/testar a eficiência dessas práticas no contexto devops, por meio (estudos de caso? análise da literatura? exemplos de empresas que as usam?);
+
+- Reunir ferramentas bem estabelecidas na implementação de microserviços;
+
+- Analisar/testar a eficiência dessas ferramentas, por meio de (estudos de caso? análise da literatura? exemplos de empresas que as usam?);
+
+- Propor uma combinação dessas ferramentas e práticas a para construção de um aplicativo.
