@@ -3,8 +3,75 @@
 \chapterprecis{Introdução sobre arquitetura de microserviços e DevOps, revisão da literatura.}\index{sinopse de capítulo}
 
 % ---
-\section{Arquitetura de microserviços}
+\section{O que são microserviços}
 % ---
+
+The term microservice can be a bit misleading. The prefix “micro” implies that microservices are either tiny little entities. Microservices do work on our behalf but they are not always tiny. The “micro” in microservices is actually in reference to the scope of functionality that the service provides
+
+A microservice provides a business or platform capability through a well-defined API, data contract, and configuration. It provides this function and only this function. It does one thing and it does it well. This simple concept provides the foundation for a framework that will guide the design, development, and deployment of your microservices.
+
+Within the context of doing one thing and doing it well, microservices also exhibit a number of other properties and behaviors; it is these elements that differentiate microservices from previous incarnations of service-oriented approaches.
+
+\subsection{São autônomos e isolados}
+Autônomo - Existe ou é capaz de existir independetemente das outras partes.
+
+Isolado - Separado das outras partes. 
+
+Isso significa que microserviços são unidades auto-contidas de funcionalidade com dependências de outros serviços fracamente acopladas e são projetados, desenvolvidos, testados e lançados independentemente.
+
+\subsubsection*{Implicações}
+For the past several years, we have been developing standards and practices for team development of large, complex systems using a layered, monolithic architecture. This is reflected in how we organize into teams, structure our solutions and source code control systems, and package and release our software. Monolithic solutions are built, tested, and deployed as one large body of code, typically across set of server or VM instances, in order to provide scale and performance. If a bug is fixed or a feature added or content updated, the entire solution is built, tested, and deployed across the server farm as one large entity. The process of building, deploying, and regression testing the monolith is costly and time-consuming. Over time, these monoliths turn into large, complex, tightly coupled systems that are nearly impossible to maintain and evolve in new directions. If you want to adopt a microservices architecture, your standards and practices will need to adapt to this new pattern. Teams will need to be organized in such a way as to support the development of microservices as distinct, independent products. The development, test, and production environments will need to be organized to support these teams, developing and deploying their microservice products separate of one another. When changes are made, only the microservice affected needs to go through the deployment pipeline, thus simplifying the process of updating the system and delivering new features and functions. By dividing the solution up into its microservice component parts and treating them as separate development efforts, the speed of development will increase and the cost of making changes will go down.
+
+\subsection{São elásticos, resilientes, e responsivos}
+
+Elastic: Capable of returning to its original length, shape, etc., after being stretched, deformed, compressed, or expanded.
+
+Resilient: Able to become strong, healthy, or successful again after something bad happens.
+
+Responsive: Quick to respond or react.
+
+Microserviços são reusados entre muitas soluções diferentes e portanto devem ser escaláveis de acordo com o uso. Devem ser tolerantes a falhas e ter um tempo de recuperação razoável se algo der errado. E também devem ser responsivos, tendo um desempenho razoável de acordo com o uso.
+
+\subsubsection*{Implicações}
+
+The environment in which you deploy your microservices must provide dynamic scale and high availability configurations for both stateful and stateless services. This is achieved by leveraging a modern cloud platform such as Microsoft Azure. Azure provides all the necessary capabilities to support elastic scale, fault tolerance, and high availability as well as configuration options that allow you the right size for performance. You will delve into how Azure is a microservices platform in greater detail in Chapter 4.
+
+\subsection{São orientados-a-mensagens e programáveis}
+
+Orientado-a-mensagens: Software que conecta sistemas separados em uma rede, carregando e distribuindo mensagens entre eles.
+
+Programável: Um plano de tarefas que são executadas com para alcançar um objetivo específico.
+
+Microserviços dependem de APIs e contratos de dados para definir como interagir com o serviço. A API define um conjunto de endpoints acessíveis por rede, e o contrato de dados define a estrutura da mensagem que é enviada ou retornada.
+
+\subsubsection{Implicações}
+
+Defining service end points and data contracts is not new. Microservice architecture builds on the evolution of industry standards to define the interaction semantics. If these standards evolve or new ones are introduced, a microservice architecture will evolve to adopt these new standards. 
+At the time of this writing, the industry has generally settled on Representational State Transfer (ReST) over HTTP for defining API endpoints and JavaScript Object Notation (JSON) for the definition of data contracts. In addition, service bus capabilities such as store and forward message queues are used to provide loose coupling between components and an asynchronous programming model.
+
+APIs and data contracts are the outermost edge of a microservice and define how a client of the service can invoke a function. Behind this API may be a very sophisticated set of software components, storage mediums, and multiple VM instances that provide the function. To the consumer of the service this is all a black box, meaning they know the published inputs and outputs but nothing else about the inner workings. As a consumer of that service, they have knowledge of the published inputs and outputs, and nothing more. What is expected is that a message is constructed, the API is invoked, and a response is returned. The interaction between the consumer and the service is finite and distinct.
+
+\subsection{São configuráveis}
+
+Configurável: Projetado ou adaptado para formar uma configuração ou para algum propósito.
+
+Microserviços devem provêr mais do que apenas uma API e um contrato de dados. Para que seja reusável e para que possa resolver as necessidades de que sistema que o use, cada microserviço tem níveis diferentes de configuração, e esta configuração pode ser feita de diferentes formas.
+
+\subsubsection*{Implicações}
+
+As you begin the design process for a microservice, you will soon discover that multiple APIs will emerge. Along with the public-facing API that you want to expose to the world, other endpoints will surface that are more of an administrative function and will be used to define how to bootstrap, monitor, manage, scale, configure, and perform other perfunctory operations on the service. Like any good software product, a microservice should provide an easy-to-use interface or console for administrative functions to configure and manage running instances. Behind the console is, of course, a set of private to semi-private APIs that provides access to the underlying data and configuration settings driving the service. A microservice, then, is more than just its public-facing ReST API and consists of multiple APIs with varying levels of access, supporting administrative consoles and a runtime infrastructure to support all of the above. It is a software product with all the trimmings.
+
+\subsection {São automatizados}
+
+Automatizados: Funcionar sem precisar ser controlado diretamente.
+
+O ciclo de vida de um microserviço é totalmente automaticazado, desde o design até o lançamento.
+
+\subsubsection*{Implicações}
+
+As you ponder this new world of software product development made up of microservices, it may occur to you that this whole effort could be quite complex with a proliferation of independent microservice products and all the complexity that entails, and you would not be wrong. This approach should not be undertaken without first having complete automated control over the software development lifecycle. This is about having the right set of tools to support a fully automated development pipeline, but more importantly it is about evolving to a DevOps culture. A DevOps culture is one that promotes collaboration and integration of the development and operations teams. When you form a team that is responsible for the design, implementation, and deployment of a microservice, that team should be cross functional, consisting of all the skills necessary to carry the process from design through deployment. That means that traditional development teams consisting of architects, developers, and testers should be expanded to include operations. While developers are traditionally responsible for the automation from build through test, called continuous integration, the operations group is traditionally responsible for deployment across test, staging, and production. Combining these teams offers the opportunity to make automation of the entire product development pipeline as well as the monitoring, diagnostics, and recovery operations a first class activity of the product team. This process is called automation, and the entire team takes responsibility for smooth operation of product releases.
+
+\section{A arquitetura de microserviços}
 
 Microserviços são uma abordagem arquitetônica e organizacional do desenvolvimento de software na qual o software consiste em pequenos serviços independentes que se comunicam usando APIs bem definidas. Esses serviços pertecem a pequenas equipes autossuficientes.
 
@@ -17,45 +84,15 @@ De acordo com Fowler, M., existem alguns pré-requisitos para começar a aplicar
 
 All of these services and the infrastructures where the services are developed, tested, and deployed require robust automation to handle the number of the processes and velocity of change [19]. It is argued that DevOps can reduce the impact of the challenges related to MSA development and operations [20]
 
-DevOps is a culture that combines new or improved practices, processes, team structures and responsibilities, and tools to maximize the ability of an organization to deliver applications and services quickly [15, 22]. DevOps acts as a process framework that can be used for developing, deploying, and managing MSA [1]. The coexistence of microservices and DevOps enables reusability, decentralized data governance, automation, and built-in scalability [2]. MSA and DevOps have many common characteristics that make them a perfect fit for each other. For instance, DevOps practices and MSA promote the idea of decomposing large problems into smaller pieces and then address them through small cross-functional teams [23]. Containerized microservices can be realized independently because DevOps gives them a favor of continuous integration and deployment. Although it is not compulsory to design software systems based on MSA in DevOps, most of the challenges arisen in DevOps can be resolved by using MSA [17]. This combination is expected to increase the team’s throughput and the overall quality of the system [1, 23]. For example, with MSA and DevOps, Netflix and Amazon engineers can do hundreds of deployments each day [19]. The MSA and DevOps combination brings several other benefits, including frequent software release, reliability and scalability of systems, resilience in the case of failure, and management of decentralized teams to control the application development [24, 25]. Moreover, the DevOps toolchain helps to continually code, build, test, package, release, configure, and monitor the MSA based systems. Furthermore, both MSA and DevOps are designed to offer great agility and operational efficiency for an enterprise
+\section{Vantagens da arquitetura de microserviços}
+
+Evolução do software. 
+
+Quanto maior e mais antigo o software, mais difícil é de dar manutenção. E monolitos envelhecem com maior velocidade do que microserviços. Mas é possível migrar de um sistema monolito para a arquitetura de microserviços aos poucos, um serviço por vez, identificando capacidades de negócio, implementando-as como um microserviço, e integrando com uso de padrões de acoplamento solto [relaxado?folgado?] (loose coupling)
+
 % ---
 \section{DevOps}
 \label{devops}
 % ---
 
-\index{citações!diretas}Utilize o ambiente \texttt{citacao} para incluir citações diretas com mais de três linhas:
-
-\begin{citacao}
-As citações diretas, no texto, com mais de três linhas, devem ser
-destacadas com recuo de 4 cm da margem esquerda, com letra menor que a do texto utilizado e sem as aspas. No caso de documentos datilografados, deve-se observar apenas o recuo \cite[5.3]{NBR10520:2002}.
-\end{citacao}
-
-Use o ambiente assim:
-
-\begin{verbatim}
-\begin{citacao}
-As citações diretas, no texto, com mais de três linhas [...] 
-deve-se observar apenas o recuo \cite[5.3]{NBR10520:2002}.
-\end{citacao}
-\end{verbatim}
-
-O ambiente \texttt{citacao} pode receber como parâmetro opcional um nome de
-idioma previamente carregado nas opções da classe (\autoref{sec-hifenizacao}). Nesse
-caso, o texto da citação é automaticamente escrito em itálico e a hifenização é
-ajustada para o idioma selecionado na opção do ambiente. Por exemplo:
-
-\begin{verbatim}
-\begin{citacao}[english]
-Text in English language in italic with correct hyphenation.
-\end{citacao}
-\end{verbatim}
-
-Tem como resultado:
-
-\begin{citacao}[english]
-Text in English language in italic with correct hyphenation.
-\end{citacao}
-
-\index{citações!simples}Citações simples, com até três linhas, devem ser
-incluídas com aspas. Observe que em \LaTeX as aspas iniciais são diferentes das
-finais: ``Amor é fogo que arde sem se ver''.
+DevOps is a culture that combines new or improved practices, processes, team structures and responsibilities, and tools to maximize the ability of an organization to deliver applications and services quickly [15, 22]. DevOps acts as a process framework that can be used for developing, deploying, and managing MSA [1]. The coexistence of microservices and DevOps enables reusability, decentralized data governance, automation, and built-in scalability [2]. MSA and DevOps have many common characteristics that make them a perfect fit for each other. For instance, DevOps practices and MSA promote the idea of decomposing large problems into smaller pieces and then address them through small cross-functional teams [23]. Containerized microservices can be realized independently because DevOps gives them a favor of continuous integration and deployment. Although it is not compulsory to design software systems based on MSA in DevOps, most of the challenges arisen in DevOps can be resolved by using MSA [17]. This combination is expected to increase the team’s throughput and the overall quality of the system [1, 23]. For example, with MSA and DevOps, Netflix and Amazon engineers can do hundreds of deployments each day [19]. The MSA and DevOps combination brings several other benefits, including frequent software release, reliability and scalability of systems, resilience in the case of failure, and management of decentralized teams to control the application development [24, 25]. Moreover, the DevOps toolchain helps to continually code, build, test, package, release, configure, and monitor the MSA based systems. Furthermore, both MSA and DevOps are designed to offer great agility and operational efficiency for an enterprise

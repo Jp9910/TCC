@@ -1,5 +1,60 @@
 \chapter{Desenvolvimento}
 
-Para provisionamento, tem a ferramenta 
+Para provisionamento, considerar a ferramenta ~~
 
-Para lançamento, usar a tecnologia
+Para lançamento, considerar a tecnologia ~~
+
+Para comunicação entre serviços, APIs são a método mais comum.
+
+\section{Problemas, soluções e desafios.}
+
+\subsection*{Requerimentos de sistemas baseados em AMS em DevOps}
+
+This category reports the problems and solutions related to the requirements of MSA based systems. To address performance overhead issues, Study (S08) presents DevOps based CAOPLE language Integrated Development Environment (CIDE). This platform provides precise control over the deployment and testing of microservices to address the performance overhead. Study (S33) proposes the VM autoconfiguration methodology to address performance issues; VM auto-configuration method creates the central domain control agent for optimizing the performance of MSA based systems. Study (S18) proposes Unicorn framework to avoid delays and network performance issues, whereas Study (S24) suggests that architects should try not to decompose microservices too fine-grain. Study (S16) presents a DevOps based approach called “Neo-Metropolis”. This approach offers open source solutions (e.g., Terraform, Ansible, Mesos, and Hadoop) to deal with scalability and elasticity of MSA based systems across different cloud platforms. Study (S18) argues for the use of containers to deal with scalability issues because containers provide an easy way to scale operations by creating more copies of the services (S18). Study (S41) suggests that developing microservices around business capabilities can address this scalability issue.
+
+\subsection{Design of MSA based systems in DevOps}
+
+This category reports the problems and solutions related to the design of MSA based systems in DevOps (see Figure 6), which can be further classified into application decomposition (S28, S33, S35, S37), security and privacy (S10, S18, S20, S36), and uncertainty (S01). Study (S28) recommends the Domain-Driven Design (DDD) pattern to address the application decomposition problem. By applying the DDD pattern, architects identify the bounded context (capabilities within the system) that can be used as a starting point for defining microservices. Similarly, Study (S33) recommends the Model-ViewController (MVC) pattern for application decomposition into microservices in terms of business scope, functionalities, and responsibilities. Study (S10) presents the DevOps based ARCADIA framework to address security issues. This framework enables security and privacy across the microservices development lifecycle by providing multi-vendor security solutions (e.g., FWaaS and OAuth 2). Study (S18) presents DevOps based Unicorn framework that offers policies and constraints to meet security requirements of MSA based systems, whereas Study (S36) suggests that a combination of standard cryptographic primitives (e.g., hash and MAC functions for authentication encryption) can provide a high level of security to microservices communication and flexible authentication to DevOps teams. To deal with uncertainty issues in cloud-native architecture, Study (S01) proposes the theory-based control models at runtime patterns. Models at runtime patterns address the uncertainty aspects (e.g., resource availability) dynamically through the control loop.
+
+\subsection{Implementation of MSA based systems in DevOps}
+
+The identified problems and solutions in this category belong to microservices integration and managing databases for microservices. To deal with the operational and configuration complexity issue, Study (S20) recommends a CD platform, which provides a CD pipeline for each service that can give control over the integration of microservices. To address the complexity issues due to a large number of microservices, Study (S24) suggests two guidelines: first, keep the interface of each microservice as simple as possible for integration purposes, and second, it is recommended to use the technology which does not require specific programming language while implementing microservices to avoid from integration issues. Moreover, Study (S03) proposes a platform (i.e., HARNESS) to facilitate the integration of microservices that are developed in geographically distributed locations. In addition to these guidelines, Study (S08) also proposes the CIDE platform that provides precise control over testing, deployment, and integration of the new functionality into existing systems. To handle the problem of data management of MSA based systems, Study (S24) discusses the use of database per service and a shared database for multiple microservices patterns. Database per service pattern can be implemented through defining a separate set of tables per function, scheme per service, and database server per service, whereas a shared database pattern can be implemented by defining a single database for a group of microservices. Usually, microservices are grouped according to the business context to use the shared database.
+
+\subsection{Testing of MSA based systems in DevOps}
+The number of services, inter-communication processes, dependencies, instances, and other variables influence the testing process for MSA based systems in DevOps. We identified six studies that stress on excessive testing of MSA based systems in DevOps. Study (S28) claims that all traditional testing strategies (e.g., unit testing, functional testing, regression testing, etc.) can be used to test MSA based systems. Moreover, Study (S28) also recommends internal testing, service testing, protocol testing, composition testing, protocol testing, scalability/throughput testing, failover/fault tolerance testing, and penetration testing strategies. Apart from the testing strategies mentioned above, Study (S08) and Study (S11) presents the CIDE platform that can be used to test MSA based systems in DevOps. The tools we identified from the selected studies that can be used to test MSA based systems are listed in Figure 7.
+
+\subsection{Deployment of MSA based systems in DevOps}
+Many solutions have been proposed to address the issues of MSA based system deployment in DevOps (e.g., complexity, dynamic deployment, and deployment in development, production, and testing environment). For instance, Study (S12) recommends a multipurpose Docker Compose tool, which can work in different environments, such as staging, development, deployment, and testing environments, and smooth the deployment process of microservices in the development environment. Study (S27) recommends Kubernetes, working with a range of containers tools (e.g., Dockers), to deploy and scale microservices into the production environment. Study (S20) recommends that the frequent deployment of microservices must be automated through a CD pipeline to finish within due time. To address the problem of complexity in dynamic deployment of many microservices, Study (S08) and Study (S11) present the CIDE platform, which provides precise control over dynamic deployment through Communication Engine (CE) and Local Execution Engine (LEE). To deal with the problem of MSA based SaaS deployment, Study (S21) proposes the SmartVM framework to automate the deployment of MSA based SaaS. Study (S21) also provides strategies (e.g., Traefik, HTTP reverse proxy, round-robin) for load balancing and separating the functional and operational concerns. Jolie Redeployment Optimiser (JRO) has been employed to achieve an optimal deployment of MSA based systems (S25). JRO consists of three components: Zephyrus, Jolie Enterprise (JE), and Jolie Reconfiguration Coordinator (JRE), in which Zephyrus generates detailed and optimal architecture for MSA based systems, JE provides a framework for deploying and managing microservices, and JRE interacts with Zephyrus and JE for optimized deployment.
+
+\subsection{Monitoring of MSA based Systems in DevOps}
+A factory design pattern-based approach, called Omnia, has been proposed to address monitoring infrastructure problem (S05). This approach provides a component called monitoring interface, which enables developers to monitor MSA based systems independently and helps system administrators to build monitoring systems that are compatible with such interface by using monitoring factory components. Some tools can help address logging issues (see Figure 7). To address the problem of monitoring fine-grain microservices at runtime in a shared execution environment, Study (S18) presents DevOps based Unicorn framework, which can monitor highly decomposed MSA based systems at runtime (S18).
+
+\subsection{Organizational Problems}
+This theme reports problems related to culture, people, cost, and organization and team structure in the context of MSA and DevOps combination. To handle the problems that may be faced with when introducing MSA and DevOps combination in a given organization, Study (S23) suggests some guidelines, such as adopting new organizational structure, introducing small cross-functional teams, training for learning new skills (e.g., MSA, DevOps), changing employee habits toward the team work and sharing of responsibilities, and providing separate physical locations to teams, etc. Study (S24) suggests that the monolithic organizational structure needs to be aligned with the architecture of MSA based systems. Similarly, to address the issue related to establishing skilled and educated DevOps teams, Study (S24) suggests that the organization should arrange training programs for their employees for learning and adopting microservices in DevOps.
+
+\subsection{Resource Management Problems}
+This category provides the mapping of problems and solutions for different types of resources required to implement MSA in DevOps. Study (S01) recommends the virtualization of applications, infrastructures, and platforms resources as a solution for addressing resource management problems. Study (S09) suggests using containers and VMs for microservices in DevOps to get the desired level of efficiency in resource utilization. Study (S03) proposes the HARNESS approach (i.e., a DevOps based approach) that provides a cloud-based platform for bringing together commodity and specialized resources (e.g., skilled people). Study (S19) introduces an MSA based SONATA NFV platform with DevOps to address resource management problems by providing a set of tools (e.g., GitHub, Jenkins, Docker). The SONATA NFV platform can also create the CI/CD pipeline to automate steps in software delivery process. Study (S09) argued that dedicated access to the host’s hardware can be increased either by giving extra privileges to microservices or by enhancing the capability of containers to access the host resources.
+
+
+\section{Requerimentos de sistemas baseados em microserviços em DevOps}
+
+    - Performance Issue due to Lack of Dedicated Access to the Host's Hardware (S09)
+        . Enable Dedicated Access to the Host's Hardware (S09)
+
+    - Empowering Developers through intelligent Software (S45)
+        . Machine Learning-based Plug-In (S45)
+
+    - Performance Overhead due to Fine Grain Decomposition (S02, S06, S08, S11, S18, S24, S30, S33, S45)
+        . Unicorn Framework (S18)
+        . VM Auto-configuration Method (S18)
+        . CIDE Platform (S08)
+
+    Scaling MSA-based Systems (S16, S18, S41)
+        . Neo-Metropolis Pratflorm (S16)
+        . Designing microservices around business capabilites (S41)
+        . Containers (S18)
+
+\section{Design de sistemas baseados em microserviços em DevOps}
+
+Security and Privacy Across Cloud-Native Applications (S10, S18, S20, S23)
+    . ARCADIA framework (S10)
