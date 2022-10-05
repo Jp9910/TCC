@@ -137,11 +137,37 @@ Em uma mudança do monolito para microserviços, é recomendado que não sejam f
 
 \section*{Plataforma}
 
-C
+Creating the runtime environment for microservices requires a significant investment in dynamic infrastructure across regionally disperse data centers. If your current on-premises application platform does not support automation, dynamic infrastructure, elastic scale, and high availability, then it makes sense to consider a cloud platform. Microsoft Azure is a microservice platform, and it provides a fully automated dynamic infrastructure, SDKs, and runtime containers along with a large portfolio of existing microservices that you can leverage, such as DocumentDb, Redis In-Memory Cache, and Service Bus, to build your own microservices catalog.
 
-\section{Trabalhos relacionados}
+\section{Identificação}
 
-Citar os trabalhos e escrever um parágrafo sobre cada
+Domain-driven design (design orientado a domínio) é uma tecnica bem consolidada e muito usada. Mas para aplica-la em microserviços, é preciso analisar onde cada peça deve ficar. Em vez de modelar os modelos e os (contextos limitados) separando-os em camadas, pode-se juntar os contextos com seus respectivos modelos, e procurar por possíveis pontos de (separação) da aplicação - um lugar onde a linguagem muda, por exemplo. Isso resultaria em um ponto de partida para separar para uma arquitetura de microserviço.
+
+If you are currently working with a complex layered architecture and have a reasonable domain model defined, the domain model will provide a roadmap to an evolutionary approach to migrating to a microservice architecture. If a domain model does not exist, you can apply domain-driven design in reverse to identify the bounded contexts, the capabilities within the system.
+
+\section{Testes}
+
+Assim como a automação, testar o microserviço em cada passo do \emph{pipeline} de \emph{deploy} é necessário para a entrega rápida de software de qualidade.
+
+Escrever e testar código não muda muito entre as arquiteturas monolítica e de microserviços. Mas além dos métodos mais conhecidos de testes, como test-driven development, teste de unidade e teste funcional, é necessário testar os microserviços conforme passam pelo \emph{pipeline} de \emph{deploy}.
+
+- Internals Testing: Test the internal functions of the service including use of data access, caching, and other cross-cutting concerns.
+
+- Service Testing: Test the service implementation of the API. This is a private internal implementation of the API and its associated models.
+
+- Protocol Testing: Test the service at the protocol level, calling the API over the specified wire protocol, usually HTTP(s).
+
+- Composition Testing: Test the service in collaboration with other services within the context of a solution.
+
+- Scalability/Throughput Testing: Test the scalability and elasticity of the deployed microservice.
+
+- Failover/Fault Tolerance Testing: Test the ability of the microservice to recover after a failure.
+
+- PEN Testing: Work with a third-party software security firm to perform penetration testing. NOTE: This will requires cooperation with Microsoft if you are pen testing microservices deployed to Azure.
+
+\section{Detectável}
+
+Encontrar microserviços em um ambiente distribuido pode ser feito de algumas maneiras diferentes: Hardcode no código, guardar em um arquivo, ou fazer um microserviço para encontrar outros microserviços e disponibilizar suas localizações. Para prover detectabilidade como um serviço será necessário adquirir um produto de terceiros, integrar um projeto aberto, ou desenvolver sua própria solução.
 
 % ---
 \section{DevOps}
@@ -149,3 +175,22 @@ Citar os trabalhos e escrever um parágrafo sobre cada
 % ---
 
 DevOps is a culture that combines new or improved practices, processes, team structures and responsibilities, and tools to maximize the ability of an organization to deliver applications and services quickly [15, 22]. DevOps acts as a process framework that can be used for developing, deploying, and managing MSA [1]. The coexistence of microservices and DevOps enables reusability, decentralized data governance, automation, and built-in scalability [2]. MSA and DevOps have many common characteristics that make them a perfect fit for each other. For instance, DevOps practices and MSA promote the idea of decomposing large problems into smaller pieces and then address them through small cross-functional teams [23]. Containerized microservices can be realized independently because DevOps gives them a favor of continuous integration and deployment. Although it is not compulsory to design software systems based on MSA in DevOps, most of the challenges arisen in DevOps can be resolved by using MSA [17]. This combination is expected to increase the team’s throughput and the overall quality of the system [1, 23]. For example, with MSA and DevOps, Netflix and Amazon engineers can do hundreds of deployments each day [19]. The MSA and DevOps combination brings several other benefits, including frequent software release, reliability and scalability of systems, resilience in the case of failure, and management of decentralized teams to control the application development [24, 25]. Moreover, the DevOps toolchain helps to continually code, build, test, package, release, configure, and monitor the MSA based systems. Furthermore, both MSA and DevOps are designed to offer great agility and operational efficiency for an enterprise
+
+\section{Trabalhos relacionados}
+
+Citar os trabalhos e escrever um parágrafo sobre cada
+
+\section*{"Microservices, IoT and Azure", por Bob Familiar - capítulo 2: "What is a microservice"}
+
+O capítulo 2 do livro de Bob Familiar descreve o que é um microserviço, suas características e implicações, benefícios, e desafios. 
+
+"Microservices do one thing and they do it well". Como é explicado por \citeonline{Familiar2015} , microserviços representam business capabilities definidos usando o design orientado a domínio, são testados a cada passo do \emph{pipeline} de \emph{deploy}, e lançados por meio de automação, como serviços independentes, isolados, altamente escaláveis e resilientes em uma infraestrutura em núvem distribuída. Pertecem a um time único de desenvolvedores, que trata o desenvolvimento do microserviço como um produto, entregando software de alta qualidade em um processo rápido e iterativo com envolvimento do cliente e satisfação como métrica de sucesso.
+
+\section*{"A Systematic Mapping Study on Microservices Architecture in DevOps", por Waseem, M., Liang, P. e Shahin, M.}
+
+Esse trabalho tem o objetivo de sistematicamente identificar, analisar, e classificar a literatura sobre microserviços em DevOps.
+
+Inicialmente o leitor é contextualizado no mundo dos microserviços e a cultura DevOps. Os autores usam a metodologia de pesquisa de um estudo de mapeamento sistemático da literatura publicada entre Janeiro de 2009 e Julho de 2018. Após selecionados 47 estudos, é feita a classificação deles de acordo com os critérios definidos pelos autores, e então é feita a discussão sobre os resultados obtidos - são expostos a quantidade de estudos sobre determinados tópicos em microserviços, problemas e soluções, desafios, métodos de descrição, design patterns, benefícios, suporte a ferramentas, domínios, e implicações para pesquisadores e praticantes.
+
+the key results are: (1) Three themes on the research on MSA in DevOps are “microservices development and operations in DevOps”, “approaches and tool support for MSA based systems in DevOps”, and “MSA migration experiences in DevOps”. (2) 24 problems with their solutions regarding implementing MSA in DevOps are identified. (3) MSA is mainly described by using boxes and lines. (4) Most of the quality attributes are positively affected when employing MSA in DevOps. (5) 50 tools that support building MSA based systems in DevOps are collected. (6) The combination of MSA and DevOps has been applied in a wide range of application domains. Conclusions: The results and findings will benefit researchers and practitioners to conduct further research and bring more dedicated solutions for the issues of MSA in DevOps.
+
