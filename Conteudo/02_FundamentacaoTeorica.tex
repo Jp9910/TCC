@@ -2,6 +2,18 @@
 
 \chapterprecis{Introdução sobre arquitetura de microserviços e DevOps, revisão da literatura.}\index{sinopse de capítulo}
 
+\section{Os monolitos}
+
+Aplicações monolíticas são aplicações que possuem camadas de acesso aos dados e de interface de usuário em um único programa em uma única plataforma. Os monolitos são autocontidos e totalmente independentes de outras aplicações. Eles são feitos não para uma tarefa em particular, mas sim para serem responsáveis por todo o processo para completar determinada função. Em outras palavras, as aplicações monolíticas não têm modularidade. Elas podem ser organizadas das mais variadas formas, e fazer uso de padrões arquiteturais, mas são limitadas em muitos outros aspectos.
+
+\subsection{Benefícios}
+
+Simples. Fácil de construir. Até certo tamanho, é mais fácil de manter.
+
+\subsection{Limitações}
+
+Crescimento, escalamento, manutenção, reutilização, flexibilidade
+
 % ---
 \section{O que são microserviços}
 % ---
@@ -87,35 +99,35 @@ All of these services and the infrastructures where the services are developed, 
 
 \section{Vantagens da arquitetura de microserviços}
 
-\section*{Evolução}
+\subsection{Evolução}
 
 Quanto maior e mais antigo o software, mais difícil é de dar manutenção, e monolitos envelhecem com maior velocidade do que microserviços. Mas é possível migrar de um sistema monolito para a arquitetura de microserviços aos poucos, um serviço por vez, identificando (capacidades/funcionalidades/escopos) de negócio, implementando-as como um microserviço, e integrando com uso de padrões de acoplamento solto [relaxado?folgado?] (loose coupling). Ao longo do tempo, mais e mais funcionalidades podem ser migradas, até que o monolito se transforme em apenas um outro serviço, ou um microserviço
 
-\section*{Possibilidade de uso de diferentes ferramentas}
+\subsection{Possibilidade de uso de diferentes ferramentas}
 
 Cada microserviço disponibiliza suas funcionalidades por meio de APIs e contratos de dados em uma rede. A comunicação independe da arquitetura do microserviço faz uso, então cada um pode escolher seu sistema operacional, linguagem e banco de dados.
 
 Isso é especialmente valioso para times multinacionais, pois cada time precisa apenas de conhecimento da arquitetura do microserviço em que trabalha.
 
-\section*{Alta velocidade}
+\subsection{Alta velocidade}
 
 Com um time responsável por cuidar do ciclo de desenvolvimento e sua automação, a velocidade com que microserviços podem ser desenvolvidos é muito maior do que fazer o equivalente para uma solução monolítica.
 
-\section*{Reusável e combinável}
+\subsection{Reusável e combinável}
 
 Microserviços são reusáveis por natureza. Eles são entidades independentes que provêm funcionalidades em um determinado escopo por meio de (open internet standards). Para criar soluções para o usuário final, multiplos microserviços podem ser combinados.
 
-\section*{Flexível}
+\subsection{Flexível}
 
 A implantação de microserviços é definida por sua automação. Essa automação pode incluir configuração de cenários diferentes de uso, não apenas para produção, mas também para desenvolvimento e testagem, possibiltando que o microserviço tenha o melhor desempenho em diversos cenários. Para tanto é necessário uso de ferramentas que configurem essa flexibilidade. (tais como as ferramentas de Auto Scaling da AWS)
 
-\section*{Versionável e Substituível}
+\subsection{Versionável e Substituível}
 
 Com o controle completo dos cenários de implantação, é possível manter versões diferentes de um mesmo serviço rodando ao mesmo tempo, proporcionando retrocompatibilidade e fácil migração. Além disso, serviços podem ser substituidos sem causar tempo indisponível.
 
 \section{Desafios}
 
-\section*{[re]Organizaçao}
+\subsection{[re]Organizaçao}
 
 Organizar o sistema e o time para sustentar uma arquitetura de microserviços é um grande desafio. \emph{If you are part of a command-and-control organization using a waterfall software project management approach, you will struggle because you are not oriented to high-velocity product development. If you lack a DevOps culture and there is no collaboration between development and operations to automate the deployment pipeline, you will struggle}.
 
@@ -135,7 +147,7 @@ Em uma mudança do monolito para microserviços, é recomendado que não sejam f
 
 •	 Put the core team into leadership positions as you form new cross-functional teams to disseminate the knowledge.
 
-\section*{Plataforma}
+\subsection{Plataforma}
 
 Creating the runtime environment for microservices requires a significant investment in dynamic infrastructure across regionally disperse data centers. If your current on-premises application platform does not support automation, dynamic infrastructure, elastic scale, and high availability, then it makes sense to consider a cloud platform. Microsoft Azure is a microservice platform, and it provides a fully automated dynamic infrastructure, SDKs, and runtime containers along with a large portfolio of existing microservices that you can leverage, such as DocumentDb, Redis In-Memory Cache, and Service Bus, to build your own microservices catalog.
 
@@ -173,6 +185,8 @@ Encontrar microserviços em um ambiente distribuido pode ser feito de algumas ma
 \section{DevOps}
 \label{devops}
 % ---
+
+(Manter esta sessão?)
 
 DevOps is a culture that combines new or improved practices, processes, team structures and responsibilities, and tools to maximize the ability of an organization to deliver applications and services quickly [15, 22]. DevOps acts as a process framework that can be used for developing, deploying, and managing MSA [1]. The coexistence of microservices and DevOps enables reusability, decentralized data governance, automation, and built-in scalability [2]. MSA and DevOps have many common characteristics that make them a perfect fit for each other. For instance, DevOps practices and MSA promote the idea of decomposing large problems into smaller pieces and then address them through small cross-functional teams [23]. Containerized microservices can be realized independently because DevOps gives them a favor of continuous integration and deployment. Although it is not compulsory to design software systems based on MSA in DevOps, most of the challenges arisen in DevOps can be resolved by using MSA [17]. This combination is expected to increase the team’s throughput and the overall quality of the system [1, 23]. For example, with MSA and DevOps, Netflix and Amazon engineers can do hundreds of deployments each day [19]. The MSA and DevOps combination brings several other benefits, including frequent software release, reliability and scalability of systems, resilience in the case of failure, and management of decentralized teams to control the application development [24, 25]. Moreover, the DevOps toolchain helps to continually code, build, test, package, release, configure, and monitor the MSA based systems. Furthermore, both MSA and DevOps are designed to offer great agility and operational efficiency for an enterprise
 
