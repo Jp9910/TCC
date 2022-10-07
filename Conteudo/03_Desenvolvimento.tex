@@ -1,16 +1,39 @@
 \chapter{Desenvolvimento}
 
-Para provisionamento, considerar a ferramenta ~~
+Provisionamento
 
-Para lançamento, considerar a tecnologia ~~
+Lançamento
 
-Para comunicação entre serviços, APIs são a método mais comum.
+Comunicação entre serviços
+
+APIs
+
+API gateway
 
 \section{Problemas, soluções e desafios.}
 
-\subsection*{Requisitos de sistemas baseados em AMS em DevOps}
+\subsection{Antes de tudo, o monolito}
 
-This category reports the problems and solutions related to the requirements of MSA based systems. To address performance overhead issues, Study (S08) presents DevOps based CAOPLE language Integrated Development Environment (CIDE). This platform provides precise control over the deployment and testing of microservices to address the performance overhead. Study (S33) proposes the VM autoconfiguration methodology to address performance issues; VM auto-configuration method creates the central domain control agent for optimizing the performance of MSA based systems. Study (S18) proposes Unicorn framework to avoid delays and network performance issues, whereas Study (S24) suggests that architects should try not to decompose microservices too fine-grain. Study (S16) presents a DevOps based approach called “Neo-Metropolis”. This approach offers open source solutions (e.g., Terraform, Ansible, Mesos, and Hadoop) to deal with scalability and elasticity of MSA based systems across different cloud platforms. Study (S18) argues for the use of containers to deal with scalability issues because containers provide an easy way to scale operations by creating more copies of the services (S18). Study (S41) suggests that developing microservices around business capabilities can address this scalability issue.
+\begin{citacao}
+But as with any architectural decision there are trade-offs. In particular with microservices there are serious consequences for operations, who now have to handle an ecosystem of small services rather than a single, well-defined monolith. Consequently if you don't have certain baseline competencies, you shouldn't consider using the microservice style. \cite{MartinFowlerMicroservices}
+\end{citacao}
+
+
+\subsection{Provisionamento}
+
+\subsection{Deploy}
+
+\subsection{Comunicação entre microserviços}
+
+\subsection*{Requisitos de sistemas baseados em AMS}
+
+
+
+
+
+This category reports the problems and solutions related to the requirements of MSA based systems. 
+
+To address performance overhead issues, Study (S08) presents DevOps based CAOPLE language Integrated Development Environment (CIDE). This platform provides precise control over the deployment and testing of microservices to address the performance overhead. Study (S33) proposes the VM autoconfiguration methodology to address performance issues; VM auto-configuration method creates the central domain control agent for optimizing the performance of MSA based systems. Study (S18) proposes Unicorn framework to avoid delays and network performance issues, whereas Study (S24) suggests that architects should try not to decompose microservices too fine-grain. Study (S16) presents a DevOps based approach called “Neo-Metropolis”. This approach offers open source solutions (e.g., Terraform, Ansible, Mesos, and Hadoop) to deal with scalability and elasticity of MSA based systems across different cloud platforms. Study (S18) argues for the use of containers to deal with scalability issues because containers provide an easy way to scale operations by creating more copies of the services (S18). Study (S41) suggests that developing microservices around business capabilities can address this scalability issue.
 
 \subsection{Design of MSA based systems in DevOps}
 
@@ -58,3 +81,6 @@ This category provides the mapping of problems and solutions for different types
 
 Security and Privacy Across Cloud-Native Applications (S10, S18, S20, S23)
     . ARCADIA framework (S10)
+
+\section{Do monolito aos microserviços}
+

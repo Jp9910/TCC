@@ -4,15 +4,22 @@
 
 \section{Os monolitos}
 
-Aplicações monolíticas são aplicações que possuem camadas de acesso aos dados e de interface de usuário em um único programa em uma única plataforma. Os monolitos são autocontidos e totalmente independentes de outras aplicações. Eles são feitos não para uma tarefa em particular, mas sim para serem responsáveis por todo o processo para completar determinada função. Em outras palavras, as aplicações monolíticas não têm modularidade. Elas podem ser organizadas das mais variadas formas, e fazer uso de padrões arquiteturais, mas são limitadas em muitos outros aspectos.
+Aplicações monolíticas são aplicações que possuem as camadas de acesso aos dados, de regras de negócios, e de interface de usuário em um único programa em uma única plataforma. Os monolitos são autocontidos e totalmente independentes de outras aplicações. Eles são feitos não para uma tarefa em particular, mas sim para serem responsáveis por todo o processo para completar determinada função. Em outras palavras, as aplicações monolíticas não têm modularidade. Elas podem ser organizadas das mais variadas formas, e fazer uso de padrões arquiteturais, mas são limitadas em muitos outros aspectos.
 
 \subsection{Benefícios}
 
-Simples. Fácil de construir. Até certo tamanho, é mais fácil de manter.
+Simples. Fácil de construir. Até certo tamanho, é mais fácil de manter. (elaborar melhor)
 
 \subsection{Limitações}
 
-Crescimento, escalamento, manutenção, reutilização, flexibilidade
+Crescimento, escalamento, manutenção, reutilização, flexibilidade (elaborar melhor)
+
+This had several limitations such as inflexibility, lack of reliability, difficulty scaling, slow development, and so on. It was to bypass these issues that microservices architecture was created.
+
+Problemas da solução monolítica:
+- Demora no deploy e precisa buildar toda a aplicação novamente
+- Falhas relativamente pequenas podem derrubar tudo
+- Escolhas mais limitadas de tecnologias (1 projeto **tende** a ter apenas 1 tecnologia)
 
 % ---
 \section{O que são microserviços}
