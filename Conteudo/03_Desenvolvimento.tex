@@ -18,8 +18,21 @@ API gateway
 But as with any architectural decision there are trade-offs. In particular with microservices there are serious consequences for operations, who now have to handle an ecosystem of small services rather than a single, well-defined monolith. Consequently if you don't have certain baseline competencies, you shouldn't consider using the microservice style. \cite{MartinFowlerMicroservices}
 \end{citacao}
 
+\citeonline{MartinFowlerMicroservices} afirma que existem 3 pré-requisitos para se adotar uma arquitetura de microserviços, e que na grande maioria dos casos, deve-se começar pela arquitetura monolítica até que o sistema já esteja bem definido. Os pré-requisitos são - provisionamento rápido, monitoramento básico e deploy rápido de aplicação.
 
-\subsection{Provisionamento}
+\subsubsection{Provisionamento rápido}
+
+No contexto da computação, provisionamento significa disponibilizar um recurso, como uma máquina virtual por exemplo. Para produzir software, é necessário provisionar muitos recursos, tanto para os desenvolvedores quanto para o cliente. Naturalmente, o provisionamento é mais fácil na núvem. Na AWS por exemplo, para conseguir uma nova máquina, basta lançar uma nova instância e acessá-la - um processo muito rápido quando comparado ao \emph{on-premises}, onde precisaria-se comprar uma nova máquina, esperar chegar, configurá-la, e só então ela estará pronta. Para alcançar um provisionamento rápido, será necessário bastante automação.
+
+\subsubsection{Monitoramento básico}
+
+Muitas coisas podem dar errado em qualquer tipo de arquitetura, mas em especial nos microserviços pois cada serviço é fracamente acoplado, estando sujeitos não só a falhas no código, mas também na comunicação, na conexão, ou até falhas físicas. Portanto o monitoramento é crucial nesse tipo de arquitetura para que problemas, especialmente os mais graves possam ser detectados no menor tempo possível. Além disso, o monitoramento também pode ser usado para detectar problemas de negócio, como uma redução nos pedidos por exemplo.
+
+\subsubsection{Deploy rápido de aplicação}
+
+Na arquitetura de microserviços o deploy geralmente é feito separadamente para cada microserviço. Com muitos serviços para gerenciar, o deploy pode se tornar uma tarefa árdua, portanto será novamente necessário uma automação dessa etapa, que geralmente envolve um pipeline de deploy, que deve ser automatizado o máximo possível.
+
+\subsection{Configuração}
 
 \subsection{Deploy}
 
@@ -27,13 +40,16 @@ But as with any architectural decision there are trade-offs. In particular with 
 
 \subsection*{Requisitos de sistemas baseados em AMS}
 
-
-
+Uma solução para a sobrecarga na execução de tantos microserviços é a um ambiente de desenvolvimento integrado na linguagem CAOPLE \cite{CAOPLE}. Essa plataforma oferece grande controle sobre o deployment e testagem de microserviços.
 
 
 This category reports the problems and solutions related to the requirements of MSA based systems. 
 
-To address performance overhead issues, Study (S08) presents DevOps based CAOPLE language Integrated Development Environment (CIDE). This platform provides precise control over the deployment and testing of microservices to address the performance overhead. Study (S33) proposes the VM autoconfiguration methodology to address performance issues; VM auto-configuration method creates the central domain control agent for optimizing the performance of MSA based systems. Study (S18) proposes Unicorn framework to avoid delays and network performance issues, whereas Study (S24) suggests that architects should try not to decompose microservices too fine-grain. Study (S16) presents a DevOps based approach called “Neo-Metropolis”. This approach offers open source solutions (e.g., Terraform, Ansible, Mesos, and Hadoop) to deal with scalability and elasticity of MSA based systems across different cloud platforms. Study (S18) argues for the use of containers to deal with scalability issues because containers provide an easy way to scale operations by creating more copies of the services (S18). Study (S41) suggests that developing microservices around business capabilities can address this scalability issue.
+Study (S33) proposes the VM autoconfiguration methodology to address performance issues; VM auto-configuration method creates the central domain control agent for optimizing the performance of MSA based systems. 
+
+Study (S18) proposes Unicorn framework to avoid delays and network performance issues, whereas Study (S24) suggests that architects should try not to decompose microservices too fine-grain. 
+
+Study (S16) presents a DevOps based approach called “Neo-Metropolis”. This approach offers open source solutions (e.g., Terraform, Ansible, Mesos, and Hadoop) to deal with scalability and elasticity of MSA based systems across different cloud platforms. Study (S18) argues for the use of containers to deal with scalability issues because containers provide an easy way to scale operations by creating more copies of the services (S18). Study (S41) suggests that developing microservices around business capabilities can address this scalability issue.
 
 \subsection{Design of MSA based systems in DevOps}
 
@@ -84,3 +100,4 @@ Security and Privacy Across Cloud-Native Applications (S10, S18, S20, S23)
 
 \section{Do monolito aos microserviços}
 
+Como migrar do monolito para os microserviços
