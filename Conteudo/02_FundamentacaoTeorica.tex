@@ -1,14 +1,18 @@
 \chapter{Fundamentação teórica}\label{cap_exemplos}
 
-\chapterprecis{Introdução sobre as arquiteturas de monolito e de microserviços. Revisão da literatura.}\index{sinopse de capítulo}
+\chapterprecis{Introdução sobre as arquiteturas de monolito e de microserviços. Trabalhos relacionados.}\index{sinopse de capítulo}
 
 \section{Os monolitos}
 
-Aplicações monolíticas são aplicações que possuem as camadas de acesso aos dados, de regras de negócios, e de interface de usuário em um único programa em uma única plataforma. Os monolitos são autocontidos e totalmente independentes de outras aplicações. Eles são feitos não para uma tarefa em particular, mas sim para serem responsáveis por todo o processo para completar determinada função. Em outras palavras, as aplicações monolíticas não têm modularidade. Elas podem ser organizadas das mais variadas formas, e fazer uso de padrões arquiteturais, mas são limitadas em muitos outros aspectos.
+Aplicações monolíticas são aplicações (não compostas?) que possuem as camadas de acesso aos dados, de regras de negócios, e de interface de usuário em um único programa em uma única plataforma. Os monolitos são autocontidos e totalmente independentes de outras aplicações. Eles são feitos não para uma tarefa em particular, mas sim para serem responsáveis por todo o processo para completar determinada função. Em outras palavras, as aplicações monolíticas não têm modularidade. Elas podem ser organizadas das mais variadas formas, e fazer uso de padrões arquiteturais, mas são limitadas em muitos outros aspectos.
 
 \subsection{Benefícios}
 
-Simples. Fácil de construir. Até certo tamanho, é mais fácil de manter. (elaborar melhor)
+O maior e melhor benefício da arquitetura monolítica é sua simplicidade. Uma aplicação simples é uma aplicação fácilmente entendida pelos seus desenvolvedores, o que melhora sua manutenibilidade. Para aplicações com um domínio simples, como um e-commerce de calçados por exemplo, optar por uma arquitetura complexa como a de microserviços significaria adicionar uma enorme complexidade - provavelmente desnecessária - em seu desenvolvimento e infraestrutura.
+
+Outra vantagem dos monolitos é sua facilidade de construção, tanto em relação a sua infraestrutura quanto ao seu desenvolvimento. Dentre todos os tipos de arquitetura, os monolitos têm o tipo de infraestrutura mais fácil de se construir, e além disso, nos monolitos geralmente não é necessário haver comunicação entre diferentes serviços ou máquinas, então os desenvolvedores não precisarão se preocupar com a complexidade que acompanha essa comunicação.
+
+Até certo tamanho, são fáceis de manter porque são fáceis de serem entendidos. Porém, depois de crescer excessivamente, um monolito pode se tornar um emaranhado complexo de funcionalidades que são difíceis de diferenciar, de separar, e de manter. E então começam a surgir as limitações deles...
 
 \subsection{Limitações}
 
@@ -25,137 +29,10 @@ Alguns problemas da solução monolítica:
 \section{O que são microserviços}
 % ---
 
-Aplicações com uma arquitetura de microserviços são separadas em partes pequenas, chamadas de microserviços, que são classificadas e se comunicam usando uma rede. Microserviços oferecem capacidades de negócio ou de plataforma, tratando um aspecto em particular da aplicação. Eles se comunicam por meio de APIs bem definidas, contratos de dados, e configurações. O "micro" em microserviços faz referência não ao tamanho do serviço, mas sim ao seu escopo de funcionalidade. Eles oferecem essa e apenas essa determinada funcionalidade. Assim sendo, microserviços não necessariamente devem ser pequenos em tamanho, mas fazem apenas uma tarefa e fazem isso bem. 
+Aplicações com uma arquitetura de microserviços são separadas em partes pequenas, chamadas de microserviços, que são classificadas e se comunicam por meio de uma rede. Microserviços oferecem capacidades de negócio ou de plataforma, tratando um aspecto em particular da aplicação. Eles se comunicam por meio de APIs bem definidas, contratos de dados, e configurações. O "micro" em microserviços faz referência não ao tamanho do serviço, mas sim ao seu escopo de funcionalidade. Eles oferecem apenas uma determinada funcionalidade, tornando-se especialistas nela. Assim sendo, microserviços não necessariamente devem ser pequenos em tamanho, mas fazem apenas uma tarefa e a fazem eficientemente. 
  
-No contexto de realizar uma tarefa bem, microserviços têm propriedades e comportamentos que os diferenciam de outras arquiteturas orientadas a serviços.
+Sendo especialistas em apenas uma tarefa, microserviços têm propriedades e comportamentos que os diferenciam de outras arquiteturas orientadas a serviços, que serão melhor discutidos no próximo capítulo.
 
-\subsection{Autonomia e Isolamento}
-Autonomia e isolamento significa que microserviços são unidades auto-contidas de funcionalidade com dependências de outros serviços fracamente acopladas e são projetados, desenvolvidos, testados e lançados independentemente.
-
-Autônomo - Existe ou é capaz de existir independetemente das outras partes.
-
-Isolado - Separado das outras partes. 
-
-\subsection{Elasticidade, resiliência, e responsividade}
-
-Microserviços são reusados entre muitas soluções diferentes e portanto devem ser escaláveis de acordo com o uso. Devem ser tolerantes a falhas e ter um tempo de recuperação razoável se algo der errado. E também devem ser responsivos, tendo um desempenho razoável de acordo com o uso.
-
-Elástico: Capaz de retornar ao tamanho/formato original depois de ser esticado, comprimido ou expandido.
-
-Resiliente: Resistente a mudanças ruins.
-
-Responsivo: Rápido em responder e reagir.
-
-\subsection{Orientação-a-mensagens e programabilidade}
-
-Microserviços dependem de APIs e contratos de dados para definir como interagir com o serviço. A API define um conjunto de endpoints acessíveis por rede, e o contrato de dados define a estrutura da mensagem que é enviada ou retornada.
-
-Orientado-a-mensagens: Software que conecta sistemas separados em uma rede, carregando e distribuindo mensagens entre eles.
-
-Programável: Obedece a um plano de tarefas que são executadas para alcançar um objetivo específico.
-
-\subsection{Configurabilidade}
-
-Microserviços devem provêr mais do que apenas uma API e um contrato de dados. Para que seja reusável e para que possa resolver as necessidades de que sistema que o use, cada microserviço tem níveis diferentes de configuração, e esta configuração pode ser feita de diferentes formas.
-
-Configurável: Projetado ou adaptado para formar uma configuração ou para algum propósito.
-
-\subsection {Automação}
-
-O ciclo de vida de um microserviço é totalmente automatizado, desde o design até a implantação.
-
-Automatizados: Funcionar sem precisar ser controlado diretamente.
-
-% \section{A arquitetura de microserviços}
-
-% Microserviços são uma abordagem arquitetônica e organizacional do desenvolvimento de software na qual o software consiste em pequenos serviços independentes que se comunicam usando APIs bem definidas. Esses serviços pertecem a pequenas equipes autossuficientes.
-
-% A arquitetura de microserviços (AMS) está ganhando força no desenvolvimento e entrega de aplicações de software como um conjunto de pequenos serviços granulares que podem ser integrados por meio de mecanismos de comunicação leve, normalmente APIs RESTful [10]. Microserviços são componentes pequenos e facilmente entendíveis que possuem capacidades de negócio no meio dos serviços [11]. Esses serviços podem ser escalados independentemente (já que são desacoplados) pela implementação de \texttt{stacks} de tecnologias diferentes [2]. Muitos pesquisadores e praticantes dizem que AMS é uma evolução da Arquitetura orientada a serviços (AOS), como visto no contexto de serviços independentes/auto-suficientes e de natureza leve [12]. Por outro lado, AMS pode ser diferenciada da AOS em termos de compartilhamento de componentes, comunicação de serviços, mediação de serviços, e acesso remoto aos serviços [13]. (Bar, f., 2018, tradução nossa). \cite{WASEEM2020110798}
-% % AOS é construida com base na ideia de compartilhar o máximo possível, enquanto AMS, o mínimo possível [13, 14]. AMS usa um estilo coreografico para comunicação inter-serviços, enquanto AOS aplica um estilo de orquestração para coordenação de serviços. Para mediação de serviços, AMS usa a camada de API que atua como uma fachada para o serviço, enquanto AOS adota o conceito de um \texttt{middleware} mensageiro para coodenação de serviços. Além disso, AMS em grande parte depende do protocolo REST e mensageria simples como protocolo de acesso remoto ao serviço; entretanto, AOS consegue lidar com diferentes tipos de protocolo de acesso remoto, incluindo mensageria simples para acessar serviços remotos [13].
-
-\section{Vantagens da arquitetura de microserviços}
-
-\subsection{Evolução}
-
-Quanto maior e mais antigo o software, mais difícil é de dar manutenção, e monolitos envelhecem com maior velocidade do que microserviços. Mas é possível migrar de um sistema monolito para a arquitetura de microserviços aos poucos, um serviço por vez, identificando (capacidades/funcionalidades/escopos) de negócio, implementando-as como um microserviço, e integrando com uso de padrões de acoplamento solto [relaxado?folgado?] (loose coupling). Ao longo do tempo, mais e mais funcionalidades podem ser migradas, até que o monolito se transforme em apenas um outro serviço, ou um microserviço
-
-\subsection{Possibilidade de uso de diferentes ferramentas}
-
-Cada microserviço disponibiliza suas funcionalidades por meio de APIs e contratos de dados em uma rede. A comunicação independe da arquitetura do microserviço faz uso, então cada um pode escolher seu sistema operacional, linguagem e banco de dados.
-
-Isso é especialmente valioso para times multinacionais, pois cada time precisa apenas de conhecimento da arquitetura do microserviço em que trabalha.
-
-\subsection{Alta velocidade}
-
-Com um time responsável por cuidar do ciclo de desenvolvimento e sua automação, a velocidade com que microserviços podem ser desenvolvidos é muito maior do que fazer o equivalente para uma solução monolítica.
-
-\subsection{Reusável e combinável}
-
-Microserviços são reusáveis por natureza. Eles são entidades independentes que provêm funcionalidades em um determinado escopo por meio de (open internet standards). Para criar soluções para o usuário final, multiplos microserviços podem ser combinados.
-
-\subsection{Flexível}
-
-A implantação de microserviços é definida por sua automação. Essa automação pode incluir configuração de cenários diferentes de uso, não apenas para produção, mas também para desenvolvimento e testagem, possibiltando que o microserviço tenha o melhor desempenho em diversos cenários. Para tanto é necessário uso de ferramentas que configurem essa flexibilidade. (tais como as ferramentas de Auto Scaling da AWS)
-
-\subsection{Versionável e Substituível}
-
-Com o controle completo dos cenários de implantação, é possível manter versões diferentes de um mesmo serviço rodando ao mesmo tempo, proporcionando retrocompatibilidade e fácil migração. Além disso, serviços podem ser substituidos sem causar tempo indisponível.
-
-\section{Desafios}
-
-\subsection{[re]Organizaçao}
-
-Organizar o sistema e o time para sustentar uma arquitetura de microserviços é um grande desafio. \emph{If you are part of a command-and-control organization using a waterfall software project management approach, you will struggle because you are not oriented to high-velocity product development. If you lack a DevOps culture and there is no collaboration between development and operations to automate the deployment pipeline, you will struggle}.
-
-Em uma mudança do monolito para microserviços, é recomendado que não sejam feitas mudanças grandes e abruptas na sua organização. Em vez disso, deve-se procurar uma oportunidade com uma iniciativa de negócio para testar a fórmula proposta por \citeonline{Familiar2015} : 
-
-•	 Form a small cross-functional team.
-
-•	 Provide training and guidance on adopting Agile, Scrum, Azure, and microservice architecture.
-
-•	 Provide a separate physical location for this team to work so that they are not adversely effected by internal politics and old habits.
-
-•	 Take a minimal-viable-product approach and begin to deliver small incremental releases of one microservice, taking the process all the way through the lifecycle.
-
-•	 Integrate this service with the existing systems using a loosely coupled approach.
-
-•	 Go through the lifecycle on this microservice several times until you feel comfortable with the process.
-
-•	 Put the core team into leadership positions as you form new cross-functional teams to disseminate the knowledge.
-
-\subsection{Plataforma}
-
-Creating the runtime environment for microservices requires a significant investment in dynamic infrastructure across regionally disperse data centers. If your current on-premises application platform does not support automation, dynamic infrastructure, elastic scale, and high availability, then it makes sense to consider a cloud platform. Microsoft Azure is a microservice platform, and it provides a fully automated dynamic infrastructure, SDKs, and runtime containers along with a large portfolio of existing microservices that you can leverage, such as DocumentDb, Redis In-Memory Cache, and Service Bus, to build your own microservices catalog.
-
-\section{Identificação}
-
-Domain-driven design (design orientado a domínio) é uma tecnica bem consolidada e muito usada. Mas para aplica-la em microserviços, é preciso analisar onde cada peça deve ficar. Em vez de modelar os modelos e os (contextos limitados) separando-os em camadas, pode-se juntar os contextos com seus respectivos modelos, e procurar por possíveis pontos de (separação) da aplicação - um lugar onde a linguagem muda, por exemplo. Isso resultaria em um ponto de partida para separar para uma arquitetura de microserviço.
-
-If you are currently working with a complex layered architecture and have a reasonable domain model defined, the domain model will provide a roadmap to an evolutionary approach to migrating to a microservice architecture. If a domain model does not exist, you can apply domain-driven design in reverse to identify the bounded contexts, the capabilities within the system.
-
-\section{Testes}
-
-Assim como a automação, testar o microserviço em cada passo do \emph{pipeline} de \emph{deploy} é necessário para a entrega rápida de software de qualidade.
-
-Escrever e testar código não muda muito entre as arquiteturas monolítica e de microserviços. Mas além dos métodos mais conhecidos de testes, como test-driven development, teste de unidade e teste funcional, é necessário testar os microserviços conforme passam pelo \emph{pipeline} de \emph{deploy}.
-
-- Internals Testing: Test the internal functions of the service including use of data access, caching, and other cross-cutting concerns.
-
-- Service Testing: Test the service implementation of the API. This is a private internal implementation of the API and its associated models.
-
-- Protocol Testing: Test the service at the protocol level, calling the API over the specified wire protocol, usually HTTP(s).
-
-- Composition Testing: Test the service in collaboration with other services within the context of a solution.
-
-- Scalability/Throughput Testing: Test the scalability and elasticity of the deployed microservice.
-
-- Failover/Fault Tolerance Testing: Test the ability of the microservice to recover after a failure.
-
-- PEN Testing: Work with a third-party software security firm to perform penetration testing. NOTE: This will requires cooperation with Microsoft if you are pen testing microservices deployed to Azure.
-
-\section{Detectável}
-
-Encontrar microserviços em um ambiente distribuido pode ser feito de algumas maneiras diferentes: Hardcode no código, guardar em um arquivo, ou fazer um microserviço para encontrar outros microserviços e disponibilizar suas localizações. Para prover detectabilidade como um serviço será necessário adquirir um produto de terceiros, integrar um projeto aberto, ou desenvolver sua própria solução.
 
 \section{Trabalhos relacionados}
 
@@ -173,3 +50,5 @@ Inicialmente o leitor é contextualizado no mundo dos microserviços e a cultura
 
 the key results are: (1) Three themes on the research on MSA in DevOps are “microservices development and operations in DevOps”, “approaches and tool support for MSA based systems in DevOps”, and “MSA migration experiences in DevOps”. (2) 24 problems with their solutions regarding implementing MSA in DevOps are identified. (3) MSA is mainly described by using boxes and lines. (4) Most of the quality attributes are positively affected when employing MSA in DevOps. (5) 50 tools that support building MSA based systems in DevOps are collected. (6) The combination of MSA and DevOps has been applied in a wide range of application domains. Conclusions: The results and findings will benefit researchers and practitioners to conduct further research and bring more dedicated solutions for the issues of MSA in DevOps.
 
+
+Comparar cada trabalho com o meu trabalho. Coisas que eles não abordam e que eu abordo
