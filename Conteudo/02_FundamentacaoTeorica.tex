@@ -1,54 +1,59 @@
-\chapter{Fundamentação teórica}\label{cap_exemplos}
+\chapter{Fundamentação teórica}\label{chapter-fundamentacao}
 
-\chapterprecis{Introdução sobre as arquiteturas de monolito e de microserviços. Trabalhos relacionados.}\index{sinopse de capítulo}
+\chapterprecis{Introdução sobre as arquiteturas de monolito e de microsserviços. Trabalhos relacionados.}\index{sinopse de capítulo}
 
-\section{Os monolitos}
+\section{As aplicações monolíticas}
 
-Aplicações monolíticas são aplicações (não compostas?) que possuem as camadas de acesso aos dados, de regras de negócios, e de interface de usuário em um único programa em uma única plataforma. Os monolitos são autocontidos e totalmente independentes de outras aplicações. Eles são feitos não para uma tarefa em particular, mas sim para serem responsáveis por todo o processo para completar determinada função. Em outras palavras, as aplicações monolíticas não têm modularidade. Elas podem ser organizadas das mais variadas formas, e fazer uso de padrões arquiteturais, mas são limitadas em muitos outros aspectos.
+Aplicações monolíticas são aplicações (não compostas?) que possuem as camadas de acesso aos dados, de regras de negócios, e de interface de usuário em um único programa em uma única plataforma. Os monolitos são autocontidos e totalmente independentes de outras aplicações. Eles são feitos não para uma tarefa em particular, mas sim para serem responsáveis por todo o processo para completar determinada função. Em outras palavras, as aplicações monolíticas têm problema de modularidade. Elas podem ser organizadas das mais variadas formas e fazer uso de padrões arquiteturais, mas são limitadas em muitos outros aspectos, citados na \autoref{subsection-monolitos-limitacoes}.
 
 \subsection{Benefícios}
 
-O maior e melhor benefício da arquitetura monolítica é sua simplicidade. Uma aplicação simples é uma aplicação fácilmente entendida pelos seus desenvolvedores, o que melhora sua manutenibilidade. Para aplicações com um domínio simples, como um e-commerce de calçados por exemplo, optar por uma arquitetura complexa como a de microserviços significaria adicionar uma enorme complexidade - provavelmente desnecessária - em seu desenvolvimento e infraestrutura.
+O maior e melhor benefício da arquitetura monolítica é sua simplicidade. Uma aplicação simples é uma aplicação fácilmente entendida pelos seus desenvolvedores, o que melhora sua manutenibilidade. Para aplicações com um domínio simples, como um e-commerce de calçados por exemplo, optar por uma arquitetura complexa como a de microsserviços significaria adicionar uma enorme complexidade - provavelmente desnecessária - em seu desenvolvimento e infraestrutura.
 
 Outra vantagem dos monolitos é sua facilidade de construção, tanto em relação a sua infraestrutura quanto ao seu desenvolvimento. Dentre todos os tipos de arquitetura, os monolitos têm o tipo de infraestrutura mais fácil de se construir, e além disso, nos monolitos geralmente não é necessário haver comunicação entre diferentes serviços ou máquinas, então os desenvolvedores não precisarão se preocupar com a complexidade que acompanha essa comunicação.
 
 Até certo tamanho, são fáceis de manter porque são fáceis de serem entendidos. Porém, depois de crescer excessivamente, um monolito pode se tornar um emaranhado complexo de funcionalidades que são difíceis de diferenciar, de separar, e de manter. E então começam a surgir as limitações deles...
 
-\subsection{Limitações}
+\subsection{Limitações}\label{subsection-monolitos-limitacoes}
 
-Crescimento, escalamento, manutenção, reutilização, flexibilidade (elaborar melhor)
+As limitações das aplicações monolíticas incluem crescimento, velocidade de desenvolvimento, confiabilidade, escalabilidade, manutenção, reutilização e flexibilidade.
 
-This had several limitations such as inflexibility, lack of reliability, difficulty scaling, slow development, and so on. It was to bypass these issues that microservices architecture was created.
+Os problemas da solução monolítica incluem:
 
-Alguns problemas da solução monolítica:
-- A necessidade de \emph{buildar} toda a aplicação, mesmo as partes em que não houveram mudanças, a cada \emph{deploy}.
+- A necessidade de compilar toda a aplicação, mesmo as partes em que não houve mudanças, a cada implantação.
+
 - Falhas relativamente pequenas podem prejudicar toda a aplicação, mesmo as partes que não tiveram relação com a falha.
-- As escolhas de tecnologias são mais limitadas. Um projeto **tende** a usar apenas 1 solução.
+
+- As escolhas de tecnologias são mais limitadas. Um projeto tende a usar apenas 1 solução devido.
 
 % ---
-\section{O que são microserviços}
+\section{Os microsserviços}
 % ---
 
-Aplicações com uma arquitetura de microserviços são separadas em partes pequenas, chamadas de microserviços, que são classificadas e se comunicam por meio de uma rede. Microserviços oferecem capacidades de negócio ou de plataforma, tratando um aspecto em particular da aplicação. Eles se comunicam por meio de APIs bem definidas, contratos de dados, e configurações. O "micro" em microserviços faz referência não ao tamanho do serviço, mas sim ao seu escopo de funcionalidade. Eles oferecem apenas uma determinada funcionalidade, tornando-se especialistas nela. Assim sendo, microserviços não necessariamente devem ser pequenos em tamanho, mas fazem apenas uma tarefa e a fazem eficientemente. 
+Aplicações com uma arquitetura de microsserviços são separadas em partes pequenas, chamadas de microsserviços, que são classificadas e se comunicam por meio de uma rede. Microsserviços oferecem capacidades de negócio ou de plataforma, tratando um aspecto em particular da aplicação. Eles se comunicam por meio de APIs bem definidas, contratos de dados, e configurações. O "micro" em microsserviços faz referência não ao tamanho do serviço, mas sim ao seu escopo de funcionalidade. Eles oferecem apenas uma determinada funcionalidade, tornando-se especialistas nela. Assim sendo, microsserviços não necessariamente devem ser pequenos em tamanho, mas fazem apenas uma tarefa e a fazem eficientemente. 
  
-Sendo especialistas em apenas uma tarefa, microserviços têm propriedades e comportamentos que os diferenciam de outras arquiteturas orientadas a serviços, que serão melhor discutidos no próximo capítulo.
+Sendo especialistas em apenas uma tarefa, microsserviços têm características e comportamentos que os diferenciam de outras arquiteturas orientadas a serviços, os quais serão discutidos no \autoref{chapter-caracteristicas}.
 
+% Microsserviços são uma abordagem arquitetônica e organizacional do desenvolvimento de software na qual o software consiste em pequenos serviços independentes que se comunicam usando APIs bem definidas. Esses serviços pertecem a pequenas equipes autossuficientes.
+
+% A arquitetura de microsserviços (AMS) está ganhando força no desenvolvimento e entrega de aplicações de software como um conjunto de pequenos serviços granulares que podem ser integrados por meio de mecanismos de comunicação leve, normalmente APIs RESTful [10]. Microsserviços são componentes pequenos e facilmente entendíveis que possuem capacidades de negócio no meio dos serviços [11]. Esses serviços podem ser escalados independentemente (já que são desacoplados) pela implementação de \texttt{stacks} de tecnologias diferentes [2]. Muitos pesquisadores e praticantes dizem que AMS é uma evolução da Arquitetura orientada a serviços (AOS), como visto no contexto de serviços independentes/auto-suficientes e de natureza leve [12]. Por outro lado, AMS pode ser diferenciada da AOS em termos de compartilhamento de componentes, comunicação de serviços, mediação de serviços, e acesso remoto aos serviços [13]. (Bar, f., 2018, tradução nossa). \cite{WASEEM2020110798}
+% % AOS é construida com base na ideia de compartilhar o máximo possível, enquanto AMS, o mínimo possível [13, 14]. AMS usa um estilo coreografico para comunicação inter-serviços, enquanto AOS aplica um estilo de orquestração para coordenação de serviços. Para mediação de serviços, AMS usa a camada de API que atua como uma fachada para o serviço, enquanto AOS adota o conceito de um \texttt{middleware} mensageiro para coodenação de serviços. Além disso, AMS em grande parte depende do protocolo REST e mensageria simples como protocolo de acesso remoto ao serviço; entretanto, AOS consegue lidar com diferentes tipos de protocolo de acesso remoto, incluindo mensageria simples para acessar serviços remotos [13].
 
 \section{Trabalhos relacionados}
 
 \section*{"Microservices, IoT and Azure", por Bob Familiar - capítulo 2: "What is a microservice"}
 
-O capítulo 2 do livro de Bob Familiar descreve o que é um microserviço, suas características e implicações, benefícios, e desafios. 
+O capítulo 2 do livro de Bob Familiar descreve o que é um microsserviço, suas características e implicações, benefícios, e desafios. 
 
-"Microservices do one thing and they do it well". Como é explicado por \citeonline{Familiar2015} , microserviços representam business capabilities definidos usando o design orientado a domínio, são testados a cada passo do \emph{pipeline} de \emph{deploy}, e lançados por meio de automação, como serviços independentes, isolados, altamente escaláveis e resilientes em uma infraestrutura em núvem distribuída. Pertecem a um time único de desenvolvedores, que trata o desenvolvimento do microserviço como um produto, entregando software de alta qualidade em um processo rápido e iterativo com envolvimento do cliente e satisfação como métrica de sucesso.
+"Microservices do one thing and they do it well". Como é explicado por \citeonline{Familiar2015} , microsserviços representam business capabilities definidos usando o design orientado a domínio, são testados a cada passo do \emph{pipeline} de \emph{deploy}, e lançados por meio de automação, como serviços independentes, isolados, altamente escaláveis e resilientes em uma infraestrutura em núvem distribuída. Pertecem a um time único de desenvolvedores, que trata o desenvolvimento do microsserviço como um produto, entregando software de alta qualidade em um processo rápido e iterativo com envolvimento do cliente e satisfação como métrica de sucesso.
 
 \section*{"A Systematic Mapping Study on Microservices Architecture in DevOps", por Waseem, M., Liang, P. e Shahin, M.}
 
-Esse trabalho tem o objetivo de sistematicamente identificar, analisar, e classificar a literatura sobre microserviços em DevOps.
+Esse trabalho tem o objetivo de sistematicamente identificar, analisar, e classificar a literatura sobre microsserviços em DevOps.
 
-Inicialmente o leitor é contextualizado no mundo dos microserviços e a cultura DevOps. Os autores usam a metodologia de pesquisa de um estudo de mapeamento sistemático da literatura publicada entre Janeiro de 2009 e Julho de 2018. Após selecionados 47 estudos, é feita a classificação deles de acordo com os critérios definidos pelos autores, e então é feita a discussão sobre os resultados obtidos - são expostos a quantidade de estudos sobre determinados tópicos em microserviços, problemas e soluções, desafios, métodos de descrição, design patterns, benefícios, suporte a ferramentas, domínios, e implicações para pesquisadores e praticantes.
+Inicialmente o leitor é contextualizado no mundo dos microsserviços e a cultura DevOps. Os autores usam a metodologia de pesquisa de um estudo de mapeamento sistemático da literatura publicada entre Janeiro de 2009 e Julho de 2018. Após selecionados 47 estudos, é feita a classificação deles de acordo com os critérios definidos pelos autores, e então é feita a discussão sobre os resultados obtidos - são expostos a quantidade de estudos sobre determinados tópicos em microsserviços, problemas e soluções, desafios, métodos de descrição, design patterns, benefícios, suporte a ferramentas, domínios, e implicações para pesquisadores e praticantes.
 
-the key results are: (1) Three themes on the research on MSA in DevOps are “microservices development and operations in DevOps”, “approaches and tool support for MSA based systems in DevOps”, and “MSA migration experiences in DevOps”. (2) 24 problems with their solutions regarding implementing MSA in DevOps are identified. (3) MSA is mainly described by using boxes and lines. (4) Most of the quality attributes are positively affected when employing MSA in DevOps. (5) 50 tools that support building MSA based systems in DevOps are collected. (6) The combination of MSA and DevOps has been applied in a wide range of application domains. Conclusions: The results and findings will benefit researchers and practitioners to conduct further research and bring more dedicated solutions for the issues of MSA in DevOps.
+Os principais resultados são: (1) Três temas de pesquisa em AMS com DevOps são “desenvolvimento e operações de microsserviços em DevOps”, “abordagens e suporte a ferramentas para sistemas baseados em AMS em DevOps”, e “Experiência de migração de AMS em DevOps”. (2) São identificados 24 problemas e apontadas suas respectivas soluções com respeito a implementação de microsserviços com DevOps. (3) A AMS é descrita princiapalmente usando caixas e linhas. (4) A maioria das qualidades da AMS são afetadas positivamente quando aplicadas com DevOps. (5) 50 ferramentas que suportam a construção de sistemas baseados em AMS são apontados. (6) A combinação da AMS e DevOps tem sido aplicada em uma ampla variedade de domínios de aplicações.
 
 
-Comparar cada trabalho com o meu trabalho. Coisas que eles não abordam e que eu abordo
+(Comparar cada trabalho com o meu trabalho. Coisas que eles não abordam e que eu abordo)

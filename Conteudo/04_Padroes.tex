@@ -1,0 +1,70 @@
+\chapter{Padrões}\label{chapter-padroes}
+
+\section{Antes de tudo, o monólito}
+
+\begin{citacao}
+But as with any architectural decision there are trade-offs. In particular with microservices there are serious consequences for operations, who now have to handle an ecosystem of small services rather than a single, well-defined monolith. Consequently if you don't have certain baseline competencies, you shouldn't consider using the microservice style. \cite{MartinFowlerMicroservices}
+\end{citacao}
+
+\citeonline{MartinFowlerMicroservices} afirma que existem 3 pré-requisitos para se adotar uma arquitetura de microserviços, e que na grande maioria dos casos, deve-se começar pela arquitetura monolítica até que o sistema já esteja bem definido. Os pré-requisitos são - provisionamento rápido, monitoramento básico e deploy rápido de aplicação.
+
+\subsection{Provisionamento rápido}
+
+No contexto da computação, provisionamento significa disponibilizar um recurso, como uma máquina virtual por exemplo. Para produzir software, é necessário provisionar muitos recursos, tanto para os desenvolvedores quanto para o cliente. Naturalmente, o provisionamento é mais fácil na núvem. Na AWS por exemplo, para conseguir uma nova máquina, basta lançar uma nova instância e acessá-la - um processo muito rápido quando comparado ao \emph{on-premises}, onde precisaria-se comprar uma nova máquina, esperar chegar, configurá-la, e só então ela estará pronta. Para alcançar um provisionamento rápido, será necessário bastante automação.
+
+\subsection{Monitoramento básico}
+
+Muitas coisas podem dar errado em qualquer tipo de arquitetura, mas em especial nos microserviços pois cada serviço é fracamente acoplado, estando sujeitos não só a falhas no código, mas também na comunicação, na conexão, ou até falhas físicas. Portanto o monitoramento é crucial nesse tipo de arquitetura para que problemas, especialmente os mais graves possam ser detectados no menor tempo possível. Além disso, o monitoramento também pode ser usado para detectar problemas de negócio, como uma redução nos pedidos por exemplo.
+
+\subsection{Deploy rápido de aplicação}
+
+Na arquitetura de microserviços o deploy geralmente é feito separadamente para cada microserviço. Com muitos serviços para gerenciar, o deploy pode se tornar uma tarefa árdua, portanto será novamente necessário uma automação dessa etapa, que geralmente envolve um pipeline de deploy, que deve ser automatizado o máximo possível.
+
+\section{Configuração}
+
+\section{Deploy}
+
+\section{Comunicação entre microserviços}
+
+\section{Testes}
+
+Mas além dos métodos mais conhecidos de testes, como test-driven development, teste de unidade e teste funcional, é necessário testar os microsserviços conforme passam pelo \emph{pipeline} de \emph{deploy}.
+
+- Testes internos: Testar as funções internas do serviço, inclusive uso de acesso de dados, e caching.
+
+- Teste de serviço: Testar a a implementação de serviço da API. Essa é uma implementação privada da API e seus modelos associados.
+
+- Teste de protocolo: Testar o serviço no nível de protocolo, chamando a API sobre o determinado protocolo (geralmente HTTP).
+
+- Composition Testing: Test the service in collaboration with other services within the context of a solution.
+
+- Scalability/Throughput Testing: Test the scalability and elasticity of the deployed microservice.
+
+- Failover/Fault Tolerance Testing: Test the ability of the microservice to recover after a failure.
+
+- PEN Testing: Work with a third-party software security firm to perform penetration testing. NOTE: This will requires cooperation with Microsoft if you are pen testing microservices deployed to Azure.
+
+
+\section{Como migrar do monolito para os microserviços}
+
+\subsection{Identificação}
+
+If you are currently working with a complex layered architecture and have a reasonable domain model defined, the domain model will provide a roadmap to an evolutionary approach to migrating to a microservice architecture. If a domain model does not exist, you can apply domain-driven design in reverse to identify the bounded contexts, the capabilities within the system. \cite{Familiar2015}
+
+\subsection{Organização}
+
+Em uma mudança do monolito para microsserviços, é recomendado que não sejam feitas mudanças grandes e abruptas na sua organização. Em vez disso, deve-se procurar uma oportunidade com uma iniciativa de negócio para testar a fórmula proposta por \citeonline{Familiar2015} : 
+
+- Formar um pequeno time inderdisciplinar (cross-functional?).
+
+- Oferecer treinamento e orientação na adoção de práticas ágeis, como o scrum.
+
+- Oferecer uma localização física separada para esse time trabalhar a fim de não afetá-lo negativamente por politicas internas ou hábitos antigos.
+
+- Adotar uma abordagem de minimo produto viável para entregar pequenos mas incrementais \emph{releases} de software, usando essa abordagem durante todo o ciclo de vida.
+
+- Integrar esse serviço com sistemas existentes, usando um acoplamento solto.
+
+- Percorrer esse ciclo de vida do microsserviço diversas vezes, fazendo as adaptações necessárias até chegar a equipe ficar confortável com o processo.
+
+- Colocar o time principal em posições de liderança enquanto são formados novos times interdisciplinares para disseminar o conhecimento e a prática.
