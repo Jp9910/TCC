@@ -39,9 +39,13 @@ Com um time responsável por cuidar do ciclo de desenvolvimento e sua automaçã
 
 Microsserviços são reusáveis por natureza. Eles são entidades independentes que provêm funcionalidades em um determinado escopo por meio de padrões de internet aberta. Para criar soluções para o usuário final, multiplos microsserviços podem ser combinados. \cite{Familiar2015}
 
-\subsection{Flexível}
+\subsection{Flexibilidade no ambiente de execução}
 
-O \emph{deploy} de microsserviços é definido por sua automação. Essa automação pode incluir configuração de cenários diferentes de uso, não apenas para produção, mas também para desenvolvimento e testagem, possibilitando que o microsserviço tenha o melhor desempenho em diversos cenários. Para tanto é necessário uso de ferramentas que configurem essa flexibilidade. Tais ferramentas serão melhor discutidas no \autoref{chapter-solucoes} \cite{Familiar2015}
+A implantação de microsserviços é altamente dependente de sua automação. Para garantir flexibilidade de ambiente de execução, essa automação pode incluir configuração de cenários diferentes de uso, não apenas para produção, mas também para desenvolvimento e testagem, possibilitando que o microsserviço tenha o melhor desempenho em diversos cenários. Para tanto, é necessário o uso de ferramentas que configurem essa flexibilidade. \cite{Familiar2015}. Tais ferramentas serão melhor discutidas no \autoref{chapter-solucoes}.
+
+\subsection{Flexibilidade na escolha de tecnologias}
+
+Cada microsserviço pode ser desenvolvido usando uma linguagem de programação e estrutura que melhor se adapte ao problema que ele é projetado para resolver, o que oferece mais possibilidades de tecnologias para usar. \cite{oracle_microservices}
 
 \subsection{Versionável e Substituível}
 
@@ -56,18 +60,17 @@ Organizar o sistema e o time para sustentar uma arquitetura de microsserviços �
     If you are part of a command-and-control organization using a waterfall software project management approach, you will struggle because you are not oriented to high-velocity product development. If you lack a DevOps culture and there is no collaboration between development and operations to automate the deployment pipeline, you will struggle. \cite{Familiar2015}
 \end{citacao}
 
-
 \subsection{Plataforma}
-Criar o ambiente de execução para microsserviços requer um grande investimento em infraestrutura dinâmica em \emph{data centers} dispersos para garantir maior disponibilidade. Se sua atual plataforma \emph{on-premises} não suporta automação, infraestrutura dinâmica, escalamento elástico e alta disponibilidade, deve-se considerar uma plataforma na núvem. Mais sobre soluções na núvem será discutido no \autoref{chapter-solucoes}.
+Criar o ambiente de execução para microsserviços requer um grande investimento em infraestrutura dinâmica em \emph{data centers} dispersos para garantir maior disponibilidade. Se sua atual plataforma \emph{on-premises} não suporta automação, infraestrutura dinâmica, escalamento elástico e alta disponibilidade, deve-se considerar uma plataforma na núvem. \cite{Familiar2015}. Mais sobre soluções na núvem será discutido no \autoref{chapter-solucoes}.
 
 \section{Identificação}
 
-Domain-driven design (design orientado a domínio) é uma tecnica bem consolidada e muito usada. Mas para aplica-la em microsserviços, é preciso analisar onde cada peça deve ficar. Em vez de projetar os modelos e os (contextos limitados) separando-os em camadas, pode-se juntar os contextos com seus respectivos modelos, e procurar por possíveis pontos de (separação) da aplicação - um lugar onde a linguagem muda, por exemplo. Isso resultaria em um ponto de partida para separar as partes de uma arquitetura de microsserviços.
+Domain-driven design (design orientado a domínio) é uma tecnica bem consolidada e muito usada. Mas para aplica-la em microsserviços, é preciso analisar onde cada peça deve ficar. Em vez de projetar os modelos e os (contextos limitados) separando-os em camadas, pode-se juntar os contextos com seus respectivos modelos, e procurar por possíveis pontos de (separação) da aplicação - um lugar onde a linguagem muda, por exemplo. Isso resultaria em um ponto de partida para separar as partes de uma arquitetura de microsserviços. \cite{Familiar2015}
 
 \section{Testes}
 
-Assim como em qualquer aplicação, o teste é uma parte crucial do seu desenvolvimento. Escrever e testar código não muda muito entre as arquiteturas monolítica e de microsserviços, contudo, nos microserviços existem mais testes a serem executados. Não deve-se testar o microsserviço apenas antes de seu lançamento, mas sim em cada passo do \emph{pipeline} de implantação, sempre automatizando o máximo de etapas possível, para assim garantir uma entrega rápida de software de qualidade.
+Assim como em qualquer aplicação, o teste é uma parte crucial do seu desenvolvimento. Escrever e testar código não muda muito entre as arquiteturas monolítica e de microsserviços, contudo, nos microserviços existem mais testes a serem executados. Não deve-se testar o microsserviço apenas antes de seu lançamento, mas sim em cada passo do \emph{pipeline} de implantação, sempre automatizando o máximo de etapas possível, para assim garantir uma entrega rápida de software de qualidade. \cite{Familiar2015}
 
 \section{Descoberta}
 
-Encontrar microsserviços em um ambiente distribuido pode ser feito de algumas maneiras diferentes. A informação pode ser armazenada diretamente no código, pode ser guardada e acessada em um arquivo, ou pode ser construido um microsserviço para encontrar outros microsserviços e disponibilizar suas localizações. Contudo, para prover detectabilidade como um serviço será necessário adquirir um produto de terceiros, integrar um projeto aberto, ou desenvolver sua própria solução.
+Encontrar microsserviços em um ambiente distribuido pode ser feito de algumas maneiras diferentes. A informação pode ser armazenada diretamente no código, pode ser guardada e acessada em um arquivo, ou pode ser construido um microsserviço para encontrar outros microsserviços e disponibilizar suas localizações. Contudo, para prover detectabilidade como um serviço será necessário adquirir um produto de terceiros, integrar um projeto aberto, ou desenvolver sua própria solução. \cite{Familiar2015}

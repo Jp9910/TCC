@@ -1,10 +1,10 @@
 \chapter{Introdução}\label{chapter-introducao}
 
-In recent years, the rise of the internet and the ubiquity of mobile computing have made it necessary for application developers to design their applications focusing on a lightweight, self-contained component.
+\emph{Software as a service}, ou Software como um serviço. Todos que têm contato com o ramo da computação sabem que essa expressão é mais do que apenas um modelo de negócio. A tendência que tem-se observado de oferecer software não mais como um pacote completo e fechado, mas sim como uma ferramenta flexível e em constante melhoria tem mudado o jeito como se desenvolve software atualmente. O público alvo e os usuários desses softwares podem chegar a números imensos.
 
-Developers need to deploy applications quickly and make changes to the application without a complete redeployment. This has led to a new development paradigm called "microservices," where an application is broken into a suite of small, independent units that perform their respective functions and communicate via APIs.
+In recent years, the rise of the internet and the ubiquity of mobile computing have made it necessary for application developers to design their applications focusing on a lightweight, self-contained component. Developers need to deploy applications quickly and make changes to the application without a complete redeployment. This has led to a new development paradigm called "microservices," where an application is broken into a suite of small, independent units that perform their respective functions and communicate via APIs. Although independent units, any number of these microservices may be pulled by the application to work together and achieve the desired results. \cite{middleware-microservices}
 
-Although independent units, any number of these microservices may be pulled by the application to work together and achieve the desired results. \cite{noauthor_what_nodate}
+Se você quiser projetar um aplicativo que seja multilíngue, facilmente escalável, fácil de manter e implantar, altamente disponível e que minimize falhas, use a arquitetura microservices para projetar e implantar um aplicativo em nuvem. Em uma arquitetura de microservices, cada microservice possui uma tarefa simples e se comunica com os clientes ou com outros microservices usando mecanismos de comunicação leves, como solicitações de API REST. \cite{oracle_microservices}
 
 %For the past several years, we have been developing standards and practices for team development of large, complex systems using a layered, monolithic architecture. This is reflected in how we organize into teams, structure our solutions and source code control systems, and package and release our software.
 
@@ -16,7 +16,7 @@ Although independent units, any number of these microservices may be pulled by t
 
 \subsection{Objetivo geral}\label{sec-objetivo-geral}
 
-Discutir, em alto nível, a arquitetura de microsserviços e suas características. Analisar os padrões, boas práticas, e soluções mais encontrados no desenvolvimento de aplicações que utilizam essa arquitetura. Modelar e implementar um exemplo de aplicação usando a arquitetura de microsserviços.
+Discutir, em alto nível, a arquitetura de microsserviços e suas características. Analisar as boas práticas e soluções mais usadas no desenvolvimento de aplicações que utilizam essa arquitetura. Modelar e implementar um exemplo de aplicação usando a arquitetura de microsserviços.
 % Analisar e resumir o estado da arte em desenvolvimento de aplicações com arquitetura de microsserviços
 
 \subsection{Objetivos específicos}\label{sec-objetivos-especificos}
@@ -24,20 +24,20 @@ Discutir, em alto nível, a arquitetura de microsserviços e suas característic
 % (TCC 1:)
 - Caracterizar a arquitetura de microsserviços;
 
-- Reunir padrões e práticas comuns na implementação de aplicações com arquitetura de microsserviços;
+- Reunir boas práticas usadas na implementação de aplicações com arquitetura de microsserviços;
 
-- Reunir soluções e ferramentas usadas na implementação de aplicações com arquitetura de microsserviços;
+- Reunir ferramentas usadas na implementação de aplicações com arquitetura de microsserviços;
 
-- Propor ideias e passos para como migrar do monolito para os microsserviços
+- Propor ideias e passos para como migrar do monolito para os microsserviços;
 
 % (TCC 2:)
-Analisar a eficiência desses padrões e práticas.
+Analisar a eficiência dessas boas práticas;
 % - Analisar/testar a eficiência desses padrões e práticas, por meio de (estudos de caso? análise da literatura? exemplos de empresas que as usam?);
 
-Analisar a eficiência dessas soluções e ferramentas.
+Analisar a eficiência dessas ferramentas;
 % - Analisar/testar a eficiência dessas soluções e ferramentas, por meio de (estudos de caso? análise da literatura? exemplos de empresas que as usam?);
 
-- Propor uma combinação desses padrões e dessas ferramentas para a construção de uma aplicação com arquitetura de microsserviços.
+- Propor uma combinação das boas práticas e das ferramentas para o desenvolvimento de aplicações com arquitetura de microsserviços.
 
 \section{Metodologia}
 

@@ -1,4 +1,4 @@
-\chapter{Padrões}\label{chapter-padroes}
+\chapter{Boas práticas}\label{chapter-boas-praticas}
 
 \section{Antes de tudo, o monólito}
 
@@ -16,19 +16,19 @@ No contexto da computação, provisionamento significa disponibilizar um recurso
 
 Muitas coisas podem dar errado em qualquer tipo de arquitetura, mas em especial nos microserviços pois cada serviço é fracamente acoplado, estando sujeitos não só a falhas no código, mas também na comunicação, na conexão, ou até falhas físicas. Portanto o monitoramento é crucial nesse tipo de arquitetura para que problemas, especialmente os mais graves possam ser detectados no menor tempo possível. Além disso, o monitoramento também pode ser usado para detectar problemas de negócio, como uma redução nos pedidos por exemplo.
 
-\subsection{Deploy rápido de aplicação}
+\subsection{Implantação rápida}
 
-Na arquitetura de microserviços o deploy geralmente é feito separadamente para cada microserviço. Com muitos serviços para gerenciar, o deploy pode se tornar uma tarefa árdua, portanto será novamente necessário uma automação dessa etapa, que geralmente envolve um pipeline de deploy, que deve ser automatizado o máximo possível.
+Na arquitetura de microserviços a implantação geralmente é feita separadamente para cada microserviço. Com muitos serviços para gerenciar, ela pode se tornar uma tarefa árdua, portanto será novamente necessário uma automação dessa etapa, que geralmente envolve um \emph{pipeline} de implantação, que deve ser automatizado o máximo possível.
 
 \section{Configuração}
 
-\section{Deploy}
+\section{Implantação}
 
 \section{Comunicação entre microserviços}
 
 \section{Testes}
 
-Mas além dos métodos mais conhecidos de testes, como test-driven development, teste de unidade e teste funcional, é necessário testar os microsserviços conforme passam pelo \emph{pipeline} de \emph{deploy}.
+Mas além dos métodos mais conhecidos de testes, como test-driven development, teste de unidade e teste funcional, é necessário testar os microsserviços conforme passam pelo \emph{pipeline} de implantação.
 
 - Testes internos: Testar as funções internas do serviço, inclusive uso de acesso de dados, e caching.
 
@@ -44,8 +44,13 @@ Mas além dos métodos mais conhecidos de testes, como test-driven development, 
 
 - PEN Testing: Work with a third-party software security firm to perform penetration testing. NOTE: This will requires cooperation with Microsoft if you are pen testing microservices deployed to Azure.
 
+\section{A metodologia de 12 fatores}
 
-\section{Como migrar do monolito para os microserviços}
+Asdf. \cite{oracle_microservices}.
+
+Qwer. \cite{12factor}
+
+\section{Do monólito aos microserviços}
 
 \subsection{Identificação}
 
