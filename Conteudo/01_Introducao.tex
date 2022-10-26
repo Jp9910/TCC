@@ -1,10 +1,22 @@
 \chapter{Introdução}\label{chapter-introducao}
 
-\emph{Software as a service}, ou Software como um serviço. Todos que têm contato com o ramo da computação sabem que essa expressão é mais do que apenas um modelo de negócio. A tendência que tem-se observado de oferecer software não mais como um pacote completo e fechado, mas sim como uma ferramenta flexível e em constante melhoria tem mudado o jeito como se desenvolve software atualmente. O público alvo e os usuários desses softwares podem chegar a números imensos.
+Todos que têm contato com o ramo do desenvolvimento de software provavelmente já ouviu o termo \emph{SaaS (Software as a Service)}, ou software como um serviço. Mas ao contrário do que alguns pensam, essa expressão é mais do que apenas um modelo de negócio.
 
-In recent years, the rise of the internet and the ubiquity of mobile computing have made it necessary for application developers to design their applications focusing on a lightweight, self-contained component. Developers need to deploy applications quickly and make changes to the application without a complete redeployment. This has led to a new development paradigm called "microservices," where an application is broken into a suite of small, independent units that perform their respective functions and communicate via APIs. Although independent units, any number of these microservices may be pulled by the application to work together and achieve the desired results. \cite{middleware-microservices}
+O crescimento da internet e a onipresença da computação móvel tem mudado o jeito como software é desenvolvido nos últimos tempos. A tendência que tem-se observado é a de oferecer software não mais como um pacote completo e fechado, mas sim como um pacote flexível e em constante melhoria, o que implica na mudança do foco dos desenvolvedores para construir componentes leves e auto-contidos, que permitam que mudanças sejam desenvolvidas e implantadas rápida e independetemente. A partir disso originou-se um novo paradigma de desenvolvimento, chamado de "microsserviços". \cite{middleware-microservices}.
 
-Se você quiser projetar um aplicativo que seja multilíngue, facilmente escalável, fácil de manter e implantar, altamente disponível e que minimize falhas, use a arquitetura microservices para projetar e implantar um aplicativo em nuvem. Em uma arquitetura de microservices, cada microservice possui uma tarefa simples e se comunica com os clientes ou com outros microservices usando mecanismos de comunicação leves, como solicitações de API REST. \cite{oracle_microservices}
+\begin{citacao}
+    Se você quiser projetar um aplicativo que seja multilíngue, facilmente escalável, fácil de manter e implantar, altamente disponível e que minimize falhas, use a arquitetura microservices para projetar e implantar um aplicativo em nuvem. \cite{oracle_microservices}
+\end{citacao}
+
+Esse estilo de arquitetura de software é amplamente considerado a melhor maneira de estruturar um sistema de software como um serviço. \cite{CAOPLE}
+
+Nesse trabalho serão discutidos as características da arquitetura de microsserviços, as boas práticas que devem ser seguidas no desenvolvimento de aplicações com essa arquitetura, e as (soluções ou ferramentas?) mais usadas.
+
+%Se você quiser projetar um aplicativo que seja multilíngue, facilmente escalável, fácil de manter e implantar, altamente disponível e que minimize falhas, use a arquitetura microservices para projetar e implantar um aplicativo em nuvem. Em uma arquitetura de microservices, cada microservice possui uma tarefa simples e se comunica com os clientes ou com outros microservices usando mecanismos de comunicação leves, como solicitações de API REST. \cite{oracle_microservices}
+
+% O público alvo e os usuários desses softwares podem chegar a números imensos.
+
+% In recent years, the rise of the internet and the ubiquity of mobile computing have made it necessary for application developers to design their applications focusing on a lightweight, self-contained component. Developers need to deploy applications quickly and make changes to the application without a complete redeployment. This has led to a new development paradigm called "microservices," where an application is broken into a suite of small, independent units that perform their respective functions and communicate via APIs. Although independent units, any number of these microservices may be pulled by the application to work together and achieve the desired results. \cite{middleware-microservices}
 
 %For the past several years, we have been developing standards and practices for team development of large, complex systems using a layered, monolithic architecture. This is reflected in how we organize into teams, structure our solutions and source code control systems, and package and release our software.
 
@@ -47,6 +59,6 @@ Para caracterizar a arquitetura de microsserviços, foram pesquisados as seguint
 
 - (microservices or microservice) and provision
 
-metodologia quanto aos objetivos, quanto a execução. passo a passo que vai seguir durante o trabalho.
+A partir dos principais resultados obtidos com essas buscas e os trabalhos em respectivas referências bibliográficas, foram extraídas as características que todo microsserviço deve ter.
 
-explicar como analisar/testar essa eficiencia (objetivos especificos)
+(metodologia quanto aos objetivos, quanto a execução. passo a passo que vai seguir durante o trabalho. explicar como analisar/testar essa eficiencia (objetivos especificos))

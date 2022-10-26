@@ -1,6 +1,6 @@
 \chapter{Boas práticas}\label{chapter-boas-praticas}
 
-\section{Antes de tudo, o monólito}
+\section{Antes de tudo, comece pelo monólito}
 
 \begin{citacao}
 But as with any architectural decision there are trade-offs. In particular with microservices there are serious consequences for operations, who now have to handle an ecosystem of small services rather than a single, well-defined monolith. Consequently if you don't have certain baseline competencies, you shouldn't consider using the microservice style. \cite{MartinFowlerMicroservices}
@@ -25,6 +25,72 @@ Na arquitetura de microserviços a implantação geralmente é feita separadamen
 \section{Implantação}
 
 \section{Comunicação entre microserviços}
+
+\section{APIs}
+
+Considerando que APIs são uma parte crucial no desenvolvimento de microserviços, sendo responsável por grande parte da comunicação que se faz necessária para conectar tantos serviços separados e manter um funcionamento eficiente e livre de falhas, esse trabalho terá um foco grande em boas práticas no desenvolvimento de APIs.
+
+\subsection{Segurança em APIs}
+
+\subsubsection*{Autenticação}
+
+Incluir autenticação em uma API consiste em exigir uma prova de autorização do uso da API. A autenticação nas APIs é indispensável para aumentar a segurança, e existem formas diferentes de implementá-la, as quais serão melhor discutidas no \autoref{chapter-solucoes}.
+
+\subsubsection*{Validação de entradas}
+
+Validar entradas significa verificar as requisições que chegam com o intuito de garantir que elas não contém dados impróprios, tais como injeções de SQL ou \emph{scripting} entre sites (scripting significa executar uma determinada sequência de comandos). Essa validação deve ser implementada tanto em nível sintático como em semântico, isso é, tanto impondo correção da sintaxe quanto impondo correção de valores. \cite{rapidAPI-security}
+
+\subsubsection*{API Gateway}
+
+Um API Gateway funciona como uma porta única de entrada para as APIs de cada serviço. As requisições dos clientes são direcionadas para um único endereço, facilitando a organização das chamadas. Esse gateway fica situado entre o cliente e os serviços do \emph{backend}, e é responsável por redirecionar as requisições recebidas para os serviços apropriados, assim o gerenciamento das chamadas pode ser feita em apenas um lugar em vez de em cada API de cada serviço. Além disso, pode-se implementar uma camada de segurança e de monitoramento. \cite{rapidAPI-security}
+
+\subsubsection*{Limitação de taxa de requisições}
+
+Limitar a taxa de requisições é um jeito de proteger a infraestrutura do servidor nos casos de acontecerem grandes fluxos de requisições, tal como em um ataque de \emph{DoS} (negação de serviço). Clientes terão seu acesso bloqueado caso enviem uma quantidade de requisições acima do limite determinado. \cite{rapidAPI-security}
+
+\subsubsection*{Compartilhar o mínimo possível}
+
+Compartilhar o mínimo possível é uma medida de segurança genérica que deve ser adotada em tudo. Mais especificamente nas APIs, deve-se retornar estritamente apenas os dados necessários para o cliente. Muitas ferramentas usadas para implementar APIs incluem por padrão informações como se fossem marcas d'água, mas que podem ser removidas, tal como headers "X-Powered-By", que vazam informações do servidor que podem auxiliar usuários mal-intencionados. \cite{rapidAPI-security}
+
+% Only share required data - Your API should only return the appropriate data. Double-check what your endpoints return and make sure no security info, like an API Key, is returned. You can also remove "X-Powered-By" response headers, as they leak server-side information that could potentially aid attackers in exploitation. \cite{rapidAPI-security}
+
+\subsection{Testes em APIs}
+
+API testing is performed to test whether a particular API meets pre-defined parameters or not.
+
+API testing includes testing APIs in isolation to ascertain if they meet the functionality, reliability, latency, performance, security, and other essential parameters.
+
+How to test an API?
+
+You can code the test or use cURL for API testing. 
+
+RapidAPI offers RapidAPI Client for VS Code to test APIs locally inside Visual Studio Code. You can also schedule API tests using RapidAPI Studio.
+
+Why should you perform API testing?
+
+- Testing your APIs timely helps to ensure your app is up all the time.
+
+- It helps to detect API security and performance issues.
+
+Benefits of API Testing
+
+- When API tests fail, you will know precisely where the issue lies that crashed the system.
+
+- As data is exchanged via XML or JSON, you can write API tests in your preferred language.
+
+- API testing also helps to release the next API version faster. \cite{rapidAPI-testing}
+
+\subsection{Otimizações em API}
+
+Cache response - Caching avoids excessive database queries. For endpoints that frequently return the same response, caching can be implemented to reduce the number of calls to the API and improve performance.
+
+Compress data - The transfer of large payloads will slow down an API. Data compression combats this issue by decreasing the data size and improving speed. There are various compression methods available, a common one being GZIP.
+
+Prevent over and under-fetching - Over-fetching results in unnecessary and unusable data, and under-fetching results in an incomplete response. Good architecture, planning, and appropriate API management tools are essential to avoid these.
+
+Paginate and filter - Both pagination and filtering are great methods to reduce response complexity and improve user experience. Pagination enables the separation and categorization of data, and filtering limits the results of parameters.
+
+Use PATCH not PUT - The PATCH and PUT methods are similar, but PATCH has performance advantages. When modifying a resource, PUT updates the entire resource, which is often unnecessary, whereas PATCH only updates a specific part. Therefore PATCH has a smaller payload. \cite{rapidAPI-optimization}
 
 \section{Testes}
 
@@ -55,6 +121,8 @@ Qwer. \cite{12factor}
 \subsection{Identificação}
 
 If you are currently working with a complex layered architecture and have a reasonable domain model defined, the domain model will provide a roadmap to an evolutionary approach to migrating to a microservice architecture. If a domain model does not exist, you can apply domain-driven design in reverse to identify the bounded contexts, the capabilities within the system. \cite{Familiar2015}
+
+% Domain-driven design (design orientado a domínio) é uma tecnica bem consolidada e muito usada no desenvolvimento de software. Entretanto, para aplica-la em microsserviços, é necessário analisar onde cada peça desse padrão de projeto deve ficar. Em vez de projetar os modelos e os contextos limitados separando-os em camadas, pode-se juntar os contextos com seus respectivos modelos, e procurar por possíveis pontos de separação da aplicação - um lugar onde a linguagem muda, por exemplo. Isso resultaria em um ponto de partida para separar as partes e formar uma arquitetura de microsserviços. \cite{Familiar2015}
 
 \subsection{Organização}
 

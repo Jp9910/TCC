@@ -1,7 +1,41 @@
-\chapter{Soluções}\label{chapter-solucoes}
+\chapter{Soluções: Ferramentas}\label{chapter-solucoes}
 
 \section{Flexibilidade}
 (tais como as ferramentas de Auto Scaling da AWS)
 
 \section{Plataforma}
 Microsoft Azure is a microservice platform, and it provides a fully automated dynamic infrastructure, SDKs, and runtime containers along with a large portfolio of existing microservices that you can leverage, such as DocumentDb, Redis In-Memory Cache, and Service Bus, to build your own microservices catalog. \cite{Familiar2015}
+
+\section{APIs}
+
+\subsection{GraphQL}
+
+A query language for your API
+
+GraphQL is a query language for APIs and a runtime for fulfilling those queries with your existing data. GraphQL provides a complete and understandable description of the data in your API, gives clients the power to ask for exactly what they need and nothing more, makes it easier to evolve APIs over time, and enables powerful developer tools. \cite{GraphQL-site}
+
+\subsection{API Gateway}
+
+Amazon API Gateway \url{https://aws.amazon.com/pt/api-gateway/?nc1=h_ls}
+
+\subsection{Ferramentas para segurança em APIs}
+
+Autenticação - Always use secure authentication methods such as OAuth, JWTs, or API Keys. It's not recommended to use basic HTTP authentication as it sends user credentials with each request. It is considered the least secure method.
+
+Validação de entradas - Métodos de validação de entrada: JSON and XML Schema validation; Regular expressions;  Data type validators available in framework; Minimum and maximum value range check for numerical inputs;  Minimum and maximum length check for strings.
+
+Usar um API Gateway - API Gateways are an all-in-one way to implement security, monitoring, and overall API management. They are a single entry point for API calls. They sit between the clients and a number of backend services to handle calls appropriately.
+
+\subsubsection{Métodos de autenticação}
+
+API Keys are unique identifiers assigned to clients, which grant them access to an API. They are passed to the server with every request and authenticate the client. They also provide authorization and can be used to identify a user's individual access permissions. API Keys are long alphanumerical strings designed to be almost impossible to guess. They are passed to servers as a query parameter or in an HTTP request header.
+
+OAuth is a powerful framework that uses tokens to give apps limited access to a user’s data without needing the user’s password. The tokens used are restricted and only allow access to data that the user specified for the particular app. It works by the user(client) first requesting authorization from the resource owner. The user is then given a unique access token from an authorization server used in each request to the resource server.
+
+Basic HTTP authentication involves the client passing the user’s username and password with every request. This is done using an HTTP Header. Basic HTTP authentication is generally considered the least secure. However, if you decide to use it, ensure you are using an HTTPS connection. If not, data is a risk of being leaked.
+
+Ferramenta para rate limiting. \cite{rapidAPI-security}
+
+\subsection{Ferramentas completas}
+
+Uma solução para a sobrecarga na execução de tantos microserviços é a um ambiente de desenvolvimento integrado na linguagem CAOPLE \cite{CAOPLE}. Essa plataforma oferece grande controle sobre o deployment e testagem de microserviços.

@@ -51,7 +51,14 @@ Cada microsserviço pode ser desenvolvido usando uma linguagem de programação 
 
 Com o controle completo dos cenários de implantação, é possível manter versões diferentes de um mesmo serviço rodando ao mesmo tempo, proporcionando retrocompatibilidade e fácil migração. Além disso, serviços podem ser atualizados ou mesmo substituidos sem ocasionar indisponibilidade do serviço. \cite{Familiar2015}
 
+
 \section{Desafios}
+
+However, developing applications in the microservices architecture presents three main challenges: (a) how to program systems that consists of a large number of services running in parallel and distributed over a cluster of computers; (b) how to reduce the communication overhead caused by executing a large number of small services; (c) how to support the flexible deployment of services to a network to achieve system load balance. \cite{CAOPLE}
+
+\subsection{Comunicação}
+
+cross-platform compatibility issues and inconsistent call standards issues in the process of development and call microservices. \cite{ZUO2020102878}
 
 \subsection{[re]Organizaçao}
 
@@ -65,7 +72,9 @@ Criar o ambiente de execução para microsserviços requer um grande investiment
 
 \section{Identificação}
 
-Domain-driven design (design orientado a domínio) é uma tecnica bem consolidada e muito usada. Mas para aplica-la em microsserviços, é preciso analisar onde cada peça deve ficar. Em vez de projetar os modelos e os (contextos limitados) separando-os em camadas, pode-se juntar os contextos com seus respectivos modelos, e procurar por possíveis pontos de (separação) da aplicação - um lugar onde a linguagem muda, por exemplo. Isso resultaria em um ponto de partida para separar as partes de uma arquitetura de microsserviços. \cite{Familiar2015}
+Domain-driven design (projeto orientado a domínio) é uma técnica bem consolidada e muito usada no desenvolvimento de software. Entretanto, para aplica-la em microsserviços, é necessário analisar onde cada peça desse padrão de projeto deve ficar. Em vez de projetar os modelos e os contextos limitados separando-os em camadas, deve-se juntar os contextos com seus respectivos modelos, e procurar por possíveis pontos de separação da aplicação - um lugar onde a linguagem muda, por exemplo. Isso resultaria em um ponto de partida para separar as partes e formar uma arquitetura de microsserviços. \cite{Familiar2015}
+
+esse parágrafo não encaixa nas caracteristicas - desafios ?...
 
 \section{Testes}
 
