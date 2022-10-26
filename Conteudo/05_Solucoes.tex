@@ -1,10 +1,16 @@
 \chapter{Soluções: Ferramentas}\label{chapter-solucoes}
 
+\chapterprecis{Este capítulo aprensenta ferramentas comumente usadas na construção de aplicações com arquitetura de microsserviços}\index{sinopse de capítulo}
+
 \section{Flexibilidade}
 (tais como as ferramentas de Auto Scaling da AWS)
 
 \section{Plataforma}
 Microsoft Azure is a microservice platform, and it provides a fully automated dynamic infrastructure, SDKs, and runtime containers along with a large portfolio of existing microservices that you can leverage, such as DocumentDb, Redis In-Memory Cache, and Service Bus, to build your own microservices catalog. \cite{Familiar2015}
+
+\section{Testes de microsserviços}
+
+Teste de penetração: NOTE: This will requires cooperation with Microsoft if you are pen testing microservices deployed to Azure.
 
 \section{APIs}
 
@@ -17,6 +23,18 @@ GraphQL is a query language for APIs and a runtime for fulfilling those queries 
 \subsection{API Gateway}
 
 Amazon API Gateway \url{https://aws.amazon.com/pt/api-gateway/?nc1=h_ls}
+
+\subsection{Ferramentas para testes em APIs}\label{ferramentas-testes-apis}
+
+RapidAPI offers RapidAPI Client for VS Code to test APIs locally inside Visual Studio Code. You can also schedule API tests using RapidAPI Studio.
+
+programar os testes em uma linguagem de programação
+
+cURL
+
+postman
+
+solução integrada ao VSCode - thunderclient
 
 \subsection{Ferramentas para segurança em APIs}
 
@@ -38,4 +56,4 @@ Ferramenta para rate limiting. \cite{rapidAPI-security}
 
 \subsection{Ferramentas completas}
 
-Uma solução para a sobrecarga na execução de tantos microserviços é a um ambiente de desenvolvimento integrado na linguagem CAOPLE \cite{CAOPLE}. Essa plataforma oferece grande controle sobre o deployment e testagem de microserviços.
+Uma solução para a sobrecarga na execução de tantos microserviços é a um ambiente de desenvolvimento integrado na linguagem CAOPLE \cite{CAOPLE}. Essa plataforma oferece grande controle sobre a implantação e testagem de microserviços.

@@ -1,30 +1,34 @@
 \chapter{Boas práticas}\label{chapter-boas-praticas}
 
+\chapterprecis{Este capítulo aprensenta as boas práticas comumente seguidas na construção de aplicações com arquitetura de microsserviços.}\index{sinopse de capítulo}
+
 \section{Antes de tudo, comece pelo monólito}
 
 \begin{citacao}
 But as with any architectural decision there are trade-offs. In particular with microservices there are serious consequences for operations, who now have to handle an ecosystem of small services rather than a single, well-defined monolith. Consequently if you don't have certain baseline competencies, you shouldn't consider using the microservice style. \cite{MartinFowlerMicroservices}
 \end{citacao}
 
-\citeonline{MartinFowlerMicroservices} afirma que existem 3 pré-requisitos para se adotar uma arquitetura de microserviços, e que na grande maioria dos casos, deve-se começar pela arquitetura monolítica até que o sistema já esteja bem definido. Os pré-requisitos são - provisionamento rápido, monitoramento básico e deploy rápido de aplicação.
+\citeonline{MartinFowlerMicroservices} afirma que existem 3 pré-requisitos para se adotar uma arquitetura de microserviços, e que é mais fácil lidar com as operações de um monólito bem definido do que de um ecossistema de pequenos serviços. Assim sendo, é uma boa prática começar pela arquitetura monolítica até que o sistema já esteja bem definido e estes pré-requisitos sejam atendidos - provisionamento rápido, monitoramento básico, e implantação rápida de aplicação.
 
 \subsection{Provisionamento rápido}
 
-No contexto da computação, provisionamento significa disponibilizar um recurso, como uma máquina virtual por exemplo. Para produzir software, é necessário provisionar muitos recursos, tanto para os desenvolvedores quanto para o cliente. Naturalmente, o provisionamento é mais fácil na núvem. Na AWS por exemplo, para conseguir uma nova máquina, basta lançar uma nova instância e acessá-la - um processo muito rápido quando comparado ao \emph{on-premises}, onde precisaria-se comprar uma nova máquina, esperar chegar, configurá-la, e só então ela estará pronta. Para alcançar um provisionamento rápido, será necessário bastante automação.
+No contexto da computação, provisionamento significa disponibilizar um recurso, como uma máquina virtual por exemplo. Para produzir software, é necessário provisionar muitos recursos, tanto para os desenvolvedores quanto para o cliente. Naturalmente, o provisionamento é mais fácil na núvem. Na AWS por exemplo, para conseguir uma nova máquina, basta lançar uma nova instância e acessá-la - um processo muito rápido quando comparado ao \emph{on-premises}, onde precisaria-se comprar uma nova máquina, esperar chegar, configurá-la, e só então ela estará pronta. Para alcançar um provisionamento rápido, será necessário bastante automação. \cite{MartinFowlerMicroservices}
 
 \subsection{Monitoramento básico}
 
-Muitas coisas podem dar errado em qualquer tipo de arquitetura, mas em especial nos microserviços pois cada serviço é fracamente acoplado, estando sujeitos não só a falhas no código, mas também na comunicação, na conexão, ou até falhas físicas. Portanto o monitoramento é crucial nesse tipo de arquitetura para que problemas, especialmente os mais graves possam ser detectados no menor tempo possível. Além disso, o monitoramento também pode ser usado para detectar problemas de negócio, como uma redução nos pedidos por exemplo.
+Muitas coisas podem dar errado em qualquer tipo de arquitetura, mas em especial nos microserviços pois cada serviço é fracamente acoplado, estando sujeitos não só a falhas no código, mas também na comunicação, na conexão, ou até falhas físicas. Portanto o monitoramento é crucial nesse tipo de arquitetura para que problemas, especialmente os mais graves possam ser detectados no menor tempo possível. Além disso, o monitoramento também pode ser usado para detectar problemas de negócio, como uma redução nos pedidos por exemplo. \cite{MartinFowlerMicroservices}
 
 \subsection{Implantação rápida}
 
-Na arquitetura de microserviços a implantação geralmente é feita separadamente para cada microserviço. Com muitos serviços para gerenciar, ela pode se tornar uma tarefa árdua, portanto será novamente necessário uma automação dessa etapa, que geralmente envolve um \emph{pipeline} de implantação, que deve ser automatizado o máximo possível.
+Na arquitetura de microserviços a implantação geralmente é feita separadamente para cada microserviço. Com muitos serviços para gerenciar, ela pode se tornar uma tarefa árdua, portanto será novamente necessário uma automação dessa etapa, que geralmente envolve um \emph{pipeline} de implantação, que deve ser automatizado o máximo possível. \cite{MartinFowlerMicroservices}
 
 \section{Configuração}
 
 \section{Implantação}
 
 \section{Comunicação entre microserviços}
+
+RPC? Ou apenas APIs?
 
 \section{APIs}
 
@@ -52,33 +56,17 @@ Limitar a taxa de requisições é um jeito de proteger a infraestrutura do serv
 
 Compartilhar o mínimo possível é uma medida de segurança genérica que deve ser adotada em tudo. Mais especificamente nas APIs, deve-se retornar estritamente apenas os dados necessários para o cliente. Muitas ferramentas usadas para implementar APIs incluem por padrão informações como se fossem marcas d'água, mas que podem ser removidas, tal como headers "X-Powered-By", que vazam informações do servidor que podem auxiliar usuários mal-intencionados. \cite{rapidAPI-security}
 
-% Only share required data - Your API should only return the appropriate data. Double-check what your endpoints return and make sure no security info, like an API Key, is returned. You can also remove "X-Powered-By" response headers, as they leak server-side information that could potentially aid attackers in exploitation. \cite{rapidAPI-security}
-
 \subsection{Testes em APIs}
 
-API testing is performed to test whether a particular API meets pre-defined parameters or not.
+Testar uma API isoladamente serve para determinar se ela atende a parâmetros pré-definidos ou não. Tais parâmetros podem ser o cumprimento da funcionalidade, a confiabilidade, a latência, o desempenho, e a segurança. Quando um teste de API falha, deverá ser possível saber precisamente onde o problema se encontra, assim aumentando a velocidade de desenvolvimento e a qualidade do produto. As ferramentas que podem ser utilizadas para testes em APIs são discutidas na sessão \autoref{ferramentas-testes-apis}.
 
-API testing includes testing APIs in isolation to ascertain if they meet the functionality, reliability, latency, performance, security, and other essential parameters.
-
-How to test an API?
-
-You can code the test or use cURL for API testing. 
-
-RapidAPI offers RapidAPI Client for VS Code to test APIs locally inside Visual Studio Code. You can also schedule API tests using RapidAPI Studio.
-
-Why should you perform API testing?
-
-- Testing your APIs timely helps to ensure your app is up all the time.
-
-- It helps to detect API security and performance issues.
-
-Benefits of API Testing
-
-- When API tests fail, you will know precisely where the issue lies that crashed the system.
-
-- As data is exchanged via XML or JSON, you can write API tests in your preferred language.
-
-- API testing also helps to release the next API version faster. \cite{rapidAPI-testing}
+% Why should you perform API testing?
+% - Testing your APIs timely helps to ensure your app is up all the time.
+% - It helps to detect API security and performance issues.
+% Benefits of API Testing
+% - When API tests fail, you will know precisely where the issue lies that crashed the system.
+% - As data is exchanged via XML or JSON, you can write API tests in your preferred language.
+% - API testing also helps to release the next API version faster. \cite{rapidAPI-testing}
 
 \subsection{Otimizações em API}
 
@@ -94,7 +82,7 @@ Use PATCH not PUT - The PATCH and PUT methods are similar, but PATCH has perform
 
 \section{Testes}
 
-Mas além dos métodos mais conhecidos de testes, como test-driven development, teste de unidade e teste funcional, é necessário testar os microsserviços conforme passam pelo \emph{pipeline} de implantação.
+Além dos métodos mais conhecidos de testes, como test-driven development, teste de unidade e teste funcional, é necessário testar os microsserviços conforme passam pelo \emph{pipeline} de implantação. Isso inclui:
 
 - Testes internos: Testar as funções internas do serviço, inclusive uso de acesso de dados, e caching.
 
@@ -102,13 +90,13 @@ Mas além dos métodos mais conhecidos de testes, como test-driven development, 
 
 - Teste de protocolo: Testar o serviço no nível de protocolo, chamando a API sobre o determinado protocolo (geralmente HTTP).
 
-- Composition Testing: Test the service in collaboration with other services within the context of a solution.
+- Teste de composição: Testar o serviço em cooperação com outros serviços no contexto de uma solução.
 
-- Scalability/Throughput Testing: Test the scalability and elasticity of the deployed microservice.
+- Teste de escalabilidade/taxa de transferência: Testar a escalabilidade e elasticidade do microsserviço implantado.
 
-- Failover/Fault Tolerance Testing: Test the ability of the microservice to recover after a failure.
+- Teste de tolerância a falha: Testar a capacidade do microsserviço de recupera-se após uma falha.
 
-- PEN Testing: Work with a third-party software security firm to perform penetration testing. NOTE: This will requires cooperation with Microsoft if you are pen testing microservices deployed to Azure.
+- Teste de penetração: Trabalhar com uma empresa terceirizada de segurança de software para realizar testes de penetração no sistema.
 
 \section{A metodologia de 12 fatores}
 
@@ -126,7 +114,7 @@ If you are currently working with a complex layered architecture and have a reas
 
 \subsection{Organização}
 
-Em uma mudança do monolito para microsserviços, é recomendado que não sejam feitas mudanças grandes e abruptas na sua organização. Em vez disso, deve-se procurar uma oportunidade com uma iniciativa de negócio para testar a fórmula proposta por \citeonline{Familiar2015} : 
+Em uma mudança do monólito para microsserviços, é recomendado que não sejam feitas mudanças grandes e abruptas na sua organização. Em vez disso, deve-se procurar uma oportunidade com uma iniciativa de negócio para testar a fórmula proposta por \citeonline{Familiar2015} : 
 
 - Formar um pequeno time inderdisciplinar (cross-functional?).
 
