@@ -16,7 +16,7 @@ No contexto da computação, provisionamento significa disponibilizar um recurso
 
 \subsection{Monitoramento básico}
 
-Muitas coisas podem dar errado em qualquer tipo de arquitetura, mas em especial nos microserviços pois cada serviço é fracamente acoplado, estando sujeitos não só a falhas no código, mas também na comunicação, na conexão, ou até falhas físicas. Portanto o monitoramento é crucial nesse tipo de arquitetura para que problemas, especialmente os mais graves possam ser detectados no menor tempo possível. Além disso, o monitoramento também pode ser usado para detectar problemas de negócio, como uma redução nos pedidos por exemplo. \cite{MartinFowlerMicroservices}
+Muitas coisas podem dar errado em qualquer tipo de arquitetura, mas em especial nos microserviços pois cada serviço é fracamente acoplado, estando sujeitos não só a falhas no código, mas também na comunicação, na conexão, ou até falhas físicas. Portanto o monitoramento é crucial nesse tipo de arquitetura para que problemas, especialmente os mais graves possam ser detectados no menor tempo possível. Além disso, o monitoramento também pode ser usado para detectar problemas de negócio, como uma redução nos pedidos de um site de vendas, por exemplo. \cite{MartinFowlerMicroservices}
 
 \subsection{Implantação rápida}
 
@@ -28,11 +28,114 @@ Na arquitetura de microserviços a implantação geralmente é feita separadamen
 
 \section{Comunicação entre microserviços}
 
+- API Gateway (Ponto único de entrada)
+    . Padronizar e controlar o acesso aos serviços e APIs. Dessa forma podemos ter controles de acesso unificados, autenticação em ponto único, etc. Mas essa também é a principal desvantagem: o ponto único de falha
+    . Oferece um proxy ou uma fachada (ponto de entrada)
+    . Desvantagem: Esse gateway pode ser um ponto de falha massiva
+    . Pode simplesmente autorizar e redirecionar requests, ou
+    . Pode também usar Decorators para adicionar informações necessárias aos requests
+    . Pode limitar o acesso ou conteúdo trafegado (mas isso geralmente é feito por outra entidade (?))
+
+- Process agregator pattern (Agregando serviços)
+    . Agrega serviços de negócio (É ainda mais alto nível)
+    . Fazem as chamadas para os serviços necessários e montam uma resposta adequada
+    . Deve ter uma lógica de processamento, e não ser apenas um proxy. No mínimo deve unir a resposta de diversos serviços
+    . Para construir um agregador, define-se um novo modelo para o sistema, que representará os dados agregados como um subnegócio
+    . A partir deste modelo, pensar na API que fornecerá as operações
+    . A ideia é relativamente simples, mas a implementação pode ser complexa
+
+- Edge pattern (Pontos de entrada para cada tipo de cliente)
+    . Gateway específico para determinados clientes
+    . Foco nas necessidades reais de determinados clientes
+    . Esses clientes podem ser clientes da API, como clientes HTTP, ou clientes de negócio mesmo
+    . Por exemplo, em vez de modificar a lógica de negócios, cria-se um novo 'edge', que receberá a resposta e modificará de acordo com a necessidade do cliente
+    . Uma possibilidade seria trabalhar apenas com edge services, e nenhum API gateway, isso é, não existiria um ponto único de entrada universal, mas sim um para cada tipo de cliente
+    . Para construir uma edge (ponta)
+        ! Identificar o cliente e suas necessidades
+        ! Construir contratos específicos para o cliente, isso é, ter recursos diferentes para cada cliente. Por exemplo, a URL pode ser diferente de cliente web para clientes mobile.
+
 RPC? Ou apenas APIs?
+
+\section{Monitoramento}
+
+- Lidando com logs
+    Logs são importantes sempre, mas especialmente em microserviços. Pode haver um serviço dedicado para logs, ou um sidecar de logs. Logs informam sobre o estado e a saúde do sistema.
+
+    . Agregando logs
+        ~ O formato dos logs (pesquisar formatos?) deve ser compartilhado entre todos os serviços, deve ser igual.
+        ~ Também deve existir uma taxonomia comum. (Logs de erro, de warning, etc)
+        ~ Logs de monolitos são agregados por padrão. 
+        ~ [12-Factor Application - É uma metodologia de desenvolvimento que diz que os logs devem ser um stream de dados. Esses logs podem ser impressos na saída padrão, e um serviço específico de logs coleta esses logs, faz o parse, categorização, relatório e todo processamento necessário - https://12factor.net/]
+        ~ Todos os logs de todos os microserviços devem ser agregados e organizados em um ponto para que possam ser consultados com facilidade.
+        ~ Um motivo importante para organizar os logs é rastrear as chamadas de uma execução. Devemos poder reconstruir uma operação a partir de um identificador. Isso é o equivalente à stack-trace de um sistema monolítico.
+        ~ Usar padrões bem consolidados de trace ID para gerar logs.
+        ~ Usar ferramentas de gerenciamento (APMs - Application performance management) para visualizar essas stack-traces.
+
+    . Agregando métricas
+        ~ Logs precisam ser desenvolvidos, mas métricas só precisam de instrumentação - o que náo é uma tarefa simples - pois geralmente as ferramentas já possuem as próprias métricas ou já existem métodos consolidados para monitoramento, como um servidor web por exemplo que já grava quando é recebida uma requisição, ou para medir uso de cpu do servidor por exemplo, já existem diversas ferramentas para isso.
+        ~ Métricas nos permitem saber o que está acontecendo em qualquer momento, e decidir que ações devem ser tomadas a partir disso. Escalar um serviço que recebe muitas requisições por exemplo, ou diminuir um que não. Métricas podem servir até para questões de negócios e de business inteligence. 
+        ~ Usar dashboards de alto nível para facilitar a visualização e monitoramento do status da aplicação
+        ~ Posteriormente, ter dashboards específicos para cada serviço, com mais detalhes.
+
+\section{Lidando com dados}
+
+"A estabilidade do serviço está diretamente relacionada ao banco de dados que ele acessa."
+
+        - Single service database
+            ~ Problema: Escalabilidade do serviço e do banco são fortemente relacionados.
+            ~ Solução: Cada serviço (quando necessário) terá seu próprio banco de dados.
+
+        - Shared service database
+            ~ Problema: Às vezes precisamos centralizar os dados (talvez por motivos contratuais, por exemplo, dois dados acessados por microserviços diferentes precisam estar disponível no mesmo banco de dados). Nesse caso o banco escala conforme a necessidade do maior desses microserviços.
+            ~ Solução: Tratar esse banco em cada serviço como se ele fosse separado.
+
+        Geralmente há preferência pelo **single service database**, não compartilhando bancos de dados entre serviços. Mas quando necessário, usa-se o **shared service database**, mas sempre tratando o banco de dados em cada serviço como se ele fosse separado.
+        Com cada serviço tendo seu próprio banco, a escalabilidade do serviço e banco pode ser feita em conjunto. Assim, serviços que recebem poucos acessos podem ter bancos menos potentes e mais baratos, e vice-versa.
+
+        - Um padrão de codificação: CQRS - Command Query Resposibility Segregation (Segregação da responsabilidade entre o comando e uma busca)
+            "At its heart, [CQRS] is the notion that you can use a different model to update information than the model you use to read information. For some situations, this separation can be valuable, but beware that **for most systems, CQRS adds risky complexity**."
+
+           Ou seja, usar um modelo para leitura (busca) e outro modelo diferente para escrita (inserção/edição). É possível ter um banco de dados de escrita e outro de leitura, e fazer uma sincronização entre esses. Essa ideia é muito facilitada usando-se o padrão CQRS.
+           
+           . Com leitura e escrita separados, cada parte pode realizar operações mais complexas
+           . O modelo de leitura pode ter informações agregadas de outros domínios
+           . O modelo de escrita pode ter dados sendo automaticamente gerados
+           . Aumenta **muito** a complexidade de um sistema
+
+        - Eventos assíncronos
+            [Um tipo de arquitetura: Event sourcing - ter toda a base dos dados através de eventos. Para reconstruir os dados, há uma lista de eventos (Pesquisar mais)]
+            . Determinados problemas não podem ser resolvidos na hora. (Um pagamento, por exemplo)
+            . Um serviço emite um evento que será tratado em seu devido tempo
+            . Usar tecnologias de mensageria e serviços de stream de dados - filas de mensageria: RabbitMQ. Serviço de streaming de dados: Kafka)
 
 \section{APIs}
 
 Considerando que APIs são uma parte crucial no desenvolvimento de microserviços, sendo responsável por grande parte da comunicação que se faz necessária para conectar tantos serviços separados e manter um funcionamento eficiente e livre de falhas, esse trabalho terá um foco grande em boas práticas no desenvolvimento de APIs.
+
+\subsection{Use códigos de status de respostas HTTP}
+Esses códigos são números entre 100 e 599, cada um tendo um significado diferente, e cada centena sendo classificada em tipos diferentes de resposta. 100-199 representam respostas de informação. 200-299 representam respostas de sucesso. 300-399 representam tipos de redirecionamentos. 400-499 representam erros por parte do cliente. 500-599 representam erros por parte do servidor. Isso é um padrão definido na seção 10 da RFC 2616 \cite{rfc_http_nielsen_1999}, e facilita com que o cliente entenda o que aconteceu com a requisição à API. Esses códigos devem ser enviados juntos com a resposta à requisição.
+
+\subsection{Use JSON para trocar dados}
+JSON é o 
+JSON is commonly used to exchange data between client and server. 
+Although it is derived from JavaScript, it is supported by other major languages, either natively or through libraries. \cite{rapidAPI-twitter}
+
+\subsection{Implement Endpoint Nesting}
+If you are developing a REST API with categories, it is good to implement endpoint nesting as it shows the relationship between different endpoints. \cite{rapidAPI-twitter}
+
+\subsection{Use an SSL Certificate}
+Secure your REST API by adding a Secure Socket Layer (SSL) certificate.
+This will make your API use HTTPS protocol instead of HTTP and make it less vulnerable to malicious attacks. \cite{rapidAPI-twitter}
+
+\subsection{Contratos de dados e versionamento}
+Uma API depende de contratos de dados, isso é, uma definição dos dados que serão recebidos e retornados. Esse contrato implica num compromisso de manter o serviço correspondente funcionando e inalterado. Entretanto, é possível desenvolver melhorias ou adicionar funcionalidades sem quebrar o contrato. Para tanto, deve ser feito um versionamento da API e deve ser mantida a transparência com os clientes que a usam. Por exemplo, sempre que algo for alterado é preciso atualizar a documentação.
+
+Para fazer o versionamento, pode-se usar o processo de versionamento de software para representar os estados da API. Nesta técnica, usa-se três números para representar a versão, por exemplo "2.3.7". O primeiro representa a versão maior, o segundo, a versão menor, e o terceiro, o patch (pequena atualização para consertar ou melhorar algo). \cite{wiki_software_versioning_2022}
+
+Em uma API, para cumprir o contrato de dados, apenas modificações aditivas podem ser feitas, tais como novos endpoints ou novos campos opcionais em algum recurso. Quando isso é feito, a versão da API muda de 2.3.7 para 2.4.0 ou para 2.3.8 dependendo do tamanho da mudança.
+
+Quando é necessário realizar alterações que descumprem o contrato, deve-se alterar a versão maior da API, por exemplo passando de 2.3.7 para 3.0.0. Nesses casos, é importante manter a versão anterior funcionando e inalterada, criando uma nova rota para acessar a versão nova, para que clientes usando a versão anterior não apresentem falhas.
+% citar o curso da alura
 
 \subsection{Segurança em APIs}
 
@@ -42,22 +145,18 @@ Incluir autenticação em uma API consiste em exigir uma prova de autorização 
 
 \subsubsection*{Validação de entradas}
 
-Validar entradas significa verificar as requisições que chegam com o intuito de garantir que elas não contém dados impróprios, tais como injeções de SQL ou \emph{scripting} entre sites (scripting significa executar uma determinada sequência de comandos). Essa validação deve ser implementada tanto em nível sintático como em semântico, isso é, tanto impondo correção da sintaxe quanto impondo correção de valores. \cite{rapidAPI-security}
+Validar entradas significa verificar as requisições que chegam com o intuito de garantir que elas não contém dados impróprios, tais como injeções de SQL ou \emph{scripting} entre sites (scripting significa executar uma determinada sequência de comandos). Essa validação deve ser implementada tanto em nível sintático como em semântico, isso é, tanto impondo correção da sintaxe quanto impondo correção de valores. \cite{rapidAPI-twitter}
 
 \subsubsection*{API Gateway}
-
-Um API Gateway funciona como uma porta única de entrada para as APIs de cada serviço. As requisições dos clientes são direcionadas para um único endereço, facilitando a organização das chamadas. Esse gateway fica situado entre o cliente e os serviços do \emph{backend}, e é responsável por redirecionar as requisições recebidas para os serviços apropriados, assim o gerenciamento das chamadas pode ser feita em apenas um lugar em vez de em cada API de cada serviço. Além disso, pode-se implementar uma camada de segurança e de monitoramento. \cite{rapidAPI-security}
+Um API Gateway funciona como uma porta única de entrada para as APIs de cada serviço. As requisições dos clientes são direcionadas para um único endereço, facilitando a organização das chamadas. Esse gateway fica situado entre o cliente e os serviços do \emph{backend}, e é responsável por redirecionar as requisições recebidas para os serviços apropriados, assim o gerenciamento das chamadas pode ser feita em apenas um lugar em vez de em cada API de cada serviço. Além disso, pode-se implementar uma camada de segurança e de monitoramento. \cite{rapidAPI-twitter}
 
 \subsubsection*{Limitação de taxa de requisições}
-
-Limitar a taxa de requisições é um jeito de proteger a infraestrutura do servidor nos casos de acontecerem grandes fluxos de requisições, tal como em um ataque de \emph{DoS} (negação de serviço). Clientes terão seu acesso bloqueado caso enviem uma quantidade de requisições acima do limite determinado. \cite{rapidAPI-security}
+Limitar a taxa de requisições é um jeito de proteger a infraestrutura do servidor nos casos de acontecerem grandes fluxos de requisições, tal como em um ataque de \emph{DoS} (negação de serviço). Clientes terão seu acesso bloqueado caso enviem uma quantidade de requisições acima do limite determinado. \cite{rapidAPI-twitter}
 
 \subsubsection*{Compartilhar o mínimo possível}
+Compartilhar o mínimo possível é uma medida de segurança genérica que pode ser adotada em qualquer microsserviço. Especificamente nas APIs, deve-se retornar estritamente apenas os dados necessários para o cliente. Muitas ferramentas usadas para implementar APIs incluem por padrão informações como se fossem marcas d'água, mas que podem ser removidas, tal como headers "X-Powered-By", que vazam informações do servidor que podem auxiliar usuários mal-intencionados. \cite{rapidAPI-twitter}
 
-Compartilhar o mínimo possível é uma medida de segurança genérica que deve ser adotada em tudo. Mais especificamente nas APIs, deve-se retornar estritamente apenas os dados necessários para o cliente. Muitas ferramentas usadas para implementar APIs incluem por padrão informações como se fossem marcas d'água, mas que podem ser removidas, tal como headers "X-Powered-By", que vazam informações do servidor que podem auxiliar usuários mal-intencionados. \cite{rapidAPI-security}
-
-\subsection{Testes em APIs}
-
+\subsection{Testar a API}
 Testar uma API isoladamente serve para determinar se ela atende a parâmetros pré-definidos ou não. Tais parâmetros podem ser o cumprimento da funcionalidade, a confiabilidade, a latência, o desempenho, e a segurança. Quando um teste de API falha, deverá ser possível saber precisamente onde o problema se encontra, assim aumentando a velocidade de desenvolvimento e a qualidade do produto. As ferramentas que podem ser utilizadas para testes em APIs são discutidas na sessão \autoref{ferramentas-testes-apis}.
 
 % Why should you perform API testing?
@@ -66,19 +165,22 @@ Testar uma API isoladamente serve para determinar se ela atende a parâmetros pr
 % Benefits of API Testing
 % - When API tests fail, you will know precisely where the issue lies that crashed the system.
 % - As data is exchanged via XML or JSON, you can write API tests in your preferred language.
-% - API testing also helps to release the next API version faster. \cite{rapidAPI-testing}
+% - API testing also helps to release the next API version faster. \cite{rapidAPI-twitter}
 
-\subsection{Otimizações em API}
+\subsection{Salvar a resposta no cache}
+Caching avoids excessive database queries. For endpoints that frequently return the same response, caching can be implemented to reduce the number of calls to the API and improve performance. \cite{rapidAPI-twitter}
 
-Cache response - Caching avoids excessive database queries. For endpoints that frequently return the same response, caching can be implemented to reduce the number of calls to the API and improve performance.
+\subsection{Comprimir os dados}
+The transfer of large payloads will slow down an API. Data compression combats this issue by decreasing the data size and improving speed. There are various compression methods available, a common one being GZIP. \cite{rapidAPI-twitter}
 
-Compress data - The transfer of large payloads will slow down an API. Data compression combats this issue by decreasing the data size and improving speed. There are various compression methods available, a common one being GZIP.
+\subsection{Evitar trazer ou buscar resultados a mais ou a menos}
+Over-fetching results in unnecessary and unusable data, and under-fetching results in an incomplete response. Good architecture, planning, and appropriate API management tools are essential to avoid these. \cite{rapidAPI-twitter}
 
-Prevent over and under-fetching - Over-fetching results in unnecessary and unusable data, and under-fetching results in an incomplete response. Good architecture, planning, and appropriate API management tools are essential to avoid these.
+\subsection{Paginar e filtrar}
+Both pagination and filtering are great methods to reduce response complexity and improve user experience. Pagination enables the separation and categorization of data, and filtering limits the results of parameters. \cite{rapidAPI-twitter}
 
-Paginate and filter - Both pagination and filtering are great methods to reduce response complexity and improve user experience. Pagination enables the separation and categorization of data, and filtering limits the results of parameters.
-
-Use PATCH not PUT - The PATCH and PUT methods are similar, but PATCH has performance advantages. When modifying a resource, PUT updates the entire resource, which is often unnecessary, whereas PATCH only updates a specific part. Therefore PATCH has a smaller payload. \cite{rapidAPI-optimization}
+\subsection{Usar PATCH, não PUT}
+The PATCH and PUT methods are similar, but PATCH has performance advantages. When modifying a resource, PUT updates the entire resource, which is often unnecessary, whereas PATCH only updates a specific part. Therefore PATCH has a smaller payload. \cite{rapidAPI-twitter}
 
 \section{Testes}
 
@@ -105,6 +207,33 @@ Asdf. \cite{oracle_microservices}.
 Qwer. \cite{12factor}
 
 \section{Do monólito aos microserviços}
+
+Separando serviços monolíticos
+
+- Separando serviços de domínio (Data Service):
+    . Usar Domain-Driven Design (DDD)
+    . Começar modelando o domínio, não pensando na persistância. Definir previamente as regras e o domínio (Programação orientada a interfaces), para então...
+    . Avaliar **quais ações serão disponibilizadas neste serviço**. (Ex: Inserir, editar, recuperar, exibir, etc...)
+    . Construir o serviço, pensando primeiro no contrato
+    . REST e RPC podem andar juntos
+
+- Separando serviços de negócio (Business Service):
+    . Identificar o processo que deve ser exposto
+    . Identificar os domínios que serão necessários nesse serviço
+    . Defina a API que será utilizada, focando no domínio e não nos dados. (Ex: Passar uma matrícula, e não um ID)
+    . Consumir serviços de domínio para executar os processos
+
+- Padrões
+    . Strangler pattern
+        ~ Quebrar um monolito, tirando as funcionalidades dele aos poucos
+        ~ Pode-se começar isolando os dados
+        ~ Ou pode-se começar isolando o domínio
+
+    . Sidecar pattern
+        ~ Compartilhar código sem que seja necessário criar um novo microserviço.
+        ~ Usa-se pacotes a parte, que podem ser facilmente instalados.
+        ~ Esses pacotes só precisam ser alterados em um lugar para ter efeito em todos os microserviços.
+        ~ Ex: pacotes do npm, do composer, do maven, etc
 
 \subsection{Identificação}
 

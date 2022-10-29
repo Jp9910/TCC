@@ -25,13 +25,13 @@ Separar em
 3- padrões
 4- soluçoes
 
-
-- tem que explicar em algum lugar as palavras que eu deixar em ingles? por exemplo pipeline - fluxo?
+- tem que explicar em algum lugar as palavras que eu deixar em ingles? por exemplo pipeline - fluxo? usar um parentese mesmo
 
 - tem alguma parte específica que eu posso colocar expressões e explicar melhor o que elas significam? por exemplo "capacidades de negócio", ou "monólito". Ou será que eu encaixo isso na fundamentação teórica mesmo?
 
-- procurar uma outra referência sobre começar primeiro com o monolito e não com microserviços.
+- mudar "padrões" para serem "boas práticas"
 
+- procurar uma outra referência sobre começar primeiro com o monolito e não com microserviços.
 
 Escolher alguns tópicos para se aprofundar?
 Enumerar os problemas, e aprofundar melhor em alguns?
@@ -41,4 +41,6 @@ Abordar em maior profundidade (opções):
 - testes
 - ci/cd
 
-- mudar "padrões" para serem "boas práticas"
+- como citar algo que eu vi num curso?
+
+- 

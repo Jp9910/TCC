@@ -49,7 +49,7 @@ A implantação de microsserviços é altamente dependente de sua automação. P
 
 Cada microsserviço pode ser desenvolvido usando uma linguagem de programação e estrutura que melhor se adapte ao problema que ele é projetado para resolver, o que oferece mais possibilidades de tecnologias para usar. \cite{oracle_microservices}
 
-\subsection{Versionável e Substituível}
+\subsection{Versionável e substituível}
 
 Com o controle completo dos cenários de implantação, é possível manter versões diferentes de um mesmo serviço rodando ao mesmo tempo, proporcionando retrocompatibilidade e fácil migração. Além disso, serviços podem ser atualizados ou mesmo substituidos sem ocasionar indisponibilidade do serviço. \cite{Familiar2015}
 
@@ -58,7 +58,18 @@ Com o controle completo dos cenários de implantação, é possível manter vers
 
 However, developing applications in the microservices architecture presents three main challenges: (a) how to program systems that consists of a large number of services running in parallel and distributed over a cluster of computers; (b) how to reduce the communication overhead caused by executing a large number of small services; (c) how to support the flexible deployment of services to a network to achieve system load balance. \cite{CAOPLE}
 
+Desvantagens dos microserviços:
+
+- Maior complexidade de desenvolvimento e infraestrutura;
+- Debug mais complexo;
+- Comunicação entre os serviços deve ser bem pensada;
+- Diversas tecnologias pode trazer problemas por inexperiência dos devs;
+- Monitoramento é crucial e mais complexo;
+- (Criar um microserviço pode ser complexo, e ter demais pode trazer problemas.).
+
 \subsection{Comunicação}
+
+- Comunicação entre os serviços deve ser bem pensada
 
 cross-platform compatibility issues and inconsistent call standards issues in the process of development and call microservices. \cite{ZUO2020102878}
 
@@ -72,16 +83,30 @@ Organizar o sistema e o time para sustentar uma arquitetura de microsserviços �
 \subsection{Plataforma}
 Criar o ambiente de execução para microsserviços requer um grande investimento em infraestrutura dinâmica em \emph{data centers} dispersos para garantir maior disponibilidade. Se sua atual plataforma \emph{on-premises} não suporta automação, infraestrutura dinâmica, escalamento elástico e alta disponibilidade, deve-se considerar uma plataforma na núvem. \cite{Familiar2015}. Mais sobre soluções na núvem será discutido no \autoref{chapter-solucoes}.
 
-\section{Identificação}
+\subsection{Identificação}
 
 Domain-driven design (projeto orientado a domínio) é uma técnica bem consolidada e muito usada no desenvolvimento de software. Entretanto, para aplica-la em microsserviços, é necessário analisar onde cada peça desse padrão de projeto deve ficar. Em vez de projetar os modelos e os contextos limitados separando-os em camadas, deve-se juntar os contextos com seus respectivos modelos, e procurar por possíveis pontos de separação da aplicação - um lugar onde a linguagem muda, por exemplo. Isso resultaria em um ponto de partida para separar as partes e formar uma arquitetura de microsserviços. \cite{Familiar2015}
 
-esse parágrafo não encaixa nas caracteristicas - desafios ?...
+% esse parágrafo não encaixa nas caracteristicas - desafios ?...
 
-\section{Testes}
+\subsection{Testes}
 
 Assim como em qualquer aplicação, o teste é uma parte crucial do seu desenvolvimento. Escrever e testar código não muda muito entre as arquiteturas monolítica e de microsserviços, contudo, nos microserviços existem mais testes a serem executados. Não deve-se testar o microsserviço apenas antes de seu lançamento, mas sim em cada passo do \emph{pipeline} de implantação, sempre automatizando o máximo de etapas possível, para assim garantir uma entrega rápida de software de qualidade. \cite{Familiar2015}
 
-\section{Descoberta}
+\subsection{Descoberta}
 
 Encontrar microsserviços em um ambiente distribuido pode ser feito de algumas maneiras diferentes. A informação pode ser armazenada diretamente no código, pode ser guardada e acessada em um arquivo, ou pode ser construido um microsserviço para encontrar outros microsserviços e disponibilizar suas localizações. Contudo, para prover detectabilidade como um serviço será necessário adquirir um produto de terceiros, integrar um projeto aberto, ou desenvolver sua própria solução. \cite{Familiar2015}
+
+\section{Tipos de microsserviços}
+
+\subsection{Serviço de dados (data service)}
+Tipo de serviço mais baixo-nível. Responsável por receber e tratar dados, assim fornecendo acesso a determinado domínio e suas regras.
+
+\subsection{Serviço de negócio (business service)}
+Em determinados momentos as operações precisam de mais de um modelo do domínio para serem representadas em um serviço. Assim, os serviços de negócio agregam dados e oferecem operações mais complexas. Eles englobam vários serviços de domínio e proveem uma funcionalidade do negócio de nível mais alto, podendo também encapsular domínios relacionados. Por exemplo, uma funcionalidade "Matricular Aluno", que envolveria operações em vários serviços de domínio.
+
+\subsection{Serviço de tradução (translation service)}
+Acessar um recurso externo. Ex: App --> T.S. --> Api externa
+
+\subsection{Serviço de ponta (edge service)}
+Entregue ao cliente, dependendo de suas necessidades. Ex: E.S. para cliente mobile e outro para clientes web

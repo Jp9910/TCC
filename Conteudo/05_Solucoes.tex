@@ -24,6 +24,8 @@ GraphQL is a query language for APIs and a runtime for fulfilling those queries 
 
 Amazon API Gateway \url{https://aws.amazon.com/pt/api-gateway/?nc1=h_ls}
 
+API Gateways are an all-in-one way to implement security, monitoring, and overall API management. They are a single entry point for API calls. They sit between the clients and a number of backend services to handle calls appropriately.
+
 \subsection{Ferramentas para testes em APIs}\label{ferramentas-testes-apis}
 
 RapidAPI offers RapidAPI Client for VS Code to test APIs locally inside Visual Studio Code. You can also schedule API tests using RapidAPI Studio.
@@ -42,8 +44,6 @@ Autenticação - Always use secure authentication methods such as OAuth, JWTs, o
 
 Validação de entradas - Métodos de validação de entrada: JSON and XML Schema validation; Regular expressions;  Data type validators available in framework; Minimum and maximum value range check for numerical inputs;  Minimum and maximum length check for strings.
 
-Usar um API Gateway - API Gateways are an all-in-one way to implement security, monitoring, and overall API management. They are a single entry point for API calls. They sit between the clients and a number of backend services to handle calls appropriately.
-
 \subsubsection{Métodos de autenticação}
 
 API Keys are unique identifiers assigned to clients, which grant them access to an API. They are passed to the server with every request and authenticate the client. They also provide authorization and can be used to identify a user's individual access permissions. API Keys are long alphanumerical strings designed to be almost impossible to guess. They are passed to servers as a query parameter or in an HTTP request header.
@@ -52,7 +52,7 @@ OAuth is a powerful framework that uses tokens to give apps limited access to a 
 
 Basic HTTP authentication involves the client passing the user’s username and password with every request. This is done using an HTTP Header. Basic HTTP authentication is generally considered the least secure. However, if you decide to use it, ensure you are using an HTTPS connection. If not, data is a risk of being leaked.
 
-Ferramenta para rate limiting. \cite{rapidAPI-security}
+Ferramenta para rate limiting. \cite{rapidAPI-twitter}
 
 \subsection{Ferramentas completas}
 
