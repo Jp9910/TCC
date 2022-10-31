@@ -2,15 +2,19 @@
 
 \chapterprecis{Este capítulo aprensenta ferramentas comumente usadas na construção de aplicações com arquitetura de microsserviços}\index{sinopse de capítulo}
 
+\section{Design, testes, e monitoramento}
+
+De acordo com \citeonline{design-monitoring-testing-waseem}, mais pesquisas são necessárias para lidar com a complexidade dos microsserviços no nível de \emph{design} (projeto), de monitoramento, e de testes, desafios para qual não há soluções dedicadas.
+
+Our findings reveal that more research is needed to address the monitoring and testing challenges through dedicated solutions. \cite{design-monitoring-testing-waseem}
+
+Teste de penetração: NOTE: This will requires cooperation with Microsoft if you are pen testing microservices deployed to Azure.
+
 \section{Flexibilidade}
 (tais como as ferramentas de Auto Scaling da AWS)
 
 \section{Plataforma}
 Microsoft Azure is a microservice platform, and it provides a fully automated dynamic infrastructure, SDKs, and runtime containers along with a large portfolio of existing microservices that you can leverage, such as DocumentDb, Redis In-Memory Cache, and Service Bus, to build your own microservices catalog. \cite{Familiar2015}
-
-\section{Testes de microsserviços}
-
-Teste de penetração: NOTE: This will requires cooperation with Microsoft if you are pen testing microservices deployed to Azure.
 
 \section{APIs}
 
@@ -53,6 +57,10 @@ OAuth is a powerful framework that uses tokens to give apps limited access to a 
 Basic HTTP authentication involves the client passing the user’s username and password with every request. This is done using an HTTP Header. Basic HTTP authentication is generally considered the least secure. However, if you decide to use it, ensure you are using an HTTPS connection. If not, data is a risk of being leaked.
 
 Ferramenta para rate limiting. \cite{rapidAPI-twitter}
+
+\subsection{Implantação}
+
+docker, kubernetes
 
 \subsection{Ferramentas completas}
 

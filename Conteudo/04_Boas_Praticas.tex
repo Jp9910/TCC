@@ -24,9 +24,17 @@ Na arquitetura de microserviços a implantação geralmente é feita separadamen
 
 \section{Configuração}
 
+(sessao Configurable \cite{Familiar2015})
+
 \section{Implantação}
 
+Docker, kubernetes
+
 \section{Comunicação entre microserviços}
+
+API gateway and Backend for frontend patterns are the most used MSA patterns \cite{design-monitoring-testing-waseem}
+
+RPC?
 
 - API Gateway (Ponto único de entrada)
     . Padronizar e controlar o acesso aos serviços e APIs. Dessa forma podemos ter controles de acesso unificados, autenticação em ponto único, etc. Mas essa também é a principal desvantagem: o ponto único de falha
@@ -54,28 +62,48 @@ Na arquitetura de microserviços a implantação geralmente é feita separadamen
         ! Identificar o cliente e suas necessidades
         ! Construir contratos específicos para o cliente, isso é, ter recursos diferentes para cada cliente. Por exemplo, a URL pode ser diferente de cliente web para clientes mobile.
 
-RPC? Ou apenas APIs?
-
 \section{Monitoramento}
 
-- Lidando com logs
-    Logs são importantes sempre, mas especialmente em microserviços. Pode haver um serviço dedicado para logs, ou um sidecar de logs. Logs informam sobre o estado e a saúde do sistema.
+Em qualquer aplicação o monitoramento é importante para garantir um bom funcionamento. Nas aplicações com arquitetura de microsserviços o monitoramento se torna indispensável, além de mais complexo. % Automação e monitoramento estão altamente ligados.
 
-    . Agregando logs
-        ~ O formato dos logs (pesquisar formatos?) deve ser compartilhado entre todos os serviços, deve ser igual.
-        ~ Também deve existir uma taxonomia comum. (Logs de erro, de warning, etc)
-        ~ Logs de monolitos são agregados por padrão. 
-        ~ [12-Factor Application - É uma metodologia de desenvolvimento que diz que os logs devem ser um stream de dados. Esses logs podem ser impressos na saída padrão, e um serviço específico de logs coleta esses logs, faz o parse, categorização, relatório e todo processamento necessário - https://12factor.net/]
-        ~ Todos os logs de todos os microserviços devem ser agregados e organizados em um ponto para que possam ser consultados com facilidade.
-        ~ Um motivo importante para organizar os logs é rastrear as chamadas de uma execução. Devemos poder reconstruir uma operação a partir de um identificador. Isso é o equivalente à stack-trace de um sistema monolítico.
-        ~ Usar padrões bem consolidados de trace ID para gerar logs.
-        ~ Usar ferramentas de gerenciamento (APMs - Application performance management) para visualizar essas stack-traces.
+resource usage and load balancing as monitoring metrics, log management and exception tracking as monitoring practices are widely used \cite{design-monitoring-testing-waseem}
 
-    . Agregando métricas
-        ~ Logs precisam ser desenvolvidos, mas métricas só precisam de instrumentação - o que náo é uma tarefa simples - pois geralmente as ferramentas já possuem as próprias métricas ou já existem métodos consolidados para monitoramento, como um servidor web por exemplo que já grava quando é recebida uma requisição, ou para medir uso de cpu do servidor por exemplo, já existem diversas ferramentas para isso.
-        ~ Métricas nos permitem saber o que está acontecendo em qualquer momento, e decidir que ações devem ser tomadas a partir disso. Escalar um serviço que recebe muitas requisições por exemplo, ou diminuir um que não. Métricas podem servir até para questões de negócios e de business inteligence. 
-        ~ Usar dashboards de alto nível para facilitar a visualização e monitoramento do status da aplicação
-        ~ Posteriormente, ter dashboards específicos para cada serviço, com mais detalhes.
+\subsection{Histórico (logs)}
+
+Manter um histórico do que aconteceu no microsserviço é uma das formas mais simples de se implementar monitoramento. O formato dos logs deve ser igual em todos os serviços, para facilitar escrita, leitura e operações.
+
+Lidando com logs
+
+Logs são importantes sempre, mas especialmente em microserviços. Pode haver um serviço dedicado para logs, ou um sidecar de logs. Logs informam sobre o estado e a saúde do sistema.
+
+Agregando logs
+O formato dos logs (pesquisar formatos?) deve ser compartilhado entre todos os serviços, deve ser igual.
+
+Também deve existir uma taxonomia comum. (Logs de erro, de warning, etc)
+
+Logs de monolitos são agregados por padrão. 
+
+[12-Factor Application - É uma metodologia de desenvolvimento que diz que os logs devem ser um stream de dados. Esses logs podem ser impressos na saída padrão, e um serviço específico de logs coleta esses logs, faz o parse, categorização, relatório e todo processamento necessário - https://12factor.net/]
+
+Todos os logs de todos os microserviços devem ser agregados e organizados em um ponto para que possam ser consultados com facilidade.
+
+Um motivo importante para organizar os logs é rastrear as chamadas de uma execução. Devemos poder reconstruir uma operação a partir de um identificador. Isso é o equivalente à stack-trace de um sistema monolítico.
+
+Usar padrões bem consolidados de trace ID para gerar logs.
+
+Usar ferramentas de gerenciamento (APMs - Application performance management) para visualizar essas stack-traces.
+
+\subsection{Métricas}
+
+Agregando métricas
+
+Logs precisam ser desenvolvidos, mas métricas só precisam de instrumentação - o que náo é uma tarefa simples - pois geralmente as ferramentas já possuem as próprias métricas ou já existem métodos consolidados para monitoramento, como um servidor web por exemplo que já grava quando é recebida uma requisição, ou para medir uso de cpu do servidor por exemplo, já existem diversas ferramentas para isso.
+
+Métricas nos permitem saber o que está acontecendo em qualquer momento, e decidir que ações devem ser tomadas a partir disso. Escalar um serviço que recebe muitas requisições por exemplo, ou diminuir um que não. Métricas podem servir até para questões de negócios e de business inteligence. 
+
+Usar dashboards de alto nível para facilitar a visualização e monitoramento do status da aplicação
+
+Posteriormente, ter dashboards específicos para cada serviço, com mais detalhes.
 
 \section{Lidando com dados}
 
@@ -116,16 +144,10 @@ Considerando que APIs são uma parte crucial no desenvolvimento de microserviço
 Esses códigos são números entre 100 e 599, cada um tendo um significado diferente, e cada centena sendo classificada em tipos diferentes de resposta. 100-199 representam respostas de informação. 200-299 representam respostas de sucesso. 300-399 representam tipos de redirecionamentos. 400-499 representam erros por parte do cliente. 500-599 representam erros por parte do servidor. Isso é um padrão definido na seção 10 da RFC 2616 \cite{rfc_http_nielsen_1999}, e facilita com que o cliente entenda o que aconteceu com a requisição à API. Esses códigos devem ser enviados juntos com a resposta à requisição.
 
 \subsection{Use JSON para trocar dados}
-JSON é o 
-JSON is commonly used to exchange data between client and server. 
-Although it is derived from JavaScript, it is supported by other major languages, either natively or through libraries. \cite{rapidAPI-twitter}
+Atualmente JSON é um dos formatos mais populares para troca de dados na web, pelo fato de ser facilmente lido tanto por humanos quanto por máquinas. Em APIs, JSON é usado para enviar e receber requisições por meio do protocolo HTTP, sendo uma solução robusta para a comunicação entre cliente e servidor. Embora seja derivado do JavaScript, JSON também é suportado por muitas outras linguagens, seja nativamente ou por meio de bibliotecas.  \cite{json_bourhis_2020}
 
-\subsection{Implement Endpoint Nesting}
+\subsection{Implemente endpoints com aninhamento}
 If you are developing a REST API with categories, it is good to implement endpoint nesting as it shows the relationship between different endpoints. \cite{rapidAPI-twitter}
-
-\subsection{Use an SSL Certificate}
-Secure your REST API by adding a Secure Socket Layer (SSL) certificate.
-This will make your API use HTTPS protocol instead of HTTP and make it less vulnerable to malicious attacks. \cite{rapidAPI-twitter}
 
 \subsection{Contratos de dados e versionamento}
 Uma API depende de contratos de dados, isso é, uma definição dos dados que serão recebidos e retornados. Esse contrato implica num compromisso de manter o serviço correspondente funcionando e inalterado. Entretanto, é possível desenvolver melhorias ou adicionar funcionalidades sem quebrar o contrato. Para tanto, deve ser feito um versionamento da API e deve ser mantida a transparência com os clientes que a usam. Por exemplo, sempre que algo for alterado é preciso atualizar a documentação.
@@ -147,6 +169,9 @@ Incluir autenticação em uma API consiste em exigir uma prova de autorização 
 
 Validar entradas significa verificar as requisições que chegam com o intuito de garantir que elas não contém dados impróprios, tais como injeções de SQL ou \emph{scripting} entre sites (scripting significa executar uma determinada sequência de comandos). Essa validação deve ser implementada tanto em nível sintático como em semântico, isso é, tanto impondo correção da sintaxe quanto impondo correção de valores. \cite{rapidAPI-twitter}
 
+\subsection*{Use um certificado Secute Socket Layer (SSL)}
+Usar um certificado SSL permite que o protocolo HTTPS seja usado em vez do HTTP, criptografando as informações que estão trafegando, o que adiciona uma camada de segurança. \cite{rapidAPI-twitter}
+
 \subsubsection*{API Gateway}
 Um API Gateway funciona como uma porta única de entrada para as APIs de cada serviço. As requisições dos clientes são direcionadas para um único endereço, facilitando a organização das chamadas. Esse gateway fica situado entre o cliente e os serviços do \emph{backend}, e é responsável por redirecionar as requisições recebidas para os serviços apropriados, assim o gerenciamento das chamadas pode ser feita em apenas um lugar em vez de em cada API de cada serviço. Além disso, pode-se implementar uma camada de segurança e de monitoramento. \cite{rapidAPI-twitter}
 
@@ -167,8 +192,8 @@ Testar uma API isoladamente serve para determinar se ela atende a parâmetros pr
 % - As data is exchanged via XML or JSON, you can write API tests in your preferred language.
 % - API testing also helps to release the next API version faster. \cite{rapidAPI-twitter}
 
-\subsection{Salvar a resposta no cache}
-Caching avoids excessive database queries. For endpoints that frequently return the same response, caching can be implemented to reduce the number of calls to the API and improve performance. \cite{rapidAPI-twitter}
+\subsection{Salvar a resposta no \emph{cache}}
+Às vezes referido como \emph{cachear}, salvar informações no \emph{cache} melhora o tempo de busca da informação. Em uma API podem haver múltiplas requisições para a mesma informação em um curto intervalo de tempo, e para cada requisição será necessário buscar a informação. Entretanto, se a informação estiver salva no \emph{cache}, não será necessário buscar essa informação, o que melhora o tempo de resposta da API, especialmente em \emph{endpoints} que frequentemente retornam a mesma resposta. \cite{rapidAPI-twitter}
 
 \subsection{Comprimir os dados}
 The transfer of large payloads will slow down an API. Data compression combats this issue by decreasing the data size and improving speed. There are various compression methods available, a common one being GZIP. \cite{rapidAPI-twitter}
@@ -183,8 +208,8 @@ Both pagination and filtering are great methods to reduce response complexity an
 The PATCH and PUT methods are similar, but PATCH has performance advantages. When modifying a resource, PUT updates the entire resource, which is often unnecessary, whereas PATCH only updates a specific part. Therefore PATCH has a smaller payload. \cite{rapidAPI-twitter}
 
 \section{Testes}
-
-Além dos métodos mais conhecidos de testes, como test-driven development, teste de unidade e teste funcional, é necessário testar os microsserviços conforme passam pelo \emph{pipeline} de implantação. Isso inclui:
+unit and endto-end testing are the most used testing strategies \cite{design-monitoring-testing-waseem}
+Além dos métodos mais conhecidos de testes, como desenvolvimento orientado a testes, teste de unidade e teste funcional, é necessário testar os microsserviços conforme passam pelo \emph{pipeline} de implantação. Isso inclui:
 
 - Testes internos: Testar as funções internas do serviço, inclusive uso de acesso de dados, e caching.
 
@@ -198,7 +223,7 @@ Além dos métodos mais conhecidos de testes, como test-driven development, test
 
 - Teste de tolerância a falha: Testar a capacidade do microsserviço de recupera-se após uma falha.
 
-- Teste de penetração: Trabalhar com uma empresa terceirizada de segurança de software para realizar testes de penetração no sistema.
+- Teste de penetração: Trabalhar com uma empresa terceirizada de segurança de software para realizar testes de penetração no sistema. \cite{Familiar2015}
 
 \section{A metodologia de 12 fatores}
 
@@ -235,7 +260,11 @@ Separando serviços monolíticos
         ~ Esses pacotes só precisam ser alterados em um lugar para ter efeito em todos os microserviços.
         ~ Ex: pacotes do npm, do composer, do maven, etc
 
-\subsection{Identificação}
+\subsection{Identificação com DDD}\label{praticas-identificacao-com-ddd}
+
+a combination of domain-driven design and business capability is the most used strategy to decompose an application into microservices \cite{design-monitoring-testing-waseem}
+
+Um caminho possível para facilitar a identificação com DDD dos microsserviços seria em vez de projetar os modelos e os contextos limitados (conceito do DDD usado para limitar um domínio, dividindo modelos grandes e explicitando as relações entre eles) separando-os em camadas, deve-se juntar os contextos limitados com seus respectivos modelos, e procurar por possíveis pontos de separação da aplicação - um lugar onde a linguagem muda, por exemplo. Isso resultaria em um ponto de partida para separar as partes e formar uma arquitetura de microsserviços. \cite{Familiar2015}
 
 If you are currently working with a complex layered architecture and have a reasonable domain model defined, the domain model will provide a roadmap to an evolutionary approach to migrating to a microservice architecture. If a domain model does not exist, you can apply domain-driven design in reverse to identify the bounded contexts, the capabilities within the system. \cite{Familiar2015}
 
