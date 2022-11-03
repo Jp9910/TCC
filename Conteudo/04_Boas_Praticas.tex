@@ -10,6 +10,8 @@ But as with any architectural decision there are trade-offs. In particular with 
 
 \citeonline{MartinFowlerMicroservices} afirma que existem 3 pré-requisitos para se adotar uma arquitetura de microserviços, e que é mais fácil lidar com as operações de um monólito bem definido do que de um ecossistema de pequenos serviços. Assim sendo, é uma boa prática começar pela arquitetura monolítica até que o sistema já esteja bem definido e estes pré-requisitos sejam atendidos - provisionamento rápido, monitoramento básico, e implantação rápida de aplicação.
 
+Já \cite{monolith-or-microservices} concorda com a convenção de começar pelo monólito, mas afirma que podem existir exceções. Ele descreve 3 condições que podem tornar a adoção de uma arquitetura de microserviços em uma nova aplicação a escolha correta. Elas são: Há necessidade de entrega de serviços rapida e independentemente, parte da plataforma precisa ser extremamente eficiente, e planeja-se aumentar o time.
+
 \subsection{Provisionamento rápido}
 
 No contexto da computação, provisionamento significa disponibilizar um recurso, como uma máquina virtual por exemplo. Para produzir software, é necessário provisionar muitos recursos, tanto para os desenvolvedores quanto para o cliente. Naturalmente, o provisionamento é mais fácil na núvem. Na AWS por exemplo, para conseguir uma nova máquina, basta lançar uma nova instância e acessá-la - um processo muito rápido quando comparado ao \emph{on-premises}, onde precisaria-se comprar uma nova máquina, esperar chegar, configurá-la, e só então ela estará pronta. Para alcançar um provisionamento rápido, será necessário bastante automação. \cite{MartinFowlerMicroservices}
@@ -22,45 +24,87 @@ Muitas coisas podem dar errado em qualquer tipo de arquitetura, mas em especial 
 
 Na arquitetura de microserviços a implantação geralmente é feita separadamente para cada microserviço. Com muitos serviços para gerenciar, ela pode se tornar uma tarefa árdua, portanto será novamente necessário uma automação dessa etapa, que geralmente envolve um \emph{pipeline} de implantação, que deve ser automatizado o máximo possível. \cite{MartinFowlerMicroservices}
 
-\section{Configuração}
-
-(sessao Configurable \cite{Familiar2015})
-
 \section{Implantação}
 
-Docker, kubernetes
+Automação.
 
 \section{Comunicação entre microserviços}
 
-API gateway and Backend for frontend patterns are the most used MSA patterns \cite{design-monitoring-testing-waseem}
+De acordo com \citeonline{design-monitoring-testing-waseem}, API Gateways, e \emph{Backend for frontend} são os padrões mais utilizados. E embora seja incomum, RPC também pode ser utilizado em conjunto com APIs para auxiliar na comunicação. Sendo APIs um tópico essencial na comunicação entre microsserviços, serão abordadas em maior profundidade na \autoref{boas-praticas-apis}
 
-RPC?
+\section{Process agregator pattern (Agregando serviços)}
 
-- API Gateway (Ponto único de entrada)
-    . Padronizar e controlar o acesso aos serviços e APIs. Dessa forma podemos ter controles de acesso unificados, autenticação em ponto único, etc. Mas essa também é a principal desvantagem: o ponto único de falha
-    . Oferece um proxy ou uma fachada (ponto de entrada)
-    . Desvantagem: Esse gateway pode ser um ponto de falha massiva
-    . Pode simplesmente autorizar e redirecionar requests, ou
-    . Pode também usar Decorators para adicionar informações necessárias aos requests
-    . Pode limitar o acesso ou conteúdo trafegado (mas isso geralmente é feito por outra entidade (?))
+Agrega serviços de negócio (É ainda mais alto nível)
 
-- Process agregator pattern (Agregando serviços)
-    . Agrega serviços de negócio (É ainda mais alto nível)
-    . Fazem as chamadas para os serviços necessários e montam uma resposta adequada
-    . Deve ter uma lógica de processamento, e não ser apenas um proxy. No mínimo deve unir a resposta de diversos serviços
-    . Para construir um agregador, define-se um novo modelo para o sistema, que representará os dados agregados como um subnegócio
-    . A partir deste modelo, pensar na API que fornecerá as operações
-    . A ideia é relativamente simples, mas a implementação pode ser complexa
+Fazem as chamadas para os serviços necessários e montam uma resposta adequada
 
-- Edge pattern (Pontos de entrada para cada tipo de cliente)
-    . Gateway específico para determinados clientes
-    . Foco nas necessidades reais de determinados clientes
-    . Esses clientes podem ser clientes da API, como clientes HTTP, ou clientes de negócio mesmo
-    . Por exemplo, em vez de modificar a lógica de negócios, cria-se um novo 'edge', que receberá a resposta e modificará de acordo com a necessidade do cliente
-    . Uma possibilidade seria trabalhar apenas com edge services, e nenhum API gateway, isso é, não existiria um ponto único de entrada universal, mas sim um para cada tipo de cliente
-    . Para construir uma edge (ponta)
-        ! Identificar o cliente e suas necessidades
-        ! Construir contratos específicos para o cliente, isso é, ter recursos diferentes para cada cliente. Por exemplo, a URL pode ser diferente de cliente web para clientes mobile.
+Deve ter uma lógica de processamento, e não ser apenas um proxy. No mínimo deve unir a resposta de diversos serviços
+
+Para construir um agregador, define-se um novo modelo para o sistema, que representará os dados agregados como um subnegócio
+
+A partir deste modelo, pensar na API que fornecerá as operações
+
+A ideia é relativamente simples, mas a implementação pode ser complexa
+
+\section{Edge pattern (Pontos de entrada para cada tipo de cliente)}
+Gateway específico para determinados clientes
+
+Foco nas necessidades reais de determinados clientes
+
+Esses clientes podem ser clientes da API, como clientes HTTP, ou clientes de negócio mesmo
+
+Por exemplo, em vez de modificar a lógica de negócios, cria-se um novo 'edge', que receberá a resposta e modificará de acordo com a necessidade do cliente
+
+Uma possibilidade seria trabalhar apenas com edge services, e nenhum API gateway, isso é, não existiria um ponto único de entrada universal, mas sim um para cada tipo de cliente
+
+Para construir uma edge (ponta), deve-se primeiro Identificar o cliente e suas necessidades, e Construir contratos específicos para o cliente, isso é, ter recursos diferentes para cada cliente. Por exemplo, a URL pode ser diferente de cliente web para clientes mobile.
+
+\section{A metodologia de 12 fatores}
+
+A metodologia de 12 fatores para o desenvolvimento de aplicativos é um conjunto de regras e diretrizes para o desenvolvimento de aplicativos nativos da nuvem e Software as a Service (SaaS). \cite{oracle_microservices}
+
+A aplicação doze-fatores é uma metodologia para construir softwares-como-serviço que:
+
+Usam formatos declarativos para automatizar a configuração inicial, minimizar tempo e custo para novos desenvolvedores participarem do projeto;
+
+Tem um contrato claro com o sistema operacional que o suporta, oferecendo portabilidade máxima entre ambientes que o executem;
+
+São adequados para implantação em modernas plataformas em nuvem, evitando a necessidade por servidores e administração do sistema;
+
+Minimizam a divergência entre desenvolvimento e produção, permitindo a implantação contínua para máxima agilidade;
+
+E podem escalar sem significativas mudanças em ferramentas, arquiteturas, ou práticas de desenvolvimento.
+
+Este documento sintetiza toda nossa experiência e observação em uma variedade de aplicações que operam como software-como-serviço. Isto é a triangulação de práticas ideais ao desenvolvimento de software, com uma atenção particular a respeito das dinâmicas de crescimento orgânico de uma aplicação ao longo do tempo, a dinâmica de colaboração entre desenvolvedores trabalhando em uma base de código, e evitando os custos de erosão de software
+
+A metodologia doze-fatores pode ser aplicada a aplicações escritas em qualquer linguagem de programação, e que utilizem qualquer combinação de serviços de suportes (banco de dados, filas, cache de memória, etc).
+
+12-Factor Application - É uma metodologia de desenvolvimento que diz que os logs devem ser um stream de dados. Esses logs podem ser impressos na saída padrão, e um serviço específico de logs coleta esses logs, faz o parse, categorização, relatório e todo processamento necessário - https://12factor.net/
+
+I. Base de Código
+Uma base de código com rastreamento utilizando controle de revisão, muitos deploys
+II. Dependências
+Declare e isole as dependências
+III. Configurações
+Armazene as configurações no ambiente
+IV. Serviços de Apoio
+Trate os serviços de apoio, como recursos ligados
+V. Construa, lance, execute
+Separe estritamente os builds e execute em estágios
+VI. Processos
+Execute a aplicação como um ou mais processos que não armazenam estado
+VII. Vínculo de porta
+Exporte serviços por ligação de porta
+VIII. Concorrência
+Dimensione por um modelo de processo
+IX. Descartabilidade
+Maximizar a robustez com inicialização e desligamento rápido
+X. Dev/prod semelhantes
+Mantenha o desenvolvimento, teste, produção o mais semelhante possível
+XI. Logs
+Trate logs como fluxo de eventos
+XII. Processos de Admin
+Executar tarefas de administração/gerenciamento como processos pontuais \cite{12factor}
 
 \section{Monitoramento}
 
@@ -82,8 +126,6 @@ O formato dos logs (pesquisar formatos?) deve ser compartilhado entre todos os s
 Também deve existir uma taxonomia comum. (Logs de erro, de warning, etc)
 
 Logs de monolitos são agregados por padrão. 
-
-[12-Factor Application - É uma metodologia de desenvolvimento que diz que os logs devem ser um stream de dados. Esses logs podem ser impressos na saída padrão, e um serviço específico de logs coleta esses logs, faz o parse, categorização, relatório e todo processamento necessário - https://12factor.net/]
 
 Todos os logs de todos os microserviços devem ser agregados e organizados em um ponto para que possam ser consultados com facilidade.
 
@@ -136,18 +178,20 @@ Posteriormente, ter dashboards específicos para cada serviço, com mais detalhe
             . Um serviço emite um evento que será tratado em seu devido tempo
             . Usar tecnologias de mensageria e serviços de stream de dados - filas de mensageria: RabbitMQ. Serviço de streaming de dados: Kafka)
 
-\section{APIs}
+\section{APIs}\label{boas-praticas-apis}
 
 Considerando que APIs são uma parte crucial no desenvolvimento de microserviços, sendo responsável por grande parte da comunicação que se faz necessária para conectar tantos serviços separados e manter um funcionamento eficiente e livre de falhas, esse trabalho terá um foco grande em boas práticas no desenvolvimento de APIs.
 
-\subsection{Use códigos de status de respostas HTTP}
+\subsection{Códigos de status de respostas HTTP}
 Esses códigos são números entre 100 e 599, cada um tendo um significado diferente, e cada centena sendo classificada em tipos diferentes de resposta. 100-199 representam respostas de informação. 200-299 representam respostas de sucesso. 300-399 representam tipos de redirecionamentos. 400-499 representam erros por parte do cliente. 500-599 representam erros por parte do servidor. Isso é um padrão definido na seção 10 da RFC 2616 \cite{rfc_http_nielsen_1999}, e facilita com que o cliente entenda o que aconteceu com a requisição à API. Esses códigos devem ser enviados juntos com a resposta à requisição.
 
-\subsection{Use JSON para trocar dados}
+\subsection{Troca de dados com JSON}
 Atualmente JSON é um dos formatos mais populares para troca de dados na web, pelo fato de ser facilmente lido tanto por humanos quanto por máquinas. Em APIs, JSON é usado para enviar e receber requisições por meio do protocolo HTTP, sendo uma solução robusta para a comunicação entre cliente e servidor. Embora seja derivado do JavaScript, JSON também é suportado por muitas outras linguagens, seja nativamente ou por meio de bibliotecas.  \cite{json_bourhis_2020}
 
-\subsection{Implemente endpoints com aninhamento}
-If you are developing a REST API with categories, it is good to implement endpoint nesting as it shows the relationship between different endpoints. \cite{rapidAPI-twitter}
+% \subsection{Endpoints com aninhamento}
+% Implementar \emph{endpoints} com aninhamento é uma boa prática pois expõe as relações entre diferentes \emph{endpoints}.
+
+% If you are developing a REST API with categories, it is good to implement endpoint nesting as it shows the relationship between different endpoints. \cite{rapidAPI-twitter}
 
 \subsection{Contratos de dados e versionamento}
 Uma API depende de contratos de dados, isso é, uma definição dos dados que serão recebidos e retornados. Esse contrato implica num compromisso de manter o serviço correspondente funcionando e inalterado. Entretanto, é possível desenvolver melhorias ou adicionar funcionalidades sem quebrar o contrato. Para tanto, deve ser feito um versionamento da API e deve ser mantida a transparência com os clientes que a usam. Por exemplo, sempre que algo for alterado é preciso atualizar a documentação.
@@ -169,11 +213,13 @@ Incluir autenticação em uma API consiste em exigir uma prova de autorização 
 
 Validar entradas significa verificar as requisições que chegam com o intuito de garantir que elas não contém dados impróprios, tais como injeções de SQL ou \emph{scripting} entre sites (scripting significa executar uma determinada sequência de comandos). Essa validação deve ser implementada tanto em nível sintático como em semântico, isso é, tanto impondo correção da sintaxe quanto impondo correção de valores. \cite{rapidAPI-twitter}
 
-\subsection*{Use um certificado Secute Socket Layer (SSL)}
+\subsubsection*{Certificado Secute Socket Layer (SSL)}
 Usar um certificado SSL permite que o protocolo HTTPS seja usado em vez do HTTP, criptografando as informações que estão trafegando, o que adiciona uma camada de segurança. \cite{rapidAPI-twitter}
 
 \subsubsection*{API Gateway}
-Um API Gateway funciona como uma porta única de entrada para as APIs de cada serviço. As requisições dos clientes são direcionadas para um único endereço, facilitando a organização das chamadas. Esse gateway fica situado entre o cliente e os serviços do \emph{backend}, e é responsável por redirecionar as requisições recebidas para os serviços apropriados, assim o gerenciamento das chamadas pode ser feita em apenas um lugar em vez de em cada API de cada serviço. Além disso, pode-se implementar uma camada de segurança e de monitoramento. \cite{rapidAPI-twitter}
+Um \emph{API Gateway} funciona como uma porta única de entrada para as APIs de cada serviço, padronizando e controlando o acesso aos serviços e APIs. Esse gateway fica situado entre o cliente e os serviços do \emph{backend}, e é responsável por redirecionar as requisições recebidas para os serviços apropriados, assim o gerenciamento das chamadas pode ser feita em apenas um lugar em vez de em cada API de cada serviço. Entretando, isso possivelmente cria um ponto massivo de falha, portanto deve-se implementar uma camada de segurança e de monitoramento. Um \emph{API Gateway} pode simplesmente autorizar e redirecionar requests, ou pode também usar \emph{Decorators}, para adicionar informações necessárias às requisições. \cite{rapidAPI-twitter}
+
+% Pode limitar o acesso ou conteúdo trafegado (mas isso geralmente é feito por outra entidade (?))
 
 \subsubsection*{Limitação de taxa de requisições}
 Limitar a taxa de requisições é um jeito de proteger a infraestrutura do servidor nos casos de acontecerem grandes fluxos de requisições, tal como em um ataque de \emph{DoS} (negação de serviço). Clientes terão seu acesso bloqueado caso enviem uma quantidade de requisições acima do limite determinado. \cite{rapidAPI-twitter}
@@ -196,20 +242,26 @@ Testar uma API isoladamente serve para determinar se ela atende a parâmetros pr
 Às vezes referido como \emph{cachear}, salvar informações no \emph{cache} melhora o tempo de busca da informação. Em uma API podem haver múltiplas requisições para a mesma informação em um curto intervalo de tempo, e para cada requisição será necessário buscar a informação. Entretanto, se a informação estiver salva no \emph{cache}, não será necessário buscar essa informação, o que melhora o tempo de resposta da API, especialmente em \emph{endpoints} que frequentemente retornam a mesma resposta. \cite{rapidAPI-twitter}
 
 \subsection{Comprimir os dados}
-The transfer of large payloads will slow down an API. Data compression combats this issue by decreasing the data size and improving speed. There are various compression methods available, a common one being GZIP. \cite{rapidAPI-twitter}
+A transferência de cargas grandes pode diminuir a velocidade da API. Comprimir os dados auxilia nesse problema, diminuindo o tamanho da carga e aumentando a velocidade de transferência. \cite{rapidAPI-twitter}
 
-\subsection{Evitar trazer ou buscar resultados a mais ou a menos}
-Over-fetching results in unnecessary and unusable data, and under-fetching results in an incomplete response. Good architecture, planning, and appropriate API management tools are essential to avoid these. \cite{rapidAPI-twitter}
+% There are various compression methods available, a common one being GZIP. \cite{rapidAPI-twitter}
+
+% \subsection{Evitar trazer ou buscar resultados a mais ou a menos}
+% Over-fetching results in unnecessary and unusable data, and under-fetching results in an incomplete response. Good architecture, planning, and appropriate API management tools are essential to avoid these. \cite{rapidAPI-twitter}
 
 \subsection{Paginar e filtrar}
-Both pagination and filtering are great methods to reduce response complexity and improve user experience. Pagination enables the separation and categorization of data, and filtering limits the results of parameters. \cite{rapidAPI-twitter}
+A Paginação separa e categoriza resultados, enquanto a filtragem retorna apenas os resultados relevantes de acordo com os parâmetros da requisição. A paginação e filtragem de resultados reduz a complexidade da resposta e facilitam o uso da API. \cite{rapidAPI-twitter}
 
-\subsection{Usar PATCH, não PUT}
-The PATCH and PUT methods are similar, but PATCH has performance advantages. When modifying a resource, PUT updates the entire resource, which is often unnecessary, whereas PATCH only updates a specific part. Therefore PATCH has a smaller payload. \cite{rapidAPI-twitter}
+\subsection{PATCH ou PUT}
+Quando é necessário modificar um recurso em uma API, usa-se os métodos HTTP PUT ou PATCH. Enquanto PUT atualiza o recurso inteiro, PATCH atualiza apenas uma parte específica do recurso, assim usando uma carga de dados menor. Portanto, quando possível deve-se usar PATCH em vez de PUT para modificar um recurso. \cite{rapidAPI-twitter}
 
 \section{Testes}
-unit and endto-end testing are the most used testing strategies \cite{design-monitoring-testing-waseem}
-Além dos métodos mais conhecidos de testes, como desenvolvimento orientado a testes, teste de unidade e teste funcional, é necessário testar os microsserviços conforme passam pelo \emph{pipeline} de implantação. Isso inclui:
+
+O processo de testes para microsserviços engloba várias estratégias diferentes de testes. Essas estratégias podem ser incluir testes funcionais, como um teste de unidade, ou testes não-funcionais, como um teste de desempenho. Usar múltiplas estratégias de testes garante que a aplicação opera com sucesso em ambientes e plataformas diferentes. 
+
+% We identified 12 testing strategies (see Table 28), which are listed in our survey question, from the literature (e.g., [9, 6, 61, 63, 64, 65, 66, 67]).
+
+De acordo com \citeonline{design-monitoring-testing-waseem}, testes de unidade e testes fim-a-fim são as estratégias de testes mais usadas. Mas de acordo com \cite{Familiar2015}, deve-se também testar os microsserviços conforme passam pelo \emph{pipeline} de implantação. Isso inclui:
 
 - Testes internos: Testar as funções internas do serviço, inclusive uso de acesso de dados, e caching.
 
@@ -225,65 +277,59 @@ Além dos métodos mais conhecidos de testes, como desenvolvimento orientado a t
 
 - Teste de penetração: Trabalhar com uma empresa terceirizada de segurança de software para realizar testes de penetração no sistema. \cite{Familiar2015}
 
-\section{A metodologia de 12 fatores}
+% \section{Do monólito aos microserviços}
 
-Asdf. \cite{oracle_microservices}.
+% Separando serviços monolíticos
 
-Qwer. \cite{12factor}
+% - Separando serviços de domínio (Data Service):
+%     . Usar Domain-Driven Design (DDD)
+%     . Começar modelando o domínio, não pensando na persistância. Definir previamente as regras e o domínio (Programação orientada a interfaces), para então...
+%     . Avaliar **quais ações serão disponibilizadas neste serviço**. (Ex: Inserir, editar, recuperar, exibir, etc...)
+%     . Construir o serviço, pensando primeiro no contrato
+%     . REST e RPC podem andar juntos
 
-\section{Do monólito aos microserviços}
+% - Separando serviços de negócio (Business Service):
+%     . Identificar o processo que deve ser exposto
+%     . Identificar os domínios que serão necessários nesse serviço
+%     . Defina a API que será utilizada, focando no domínio e não nos dados. (Ex: Passar uma matrícula, e não um ID)
+%     . Consumir serviços de domínio para executar os processos
 
-Separando serviços monolíticos
+% - Padrões
+%     . Strangler pattern
+%         ~ Quebrar um monolito, tirando as funcionalidades dele aos poucos
+%         ~ Pode-se começar isolando os dados
+%         ~ Ou pode-se começar isolando o domínio
 
-- Separando serviços de domínio (Data Service):
-    . Usar Domain-Driven Design (DDD)
-    . Começar modelando o domínio, não pensando na persistância. Definir previamente as regras e o domínio (Programação orientada a interfaces), para então...
-    . Avaliar **quais ações serão disponibilizadas neste serviço**. (Ex: Inserir, editar, recuperar, exibir, etc...)
-    . Construir o serviço, pensando primeiro no contrato
-    . REST e RPC podem andar juntos
+%     . Sidecar pattern
+%         ~ Compartilhar código sem que seja necessário criar um novo microserviço.
+%         ~ Usa-se pacotes a parte, que podem ser facilmente instalados.
+%         ~ Esses pacotes só precisam ser alterados em um lugar para ter efeito em todos os microserviços.
+%         ~ Ex: pacotes do npm, do composer, do maven, etc
 
-- Separando serviços de negócio (Business Service):
-    . Identificar o processo que deve ser exposto
-    . Identificar os domínios que serão necessários nesse serviço
-    . Defina a API que será utilizada, focando no domínio e não nos dados. (Ex: Passar uma matrícula, e não um ID)
-    . Consumir serviços de domínio para executar os processos
+% \subsection{Identificação com DDD}\label{praticas-identificacao-com-ddd}
 
-- Padrões
-    . Strangler pattern
-        ~ Quebrar um monolito, tirando as funcionalidades dele aos poucos
-        ~ Pode-se começar isolando os dados
-        ~ Ou pode-se começar isolando o domínio
+% a combination of domain-driven design and business capability is the most used strategy to decompose an application into microservices \cite{design-monitoring-testing-waseem}
 
-    . Sidecar pattern
-        ~ Compartilhar código sem que seja necessário criar um novo microserviço.
-        ~ Usa-se pacotes a parte, que podem ser facilmente instalados.
-        ~ Esses pacotes só precisam ser alterados em um lugar para ter efeito em todos os microserviços.
-        ~ Ex: pacotes do npm, do composer, do maven, etc
+% Um caminho possível para facilitar a identificação com DDD dos microsserviços seria em vez de projetar os modelos e os contextos limitados (conceito do DDD usado para limitar um domínio, dividindo modelos grandes e explicitando as relações entre eles) separando-os em camadas, deve-se juntar os contextos limitados com seus respectivos modelos, e procurar por possíveis pontos de separação da aplicação - um lugar onde a linguagem muda, por exemplo. Isso resultaria em um ponto de partida para separar as partes e formar uma arquitetura de microsserviços. \cite{Familiar2015}
 
-\subsection{Identificação com DDD}\label{praticas-identificacao-com-ddd}
+% If you are currently working with a complex layered architecture and have a reasonable domain model defined, the domain model will provide a roadmap to an evolutionary approach to migrating to a microservice architecture. If a domain model does not exist, you can apply domain-driven design in reverse to identify the bounded contexts, the capabilities within the system. \cite{Familiar2015}
 
-a combination of domain-driven design and business capability is the most used strategy to decompose an application into microservices \cite{design-monitoring-testing-waseem}
+% % Domain-driven design (design orientado a domínio) é uma tecnica bem consolidada e muito usada no desenvolvimento de software. Entretanto, para aplica-la em microsserviços, é necessário analisar onde cada peça desse padrão de projeto deve ficar. Em vez de projetar os modelos e os contextos limitados separando-os em camadas, pode-se juntar os contextos com seus respectivos modelos, e procurar por possíveis pontos de separação da aplicação - um lugar onde a linguagem muda, por exemplo. Isso resultaria em um ponto de partida para separar as partes e formar uma arquitetura de microsserviços. \cite{Familiar2015}
 
-Um caminho possível para facilitar a identificação com DDD dos microsserviços seria em vez de projetar os modelos e os contextos limitados (conceito do DDD usado para limitar um domínio, dividindo modelos grandes e explicitando as relações entre eles) separando-os em camadas, deve-se juntar os contextos limitados com seus respectivos modelos, e procurar por possíveis pontos de separação da aplicação - um lugar onde a linguagem muda, por exemplo. Isso resultaria em um ponto de partida para separar as partes e formar uma arquitetura de microsserviços. \cite{Familiar2015}
+% \subsection{Organização}
 
-If you are currently working with a complex layered architecture and have a reasonable domain model defined, the domain model will provide a roadmap to an evolutionary approach to migrating to a microservice architecture. If a domain model does not exist, you can apply domain-driven design in reverse to identify the bounded contexts, the capabilities within the system. \cite{Familiar2015}
+% Em uma mudança do monólito para microsserviços, é recomendado que não sejam feitas mudanças grandes e abruptas na sua organização. Em vez disso, deve-se procurar uma oportunidade com uma iniciativa de negócio para testar a fórmula proposta por \citeonline{Familiar2015} : 
 
-% Domain-driven design (design orientado a domínio) é uma tecnica bem consolidada e muito usada no desenvolvimento de software. Entretanto, para aplica-la em microsserviços, é necessário analisar onde cada peça desse padrão de projeto deve ficar. Em vez de projetar os modelos e os contextos limitados separando-os em camadas, pode-se juntar os contextos com seus respectivos modelos, e procurar por possíveis pontos de separação da aplicação - um lugar onde a linguagem muda, por exemplo. Isso resultaria em um ponto de partida para separar as partes e formar uma arquitetura de microsserviços. \cite{Familiar2015}
+% - Formar um pequeno time inderdisciplinar (cross-functional?).
 
-\subsection{Organização}
+% - Oferecer treinamento e orientação na adoção de práticas ágeis, como o scrum.
 
-Em uma mudança do monólito para microsserviços, é recomendado que não sejam feitas mudanças grandes e abruptas na sua organização. Em vez disso, deve-se procurar uma oportunidade com uma iniciativa de negócio para testar a fórmula proposta por \citeonline{Familiar2015} : 
+% - Oferecer uma localização física separada para esse time trabalhar a fim de não afetá-lo negativamente por politicas internas ou hábitos antigos.
 
-- Formar um pequeno time inderdisciplinar (cross-functional?).
+% - Adotar uma abordagem de minimo produto viável para entregar pequenos mas incrementais \emph{releases} de software, usando essa abordagem durante todo o ciclo de vida.
 
-- Oferecer treinamento e orientação na adoção de práticas ágeis, como o scrum.
+% - Integrar esse serviço com sistemas existentes, usando um acoplamento solto.
 
-- Oferecer uma localização física separada para esse time trabalhar a fim de não afetá-lo negativamente por politicas internas ou hábitos antigos.
+% - Percorrer esse ciclo de vida do microsserviço diversas vezes, fazendo as adaptações necessárias até chegar a equipe ficar confortável com o processo.
 
-- Adotar uma abordagem de minimo produto viável para entregar pequenos mas incrementais \emph{releases} de software, usando essa abordagem durante todo o ciclo de vida.
-
-- Integrar esse serviço com sistemas existentes, usando um acoplamento solto.
-
-- Percorrer esse ciclo de vida do microsserviço diversas vezes, fazendo as adaptações necessárias até chegar a equipe ficar confortável com o processo.
-
-- Colocar o time principal em posições de liderança enquanto são formados novos times interdisciplinares para disseminar o conhecimento e a prática.
+% - Colocar o time principal em posições de liderança enquanto são formados novos times interdisciplinares para disseminar o conhecimento e a prática.
