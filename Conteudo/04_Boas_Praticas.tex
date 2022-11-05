@@ -24,16 +24,6 @@ Muitas coisas podem dar errado em qualquer tipo de arquitetura, mas em especial 
 
 Na arquitetura de microserviços a implantação geralmente é feita separadamente para cada microserviço. Com muitos serviços para gerenciar, ela pode se tornar uma tarefa árdua, portanto será novamente necessário uma automação dessa etapa, que geralmente envolve um \emph{pipeline} de implantação, que deve ser automatizado o máximo possível. \cite{MartinFowlerMicroservices}
 
-\section{Implantação}
-
-Automação.
-
-\section{Comunicação entre microserviços}
-
-De acordo com \citeonline{design-monitoring-testing-waseem}, API Gateway e \emph{Backend for frontend} são os padrões de projeto mais utilizados para lidar com a comunicação dos microsserviços. Eles são padrões similares - a diferença é que no \emph{Backend for Frontend} há um \emph{gateway} para cada tipo de cliente. RPC também pode ser utilizado em conjunto com APIs para auxiliar na comunicação dos microsserviços. 
-
-Considerando que APIs são um tópico essencial na comunicação entre microsserviços, elas serão abordadas em maior profundidade na \autoref{boas-praticas-apis}.
-
 \section{A metodologia de 12 fatores}
 
 A metodologia de 12 fatores para o desenvolvimento de aplicativos é um conjunto de regras e diretrizes para o desenvolvimento de aplicativos nativos da nuvem e software como um serviço. De acordo com ela, os microsserviços devem respeitar as seguintes orientações: 
@@ -79,32 +69,7 @@ XI. Logs - Logs devem ser tratatos como um fluxo de eventos.
 
 XII. Processos administrativos - Tarefas de administração ou de gerenciamento devem ser executadas como processos únicos. \cite{12factor, oracle_microservices}
 
-\section{Monitoramento}
-
-Em qualquer aplicação o monitoramento é importante para garantir um bom funcionamento. Entretanto, na arquitetura de microsserviços o monitoramento se torna indispensável, além de mais complexo. % Automação e monitoramento estão altamente ligados.
-
-resource usage and load balancing as monitoring metrics, log management and exception tracking as monitoring practices are widely used \cite{design-monitoring-testing-waseem}
-
-\subsection{Históricos}
-
-Um histórico, também conhecido como \emph{log}, descreve o que aconteceu em determinado sistema e provê informações sobre o estado e a saúde dele. Manter um histórico do microsserviço é uma das formas mais simples de se implementar monitoramento, e é fortemente indicado. 
-
-Para facilitar a escrita, leitura e operação dos históricos, deve-se padronizar o formato deles em todos os microsserviços e diferenciar entradas de erros, de avisos e de informação. Além disso, eles devem ser agregados e organizados em um único lugar para que possam ser facilmente consultados.
-
-Pode haver um serviço dedicado para logs, ou um sidecar de logs (pacote instalável).
-
-% Um motivo importante para organizar os logs é rastrear as chamadas de uma execução. Devemos poder reconstruir uma operação a partir de um identificador. Isso é o equivalente à stack-trace de um sistema monolítico.
-
-% Usar ferramentas de gerenciamento (APMs - Application performance management) para visualizar essas stack-traces.
-
-\subsection{Métricas}
-Métricas nos permitem saber o que está acontecendo em qualquer momento, e decidir que ações devem ser tomadas a partir disso. Escalar um serviço que recebe muitas requisições por exemplo, ou diminuir um que não. Métricas podem inclusive servir para questões de negócios e de \emph{business inteligence}. 
-
-Enquanto históricos precisam ser desenvolvidos, métricas apenas precisam de instrumentação pois muitas ferramentas já possuem as próprias métricas ou já existem métodos consolidados para as obter. Nos servidores web mais populares, por exemplo, as informações básicas sobre uma requisição já são gravadas por padrão.
-
-É recomendado usar dashboards de alto nível para melhorar a visualização e monitoramento do status da aplicação a partir de suas métricas.
-
-\section{Lidando com dados}
+\section{Persistência de dados}
 
 "A estabilidade do serviço está diretamente relacionada ao banco de dados que ele acessa."
 
@@ -135,6 +100,77 @@ Enquanto históricos precisam ser desenvolvidos, métricas apenas precisam de in
             . Um serviço emite um evento que será tratado em seu devido tempo
             . Usar tecnologias de mensageria e serviços de stream de dados - filas de mensageria: RabbitMQ. Serviço de streaming de dados: Kafka)
 
+The recommended pattern to implement persistence for a microservice is to use a single database. For each microservice, keep the persistent data private, and create the database as a part of the microservice implementation.
+
+In this pattern, the private persistent data is accessible through only the microservice API.
+
+The following illustration shows the persistence design for microservices.
+
+The following variants of this microservice implementation apply to relational databases:
+
+    Private tables: Each service owns a set of tables.
+    Schema: Each service owns a private database schema.
+    Database: Each service owns a database server, as shown in the illustration.
+
+A persistence anti-pattern for your microservices is to share one database schema across multiple microservices. You can implement atomic, consistent, isolated, and durable transactions for data consistency. An advantage with this anti-pattern is that it uses a simple database. The disadvantages are that the microservices might interfere with each other while accessing the database, and the development cycles may slow down because developers of different microservices need to coordinate the schema changes, which also increases inter-service dependencies.
+
+Your microservices can connect to an Oracle Database instance that is running on Oracle Cloud Infrastructure. The Oracle multi-tenant database supports multiple pluggable databases (PDBs) within a container. This is the best choice for the persistence layer for microservices, for bounded context isolation of data, security, and for high availability. In many cases, fewer PDBs can be used with schema-level isolation. 
+
+\section{Implantação}
+
+Containers. Automação.
+
+After you build your microservice, you must containerize it. A microservice running in its own container doesn’t affect the microservices deployed in the other containers.
+
+A container is a standardized unit of software, used to develop, ship and deploy applications.
+
+Containers are managed using a container engine, such as Docker. The container engine provides the tools that are necessary to bundle all the application dependencies as a container.
+
+You can use the Docker engine to create, deploy, and run your microservices applications in containers. Microservices running in Docker containers have the following characteristics:
+
+Standard: The microservices are portable. They can run anywhere.
+Lightweight: Docker shares the operating system (OS) kernel, doesn’t require an OS for each instance, and runs as a lightweight process.
+Secure: Each container runs as an isolated process. So the microservices are secure.
+
+The process of containerizing a microservice involves creating a Dockerfile, creating and building a container image that includes its dependencies and the environmental configuration, deploying the image to a Docker engine, and uploading the image to a container registry for storage and retrieval. 
+
+\section{Comunicação entre microserviços}
+
+Requisições HTTP são o método mais simples para realizar comunicação síncrona entre microsserviços. Uma requisição HTTP é feita por um cliente, para um dado \emph{host} em um servidor, com o propósito de acessar um recurso nesse servidor. Por usar o \emph{Transmition Control Protocol} (TCP), é um método de comunicação confiável, mas não tão eficiente quanto poderia ser.
+
+Para comunicação assíncrona, filas de mensagens são amplamente usadas. Quando um serviço precisa enviar informações a outro de modo assíncrono, ele envia uma mensagem para a fila de mensagens, e ela será armazenada até ser processada ou excluída. Cada mensagem é processada uma única vez, por um único consumidor. As filas de mensagens podem ser usadas para dividir um processamento pesado, para armazenar trabalho em \emph{buffers} ou lotes, ou para processar uniformemente picos de cargas de trabalho.
+
+Embora menos comum, chamada de procedimento remoto (RPC) também é utilizado para realizar comunicação síncrona ou assíncrona entre microsserviços. Uma chamada de procedimento remoto se dá quando um programa faz com que um procedimento ou uma sub-rotina execute em um espaço de endereço diferente, comumente em outra máquina numa rede compartilhada. Essa chamada é feita como se fosse um procedimento local, isso é, o programador não precisa explicitar que se trata de um procedimento remoto. gRPC é uma ferramenta moderna com alto desempenho que tem ganhado grande popularidade em meio aos praticantes de microsserviços e é considerada um "projeto de incubação" pela Cloud Native Computing Foundation. Essa ferramenta será melhor discutida no \autoref{chapter-ferramentas} \cite{microsoft-grpc}
+
+De acordo com \citeonline{design-monitoring-testing-waseem}, \emph{API Gateway} e \emph{Backend for frontend} são os padrões de projeto mais utilizados para lidar com a comunicação de microsserviços. São padrões similares - a diferença é que no \emph{Backend for Frontend} há um \emph{gateway} para cada tipo de cliente. Esses padrões serão discutidos na \autoref{boas-praticas-api-gateway}. 
+
+% Considerando que APIs são um tópico essencial na comunicação entre microsserviços, elas serão abordadas em maior profundidade na \autoref{boas-praticas-apis}.
+
+\section{Monitoramento}
+
+Em qualquer aplicação o monitoramento é importante para garantir um bom funcionamento. Entretanto, na arquitetura de microsserviços o monitoramento se torna indispensável, além de mais complexo. % Automação e monitoramento estão altamente ligados.
+
+resource usage and load balancing as monitoring metrics, log management and exception tracking as monitoring practices are widely used \cite{design-monitoring-testing-waseem}
+
+\subsection{Históricos}
+
+Um histórico, também conhecido como \emph{log}, descreve o que aconteceu em determinado sistema e provê informações sobre o estado e a saúde dele. Manter um histórico do microsserviço é uma das formas mais simples de se implementar monitoramento, e é fortemente indicado. 
+
+Para facilitar a escrita, leitura e operação dos históricos, deve-se padronizar o formato deles em todos os microsserviços e diferenciar entradas de erros, de avisos e de informação. Além disso, eles devem ser agregados e organizados em um único lugar para que possam ser facilmente consultados.
+
+Pode haver um serviço dedicado para logs, ou um sidecar de logs (pacote instalável).
+
+% Um motivo importante para organizar os logs é rastrear as chamadas de uma execução. Devemos poder reconstruir uma operação a partir de um identificador. Isso é o equivalente à stack-trace de um sistema monolítico.
+
+% Usar ferramentas de gerenciamento (APMs - Application performance management) para visualizar essas stack-traces.
+
+\subsection{Métricas}
+Métricas nos permitem saber o que está acontecendo em qualquer momento, e decidir que ações devem ser tomadas a partir disso. Escalar um serviço que recebe muitas requisições por exemplo, ou diminuir um que não. Métricas podem inclusive servir para questões de negócios e de \emph{business inteligence}. 
+
+Enquanto históricos precisam ser desenvolvidos, métricas apenas precisam de instrumentação pois muitas ferramentas já possuem as próprias métricas ou já existem métodos consolidados para as obter. Nos servidores web mais populares, por exemplo, as informações básicas sobre uma requisição já são gravadas por padrão.
+
+É recomendado usar dashboards de alto nível para melhorar a visualização e monitoramento do status da aplicação a partir de suas métricas.
+
 \section{APIs}\label{boas-praticas-apis}
 
 Considerando que APIs são uma parte crucial no desenvolvimento de microserviços, sendo responsável por grande parte da comunicação que se faz necessária para conectar tantos serviços separados e manter um funcionamento eficiente e livre de falhas, esse trabalho terá um foco grande em boas práticas no desenvolvimento de APIs.
@@ -145,10 +181,9 @@ Esses códigos são números entre 100 e 599, cada um tendo um significado difer
 \subsection{Troca de dados com JSON}
 Atualmente JSON é um dos formatos mais populares para troca de dados na web, pelo fato de ser facilmente lido tanto por humanos quanto por máquinas. Em APIs, JSON é usado para enviar e receber requisições por meio do protocolo HTTP, sendo uma solução robusta para a comunicação entre cliente e servidor. Embora seja derivado do JavaScript, JSON também é suportado por muitas outras linguagens, seja nativamente ou por meio de bibliotecas.  \cite{json_bourhis_2020}
 
-% \subsection{Endpoints com aninhamento}
-% Implementar \emph{endpoints} com aninhamento é uma boa prática pois expõe as relações entre diferentes \emph{endpoints}.
-
-% If you are developing a REST API with categories, it is good to implement endpoint nesting as it shows the relationship between different endpoints. \cite{rapidAPI-twitter}
+\subsection{Buffers de Protocolo}
+Alternativa ao JSON. É mais eficiente.
+% https://developers.google.com/protocol-buffers/docs/overview
 
 \subsection{Contratos de dados e versionamento}
 Uma API depende de contratos de dados, isso é, uma definição dos dados que serão recebidos e retornados. Esse contrato implica num compromisso de manter o serviço correspondente funcionando e inalterado. Entretanto, é possível desenvolver melhorias ou adicionar funcionalidades sem quebrar o contrato. Para tanto, deve ser feito um versionamento da API e deve ser mantida a transparência com os clientes que a usam. Por exemplo, sempre que algo for alterado é preciso atualizar a documentação.
@@ -173,7 +208,7 @@ Entretando, também há desvantagens no uso desse padrão: (1) há um acoplament
 
 \subsubsection*{Autenticação}
 
-Incluir autenticação em uma API consiste em exigir uma prova de autorização do uso da API. A autenticação nas APIs é indispensável para aumentar a segurança, e existem formas diferentes de implementá-la, as quais serão melhor discutidas no \autoref{chapter-solucoes}.
+Incluir autenticação em uma API consiste em exigir uma prova de autorização do uso da API. A autenticação nas APIs é indispensável para aumentar a segurança, e existem formas diferentes de implementá-la, as quais serão melhor discutidas no \autoref{chapter-ferramentas}.
 
 \subsubsection*{Validação de entradas}
 
@@ -218,11 +253,11 @@ Quando é necessário modificar um recurso em uma API, usa-se os métodos HTTP P
 
 \section{Testes}
 
-O processo de testes para microsserviços engloba várias estratégias diferentes de testes. Essas estratégias podem ser incluir testes funcionais, como um teste de unidade, ou testes não-funcionais, como um teste de desempenho. Usar múltiplas estratégias de testes garante que a aplicação opera com sucesso em ambientes e plataformas diferentes. 
+O processo de testes para microsserviços engloba várias estratégias diferentes de testes. Essas estratégias podem ser incluir testes funcionais, como um teste de unidade, ou testes não-funcionais, como um teste de desempenho. Usar múltiplas estratégias de testes garante que a aplicação opera com sucesso em ambientes e plataformas diferentes. De acordo com \citeonline{design-monitoring-testing-waseem}, testes de unidade e testes fim-a-fim são as estratégias de testes mais usadas.
 
 % We identified 12 testing strategies (see Table 28), which are listed in our survey question, from the literature (e.g., [9, 6, 61, 63, 64, 65, 66, 67]).
 
-De acordo com \citeonline{design-monitoring-testing-waseem}, testes de unidade e testes fim-a-fim são as estratégias de testes mais usadas. Mas de acordo com \cite{Familiar2015}, deve-se também testar os microsserviços conforme passam pelo \emph{pipeline} de implantação. Isso inclui:
+\citeonline{Familiar2015} afirma que além de usar os métodos mais comuns de testes, deve-se também testar os microsserviços conforme passam pelo \emph{pipeline} de implantação. Isso inclui:
 
 - Testes internos: Testar as funções internas do serviço, inclusive uso de acesso de dados, e caching.
 
