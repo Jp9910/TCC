@@ -55,29 +55,29 @@ A metodologia de 12 fatores para o desenvolvimento de aplicativos é um conjunto
 
 % 12-Factor Application - É uma metodologia de desenvolvimento que diz que os logs devem ser um stream de dados. Esses logs podem ser impressos na saída padrão, e um serviço específico de logs coleta esses logs, faz o parse, categorização, relatório e todo processamento necessário - https://12factor.net/
 
-I. Base de Código - Cada microsserviço deve ter uma base de código com rastreamento utilizando controle de revisão, e com muitos deploys
+I. Base de Código - Cada microsserviço deve ter uma base de código única e particular, com rastreamento utilizando controle de revisão, e devem ser criados várias implantações.
 
 II. Dependências - Cada microsserviço deve declarar e isolar suas dependências.
 
 III. Configurações - Configurações de ambiente devem ser armazenadas fora do microsserviço, para que ele possa decidir a configuração apropriada a ser usada.
 
-IV. Serviços de Apoio - Os microsserviços não deve fazer distinção entre serviços de terceiros e serviços locais.
+IV. Serviços de Apoio - Os microsserviços não devem fazer distinção entre serviços de terceiros e serviços locais.
 
-V. Construir, lançar, e executar - Separe estritamente os builds e execute em estágios
+V. Construir, lançar, e executar - Deve-se separar e distinguir cada etapa do processo de desenvolvimento. Na etapa de construção, o código é transformado em um executável. Na etapa de lançamento, o executável se combina com a configuração atual da implantação, seja teste, desenvolvimento ou produção. Na etapa de execução, o aplicativo é executado no ambiente adequado ao lançamento selecionado.
 
-VI. Processos - Execute a aplicação como um ou mais processos que não armazenam estado
+VI. Processos - Deve-se executar a aplicação como um ou mais processos que não armazenam estado, assim diminuindo o acoplamento e facilitando o escalamento.
 
-VII. Vínculo de porta - Exporte serviços por ligação de porta
+VII. Vínculo de porta - Um microsserviço deve ser executado em um container e exposto por meio de portas.
 
-VIII. Concorrência - Dimensione por um modelo de processo
+VIII. Concorrência - Cada processo deve ser independente e executado separadamente, para se ter um melhor dimensionamento e ser capaz de executar mais ao mesmo tempo.
 
-IX. Descartabilidade - Maximizar a robustez com inicialização e desligamento rápido
+IX. Descartabilidade - Deve ser possível iniciar ou interromper a aplicação imediatamente sempre que necessário. Caso a aplicação pare de funcionar, deve ser capaz de iniciar novamente sem perdas.
 
-X. Dev/prod semelhantes - Mantenha o desenvolvimento, teste, produção o mais semelhante possível
+X. Paridade de desenvolvimento e produção - Deve-se manter os ambientes de desenvolvimento, teste e produção o mais semelhantes possível.
 
-XI. Logs - Trate logs como fluxo de eventos
+XI. Logs - Logs devem ser tratatos como um fluxo de eventos.
 
-XII. Processos de Admin - Executar tarefas de administração/gerenciamento como processos pontuais \cite{12factor, oracle_microservices}
+XII. Processos administrativos - Tarefas de administração ou de gerenciamento devem ser executadas como processos únicos. \cite{12factor, oracle_microservices}
 
 \section{Monitoramento}
 
@@ -85,40 +85,24 @@ Em qualquer aplicação o monitoramento é importante para garantir um bom funci
 
 resource usage and load balancing as monitoring metrics, log management and exception tracking as monitoring practices are widely used \cite{design-monitoring-testing-waseem}
 
-\subsection{Histórico (logs)}
+\subsection{Históricos}
 
-Manter um histórico do que aconteceu no microsserviço é uma das formas mais simples de se implementar monitoramento. O formato dos logs deve ser igual em todos os serviços, para facilitar escrita, leitura e operações.
+Um histórico, também conhecido como \emph{log}, descreve o que aconteceu em determinado sistema e provê informações sobre o estado e a saúde dele. Manter um histórico do microsserviço é uma das formas mais simples de se implementar monitoramento, e é fortemente indicado. 
 
-Lidando com logs
+Para facilitar a escrita, leitura e operação dos históricos, deve-se padronizar o formato deles em todos os microsserviços e diferenciar entradas de erros, de avisos e de informação. Além disso, eles devem ser agregados e organizados em um único lugar para que possam ser facilmente consultados.
 
-Logs são importantes sempre, mas especialmente em microserviços. Pode haver um serviço dedicado para logs, ou um sidecar de logs. Logs informam sobre o estado e a saúde do sistema.
+Pode haver um serviço dedicado para logs, ou um sidecar de logs (pacote instalável).
 
-Agregando logs
-O formato dos logs (pesquisar formatos?) deve ser compartilhado entre todos os serviços, deve ser igual.
+% Um motivo importante para organizar os logs é rastrear as chamadas de uma execução. Devemos poder reconstruir uma operação a partir de um identificador. Isso é o equivalente à stack-trace de um sistema monolítico.
 
-Também deve existir uma taxonomia comum. (Logs de erro, de warning, etc)
-
-Logs de monolitos são agregados por padrão. 
-
-Todos os logs de todos os microserviços devem ser agregados e organizados em um ponto para que possam ser consultados com facilidade.
-
-Um motivo importante para organizar os logs é rastrear as chamadas de uma execução. Devemos poder reconstruir uma operação a partir de um identificador. Isso é o equivalente à stack-trace de um sistema monolítico.
-
-Usar padrões bem consolidados de trace ID para gerar logs.
-
-Usar ferramentas de gerenciamento (APMs - Application performance management) para visualizar essas stack-traces.
+% Usar ferramentas de gerenciamento (APMs - Application performance management) para visualizar essas stack-traces.
 
 \subsection{Métricas}
+Métricas nos permitem saber o que está acontecendo em qualquer momento, e decidir que ações devem ser tomadas a partir disso. Escalar um serviço que recebe muitas requisições por exemplo, ou diminuir um que não. Métricas podem inclusive servir para questões de negócios e de \emph{business inteligence}. 
 
-Agregando métricas
+Enquanto históricos precisam ser desenvolvidos, métricas apenas precisam de instrumentação pois muitas ferramentas já possuem as próprias métricas ou já existem métodos consolidados para as obter. Nos servidores web mais populares, por exemplo, as informações básicas sobre uma requisição já são gravadas por padrão.
 
-Logs precisam ser desenvolvidos, mas métricas só precisam de instrumentação - o que náo é uma tarefa simples - pois geralmente as ferramentas já possuem as próprias métricas ou já existem métodos consolidados para monitoramento, como um servidor web por exemplo que já grava quando é recebida uma requisição, ou para medir uso de cpu do servidor por exemplo, já existem diversas ferramentas para isso.
-
-Métricas nos permitem saber o que está acontecendo em qualquer momento, e decidir que ações devem ser tomadas a partir disso. Escalar um serviço que recebe muitas requisições por exemplo, ou diminuir um que não. Métricas podem servir até para questões de negócios e de business inteligence. 
-
-Usar dashboards de alto nível para facilitar a visualização e monitoramento do status da aplicação
-
-Posteriormente, ter dashboards específicos para cada serviço, com mais detalhes.
+É recomendado usar dashboards de alto nível para melhorar a visualização e monitoramento do status da aplicação a partir de suas métricas.
 
 \section{Lidando com dados}
 
