@@ -30,81 +30,54 @@ Automação.
 
 \section{Comunicação entre microserviços}
 
-De acordo com \citeonline{design-monitoring-testing-waseem}, API Gateways, e \emph{Backend for frontend} são os padrões mais utilizados. E embora seja incomum, RPC também pode ser utilizado em conjunto com APIs para auxiliar na comunicação. Sendo APIs um tópico essencial na comunicação entre microsserviços, serão abordadas em maior profundidade na \autoref{boas-praticas-apis}
+De acordo com \citeonline{design-monitoring-testing-waseem}, API Gateway e \emph{Backend for frontend} são os padrões de projeto mais utilizados para lidar com a comunicação dos microsserviços. Eles são padrões similares - a diferença é que no \emph{Backend for Frontend} há um \emph{gateway} para cada tipo de cliente. RPC também pode ser utilizado em conjunto com APIs para auxiliar na comunicação dos microsserviços. 
 
-\section{Process agregator pattern (Agregando serviços)}
-
-Agrega serviços de negócio (É ainda mais alto nível)
-
-Fazem as chamadas para os serviços necessários e montam uma resposta adequada
-
-Deve ter uma lógica de processamento, e não ser apenas um proxy. No mínimo deve unir a resposta de diversos serviços
-
-Para construir um agregador, define-se um novo modelo para o sistema, que representará os dados agregados como um subnegócio
-
-A partir deste modelo, pensar na API que fornecerá as operações
-
-A ideia é relativamente simples, mas a implementação pode ser complexa
-
-\section{Edge pattern (Pontos de entrada para cada tipo de cliente)}
-Gateway específico para determinados clientes
-
-Foco nas necessidades reais de determinados clientes
-
-Esses clientes podem ser clientes da API, como clientes HTTP, ou clientes de negócio mesmo
-
-Por exemplo, em vez de modificar a lógica de negócios, cria-se um novo 'edge', que receberá a resposta e modificará de acordo com a necessidade do cliente
-
-Uma possibilidade seria trabalhar apenas com edge services, e nenhum API gateway, isso é, não existiria um ponto único de entrada universal, mas sim um para cada tipo de cliente
-
-Para construir uma edge (ponta), deve-se primeiro Identificar o cliente e suas necessidades, e Construir contratos específicos para o cliente, isso é, ter recursos diferentes para cada cliente. Por exemplo, a URL pode ser diferente de cliente web para clientes mobile.
+Considerando que APIs são um tópico essencial na comunicação entre microsserviços, elas serão abordadas em maior profundidade na \autoref{boas-praticas-apis}.
 
 \section{A metodologia de 12 fatores}
 
-A metodologia de 12 fatores para o desenvolvimento de aplicativos é um conjunto de regras e diretrizes para o desenvolvimento de aplicativos nativos da nuvem e Software as a Service (SaaS). \cite{oracle_microservices}
+A metodologia de 12 fatores para o desenvolvimento de aplicativos é um conjunto de regras e diretrizes para o desenvolvimento de aplicativos nativos da nuvem e software como um serviço. De acordo com ela, os microsserviços devem respeitar as seguintes orientações: 
 
-A aplicação doze-fatores é uma metodologia para construir softwares-como-serviço que:
+% Metodologia para construir saas que:
+% Usam formatos declarativos para automatizar a configuração inicial, minimizar tempo e custo para novos desenvolvedores participarem do projeto;
 
-Usam formatos declarativos para automatizar a configuração inicial, minimizar tempo e custo para novos desenvolvedores participarem do projeto;
+% Tem um contrato claro com o sistema operacional que o suporta, oferecendo portabilidade máxima entre ambientes que o executem;
 
-Tem um contrato claro com o sistema operacional que o suporta, oferecendo portabilidade máxima entre ambientes que o executem;
+% São adequados para implantação em modernas plataformas em nuvem, evitando a necessidade por servidores e administração do sistema;
 
-São adequados para implantação em modernas plataformas em nuvem, evitando a necessidade por servidores e administração do sistema;
+% Minimizam a divergência entre desenvolvimento e produção, permitindo a implantação contínua para máxima agilidade;
 
-Minimizam a divergência entre desenvolvimento e produção, permitindo a implantação contínua para máxima agilidade;
+% E podem escalar sem significativas mudanças em ferramentas, arquiteturas, ou práticas de desenvolvimento.
 
-E podem escalar sem significativas mudanças em ferramentas, arquiteturas, ou práticas de desenvolvimento.
+% Este documento sintetiza toda nossa experiência e observação em uma variedade de aplicações que operam como software-como-serviço. Isto é a triangulação de práticas ideais ao desenvolvimento de software, com uma atenção particular a respeito das dinâmicas de crescimento orgânico de uma aplicação ao longo do tempo, a dinâmica de colaboração entre desenvolvedores trabalhando em uma base de código, e evitando os custos de erosão de software
 
-Este documento sintetiza toda nossa experiência e observação em uma variedade de aplicações que operam como software-como-serviço. Isto é a triangulação de práticas ideais ao desenvolvimento de software, com uma atenção particular a respeito das dinâmicas de crescimento orgânico de uma aplicação ao longo do tempo, a dinâmica de colaboração entre desenvolvedores trabalhando em uma base de código, e evitando os custos de erosão de software
+% A metodologia doze-fatores pode ser aplicada a aplicações escritas em qualquer linguagem de programação, e que utilizem qualquer combinação de serviços de suportes (banco de dados, filas, cache de memória, etc).
 
-A metodologia doze-fatores pode ser aplicada a aplicações escritas em qualquer linguagem de programação, e que utilizem qualquer combinação de serviços de suportes (banco de dados, filas, cache de memória, etc).
+% 12-Factor Application - É uma metodologia de desenvolvimento que diz que os logs devem ser um stream de dados. Esses logs podem ser impressos na saída padrão, e um serviço específico de logs coleta esses logs, faz o parse, categorização, relatório e todo processamento necessário - https://12factor.net/
 
-12-Factor Application - É uma metodologia de desenvolvimento que diz que os logs devem ser um stream de dados. Esses logs podem ser impressos na saída padrão, e um serviço específico de logs coleta esses logs, faz o parse, categorização, relatório e todo processamento necessário - https://12factor.net/
+I. Base de Código - Cada microsserviço deve ter uma base de código com rastreamento utilizando controle de revisão, e com muitos deploys
 
-I. Base de Código
-Uma base de código com rastreamento utilizando controle de revisão, muitos deploys
-II. Dependências
-Declare e isole as dependências
-III. Configurações
-Armazene as configurações no ambiente
-IV. Serviços de Apoio
-Trate os serviços de apoio, como recursos ligados
-V. Construa, lance, execute
-Separe estritamente os builds e execute em estágios
-VI. Processos
-Execute a aplicação como um ou mais processos que não armazenam estado
-VII. Vínculo de porta
-Exporte serviços por ligação de porta
-VIII. Concorrência
-Dimensione por um modelo de processo
-IX. Descartabilidade
-Maximizar a robustez com inicialização e desligamento rápido
-X. Dev/prod semelhantes
-Mantenha o desenvolvimento, teste, produção o mais semelhante possível
-XI. Logs
-Trate logs como fluxo de eventos
-XII. Processos de Admin
-Executar tarefas de administração/gerenciamento como processos pontuais \cite{12factor}
+II. Dependências - Cada microsserviço deve declarar e isolar suas dependências.
+
+III. Configurações - Configurações de ambiente devem ser armazenadas fora do microsserviço, para que ele possa decidir a configuração apropriada a ser usada.
+
+IV. Serviços de Apoio - Os microsserviços não deve fazer distinção entre serviços de terceiros e serviços locais.
+
+V. Construir, lançar, e executar - Separe estritamente os builds e execute em estágios
+
+VI. Processos - Execute a aplicação como um ou mais processos que não armazenam estado
+
+VII. Vínculo de porta - Exporte serviços por ligação de porta
+
+VIII. Concorrência - Dimensione por um modelo de processo
+
+IX. Descartabilidade - Maximizar a robustez com inicialização e desligamento rápido
+
+X. Dev/prod semelhantes - Mantenha o desenvolvimento, teste, produção o mais semelhante possível
+
+XI. Logs - Trate logs como fluxo de eventos
+
+XII. Processos de Admin - Executar tarefas de administração/gerenciamento como processos pontuais \cite{12factor, oracle_microservices}
 
 \section{Monitoramento}
 
@@ -203,6 +176,15 @@ Em uma API, para cumprir o contrato de dados, apenas modificações aditivas pod
 Quando é necessário realizar alterações que descumprem o contrato, deve-se alterar a versão maior da API, por exemplo passando de 2.3.7 para 3.0.0. Nesses casos, é importante manter a versão anterior funcionando e inalterada, criando uma nova rota para acessar a versão nova, para que clientes usando a versão anterior não apresentem falhas.
 % citar o curso da alura
 
+\subsection{API Gateway}\label{boas-praticas-api-gateway}
+Numa arquitetura de microsserviços, os clientes geralmente consomem funcionalidades de mais de um microsserviço. Se esse consumo é feito do cliente diretamente para o microsserviço, o cliente precisa lidar com várias requisições aos \emph{endpoints}. Quando os microsserviços mudam ou mais microsserviços surgem frequentemente, fica inviável tratar tantos endpoints por parte do cliente. Uma solução para isso é usar um \emph{API Gateway}. 
+
+Um \emph{API Gateway} é um padrão de projeto e funciona como uma porta única de entrada para as APIs de cada microsserviço, padronizando e controlando o acesso aos microsserviços e APIs. Esse gateway fica situado entre o cliente e os microsserviços, e é responsável por redirecionar as requisições recebidas para os microsserviços apropriados, assim o gerenciamento das chamadas pode ser feita em apenas um lugar em vez de em cada API de cada microsserviço. Além disso, nele também podem ser implementadas camadas de segurança e de monitoramento.
+
+Outra vantagem é que esse \emph{API Gateway} pode agregar requisições, permitindo que o cliente envie apenas uma requisição para o \emph{API Gateway} para recuperar informações de diferentes microsserviços, o que normalmente exigiria múltiplas requisições. Nesse caso, quando recebida a requisição do cliente, o \emph{API Gateway} fica responsável por disparar as requisições correspondentes, agregar as respostas e as devolver ao cliente.
+
+Entretando, também há desvantagens no uso desse padrão: (1) há um acoplamento forte entre os microsserviços e o \emph{API Gateway}, (2) surge um possível ponto massivo de falha nesse \emph{API Gateway}, (3) Se não escalado adequadamente, esse \emph{API Gateway} pode se tornar um gargalo. \cite{microsoft-api-gateway}
+
 \subsection{Segurança em APIs}
 
 \subsubsection*{Autenticação}
@@ -215,11 +197,6 @@ Validar entradas significa verificar as requisições que chegam com o intuito d
 
 \subsubsection*{Certificado Secute Socket Layer (SSL)}
 Usar um certificado SSL permite que o protocolo HTTPS seja usado em vez do HTTP, criptografando as informações que estão trafegando, o que adiciona uma camada de segurança. \cite{rapidAPI-twitter}
-
-\subsubsection*{API Gateway}
-Um \emph{API Gateway} funciona como uma porta única de entrada para as APIs de cada serviço, padronizando e controlando o acesso aos serviços e APIs. Esse gateway fica situado entre o cliente e os serviços do \emph{backend}, e é responsável por redirecionar as requisições recebidas para os serviços apropriados, assim o gerenciamento das chamadas pode ser feita em apenas um lugar em vez de em cada API de cada serviço. Entretando, isso possivelmente cria um ponto massivo de falha, portanto deve-se implementar uma camada de segurança e de monitoramento. Um \emph{API Gateway} pode simplesmente autorizar e redirecionar requests, ou pode também usar \emph{Decorators}, para adicionar informações necessárias às requisições. \cite{rapidAPI-twitter}
-
-% Pode limitar o acesso ou conteúdo trafegado (mas isso geralmente é feito por outra entidade (?))
 
 \subsubsection*{Limitação de taxa de requisições}
 Limitar a taxa de requisições é um jeito de proteger a infraestrutura do servidor nos casos de acontecerem grandes fluxos de requisições, tal como em um ataque de \emph{DoS} (negação de serviço). Clientes terão seu acesso bloqueado caso enviem uma quantidade de requisições acima do limite determinado. \cite{rapidAPI-twitter}
@@ -276,6 +253,34 @@ De acordo com \citeonline{design-monitoring-testing-waseem}, testes de unidade e
 - Teste de tolerância a falha: Testar a capacidade do microsserviço de recupera-se após uma falha.
 
 - Teste de penetração: Trabalhar com uma empresa terceirizada de segurança de software para realizar testes de penetração no sistema. \cite{Familiar2015}
+
+% \section{Agregando serviços (process agregator pattern)}
+% Um padrão popular Agregar serviços de negócio em um único serviço mantém as funções em um nível mais alto. 
+
+% Agrega serviços de negócio (É ainda mais alto nível)
+
+% Fazem as chamadas para os serviços necessários e montam uma resposta adequada
+
+% Deve ter uma lógica de processamento, e não ser apenas um proxy. No mínimo deve unir a resposta de diversos serviços
+
+% Para construir um agregador, define-se um novo modelo para o sistema, que representará os dados agregados como um subnegócio
+
+% A partir deste modelo, pensar na API que fornecerá as operações
+
+% A ideia é relativamente simples, mas a implementação pode ser complexa
+
+% \section{Pontos de entrada para cada tipo de cliente} 
+% Gateway específico para determinados clientes
+
+% Foco nas necessidades reais de determinados clientes
+
+% Esses clientes podem ser clientes da API, como clientes HTTP, ou clientes de negócio mesmo
+
+% Por exemplo, em vez de modificar a lógica de negócios, cria-se um novo 'edge', que receberá a resposta e modificará de acordo com a necessidade do cliente
+
+% Uma possibilidade seria trabalhar apenas com edge services, e nenhum API gateway, isso é, não existiria um ponto único de entrada universal, mas sim um para cada tipo de cliente
+
+% Para construir uma edge (ponta), deve-se primeiro Identificar o cliente e suas necessidades, e Construir contratos específicos para o cliente, isso é, ter recursos diferentes para cada cliente. Por exemplo, a URL pode ser diferente de cliente web para clientes mobile.
 
 % \section{Do monólito aos microserviços}
 
