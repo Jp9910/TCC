@@ -6,20 +6,19 @@
 
 De acordo com \citeonline{design-monitoring-testing-waseem}, mais pesquisas são necessárias para lidar com a complexidade dos microsserviços no nível de \emph{design} (projeto), de monitoramento, e de testes, desafios para qual não há soluções dedicadas.
 
-Our findings reveal that more research is needed to address the monitoring and testing challenges through dedicated solutions. \cite{design-monitoring-testing-waseem}
-
-Teste de penetração: NOTE: This will requires cooperation with Microsoft if you are pen testing microservices deployed to Azure.
-
 \section{Comunicação}
 
-\subsection*{API Gateway}
-Amazon API Gateway \url{https://aws.amazon.com/pt/api-gateway/} 
+\subsection*{API}
+Swagger, GraphQL, Hoppscotch, Postman
 
 \subsection*{RPC}
 gRPC \url{https://grpc.io/}
 
-\subsection*{Comunicação Assíncrona}
+\subsection*{Mensagens}
 RabbitMQ, Azure Service Bus, Amazon Simple Queue Service
+
+\subsection*{Streaming de dados}
+Apache Kafka
 
 \section{Flexibilidade}
 Ferramentas de Auto Scaling da AWS
@@ -66,9 +65,13 @@ Basic HTTP authentication involves the client passing the user’s username and 
 
 Ferramenta para rate limiting. \cite{rapidAPI-twitter}
 
-\section{Implantação}
+\section{Orquestração}
 
-docker, kubernetes
+Docker Swarm, Kubernetes, Conductore, Azure Kubernetes Service (AKS)
+
+\section{Monitoramento}
+
+Logstash, Middleware, Elastic Stack
 
 \section{Plataformas}
 

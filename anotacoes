@@ -4,17 +4,7 @@
 \textit{testeteste}
 \emph{123 teste teste}
 
-
-- Mudei o titulo para padrões e soluções. O que encaixaria no desenvolvimento e o que encaixaria na fundamentação teórica? (Pedir pra ler a fundamentação teórica)
-
-- Trabalhos relacionados. Como fazer o título da subseção?
-
-- como fazer citação direta só que traduzido? e se for mais de três linhas? citar diretamente em ingles, mas traduzir depois
-
-- 3.1.1 citar em ingles? ou é melhor traduzir?
-
 - pode usar a imagem do mapeamento de problemas e soluções no anexo? sim, citação comum
-
 imagem
 fonte: ()
 
@@ -26,10 +16,6 @@ Separar em
 4- soluçoes
 
 - tem que explicar em algum lugar as palavras que eu deixar em ingles? por exemplo pipeline - fluxo? usar um parentese mesmo
-
-- tem alguma parte específica que eu posso colocar expressões e explicar melhor o que elas significam? por exemplo "capacidades de negócio", ou "monólito". Ou será que eu encaixo isso na fundamentação teórica mesmo?
-
-- mudar "padrões" para serem "boas práticas"
 
 - procurar uma outra referência sobre começar primeiro com o monolito e não com microserviços.
 
@@ -43,4 +29,6 @@ Abordar em maior profundidade (opções):
 
 - como citar algo que eu vi num curso?
 
-- 
+- usar algumas referencias diferentes no capitulo de características
+- grafico no plano de continuidade
+- metodologia?

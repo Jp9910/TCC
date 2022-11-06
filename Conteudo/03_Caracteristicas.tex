@@ -2,59 +2,65 @@
 
 \chapterprecis{Este capítulo aprensenta as propriedades e as vantagens dos microsserviços, assim como os desafios que acompanham suas implementações.}\index{sinopse de capítulo}
 
-\section{Propriedades dos microsserviços}
+% \section{Propriedades dos microsserviços}
 
-\subsection{Autonomia e Isolamento}
+Em geral não existe uma definição formal do que o estilo de arquitetura de microsserviços tem ou não tem, mas essas são características comuns observadas em arquiteturas que se encaixam como microsserviços. Assim sendo, nem todas as arquiteturas de microsserviços terão essas características, mas é esperado que a maioria delas estejam presentes. \cite{MartinFowlerMicroservices}
+
+\section{Autonomia e Isolamento}
 Autonomia e isolamento significa que microsserviços são unidades auto-contidas de funcionalidade com dependências de outros serviços fracamente acopladas e são projetados, desenvolvidos, testados e lançados independentemente. O termo autônomo pode ser definido como - existe ou é capaz de existir independetemente das outras partes. O termo isolado, como - separado das outras partes. \cite{Familiar2015}
 
-\subsection{Elasticidade, resiliência, e responsividade}
+\section{Elasticidade, resiliência, e responsividade}
 
 Microsserviços são reusados entre muitas soluções diferentes e portanto devem ser escaláveis de acordo com o uso. Devem ser resilientes, isso é, ser tolerantes a falhas e ter um tempo de recuperação razoável quando algo der errado. Além disso, devem ser responsivos, tendo um desempenho razoável de acordo com o uso. O termo elástico pode ser definido como - capaz de retornar ao tamanho/formato original depois de ser esticado, comprimido ou expandido. O termo resiliente, como - resistente às mudanças negativas. O termo responsivo, como - Rápido em responder e reagir. \cite{Familiar2015}
 
-\subsection{Orientação-a-mensagens e programabilidade}
+\section{Orientação-a-mensagens e programabilidade}
 
 Microsserviços dependem de APIs e contratos de dados para definir como interagir com o serviço. A API define um conjunto de endpoints acessíveis por rede, e o contrato de dados define a estrutura da mensagem que é enviada ou retornada. O termo orientado-a-mensagens pode ser definido como - Software que conecta sistemas separados em uma rede, carregando e distribuindo mensagens entre eles. O termo programável, como - Obedece a um plano de tarefas que são executadas para alcançar um objetivo específico. \cite{Familiar2015}
 
-\subsection{Configurabilidade}
+\section{Configurabilidade}
 
 Microsserviços devem provêr mais do que apenas uma API e um contrato de dados. Para que seja reusável e para que possa resolver as necessidades do sistema que o use, cada microsserviço tem níveis diferentes de configuração, e esta configuração pode ser feita de diferentes formas. O termo configurável pode ser definido como - Projetado ou adaptado para formar uma configuração ou para algum propósito. \cite{Familiar2015}
 
-\subsection {Automação}
+\section {Automação}
 
 O ciclo de vida de um microsserviço deve ser totalmente automatizado, desde o planejamento (projeto) até a implantação. O termo automatizado pode ser definido como - Funcionar sem precisar ser controlado diretamente. \cite{Familiar2015}
 
-\section{Vantagens}
+% \section{Vantagens}
 
-\subsection{Evolução}
+\section{Evolução}
 
 Quanto maior e mais antigo o software, mais difícil é de dar manutenção, e monólitos envelhecem com maior velocidade do que microsserviços. Entretanto, é possível migrar de um sistema monolítico para a arquitetura de microsserviços aos poucos, um serviço por vez, identificando capacidades de negócio, implementando-as como um microsserviço, e integrando com uso de padrões de baixo acoplamento. Ao longo do tempo, mais e mais funcionalidades podem ser separadas e implementadas como microsserviço, até que o núcleo da aplicação monolítica se transforme em apenas um outro serviço, ou um microsserviço. \cite{Familiar2015}
 
-\subsection{Possibilidade de uso de diferentes ferramentas}
+\section{Possibilidade de uso de diferentes ferramentas}
 
 Cada microsserviço disponibiliza suas funcionalidades por meio de APIs e contratos de dados em uma rede. A comunicação independe da arquitetura que o microsserviço faz uso, então cada microsserviço pode escolher seu sistema operacional, linguagem e banco de dados. Isso é especialmente valioso para times com dificuldade de comunicação, pois cada time precisa apenas de conhecimento da arquitetura do microsserviço em que trabalha. \cite{Familiar2015}
 
-\subsection{Alta velocidade}
+\section{Alta velocidade}
 
 Com um time responsável por cuidar do ciclo de desenvolvimento e sua automação, a velocidade com que microsserviços podem ser desenvolvidos é muito maior do que fazer o equivalente para uma solução monolítica. \cite{Familiar2015}
 
-\subsection{Reusável e combinável}
+\section{Componentização - Reusável e combinável}
 
-Microsserviços são reusáveis por natureza. Eles são entidades independentes que provêm funcionalidades em um determinado escopo por meio de padrões de internet aberta. Para criar soluções para o usuário final, multiplos microsserviços podem ser combinados. \cite{Familiar2015}
+Há muito tempo na indústria do software deseja-se construir sistemas apenas juntando componentes, assim como se faz no mundo físico.
 
-\subsection{Flexibilidade no ambiente de execução}
+\citeonline{MartinFowlerMicroservices} define um componente como uma unidade de software que é atualizável e substituível independentemente. Microsserviços podem utilizar bibliotecas como componentes mas nessa arquitetura a maneira principal e mais eficiente para componentizar o software é justamente ser dividido em serviços. Quando uma aplicação usa múltiplas bibliotecas como componentes em um único processo, uma mudança em qualquer desses componentes resulta na necessidade de reimplantar a aplicação toda. Se essa mesma aplicação é decomposta em múltiplos serviços, é provável que uma mudança nesse serviço só obrigaria a reimplantação do próprio serviço. Como os microsserviços são entidades independentes que provêm funcionalidades em um determinado escopo por meio de padrões de internet aberta, são reusáveis por natureza. Para criar soluções para o usuário final, multiplos microsserviços podem ser combinados. \cite{MartinFowlerMicroservices,Familiar2015}
+
+Contudo, usar serviços dessa forma traz algumas desvantagens. A comunicação remota é muito mais complexa e cara, então o método de comunicação escolhido deve ser implementado de modo flexível. Além disso, realocar responsabilidades entre os componentes é mais difícil quando se trata de processos diferentes. \cite{MartinFowlerMicroservices}.
+
+\section{Flexibilidade no ambiente de execução}
 
 A implantação de microsserviços é altamente dependente de sua automação. Para garantir flexibilidade de ambiente de execução, essa automação pode incluir configuração de cenários diferentes de uso, não apenas para produção, mas também para desenvolvimento e testagem, possibilitando que o microsserviço tenha o melhor desempenho em diversos cenários. Para tanto, é necessário o uso de ferramentas que configurem essa flexibilidade. \cite{Familiar2015}. Tais ferramentas serão melhor discutidas no \autoref{chapter-ferramentas}.
 
-\subsection{Flexibilidade na escolha de tecnologias}
+\section{Flexibilidade na escolha de tecnologias}
 
 Cada microsserviço pode ser desenvolvido usando uma linguagem de programação e estrutura que melhor se adapte ao problema que ele é projetado para resolver, o que oferece mais possibilidades de tecnologias para usar. \cite{oracle_microservices}
 
-\subsection{Versionável e substituível}
+\section{Versionável e substituível}
 
 Com o controle completo dos cenários de implantação, é possível manter versões diferentes de um mesmo serviço rodando ao mesmo tempo, proporcionando retrocompatibilidade e fácil migração. Além disso, serviços podem ser atualizados ou mesmo substituidos sem ocasionar indisponibilidade do serviço. \cite{Familiar2015}
 
 
-\section{Desafios}
+\section{O desafio da complexidade}
 
 De acordo com \citeonline{CAOPLE}, os três grandes desafios do desenvolvimento de aplicações com arquitetura de microsserviços são
 
@@ -67,9 +73,6 @@ De acordo com \citeonline{CAOPLE}, os três grandes desafios do desenvolvimento 
 3 - Como sustentar a implantação flexível de serviços em uma rede para conseguir realizar o balanceamento de carga.
 %how to support the flexible deployment of services to a network to achieve system load balance.
 
-Esses e outros desafios podem ser dividos em tópicos mais específicos, abordados a seguir.
-
-\subsection{Complexidade}
 O uso da arquitetura de microsserviços implica num grande aumento de complexidade não apenas na infraestrutura, mas também em algumas etapas do ciclo de desenvolvimento do software, como no \emph{debug} ou nos testes por exemplo. Consequentemente, muitos outros desafios surgem a partir dessa complexidade. Além disso, o uso de diversas tecnologias pode trazer problemas por inexperiência dos desenvolvedores. De acordo com \citeonline{design-monitoring-testing-waseem}, mais pesquisas são necessárias para lidar com a complexidade dos microsserviços no nível de \emph{design} (projeto), de monitoramento, e de testes, desafios para qual não há soluções dedicadas.
 
 % citar curso alura
@@ -83,34 +86,24 @@ O uso da arquitetura de microsserviços implica num grande aumento de complexida
 % - Monitoramento é crucial e mais complexo;
 % - (Criar um microserviço pode ser complexo, e ter demais pode trazer problemas.).
 
-\subsection{Comunicação}
+% \subsection{Comunicação}
 
-- Comunicação entre os serviços deve ser bem pensada
+% - Comunicação entre os serviços deve ser bem pensada
 
-cross-platform compatibility issues and inconsistent call standards issues in the process of development and call microservices. \cite{ZUO2020102878}
+% cross-platform compatibility issues and inconsistent call standards issues in the process of development and call microservices. \cite{ZUO2020102878}
 
-\subsection{[re]Organizaçao}
+% \subsection{[re]Organizaçao}
 
-Organizar o sistema e o time para sustentar uma arquitetura de microsserviços é um grande desafio. Como explica \citeonline{Familiar2015}: 
-\begin{citacao}
-    If you are part of a command-and-control organization using a waterfall software project management approach, you will struggle because you are not oriented to high-velocity product development. If you lack a DevOps culture and there is no collaboration between development and operations to automate the deployment pipeline, you will struggle. \cite{Familiar2015}
-\end{citacao}
+% Organizar o sistema e o time para sustentar uma arquitetura de microsserviços é um grande desafio. Como explica \citeonline{Familiar2015}: 
+% \begin{citacao}
+%     If you are part of a command-and-control organization using a waterfall software project management approach, you will struggle because you are not oriented to high-velocity product development. If you lack a DevOps culture and there is no collaboration between development and operations to automate the deployment pipeline, you will struggle. \cite{Familiar2015}
+% \end{citacao}
 
-\subsection{Plataforma}
-Criar o ambiente de execução para microsserviços requer um grande investimento em infraestrutura dinâmica em \emph{data centers} dispersos para garantir maior disponibilidade. Se sua atual plataforma \emph{on-premises} não suporta automação, infraestrutura dinâmica, escalamento elástico e alta disponibilidade, deve-se considerar uma plataforma na núvem. \cite{Familiar2015}. Mais sobre soluções na núvem será discutido no \autoref{chapter-ferramentas}.
+% \subsection{Plataforma}
+% Criar o ambiente de execução para microsserviços requer um grande investimento em infraestrutura dinâmica em \emph{data centers} dispersos para garantir maior disponibilidade. Se sua atual plataforma \emph{on-premises} não suporta automação, infraestrutura dinâmica, escalamento elástico e alta disponibilidade, deve-se considerar uma plataforma na núvem. \cite{Familiar2015}. Mais sobre soluções na núvem será discutido no \autoref{chapter-ferramentas}.
 
-\subsection{Identificação com DDD}
+% % \subsection{Monitoramento}
 
-Domain-driven design (projeto orientado a domínio) é uma técnica bem consolidada e muito usada no desenvolvimento de software. Entretanto, para aplica-la em microsserviços, é necessário analisar onde cada peça desse padrão de projeto deve ficar. Veja a \autoref{praticas-identificacao-com-ddd} para um possível caminho a ser seguido.
+% \subsection{Descoberta}
 
-% esse parágrafo não encaixa nas caracteristicas - desafios ?...
-
-\subsection{Testes}
-
-Assim como em qualquer aplicação, o teste é uma parte crucial do seu desenvolvimento. Escrever e testar código não muda muito entre as arquiteturas monolítica e de microsserviços, contudo, nos microserviços existem mais testes a serem executados. Não deve-se testar o microsserviço apenas antes de seu lançamento, mas sim em cada passo do \emph{pipeline} de implantação, sempre automatizando o máximo de etapas possível, para assim garantir uma entrega rápida de software de qualidade. \cite{Familiar2015}
-
-% \subsection{Monitoramento}
-
-\subsection{Descoberta}
-
-Encontrar microsserviços em um ambiente distribuido pode ser feito de algumas maneiras diferentes. A informação pode ser armazenada diretamente no código, pode ser guardada e acessada em um arquivo, ou pode ser construido um microsserviço para encontrar outros microsserviços e disponibilizar suas localizações. Contudo, para prover detectabilidade como um serviço será necessário adquirir um produto de terceiros, integrar um projeto aberto, ou desenvolver sua própria solução. \cite{Familiar2015}
+% Encontrar microsserviços em um ambiente distribuido pode ser feito de algumas maneiras diferentes. A informação pode ser armazenada diretamente no código, pode ser guardada e acessada em um arquivo, ou pode ser construido um microsserviço para encontrar outros microsserviços e disponibilizar suas localizações. Contudo, para prover detectabilidade como um serviço será necessário adquirir um produto de terceiros, integrar um projeto aberto, ou desenvolver sua própria solução. \cite{Familiar2015}

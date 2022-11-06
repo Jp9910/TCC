@@ -5,24 +5,24 @@
 \section{Antes de tudo, comece pelo monólito}
 
 \begin{citacao}
-But as with any architectural decision there are trade-offs. In particular with microservices there are serious consequences for operations, who now have to handle an ecosystem of small services rather than a single, well-defined monolith. Consequently if you don't have certain baseline competencies, you shouldn't consider using the microservice style. \cite{MartinFowlerMicroservices}
+But as with any architectural decision there are trade-offs. In particular with microservices there are serious consequences for operations, who now have to handle an ecosystem of small services rather than a single, well-defined monolith. Consequently if you don't have certain baseline competencies, you shouldn't consider using the microservice style. \cite{MartinFowlerMicroservicesPrereq}
 \end{citacao}
 
-\citeonline{MartinFowlerMicroservices} afirma que existem 3 pré-requisitos para se adotar uma arquitetura de microserviços, e que é mais fácil lidar com as operações de um monólito bem definido do que de um ecossistema de pequenos serviços. Assim sendo, é uma boa prática começar pela arquitetura monolítica até que o sistema já esteja bem definido e estes pré-requisitos sejam atendidos - provisionamento rápido, monitoramento básico, e implantação rápida de aplicação.
+\citeonline{MartinFowlerMicroservicesPrereq} afirma que existem 3 pré-requisitos para se adotar uma arquitetura de microserviços, e que é mais fácil lidar com as operações de um monólito bem definido do que de um ecossistema de pequenos serviços. Assim sendo, é uma boa prática começar pela arquitetura monolítica até que o sistema já esteja bem definido e estes pré-requisitos sejam atendidos - provisionamento rápido, monitoramento básico, e implantação rápida de aplicação.
 
 Já \cite{monolith-or-microservices} concorda com a convenção de começar pelo monólito, mas afirma que podem existir exceções. Ele descreve 3 condições que podem tornar a adoção de uma arquitetura de microserviços em uma nova aplicação a escolha correta. Elas são: Há necessidade de entrega de serviços rapida e independentemente, parte da plataforma precisa ser extremamente eficiente, e planeja-se aumentar o time.
 
 \subsection{Provisionamento rápido}
 
-No contexto da computação, provisionamento significa disponibilizar um recurso, como uma máquina virtual por exemplo. Para produzir software, é necessário provisionar muitos recursos, tanto para os desenvolvedores quanto para o cliente. Naturalmente, o provisionamento é mais fácil na núvem. Na AWS por exemplo, para conseguir uma nova máquina, basta lançar uma nova instância e acessá-la - um processo muito rápido quando comparado ao \emph{on-premises}, onde precisaria-se comprar uma nova máquina, esperar chegar, configurá-la, e só então ela estará pronta. Para alcançar um provisionamento rápido, será necessário bastante automação. \cite{MartinFowlerMicroservices}
+No contexto da computação, provisionamento significa disponibilizar um recurso, como uma máquina virtual por exemplo. Para produzir software, é necessário provisionar muitos recursos, tanto para os desenvolvedores quanto para o cliente. Naturalmente, o provisionamento é mais fácil na núvem. Na AWS por exemplo, para conseguir uma nova máquina, basta lançar uma nova instância e acessá-la - um processo muito rápido quando comparado ao \emph{on-premises}, onde precisaria-se comprar uma nova máquina, esperar chegar, configurá-la, e só então ela estará pronta. Para alcançar um provisionamento rápido, será necessário bastante automação. \cite{MartinFowlerMicroservicesPrereq}
 
 \subsection{Monitoramento básico}
 
-Muitas coisas podem dar errado em qualquer tipo de arquitetura, mas em especial nos microserviços pois cada serviço é fracamente acoplado, estando sujeitos não só a falhas no código, mas também na comunicação, na conexão, ou até falhas físicas. Portanto o monitoramento é crucial nesse tipo de arquitetura para que problemas, especialmente os mais graves possam ser detectados no menor tempo possível. Além disso, o monitoramento também pode ser usado para detectar problemas de negócio, como uma redução nos pedidos de um site de vendas, por exemplo. \cite{MartinFowlerMicroservices}
+Muitas coisas podem dar errado em qualquer tipo de arquitetura, mas em especial nos microserviços pois cada serviço é fracamente acoplado, estando sujeitos não só a falhas no código, mas também na comunicação, na conexão, ou até falhas físicas. Portanto o monitoramento é crucial nesse tipo de arquitetura para que problemas, especialmente os mais graves possam ser detectados no menor tempo possível. Além disso, o monitoramento também pode ser usado para detectar problemas de negócio, como uma redução nos pedidos de um site de vendas, por exemplo. \cite{MartinFowlerMicroservicesPrereq}
 
 \subsection{Implantação rápida}
 
-Na arquitetura de microserviços a implantação geralmente é feita separadamente para cada microserviço. Com muitos serviços para gerenciar, ela pode se tornar uma tarefa árdua, portanto será novamente necessário uma automação dessa etapa, que geralmente envolve um \emph{pipeline} de implantação, que deve ser automatizado o máximo possível. \cite{MartinFowlerMicroservices}
+Na arquitetura de microserviços a implantação geralmente é feita separadamente para cada microserviço. Com muitos serviços para gerenciar, ela pode se tornar uma tarefa árdua, portanto será novamente necessário uma automação dessa etapa, que geralmente envolve um \emph{pipeline} de implantação, que deve ser automatizado o máximo possível. \cite{MartinFowlerMicroservicesPrereq}
 
 \section{A metodologia de 12 fatores}
 
@@ -136,7 +136,7 @@ The process of containerizing a microservice involves creating a Dockerfile, cre
 
 \section{Comunicação entre microserviços}
 
-Requisições HTTP são o método mais simples para realizar comunicação síncrona entre microsserviços. Uma requisição HTTP é feita por um cliente, para um dado \emph{host} em um servidor, com o propósito de acessar um recurso nesse servidor. Por usar o \emph{Transmition Control Protocol} (TCP), é um método de comunicação confiável, mas não tão eficiente quanto poderia ser.
+Requisições HTTP para uma API é o método mais usado para realizar comunicação síncrona entre microsserviços. \cite{MartinFowlerMicroservices}. Uma requisição HTTP é feita por um cliente, para um dado \emph{host} em um servidor, com o propósito de acessar um recurso nesse servidor. Por usar o \emph{Transmition Control Protocol} (TCP), é um método de comunicação confiável, mas não tão eficiente quanto poderia ser.
 
 Para comunicação assíncrona, filas de mensagens são amplamente usadas. Quando um serviço precisa enviar informações a outro de modo assíncrono, ele envia uma mensagem para a fila de mensagens, e ela será armazenada até ser processada ou excluída. Cada mensagem é processada uma única vez, por um único consumidor. As filas de mensagens podem ser usadas para dividir um processamento pesado, para armazenar trabalho em \emph{buffers} ou lotes, ou para processar uniformemente picos de cargas de trabalho.
 
