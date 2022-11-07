@@ -2,7 +2,7 @@
 
 \chapterprecis{Este capítulo aprensenta as boas práticas comumente seguidas na construção de aplicações com arquitetura de microsserviços.}\index{sinopse de capítulo}
 
-\section{Antes de tudo, comece pelo monólito}
+\section{Se necessário, comece pela arquitetura monolítica}
 
 \begin{citacao}
 But as with any architectural decision there are trade-offs. In particular with microservices there are serious consequences for operations, who now have to handle an ecosystem of small services rather than a single, well-defined monolith. Consequently if you don't have certain baseline competencies, you shouldn't consider using the microservice style. \cite{MartinFowlerMicroservicesPrereq}
@@ -67,56 +67,47 @@ X. Paridade de desenvolvimento e produção - Deve-se manter os ambientes de des
 
 XI. Logs - Logs devem ser tratatos como um fluxo de eventos.
 
-XII. Processos administrativos - Tarefas de administração ou de gerenciamento devem ser executadas como processos únicos. \cite{12factor, oracle_microservices}
+XII. Processos administrativos - Tarefas de administração ou de gerenciamento devem ser executadas como processos únicos. \cite{12factor, oracle_microservices,12fatores-rita}
 
-\section{Persistência de dados}
+\section{Produtos, não projetos}
 
-"A estabilidade do serviço está diretamente relacionada ao banco de dados que ele acessa."
+Most application development efforts that we see use a project model: where the aim is to deliver some piece of software which is then considered to be completed. On completion the software is handed over to a maintenance organization and the project team that built it is disbanded.
 
-        - Single service database
-            ~ Problema: Escalabilidade do serviço e do banco são fortemente relacionados.
-            ~ Solução: Cada serviço (quando necessário) terá seu próprio banco de dados.
+Microservice proponents tend to avoid this model, preferring instead the notion that a team should own a product over its full lifetime. A common inspiration for this is Amazon's notion of "you build, you run it" where a development team takes full responsibility for the software in production. This brings developers into day-to-day contact with how their software behaves in production and increases contact with their users, as they have to take on at least some of the support burden.
 
-        - Shared service database
-            ~ Problema: Às vezes precisamos centralizar os dados (talvez por motivos contratuais, por exemplo, dois dados acessados por microserviços diferentes precisam estar disponível no mesmo banco de dados). Nesse caso o banco escala conforme a necessidade do maior desses microserviços.
-            ~ Solução: Tratar esse banco em cada serviço como se ele fosse separado.
+The product mentality, ties in with the linkage to business capabilities. Rather than looking at the software as a set of functionality to be completed, there is an on-going relationship where the question is how can software assist its users to enhance the business capability.
 
-        Geralmente há preferência pelo **single service database**, não compartilhando bancos de dados entre serviços. Mas quando necessário, usa-se o **shared service database**, mas sempre tratando o banco de dados em cada serviço como se ele fosse separado.
-        Com cada serviço tendo seu próprio banco, a escalabilidade do serviço e banco pode ser feita em conjunto. Assim, serviços que recebem poucos acessos podem ter bancos menos potentes e mais baratos, e vice-versa.
+There's no reason why this same approach can't be taken with monolithic applications, but the smaller granularity of services can make it easier to create the personal relationships between service developers and their users. \cite{MartinFowlerMicroservices}
 
-        - Um padrão de codificação: CQRS - Command Query Resposibility Segregation (Segregação da responsabilidade entre o comando e uma busca)
-            "At its heart, [CQRS] is the notion that you can use a different model to update information than the model you use to read information. For some situations, this separation can be valuable, but beware that **for most systems, CQRS adds risky complexity**."
+\section{Desenvolver e compartilhar ferramentas}
+Em vez de apenas usar um conjunto de padrões definidos para desenvolver microsserviços, é preferível produzir ferramentas úteis que outros desenvolvedores podem usar para resolver problemas similares aos que eles enfrentam. Essas ferramentas geralmente são extraídas de implementações maiores e compartilhadas com um grupo mais amplo, geralmente por meio de um modelo de código aberto. Com o git e o github se tornando ferramentas tão populares, práticas de código aberto estão cada vez mais comuns. \cite{MartinFowlerMicroservices}
 
-           Ou seja, usar um modelo para leitura (busca) e outro modelo diferente para escrita (inserção/edição). É possível ter um banco de dados de escrita e outro de leitura, e fazer uma sincronização entre esses. Essa ideia é muito facilitada usando-se o padrão CQRS.
-           
-           . Com leitura e escrita separados, cada parte pode realizar operações mais complexas
-           . O modelo de leitura pode ter informações agregadas de outros domínios
-           . O modelo de escrita pode ter dados sendo automaticamente gerados
-           . Aumenta **muito** a complexidade de um sistema
+A Netflix é um exemplo de organização que segue essa filosofia. Compartilhar código útil e muito bem testado como bibliotecas incentiva outros desenvolvedores a resolver problemas semelhantes de maneiras semelhantes, mas deixa a porta aberta para escolher uma abordagem diferente, se necessário. As bibliotecas compartilhadas tendem a se concentrar em problemas comuns, como armazenamento de dados, comunicação entre processos e automação de infraestrutura. \cite{MartinFowlerMicroservices}
 
-        - Eventos assíncronos
-            [Um tipo de arquitetura: Event sourcing - ter toda a base dos dados através de eventos. Para reconstruir os dados, há uma lista de eventos (Pesquisar mais)]
-            . Determinados problemas não podem ser resolvidos na hora. (Um pagamento, por exemplo)
-            . Um serviço emite um evento que será tratado em seu devido tempo
-            . Usar tecnologias de mensageria e serviços de stream de dados - filas de mensageria: RabbitMQ. Serviço de streaming de dados: Kafka)
+\section{Descentralização dos dados}
 
-The recommended pattern to implement persistence for a microservice is to use a single database. For each microservice, keep the persistent data private, and create the database as a part of the microservice implementation.
+Para o gerenciamento de dados, há a possibilidade de compartilhar um banco de dados entre diferentes microsserviços, mas isso é visto como um anti-padrão. Uma aplicação com arquitetura de microsserviços tem melhor isolamento, segurança e disponibilidade quando cada serviço gerencia seu próprio banco de dados particular, inclusive tendo a possibilidade de ser instâncias diferentes da mesma tecnologia ou usar sistemas de banco de dados totalmente diferentes. Os dados persistidos por esses bancos de dados particulares só devem ser acessados diretamente pelo serviço que o contém, e outros serviços que necessitem desses dados precisarão enviar uma requisição. Com cada serviço tendo seu próprio banco de dados, a escalabilidade do serviço e do seu banco pode ser feita em conjunto. Assim, serviços que recebem poucos acessos podem ter bancos menos potentes e mais baratos, e vice-versa. \cite{oracle_microservices,MartinFowlerMicroservices}
 
-In this pattern, the private persistent data is accessible through only the microservice API.
+Entretanto, essa descentralização tem implicações para o gerenciamento de atualizações. Geralmente a abordagem para se garantir consistência nas atualizações é pelo uso de transações quando atualizando múltiplos recursos. Contudo, o uso de transações resultada em um acoplamento temporal, o que é problemático quando se tem muitos serviços. Além disso, transações distribuidas são notoriamente difíceis de implementar, e portanto arquiteturas de microsserviços realizam coordenação sem transações entre serviços, com reconhecimento claro de que consistência pode ser apenas consistência eventual e que problemas serão lidados pela compensação de operações. \cite{MartinFowlerMicroservices} 
 
-The following illustration shows the persistence design for microservices.
+% Existe um padrão ...
 
-The following variants of this microservice implementation apply to relational databases:
+% - Um padrão de codificação: CQRS - Command Query Resposibility Segregation (Segregação da responsabilidade entre o comando e uma busca)
+%     "At its heart, [CQRS] is the notion that you can use a different model to update information than the model you use to read information. For some situations, this separation can be valuable, but beware that **for most systems, CQRS adds risky complexity**."
 
-    Private tables: Each service owns a set of tables.
-    Schema: Each service owns a private database schema.
-    Database: Each service owns a database server, as shown in the illustration.
+%     Ou seja, usar um modelo para leitura (busca) e outro modelo diferente para escrita (inserção/edição). É possível ter um banco de dados de escrita e outro de leitura, e fazer uma sincronização entre esses. Essa ideia é muito facilitada usando-se o padrão CQRS.
+    
+%     . Com leitura e escrita separados, cada parte pode realizar operações mais complexas
+%     . O modelo de leitura pode ter informações agregadas de outros domínios
+%     . O modelo de escrita pode ter dados sendo automaticamente gerados
+%     . Aumenta **muito** a complexidade de um sistema
 
-A persistence anti-pattern for your microservices is to share one database schema across multiple microservices. You can implement atomic, consistent, isolated, and durable transactions for data consistency. An advantage with this anti-pattern is that it uses a simple database. The disadvantages are that the microservices might interfere with each other while accessing the database, and the development cycles may slow down because developers of different microservices need to coordinate the schema changes, which also increases inter-service dependencies.
 
-Your microservices can connect to an Oracle Database instance that is running on Oracle Cloud Infrastructure. The Oracle multi-tenant database supports multiple pluggable databases (PDBs) within a container. This is the best choice for the persistence layer for microservices, for bounded context isolation of data, security, and for high availability. In many cases, fewer PDBs can be used with schema-level isolation. 
+% Choosing to manage inconsistencies in this way is a new challenge for many development teams, but it is one that often matches business practice. Often businesses handle a degree of inconsistency in order to respond quickly to demand, while having some kind of reversal process to deal with mistakes. The trade-off is worth it as long as the cost of fixing mistakes is less than the cost of lost business under greater consistency. \cite{MartinFowlerMicroservices}
+
 
 \section{Implantação}
+Práticas de integração contínua e de entrega contínua. 
 
 Containers. Automação.
 
@@ -134,13 +125,17 @@ Secure: Each container runs as an isolated process. So the microservices are sec
 
 The process of containerizing a microservice involves creating a Dockerfile, creating and building a container image that includes its dependencies and the environmental configuration, deploying the image to a Docker engine, and uploading the image to a container registry for storage and retrieval. 
 
-\section{Comunicação entre microserviços}
+\section{Comunicação}
 
-Requisições HTTP para uma API é o método mais usado para realizar comunicação síncrona entre microsserviços. \cite{MartinFowlerMicroservices}. Uma requisição HTTP é feita por um cliente, para um dado \emph{host} em um servidor, com o propósito de acessar um recurso nesse servidor. Por usar o \emph{Transmition Control Protocol} (TCP), é um método de comunicação confiável, mas não tão eficiente quanto poderia ser.
+Ao construir estruturas de comunicação entre diferentes processos, observa-se muitos produtos e abordagens que enfatizam a colocação de inteligência significativa no próprio mecanismo de comunicação. Um bom exemplo disso é o Enterprise Service Bus (ESB), onde os produtos ESB geralmente incluem recursos sofisticados para roteamento de mensagens, tratamento, transformação e aplicação de regras de negócios. \cite{MartinFowlerMicroservices}.
+
+A comunidade de microsserviços favorece uma abordagem alternativa: \emph{endpoints} inteligentes e canais simples. Os aplicativos criados a partir de microsserviços visam ser o mais desacoplados e coesos possível - eles possuem sua própria lógica de domínio e agem mais como filtros - recebendo uma solicitação, aplicando a lógica conforme apropriado e produzindo uma resposta. Isso é feito usando protocolos REST simples em vez de protocolos complexos como \emph{Web Service Choreography} ou orquestração por uma ferramenta central. \cite{MartinFowlerMicroservices}
+
+Requisições HTTP em conjunto uma API de recursos é o método mais usado para realizar comunicação síncrona na arquitetura de microsserviços. Uma requisição HTTP é feita por um cliente, para um dado \emph{host} em um servidor, com o propósito de acessar um recurso nesse servidor. Por usar o \emph{Transmition Control Protocol} (TCP), é um método de comunicação confiável, mas não tão eficiente quanto poderia ser. \cite{MartinFowlerMicroservices}.
 
 Para comunicação assíncrona, filas de mensagens são amplamente usadas. Quando um serviço precisa enviar informações a outro de modo assíncrono, ele envia uma mensagem para a fila de mensagens, e ela será armazenada até ser processada ou excluída. Cada mensagem é processada uma única vez, por um único consumidor. As filas de mensagens podem ser usadas para dividir um processamento pesado, para armazenar trabalho em \emph{buffers} ou lotes, ou para processar uniformemente picos de cargas de trabalho.
 
-Embora menos comum, chamada de procedimento remoto (RPC) também é utilizado para realizar comunicação síncrona ou assíncrona entre microsserviços. Uma chamada de procedimento remoto se dá quando um programa faz com que um procedimento ou uma sub-rotina execute em um espaço de endereço diferente, comumente em outra máquina numa rede compartilhada. Essa chamada é feita como se fosse um procedimento local, isso é, o programador não precisa explicitar que se trata de um procedimento remoto. gRPC é uma ferramenta moderna com alto desempenho que tem ganhado grande popularidade em meio aos praticantes de microsserviços e é considerada um "projeto de incubação" pela Cloud Native Computing Foundation. Essa ferramenta será melhor discutida no \autoref{chapter-ferramentas} \cite{microsoft-grpc}
+Embora menos comum, chamada de procedimento remoto (RPC) também é utilizado para realizar comunicação síncrona ou assíncrona nos microsserviços. Uma chamada de procedimento remoto se dá quando um programa faz com que um procedimento ou uma sub-rotina execute em um espaço de endereço diferente, comumente em outra máquina numa rede compartilhada. Essa chamada é feita como se fosse um procedimento local, isso é, o programador não precisa explicitar que se trata de um procedimento remoto. gRPC é uma ferramenta moderna com alto desempenho que tem ganhado grande popularidade em meio aos praticantes de microsserviços e é considerada um "projeto de incubação" pela Cloud Native Computing Foundation. Essa ferramenta será melhor discutida no \autoref{chapter-ferramentas} \cite{microsoft-grpc}
 
 De acordo com \citeonline{design-monitoring-testing-waseem}, \emph{API Gateway} e \emph{Backend for frontend} são os padrões de projeto mais utilizados para lidar com a comunicação de microsserviços. São padrões similares - a diferença é que no \emph{Backend for Frontend} há um \emph{gateway} para cada tipo de cliente. Esses padrões serão discutidos na \autoref{boas-praticas-api-gateway}. 
 

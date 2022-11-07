@@ -23,13 +23,9 @@ Microsserviços devem provêr mais do que apenas uma API e um contrato de dados.
 
 \section {Automação}
 
-O ciclo de vida de um microsserviço deve ser totalmente automatizado, desde o planejamento (projeto) até a implantação. O termo automatizado pode ser definido como - Funcionar sem precisar ser controlado diretamente. \cite{Familiar2015}
+O ciclo de vida de um microsserviço deve ser totalmente automatizado, desde o projeto até a implantação. O termo automatizado pode ser definido como - Funcionar sem precisar ser controlado diretamente. \cite{Familiar2015}
 
 % \section{Vantagens}
-
-\section{Evolução}
-
-Quanto maior e mais antigo o software, mais difícil é de dar manutenção, e monólitos envelhecem com maior velocidade do que microsserviços. Entretanto, é possível migrar de um sistema monolítico para a arquitetura de microsserviços aos poucos, um serviço por vez, identificando capacidades de negócio, implementando-as como um microsserviço, e integrando com uso de padrões de baixo acoplamento. Ao longo do tempo, mais e mais funcionalidades podem ser separadas e implementadas como microsserviço, até que o núcleo da aplicação monolítica se transforme em apenas um outro serviço, ou um microsserviço. \cite{Familiar2015}
 
 \section{Possibilidade de uso de diferentes ferramentas}
 
@@ -59,21 +55,25 @@ Cada microsserviço pode ser desenvolvido usando uma linguagem de programação 
 
 Com o controle completo dos cenários de implantação, é possível manter versões diferentes de um mesmo serviço rodando ao mesmo tempo, proporcionando retrocompatibilidade e fácil migração. Além disso, serviços podem ser atualizados ou mesmo substituidos sem ocasionar indisponibilidade do serviço. \cite{Familiar2015}
 
+\section{Evolução}
 
-\section{O desafio da complexidade}
+Como explicado na sessão \autoref{sessao-monolitos}, quanto maior e mais antigo o software, mais difícil é de lhe dar manutenção. Porém, com componentes modularizados e organizados adequadamente, é possível que uma aplicação com arquitetura de microsserviços nunca se extingua, isso é, chegue em um ponto que fica inviável dar manutenção. 
 
-De acordo com \citeonline{CAOPLE}, os três grandes desafios do desenvolvimento de aplicações com arquitetura de microsserviços são
+Embora seja possível decompor uma aplicação monolítica em uma arquitetura de microsserviços - que é um tema de pesquisa muito recorrente na área da arquitetura de aplicações - esse assunto não faz parte do escopo deste trabalho.
 
-1 - Como programar sistemas que consistem de um grande número de serviços executando em paralelo e distribuidos em um conjunto de máquinas;
-% how to program systems that consists of a large number of services running in parallel and distributed over a cluster of computers;
+% Entretanto, é possível migrar de um sistema monolítico para a arquitetura de microsserviços aos poucos, um serviço por vez, identificando capacidades de negócio, implementando-as como um microsserviço, e integrando com uso de padrões de baixo acoplamento. Ao longo do tempo, mais e mais funcionalidades podem ser separadas e implementadas como microsserviço, até que o núcleo da aplicação monolítica se transforme em apenas um outro serviço, ou um microsserviço. \cite{Familiar2015}
 
-2 - Como reduzir a sobrecarga de comunicação causada pela execução de grandes números de pequenos serviços;
+\section{Complexidade}
+
+O uso da arquitetura de microsserviços implica num grande aumento de complexidade não apenas na infraestrutura, mas também em muitas etapas do ciclo de desenvolvimento do software, como no \emph{debug}, nos testes, e no monitoramento por exemplo. Além disso, o uso de diversas tecnologias geralmente traz problemas por inexperiência dos desenvolvedores. 
+
+Dessa forma, existem muitos desafios na construção de aplicações com arquitetura de microsserviços, e optar por ela nem sempre é a escolha correta. Os desafios incluem complexidade de projeto, complexidade operacional, consistência de dados, e comunicação. De acordo com \citeonline{design-monitoring-testing-waseem}, mais pesquisas são necessárias para lidar com a complexidade dos microsserviços no nível de projeto, de monitoramento, e de testes, desafios para qual não há soluções dedicadas.
+
+De acordo com \citeonline{CAOPLE}, os três grandes desafios do desenvolvimento de aplicações com arquitetura de microsserviços são (1) Como programar sistemas que consistem de um grande número de serviços executando em paralelo e distribuidos em um conjunto de máquinas, (2) Como reduzir a sobrecarga de comunicação causada pela execução de grandes números de pequenos serviços, (3) Como sustentar a implantação flexível de serviços em uma rede para conseguir realizar o balanceamento de carga.
+
+%how to program systems that consists of a large number of services running in parallel and distributed over a cluster of computers;
 %how to reduce the communication overhead caused by executing a large number of small services;
-
-3 - Como sustentar a implantação flexível de serviços em uma rede para conseguir realizar o balanceamento de carga.
 %how to support the flexible deployment of services to a network to achieve system load balance.
-
-O uso da arquitetura de microsserviços implica num grande aumento de complexidade não apenas na infraestrutura, mas também em algumas etapas do ciclo de desenvolvimento do software, como no \emph{debug} ou nos testes por exemplo. Consequentemente, muitos outros desafios surgem a partir dessa complexidade. Além disso, o uso de diversas tecnologias pode trazer problemas por inexperiência dos desenvolvedores. De acordo com \citeonline{design-monitoring-testing-waseem}, mais pesquisas são necessárias para lidar com a complexidade dos microsserviços no nível de \emph{design} (projeto), de monitoramento, e de testes, desafios para qual não há soluções dedicadas.
 
 % citar curso alura
 
