@@ -29,7 +29,7 @@ O ciclo de vida de um microsserviço deve ser totalmente automatizado, desde o p
 
 \section{Possibilidade de uso de diferentes ferramentas}
 
-Cada microsserviço disponibiliza suas funcionalidades por meio de APIs e contratos de dados em uma rede. A comunicação independe da arquitetura que o microsserviço faz uso, então cada microsserviço pode escolher seu sistema operacional, linguagem e banco de dados. Isso é especialmente valioso para times com dificuldade de comunicação, pois cada time precisa apenas de conhecimento da arquitetura do microsserviço em que trabalha. \cite{Familiar2015}
+Cada microsserviço disponibiliza suas funcionalidades por meio de APIs e contratos de dados em uma rede. A comunicação independe da arquitetura que o microsserviço faz uso, o que possibilita que cada microsserviço possa escolher seu sistema operacional, linguagem e banco de dados. Embora essa flexibilidade seja algo positivo, usar muitas tecnologias diferentes aumenta a complexidade do sistema. \cite{Familiar2015}
 
 \section{Alta velocidade}
 
@@ -57,9 +57,9 @@ Com o controle completo dos cenários de implantação, é possível manter vers
 
 \section{Evolução}
 
-Como explicado na sessão \autoref{sessao-monolitos}, quanto maior e mais antigo o software, mais difícil é de lhe dar manutenção. Porém, com componentes modularizados e organizados adequadamente, é possível que uma aplicação com arquitetura de microsserviços nunca se extingua, isso é, chegue em um ponto que fica inviável dar manutenção. 
+Como explicado na sessão \autoref{sessao-monolitos}, quanto maior e mais antigo o software, mais difícil é de lhe dar manutenção. Porém, com componentes modularizados e organizados adequadamente, uma aplicação com arquitetura de microsserviços tende a crescer muito mais horizontalmente do que verticalmente, possibilitando que ela nunca chegue em um estado em que fica inviável dar manutenção. 
 
-Embora seja possível decompor uma aplicação monolítica em uma arquitetura de microsserviços - que é um tema de pesquisa muito recorrente na área da arquitetura de aplicações - esse assunto não faz parte do escopo deste trabalho.
+É possível decompor uma aplicação monolítica em uma arquitetura de microsserviços - tema de pesquisa muito recorrente na área da arquitetura de aplicações - mas esse processo não faz parte do escopo deste trabalho.
 
 % Entretanto, é possível migrar de um sistema monolítico para a arquitetura de microsserviços aos poucos, um serviço por vez, identificando capacidades de negócio, implementando-as como um microsserviço, e integrando com uso de padrões de baixo acoplamento. Ao longo do tempo, mais e mais funcionalidades podem ser separadas e implementadas como microsserviço, até que o núcleo da aplicação monolítica se transforme em apenas um outro serviço, ou um microsserviço. \cite{Familiar2015}
 
