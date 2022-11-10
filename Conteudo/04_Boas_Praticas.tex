@@ -6,33 +6,33 @@
 
 % But as with any architectural decision there are trade-offs. In particular with microservices there are serious consequences for operations, who now have to handle an ecosystem of small services rather than a single, well-defined monolith. Consequently if you don't have certain baseline competencies, you shouldn't consider using the microservice style. \cite{MartinFowlerMicroservicesPrereq}
 
-\citeonline{martin-fowler-monolith-first} defende o uso de arquiteturas monolíticas para desenvolver aplicações novas. Mesmo os defensores dos microsserviços dizem que há riscos e custos no uso dessa arquitetura, os quais desaceleram o time de desenvolvimento, assim favorecento monólitos para aplicações mais simples. Esse fato leva a um argumento forte para a escolha de uma arquitetura monolítica mesmo se for acreditado que haverá benefícios mais tarde com o uso da arquitetura de microsserviços, por duas razões. A primeira é conhecida como \emph{Yagni - You're not gonna need it}, ou "Você não precisará disso", um preceito do método ágil \emph{ExtremeProgramming} que diz que uma capacidade que acredita-se ser necessária no futuro não deve ser implementada agora por quê "você não precisará disso". A segunda razão é que microsserviços só funcionarão bem se os limites forem muito bem estabelecidos, e para tanto, constrói-se um monólito primeiro para que se possa descobrir os limites antes de serem impostos grandes obstáculos neles pela divisão dos microsserviços. \cite{martin-fowler-monolith-first}
+\citeonline{martin-fowler-monolith-first} defende o uso de arquiteturas monolíticas para desenvolver novas aplicações. Mesmo os defensores dos microsserviços dizem que há custos e riscos no uso desta arquitetura, os quais desaceleram o time de desenvolvimento, assim favorecento monólitos para aplicações mais simples. Esse fato leva a um argumento forte para a escolha de uma arquitetura monolítica mesmo se for acreditado que haverá benefícios mais tarde com o uso da arquitetura de microsserviços, por duas razões. A primeira é conhecida como \emph{Yagni - You're not gonna need it}, ou "Você não precisará disso", um preceito do método ágil \emph{ExtremeProgramming} que diz que uma capacidade que acredita-se ser necessária no futuro não deve ser implementada agora por quê "você não precisará disso". A segunda razão é que microsserviços só funcionarão bem se os limites forem muito bem estabelecidos, e para tanto, constrói-se um monólito primeiro para que se possa descobrir os limites antes de serem impostos grandes obstáculos neles pela divisão dos microsserviços. \cite{martin-fowler-monolith-first}
 % pois qualquer refatoração de funcionalidade inter-serviços é muito mais difícil do que uma funcionalidade em um monólito.
 % It's a statement that some capability we presume our software needs in the future should not be built now because "you aren't gonna need it". 
 
-Além disso, \citeonline{MartinFowlerMicroservicesPrereq} também afirma que existem 3 pré-requisitos para se adotar uma arquitetura de microsserviços, e que é mais fácil lidar com as operações de um monólito bem definido do que de um ecossistema de pequenos serviços. Assim sendo, pode-se considerar uma boa prática começar pela arquitetura monolítica até que o sistema já esteja bem definido e estes pré-requisitos sejam atendidos - provisionamento rápido, monitoramento básico, e implantação rápida de aplicação. \cite{MartinFowlerMicroservicesPrereq}
+Além disso, \citeonline{MartinFowlerMicroservicesPrereq} também afirma que existem 3 pré-requisitos para se adotar uma arquitetura de microsserviços, e que é mais fácil lidar com as operações de um monólito bem definido do que de um ecossistema de pequenos serviços. Assim sendo, pode-se considerar uma boa prática começar pela arquitetura monolítica até que o sistema já esteja bem definido e estes pré-requisitos sejam atendidos - provisionamento rápido, monitoramento básico, e implantação rápida de aplicação - explicados na \autoref{boas-praticas-provisionamento-rapido}, \autoref{boas-praticas-monitoramento-basico} e \autoref{boas-praticas-implantacao-rapida} respectivamente. \cite{MartinFowlerMicroservicesPrereq}
 
 Já \citeonline{dontStartWithMonolith-tilkov} contesta essa prática e afirma que não se deve começar pela arquitetura monolítica se o objetivo for uma arquitetura de microserviços. Ele afirma que o melhor momento para se pensar em divir um sistema é justamente quando ele está sendo construido, e que é extremamente difícil dividir um sistema \emph{brownfield} (sistema desenvolvido a partir de outro pré-existente). Entretanto, ele reconhece que para dividir um sistema, deve-se conhecer muito bem o domínio, e que o cenário ideal para o desenvolvimento de microsserviços é quando se está desenvolvendo uma segunda versão de um sistema existente. \citeonline{martin-fowler-monolith-first} reconhece esses argumentos como válidos, e reforça que existem sim benefícios de se começar por uma arquitetura de microsserviços, mas ainda existem poucas histórias de aplicações com arquiteturas de microsserviços e mais relatos são necessários para saber a melhor escolha inicial de arquitetura. \cite{dontStartWithMonolith-tilkov,martin-fowler-monolith-first}
 % I’m firmly convinced that starting with a monolith is usually exactly the wrong thing to do. 
 
 % If you are actually able to build a well-structured monolith, you probably don’t need microservices in the first place. Which is OK! I definitely agree with Martin: You shouldn’t introduce the complexity of additional distribution into your system if you don’t have a very good reason for doing so. 
 
-\citeonline{monolith-or-microservices} afirma que para decidir a abordagem arquitetural inicial de uma aplicação é necessário considerar o contexto do negócio, da própria aplicação, e do time que a irá desenvolver, e que existem condições que configuram a melhor escolha. Ele descreve 3 condições que tornam a adoção de uma arquitetura de microserviços para uma nova aplicação uma boa escolha - Há necessidade de entrega de serviços rapida e independentemente, parte da plataforma precisa ser extremamente eficiente, e planeja-se aumentar o time. E também descreve 3 condições que tornam a adoção de uma arquitetura monolítica uma boa escolha - O time ainda está crescendo em números, o produto sendo construído é não comprovado é uma prova de conceito, o time não tem experiência com microsserviços.
+\citeonline{monolith-or-microservices} afirma que para decidir a abordagem arquitetural inicial de uma aplicação é necessário considerar o contexto do negócio, da própria aplicação, e do time que a irá desenvolver, e que existem condições que configuram a melhor escolha. Ele descreve 3 condições que tornam a adoção de uma arquitetura de microserviços para uma nova aplicação uma boa escolha - (1) Há necessidade de entrega de serviços rapida e independentemente, (2) parte da plataforma precisa ser extremamente eficiente, e (3) planeja-se aumentar o time. E também descreve 3 condições que tornam a adoção de uma arquitetura monolítica uma boa escolha - (1) O time ainda está em crescimento, (2) o produto sendo construído é não comprovado é uma prova de conceito, (2) o time não tem experiência com microsserviços.
 
 Percebe-se então que um ponto de concordância entre os autores é que existem tanto razões para se começar pelos microsserviços como razões para se começar com uma arquitetura mais simples. Porém, não foi observado um consenso geral sobre quais seriam exatamente as razões para adotar ou não uma arquitetura de microsserviços para uma nova aplicação desde o início de seu desenvolvimento. Há nesse ponto, portanto, espaço para mais discussões e pesquisas.
 
 % razões que configuram uma boa escolha para a arquitetura inicial de uma aplicação
 % discordância sobre o que é ou não necessário para sustentar uma arquitetura de microsserviços desde o início da aplicação, e quais seriam as razões para se adotar ou não essa arquitetura desde o ínicio da aplicação
 
-\subsection{Provisionamento rápido}
+\subsection{Provisionamento rápido}\label{boas-praticas-provisionamento-rapido}
 
 No contexto da computação, provisionamento significa disponibilizar um recurso, como uma máquina virtual por exemplo. Para produzir software, é necessário provisionar muitos recursos, tanto para os desenvolvedores quanto para o cliente. Naturalmente, o provisionamento é mais fácil na núvem. Na AWS por exemplo, para conseguir uma nova máquina, basta lançar uma nova instância e acessá-la - um processo muito rápido quando comparado ao \emph{on-premises}, onde precisaria-se comprar uma nova máquina, esperar chegar, configurá-la, e só então ela estará pronta. Para alcançar um provisionamento rápido, será necessário bastante automação. \cite{MartinFowlerMicroservicesPrereq}
 
-\subsection{Monitoramento básico}
+\subsection{Monitoramento básico}\label{boas-praticas-monitoramento-basico}
 
 Muitas coisas podem dar errado em qualquer tipo de arquitetura, mas em especial nos microserviços pois cada serviço é fracamente acoplado, estando sujeitos não só a falhas no código, mas também na comunicação, na conexão, ou até falhas físicas. Portanto o monitoramento é crucial nesse tipo de arquitetura para que problemas, especialmente os mais graves possam ser detectados no menor tempo possível. Além disso, o monitoramento também pode ser usado para detectar problemas de negócio, como uma redução nos pedidos de um site de vendas, por exemplo. \cite{MartinFowlerMicroservicesPrereq}
 
-\subsection{Implantação rápida}
+\subsection{Implantação rápida}\label{boas-praticas-implantacao-rapida}
 
 Na arquitetura de microserviços a implantação geralmente é feita separadamente para cada microserviço. Com muitos serviços para gerenciar, ela pode se tornar uma tarefa árdua, portanto será novamente necessário uma automação dessa etapa, que geralmente envolve um \emph{pipeline} de implantação, que deve ser automatizado o máximo possível. \cite{MartinFowlerMicroservicesPrereq}
 
@@ -83,13 +83,17 @@ XII. Processos administrativos - Tarefas de administração ou de gerenciamento 
 
 \section{Produtos, não projetos}
 
-Most application development efforts that we see use a project model: where the aim is to deliver some piece of software which is then considered to be completed. On completion the software is handed over to a maintenance organization and the project team that built it is disbanded.
+A maioria dos times de desenvolvedores trabalham sob o seguinte modelo de projeto: O objetivo é entregar uma peça de \emph{software}, que quando entregue é considerada como completa. Após isso, o \emph{software} é passado para um time de manutenção e o time que o desenvolveu é desfeito.
 
-Microservice proponents tend to avoid this model, preferring instead the notion that a team should own a product over its full lifetime. A common inspiration for this is Amazon's notion of "you build, you run it" where a development team takes full responsibility for the software in production. This brings developers into day-to-day contact with how their software behaves in production and increases contact with their users, as they have to take on at least some of the support burden.
+Os praticantes de microsserviços tendem a evitar esse modelo, em vez disso adotando a ideia de que um time deve ser o dono de um produto - não projeto - durante todo seu ciclo de vida. Um exemplo de empresa que adota esse modelo é a Amazon, exercendo a ideia de "você constroi, você executa", na qual um time de desenvolvimento é totalmente responsável por um \emph{software} em produção (um produto). Dessa forma, o time adquire pleno conhecimento de como seu produto se comporta, e como seus usuários o utilizam, pois também terá que realizar o suporte aos usuários do produto.
 
-The product mentality, ties in with the linkage to business capabilities. Rather than looking at the software as a set of functionality to be completed, there is an on-going relationship where the question is how can software assist its users to enhance the business capability.
+Essa prática também está ligada a separação da aplicação por capacidades de negócio. Em vez de enxergar o software como um conjunto de funcionalidades a serem implementadas, cria-se uma relação entre os desenvolvedores e os usuários, na qual a questão é como o software pode auxiliar o usuário a aumentar a capacidade de negócio.
 
-There's no reason why this same approach can't be taken with monolithic applications, but the smaller granularity of services can make it easier to create the personal relationships between service developers and their users. \cite{MartinFowlerMicroservices}
+Tal prática também pode ser aplicada em aplicações monolíticas, embora a divisão em microsserviços facilita a crição de relações entre os desenvolvedores de serviços e seus usuários. \cite{MartinFowlerMicroservices}
+
+% The product mentality, ties in with the linkage to business capabilities. Rather than looking at the software as a set of functionality to be completed, there is an on-going relationship where the question is how can software assist its users to enhance the business capability.
+
+% There's no reason why this same approach can't be taken with monolithic applications, but the smaller granularity of services can make it easier to create the personal relationships between service developers and their users. \cite{MartinFowlerMicroservices}
 
 \section{Desenvolver e compartilhar ferramentas}
 Em vez de apenas usar um conjunto de padrões definidos para desenvolver microsserviços, é preferível produzir ferramentas úteis que outros desenvolvedores podem usar para resolver problemas similares aos que eles enfrentam. Essas ferramentas geralmente são extraídas de implementações maiores e compartilhadas com um grupo mais amplo, geralmente por meio de um modelo de código aberto. Com o git e o github se tornando ferramentas tão populares, práticas de código aberto estão cada vez mais comuns. \cite{MartinFowlerMicroservices}
@@ -161,18 +165,18 @@ resource usage and load balancing as monitoring metrics, log management and exce
 
 \subsection{Históricos}
 
-Um histórico, também conhecido como \emph{log}, descreve o que aconteceu em determinado sistema e provê informações sobre o estado e a saúde dele. Manter um histórico do microsserviço é uma das formas mais simples de se implementar monitoramento, e é fortemente indicado. 
+Um histórico, também conhecido como \emph{logs}, descreve o que aconteceu em determinado sistema e provê informações sobre o estado e a saúde dele. Manter um histórico do microsserviço é uma forma simples e eficiente de se implementar monitoramento, e é fortemente indicado. Para manter históricos, pode-se desenvolver um serviço dedicado a isso, para ser reutilizado onde necessário. Outra possibilidade é utilizar bibliotecas, próprias ou desenvolvidas por terceiros.
 
 Para facilitar a escrita, leitura e operação dos históricos, deve-se padronizar o formato deles em todos os microsserviços e diferenciar entradas de erros, de avisos e de informação. Além disso, eles devem ser agregados e organizados em um único lugar para que possam ser facilmente consultados.
 
-Pode haver um serviço dedicado para logs, ou um sidecar de logs (pacote instalável).
+% Pode haver um serviço dedicado para logs, ou um sidecar de logs (pacote instalável).
 
 % Um motivo importante para organizar os logs é rastrear as chamadas de uma execução. Devemos poder reconstruir uma operação a partir de um identificador. Isso é o equivalente à stack-trace de um sistema monolítico.
 
 % Usar ferramentas de gerenciamento (APMs - Application performance management) para visualizar essas stack-traces.
 
 \subsection{Métricas}
-Métricas nos permitem saber o que está acontecendo em qualquer momento, e decidir que ações devem ser tomadas a partir disso. Escalar um serviço que recebe muitas requisições por exemplo, ou diminuir um que não. Métricas podem inclusive servir para questões de negócios e de \emph{business inteligence}. 
+Métricas nos permitem saber o que está acontecendo em qualquer momento, e decidir que ações devem ser tomadas a partir disso. Por exemplo, escalar um serviço que recebe muitas requisições ou diminuir um que não. Métricas podem inclusive servir para questões de negócios e de \emph{business inteligence}. 
 
 Enquanto históricos precisam ser desenvolvidos, métricas apenas precisam de instrumentação pois muitas ferramentas já possuem as próprias métricas ou já existem métodos consolidados para as obter. Nos servidores web mais populares, por exemplo, as informações básicas sobre uma requisição já são gravadas por padrão.
 
@@ -180,7 +184,7 @@ Enquanto históricos precisam ser desenvolvidos, métricas apenas precisam de in
 
 \section{APIs}\label{boas-praticas-apis}
 
-Considerando que APIs são uma parte crucial no desenvolvimento de microserviços, sendo responsável por grande parte da comunicação que se faz necessária para conectar tantos serviços separados e manter um funcionamento eficiente e livre de falhas, esse trabalho terá um foco grande em boas práticas no desenvolvimento de APIs.
+Considerando que APIs são uma parte crucial no desenvolvimento de microserviços, sendo responsável por grande parte da comunicação que se faz necessária para conectar tantos serviços separados e manter um funcionamento eficiente e livre de falhas, este trabalho explorará diversas boas práticas no desenvolvimento de APIs.
 
 \subsection{Códigos de status de respostas HTTP}
 Esses códigos são números entre 100 e 599, cada um tendo um significado diferente, e cada centena sendo classificada em tipos diferentes de resposta. 100-199 representam respostas de informação. 200-299 representam respostas de sucesso. 300-399 representam tipos de redirecionamentos. 400-499 representam erros por parte do cliente. 500-599 representam erros por parte do servidor. Isso é um padrão definido na seção 10 da RFC 2616 \cite{rfc_http_nielsen_1999}, e facilita com que o cliente entenda o que aconteceu com a requisição à API. Esses códigos devem ser enviados juntos com a resposta à requisição.
@@ -260,7 +264,7 @@ Quando é necessário modificar um recurso em uma API, usa-se os métodos HTTP P
 
 \section{Testes}
 
-O processo de testes para microsserviços engloba várias estratégias diferentes de testes. Essas estratégias podem ser incluir testes funcionais, como um teste de unidade, ou testes não-funcionais, como um teste de desempenho. Usar múltiplas estratégias de testes garante que a aplicação opera com sucesso em ambientes e plataformas diferentes. De acordo com \citeonline{design-monitoring-testing-waseem}, testes de unidade e testes fim-a-fim são as estratégias de testes mais usadas.
+O processo de testes para microsserviços engloba várias estratégias diferentes de testes. Essas estratégias podem incluir testes funcionais, como um teste de unidade, ou testes não-funcionais, como um teste de desempenho. Usar múltiplas estratégias de testes garante que a aplicação opera com sucesso em ambientes e plataformas diferentes. De acordo com \citeonline{design-monitoring-testing-waseem}, testes de unidade e testes fim-a-fim são as estratégias de testes mais usadas.
 
 % We identified 12 testing strategies (see Table 28), which are listed in our survey question, from the literature (e.g., [9, 6, 61, 63, 64, 65, 66, 67]).
 
