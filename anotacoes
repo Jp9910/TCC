@@ -33,8 +33,9 @@ Abordar em maior profundidade (opções):
 - falar sobre REST?
 - melhorar introdução .. falar sobre
 - adicionar mais trabalhos relacionados 
-- 2.1.2
+
 - 4.6 implantação
 - 4.8 monitoramento
 - 4.9.3 protocol buffers
 - usar imagem do eShopOnContainers?
+- ler o resto do artigo 'microservices' de martin fowler (infrastructure automation)

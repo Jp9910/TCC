@@ -17,9 +17,9 @@ Já \citeonline{dontStartWithMonolith-tilkov} contesta essa prática e afirma qu
 
 % If you are actually able to build a well-structured monolith, you probably don’t need microservices in the first place. Which is OK! I definitely agree with Martin: You shouldn’t introduce the complexity of additional distribution into your system if you don’t have a very good reason for doing so. 
 
-\citeonline{monolith-or-microservices} afirma que para decidir a abordagem arquitetural inicial de uma aplicação é necessário considerar o contexto do negócio, da própria aplicação, e do time que a irá desenvolver, e que existem condições que configuram a melhor escolha. Ele descreve 3 condições que tornam a adoção de uma arquitetura de microserviços para uma nova aplicação uma boa escolha - (1) Há necessidade de entrega de serviços rapida e independentemente, (2) parte da plataforma precisa ser extremamente eficiente, e (3) planeja-se aumentar o time. E também descreve 3 condições que tornam a adoção de uma arquitetura monolítica uma boa escolha - (1) O time ainda está em crescimento, (2) o produto sendo construído é não comprovado é uma prova de conceito, (2) o time não tem experiência com microsserviços.
+\citeonline{monolith-or-microservices} afirma que para decidir a abordagem arquitetural inicial de uma aplicação é necessário considerar o contexto do negócio, da própria aplicação, e do time que a irá desenvolver, e que existem condições que configuram a melhor escolha. Ele descreve 3 condições que tornam a adoção de uma arquitetura de microserviços para uma nova aplicação uma boa escolha - (1) Há necessidade de entrega de serviços rapida e independentemente, (2) parte da plataforma precisa ser extremamente eficiente, e (3) planeja-se aumentar o time. E também descreve 3 condições que tornam a adoção de uma arquitetura monolítica uma boa escolha - (1) O time ainda está em crescimento, (2) o produto sendo construído é não comprovado ou é uma prova de conceito, (3) o time não tem experiência com microsserviços. \cite{monolith-or-microservices}
 
-Percebe-se então que um ponto de concordância entre os autores é que existem tanto razões para se começar pelos microsserviços como razões para se começar com uma arquitetura mais simples. Porém, não foi observado um consenso geral sobre quais seriam exatamente as razões para adotar ou não uma arquitetura de microsserviços para uma nova aplicação desde o início de seu desenvolvimento. Há nesse ponto, portanto, espaço para mais discussões e pesquisas.
+Percebe-se então que existem tanto razões para se começar pelos microsserviços como razões para se começar com uma arquitetura mais simples. Porém, não foi observado um consenso geral sobre quais seriam exatamente as razões para adotar ou não uma arquitetura de microsserviços para uma nova aplicação desde o início de seu desenvolvimento. Há nesse ponto, portanto, espaço para mais discussões e pesquisas.
 
 % razões que configuram uma boa escolha para a arquitetura inicial de uma aplicação
 % discordância sobre o que é ou não necessário para sustentar uma arquitetura de microsserviços desde o início da aplicação, e quais seriam as razões para se adotar ou não essa arquitetura desde o ínicio da aplicação
@@ -30,11 +30,11 @@ No contexto da computação, provisionamento significa disponibilizar um recurso
 
 \subsection{Monitoramento básico}\label{boas-praticas-monitoramento-basico}
 
-Muitas coisas podem dar errado em qualquer tipo de arquitetura, mas em especial nos microserviços pois cada serviço é fracamente acoplado, estando sujeitos não só a falhas no código, mas também na comunicação, na conexão, ou até falhas físicas. Portanto o monitoramento é crucial nesse tipo de arquitetura para que problemas, especialmente os mais graves possam ser detectados no menor tempo possível. Além disso, o monitoramento também pode ser usado para detectar problemas de negócio, como uma redução nos pedidos de um site de vendas, por exemplo. \cite{MartinFowlerMicroservicesPrereq}
+Muitas coisas podem dar errado em qualquer tipo de arquitetura, mas em especial nos microserviços pois cada serviço é fracamente acoplado, estando sujeitos não só a falhas no código, mas também na comunicação, na conexão, ou até falhas físicas. Portanto, o monitoramento é crucial nesse tipo de arquitetura para que problemas, especialmente os mais graves possam ser detectados no menor tempo possível. Ademais, o monitoramento também pode ser usado para detectar problemas de negócio, como uma redução nos pedidos de um site de vendas, por exemplo. \cite{MartinFowlerMicroservicesPrereq}
 
 \subsection{Implantação rápida}\label{boas-praticas-implantacao-rapida}
 
-Na arquitetura de microserviços a implantação geralmente é feita separadamente para cada microserviço. Com muitos serviços para gerenciar, ela pode se tornar uma tarefa árdua, portanto será novamente necessário uma automação dessa etapa, que geralmente envolve um \emph{pipeline} de implantação, que deve ser automatizado o máximo possível. \cite{MartinFowlerMicroservicesPrereq}
+Na arquitetura de microserviços a implantação é feita separadamente para cada microsserviço. Com muitos serviços para gerenciar, ela pode se tornar uma tarefa árdua, portanto será novamente necessário um grande nível de automação nessa etapa, geralmente envolvendo um \emph{pipeline} de implantação, que deve ser automatizado o máximo possível. \cite{MartinFowlerMicroservicesPrereq}
 
 \section{A metodologia de 12 fatores}
 
@@ -71,32 +71,28 @@ VI. Processos - Deve-se executar a aplicação como um ou mais processos que nã
 
 VII. Vínculo de porta - Um microsserviço deve ser executado em um container e exposto por meio de portas.
 
-VIII. Concorrência - Cada processo deve ser independente e executado separadamente, para se ter um melhor dimensionamento e ser capaz de executar mais ao mesmo tempo.
+VIII. Concorrência - Cada processo deve ser independente e executado separadamente, para se ter um melhor dimensionamento e possibilidade de executar mais ao mesmo tempo.
 
 IX. Descartabilidade - Deve ser possível iniciar ou interromper a aplicação imediatamente sempre que necessário. Caso a aplicação pare de funcionar, deve ser capaz de iniciar novamente sem perdas.
 
 X. Paridade de desenvolvimento e produção - Deve-se manter os ambientes de desenvolvimento, teste e produção o mais semelhantes possível.
 
-XI. Logs - Logs devem ser tratatos como um fluxo de eventos.
+XI. \emph{Logs} (históricos) - Logs devem ser tratatos como um fluxo de eventos.
 
 XII. Processos administrativos - Tarefas de administração ou de gerenciamento devem ser executadas como processos únicos. \cite{12factor, oracle_microservices,12fatores-rita}
 
 \section{Produtos, não projetos}
 
-A maioria dos times de desenvolvedores trabalham sob o seguinte modelo de projeto: O objetivo é entregar uma peça de \emph{software}, que quando entregue é considerada como completa. Após isso, o \emph{software} é passado para um time de manutenção e o time que o desenvolveu é desfeito.
+A maioria dos times de desenvolvedores trabalham sob o seguinte modelo de projeto: O objetivo é entregar uma peça de \emph{software}, que quando entregue é considerada como completa. Após isso, o \emph{software} é passado para um time de manutenção e o time que o desenvolveu é desfeito. \cite{MartinFowlerMicroservices}
 
-Os praticantes de microsserviços tendem a evitar esse modelo, em vez disso adotando a ideia de que um time deve ser o dono de um produto - não projeto - durante todo seu ciclo de vida. Um exemplo de empresa que adota esse modelo é a Amazon, exercendo a ideia de "você constroi, você executa", na qual um time de desenvolvimento é totalmente responsável por um \emph{software} em produção (um produto). Dessa forma, o time adquire pleno conhecimento de como seu produto se comporta, e como seus usuários o utilizam, pois também terá que realizar o suporte aos usuários do produto.
-
-Essa prática também está ligada a separação da aplicação por capacidades de negócio. Em vez de enxergar o software como um conjunto de funcionalidades a serem implementadas, cria-se uma relação entre os desenvolvedores e os usuários, na qual a questão é como o software pode auxiliar o usuário a aumentar a capacidade de negócio.
-
-Tal prática também pode ser aplicada em aplicações monolíticas, embora a divisão em microsserviços facilita a crição de relações entre os desenvolvedores de serviços e seus usuários. \cite{MartinFowlerMicroservices}
+Os praticantes de microsserviços tendem a evitar esse modelo, em vez disso adotando a ideia de que um time deve ser o dono de um produto - não projeto - durante todo seu ciclo de vida. Um exemplo de empresa que adota esse modelo é a Amazon, exercendo a ideia de "você constroi, você executa", na qual um time de desenvolvimento é totalmente responsável por um \emph{software} em produção (um produto). Dessa forma, o time adquire pleno conhecimento de como seu produto se comporta, e como seus usuários o utilizam, pois também terá que realizar o suporte aos usuários do produto. Essa prática também está ligada a separação da aplicação por capacidades de negócio - em vez de enxergar o software como um conjunto de funcionalidades a serem implementadas, cria-se uma relação entre os desenvolvedores e os usuários, na qual a questão é como o software pode auxiliar o usuário a aumentar a capacidade de negócio. Tal prática também pode ser aplicada em aplicações monolíticas, embora a divisão em microsserviços facilita a crição de relações entre os desenvolvedores de serviços e seus usuários. \cite{MartinFowlerMicroservices}
 
 % The product mentality, ties in with the linkage to business capabilities. Rather than looking at the software as a set of functionality to be completed, there is an on-going relationship where the question is how can software assist its users to enhance the business capability.
 
 % There's no reason why this same approach can't be taken with monolithic applications, but the smaller granularity of services can make it easier to create the personal relationships between service developers and their users. \cite{MartinFowlerMicroservices}
 
 \section{Desenvolver e compartilhar ferramentas}
-Em vez de apenas usar um conjunto de padrões definidos para desenvolver microsserviços, é preferível produzir ferramentas úteis que outros desenvolvedores podem usar para resolver problemas similares aos que eles enfrentam. Essas ferramentas geralmente são extraídas de implementações maiores e compartilhadas com um grupo mais amplo, geralmente por meio de um modelo de código aberto. Com o git e o github se tornando ferramentas tão populares, práticas de código aberto estão cada vez mais comuns. \cite{MartinFowlerMicroservices}
+Em vez de apenas usar um conjunto de padrões definidos para desenvolver microsserviços, é preferível produzir ferramentas úteis que outros desenvolvedores possam usar para resolver problemas similares aos que eles enfrentam. Essas ferramentas geralmente são extraídas de implementações maiores e compartilhadas com um grupo mais amplo, geralmente por meio de um modelo de código aberto. Com o Git e o GitHub se tornando ferramentas tão populares, práticas de código aberto estão cada vez mais comuns. \cite{MartinFowlerMicroservices}
 
 A Netflix é um exemplo de organização que segue essa filosofia. Compartilhar código útil e muito bem testado como bibliotecas incentiva outros desenvolvedores a resolver problemas semelhantes de maneiras semelhantes, mas deixa a porta aberta para escolher uma abordagem diferente, se necessário. As bibliotecas compartilhadas tendem a se concentrar em problemas comuns, como armazenamento de dados, comunicação entre processos e automação de infraestrutura. \cite{MartinFowlerMicroservices}
 
@@ -147,7 +143,7 @@ Ao construir estruturas de comunicação entre diferentes processos, observa-se 
 
 A comunidade de microsserviços favorece uma abordagem alternativa: \emph{endpoints} inteligentes e canais simples. Os aplicativos criados a partir de microsserviços visam ser o mais desacoplados e coesos possível - eles possuem sua própria lógica de domínio e agem mais como filtros - recebendo uma solicitação, aplicando a lógica conforme apropriado e produzindo uma resposta. Isso é feito usando protocolos REST simples em vez de protocolos complexos como \emph{Web Service Choreography} ou orquestração por uma ferramenta central. \cite{MartinFowlerMicroservices}
 
-Requisições HTTP em conjunto uma API de recursos é o método mais usado para realizar comunicação síncrona na arquitetura de microsserviços. Uma requisição HTTP é feita por um cliente, para um dado \emph{host} em um servidor, com o propósito de acessar um recurso nesse servidor. Por usar o \emph{Transmition Control Protocol} (TCP), é um método de comunicação confiável, mas não tão eficiente quanto poderia ser. \cite{MartinFowlerMicroservices}.
+Requisições HTTP em conjunto com uma API de recursos é o método mais usado para realizar comunicação síncrona na arquitetura de microsserviços. Uma requisição HTTP é feita por um cliente para um dado \emph{host} em um servidor, com o propósito de acessar um recurso nesse servidor. Por usar o \emph{Transmition Control Protocol} (TCP), é um método de comunicação confiável, mas não tão eficiente quanto poderia ser. \cite{MartinFowlerMicroservices}.
 
 Para comunicação assíncrona, filas de mensagens são amplamente usadas. Quando um serviço precisa enviar informações a outro de modo assíncrono, ele envia uma mensagem para a fila de mensagens, e ela será armazenada até ser processada ou excluída. Cada mensagem é processada uma única vez, por um único consumidor. As filas de mensagens podem ser usadas para dividir um processamento pesado, para armazenar trabalho em \emph{buffers} ou lotes, ou para processar uniformemente picos de cargas de trabalho.
 
@@ -181,6 +177,28 @@ Métricas nos permitem saber o que está acontecendo em qualquer momento, e deci
 Enquanto históricos precisam ser desenvolvidos, métricas apenas precisam de instrumentação pois muitas ferramentas já possuem as próprias métricas ou já existem métodos consolidados para as obter. Nos servidores web mais populares, por exemplo, as informações básicas sobre uma requisição já são gravadas por padrão.
 
 É recomendado usar dashboards de alto nível para melhorar a visualização e monitoramento do status da aplicação a partir de suas métricas.
+
+\section{Testes}
+
+O processo de testes para microsserviços engloba várias estratégias diferentes de testes. Essas estratégias podem incluir testes funcionais, como um teste de unidade, ou testes não-funcionais, como um teste de desempenho. Usar múltiplas estratégias de testes garante que a aplicação opera com sucesso em ambientes e plataformas diferentes. De acordo com \citeonline{design-monitoring-testing-waseem}, testes de unidade e testes fim-a-fim são as estratégias de testes mais usadas.
+
+% We identified 12 testing strategies (see Table 28), which are listed in our survey question, from the literature (e.g., [9, 6, 61, 63, 64, 65, 66, 67]).
+
+\citeonline{Familiar2015} afirma que além de usar os métodos mais comuns de testes, deve-se também testar os microsserviços conforme passam pelo \emph{pipeline} de implantação. Isso inclui:
+
+- Testes internos: Testar as funções internas do serviço, inclusive uso de acesso de dados, e caching.
+
+- Teste de serviço: Testar a a implementação de serviço da API. Essa é uma implementação privada da API e seus modelos associados.
+
+- Teste de protocolo: Testar o serviço no nível de protocolo, chamando a API sobre o determinado protocolo (geralmente HTTP).
+
+- Teste de composição: Testar o serviço em cooperação com outros serviços no contexto de uma solução.
+
+- Teste de escalabilidade/taxa de transferência: Testar a escalabilidade e elasticidade do microsserviço implantado.
+
+- Teste de tolerância a falha: Testar a capacidade do microsserviço de recupera-se após uma falha.
+
+- Teste de penetração: Trabalhar com uma empresa terceirizada de segurança de software para realizar testes de penetração no sistema. \cite{Familiar2015}
 
 \section{APIs}\label{boas-praticas-apis}
 
@@ -235,7 +253,7 @@ Limitar a taxa de requisições é um jeito de proteger a infraestrutura do serv
 Compartilhar o mínimo possível é uma medida de segurança genérica que pode ser adotada em qualquer microsserviço. Especificamente nas APIs, deve-se retornar estritamente apenas os dados necessários para o cliente. Muitas ferramentas usadas para implementar APIs incluem por padrão informações como se fossem marcas d'água, mas que podem ser removidas, tal como headers "X-Powered-By", que vazam informações do servidor que podem auxiliar usuários mal-intencionados. \cite{rapidAPI-twitter}
 
 \subsection{Testar a API}
-Testar uma API isoladamente serve para determinar se ela atende a parâmetros pré-definidos ou não. Tais parâmetros podem ser o cumprimento da funcionalidade, a confiabilidade, a latência, o desempenho, e a segurança. Quando um teste de API falha, deverá ser possível saber precisamente onde o problema se encontra, assim aumentando a velocidade de desenvolvimento e a qualidade do produto. As ferramentas que podem ser utilizadas para testes em APIs são discutidas na sessão \autoref{ferramentas-testes-apis}.
+Testar uma API isoladamente serve para determinar se ela atende a parâmetros pré-definidos ou não. Tais parâmetros podem ser o cumprimento da funcionalidade, a confiabilidade, a latência, o desempenho, e a segurança. Quando um teste de API falha, deverá ser possível saber precisamente onde o problema se encontra, assim aumentando a velocidade de desenvolvimento e a qualidade do produto. As ferramentas que podem ser utilizadas para testes em APIs são discutidas na \autoref{ferramentas-testes-apis}.
 
 % Why should you perform API testing?
 % - Testing your APIs timely helps to ensure your app is up all the time.
@@ -261,28 +279,6 @@ A Paginação separa e categoriza resultados, enquanto a filtragem retorna apena
 
 \subsection{PATCH ou PUT}
 Quando é necessário modificar um recurso em uma API, usa-se os métodos HTTP PUT ou PATCH. Enquanto PUT atualiza o recurso inteiro, PATCH atualiza apenas uma parte específica do recurso, assim usando uma carga de dados menor. Portanto, quando possível deve-se usar PATCH em vez de PUT para modificar um recurso. \cite{rapidAPI-twitter}
-
-\section{Testes}
-
-O processo de testes para microsserviços engloba várias estratégias diferentes de testes. Essas estratégias podem incluir testes funcionais, como um teste de unidade, ou testes não-funcionais, como um teste de desempenho. Usar múltiplas estratégias de testes garante que a aplicação opera com sucesso em ambientes e plataformas diferentes. De acordo com \citeonline{design-monitoring-testing-waseem}, testes de unidade e testes fim-a-fim são as estratégias de testes mais usadas.
-
-% We identified 12 testing strategies (see Table 28), which are listed in our survey question, from the literature (e.g., [9, 6, 61, 63, 64, 65, 66, 67]).
-
-\citeonline{Familiar2015} afirma que além de usar os métodos mais comuns de testes, deve-se também testar os microsserviços conforme passam pelo \emph{pipeline} de implantação. Isso inclui:
-
-- Testes internos: Testar as funções internas do serviço, inclusive uso de acesso de dados, e caching.
-
-- Teste de serviço: Testar a a implementação de serviço da API. Essa é uma implementação privada da API e seus modelos associados.
-
-- Teste de protocolo: Testar o serviço no nível de protocolo, chamando a API sobre o determinado protocolo (geralmente HTTP).
-
-- Teste de composição: Testar o serviço em cooperação com outros serviços no contexto de uma solução.
-
-- Teste de escalabilidade/taxa de transferência: Testar a escalabilidade e elasticidade do microsserviço implantado.
-
-- Teste de tolerância a falha: Testar a capacidade do microsserviço de recupera-se após uma falha.
-
-- Teste de penetração: Trabalhar com uma empresa terceirizada de segurança de software para realizar testes de penetração no sistema. \cite{Familiar2015}
 
 % \section{Agregando serviços (process agregator pattern)}
 % Um padrão popular Agregar serviços de negócio em um único serviço mantém as funções em um nível mais alto. 
