@@ -116,12 +116,73 @@ Entretanto, essa descentralização tem implicações para o gerenciamento de at
 
 
 % Choosing to manage inconsistencies in this way is a new challenge for many development teams, but it is one that often matches business practice. Often businesses handle a degree of inconsistency in order to respond quickly to demand, while having some kind of reversal process to deal with mistakes. The trade-off is worth it as long as the cost of fixing mistakes is less than the cost of lost business under greater consistency. \cite{MartinFowlerMicroservices}
+\section{CI/CD}
+CI/CD é um método para entregar aplicações e mudanças nelas com frequência aos clientes. CI é um acrônimo de \emph{Continuous Integration}, e diz respeito a como o novo código feito pelo desenvolvedor chega no repositório principal e se transforma em um artefato implantável. Já CD é um acrônimo de \emph{Continuous Deployment} ou \emph{Continuous Delivery}. \emph{Continuous Delivery} diz respeito a automação de como os artefatos são lançados e garante que eles podem ser implantados num ambiente de execução a qualquer hora. \emph{Continuous Deployment} diz respeito a automação de como os lançamentos são de fato implantados no ambiente de execução. A \autoref{figura-ci-cd} ilustra as definições e limites da integração, entrega e implantação contínua. Apesar de determinar essas definições para este trabalho, foram observados conflitos na bibliografia revisada tanto nas definições para os termos CI e CD quanto nos limites do que essas práticas englobam, em particular para o termo CD, que pode significar \emph{Continuous Delivery}, \emph{Continuous Deployment}, ou mesmo os dois. No fim, não é importante se ater à semântica - apenas deve-se lembrar que CI/CD é um processo, muitas vezes visualizado como um \emph{pipeline}, que envolve a adição de um alto nível de automação e monitoramento no desenvolvimento de aplicações. \cite{redhat-ci-cd, harness-ci-cd, gitlab-ci-cd}
 
+\begin{figure}[htb]
+	\caption{\label{figura-ci-cd}CI/CD}
+	\begin{center}
+	    \includegraphics[scale=0.5]{Imagens/ci-cd.pdf}
+	\end{center}
+	\legend{Fonte: Autor}
+\end{figure}
+% With continuous delivery, the software is built so that it can be deployed to production at any time. Then you can trigger the deployments manually or move to continuous deployment where deployments are automated as well. \cite{gitlab-ci-cd}
 
-\section{Implantação}
-Práticas de integração contínua e de entrega contínua. 
+% Continuous Delivery means you ensure every change can be deployed to production. Continuous Deployment means you deploy every change. - Martin fowler https://twitter.com/martinfowler/status/598918601190580224?lang=en
 
-Containers. Automação.
+% CI/CD, continuous integration/continuous delivery, é um método para entregar aplicações com frequência aos clientes. Para isso, é aplicada a automação nas etapas do desenvolvimento de aplicações. Os principais conceitos atribuídos a esse método são a integração, entrega e implantação contínuas. Com o CI/CD, é possível solucionar os problemas que a integração de novos códigos pode causar para as equipes de operações e desenvolvimento (o famoso "inferno de integração"). Especificamente, o CI/CD aplica monitoramento e automação contínuos em todo o ciclo de vida das aplicações, incluindo as etapas de teste e integração, além da entrega e implantação. Juntas, essas práticas relacionadas são muitas vezes chamadas de "pipeline de CI/CD" e são compatíveis com o trabalho conjunto das equipes de operações e desenvolvimento com métodos ágeis. citar \url{https://www.redhat.com/pt-br/topics/devops/what-is-ci-cd}
+
+% CI/CD falls under DevOps (the joining of development and operations) and combines the practices of continuous integration and continuous delivery. CI/CD automates much or all of the manual human intervention traditionally needed to get new code from a commit into production such as build, test, and deploy, as well as infrastructure provisioning. With a CI/CD pipeline, developers can make changes to code that are then automatically tested and pushed out for delivery and deployment. Get CI/CD right and downtime is minimized and code releases happen faster. citar \url{https://about.gitlab.com/topics/ci-cd/}
+
+% As you traverse environments from non-prod to the staging environment and eventually to production, the number of endpoints you deploy to increases. Continuous Deployment focuses on the path of least resistance to get the software into the needed environment(s). citar \url{https://harness.io/blog/continuous-delivery-vs-continuous-deployment}
+
+% Being strategic in where to apply parts of your test suite is needed in order to avoid overburdening the Continuous Integration process. A line in the sand should be that Continuous Integration tackles artifact-centric confidence-building (for example, unit tests and artifact scans). Tests that take into account other artifacts and dependencies and/or application infrastructure are better-suited for the Continuous Delivery process. After the build is checked into a central repository, the next step to getting your idea into production is the promotion/deployment process. citar \url{https://harness.io/blog/continuous-delivery-vs-continuous-deployment}
+
+\subsection{CI}
+Integração contínua (ou \emph{CI - Continuous Integration}) é uma prática no desenvolvimento de software onde os desenvolvedores integram o código em um repositório compartilhado múltiplas vezes no dia. Muitos times afirmam que essa prática leva a uma grande redução nos problemas de integração e os permite desenvolver \emph{software} coeso mais rapidamente. Além disso, melhora a identificação do progresso do desenvolvimento, facilita a identificação e remoção de falhas e bugs, e aumenta a experiência e a confiança do time nos testes e compilação do código desenvolvido. A integração contínua por sí só requer apenas uma ferramenta de controle de versão (como Git ou SVN) para ser feita, mas existem práticas bem consolidadas na indústria do desenvolvimento de \emph{software} que auxiliam e incrementam esse processo. \cite{martin-fowler-continuous-integration}
+
+\subsubsection{Manter apenas um repositório fonte}
+Deve-se ter um repositório, compartilhado por toda a equipe desenvolvedora, que contém tudo aquilo que é necessário para a construção do projeto, para que seja possível se ter um novo ambiente de desenvolvimento funcional rapidamente. Isso inclui mas não é limitado a - código, \emph{scripts}, migrações e esquemas de bancos de dados, arquivos de propriedades, e configurações de IDE. Além disso, o conteúdo do repositório deve estar disponível para todos, assim aumentando a visibilidade e facilitando o monitoramento do progresso do conteúdo. \cite{gitlab-ci-cd,martin-fowler-continuous-integration}
+
+\subsubsection{Automatizar testes de novas compilações}
+As integrações de cada novo \emph{commit} no repositório precisam ser compiladas e testadas, o que é uma tarefa árdua e demorada se feita manualmente. Desse modo, deve-se elaborar uma bateria de testes, e executá-la de forma automática a cada nova compilação, para assim detectar falhas rapidamente e aumentar a qualidade do código. \cite{gitlab-ci-cd,martin-fowler-continuous-integration}
+
+\subsubsection{Otimizar a compilação}
+Compilações lentas afetam negativamente a integração contínua, atrasando integrações e diminuindo a frequência do \emph{feedback}. Além disso, todas as etapas da compilação devem ser simples de executar, idealmente por meio de um único comando. \cite{martin-fowler-continuous-integration}
+
+\subsubsection{Servidor de integração}
+Às vezes não é possível realizar todos os testes necessários na máquina local do desenvolvedor, seja por questões de tempo ou pelo projeto ser muito complexo para ser testado integralmente. Nesse caso, será preciso providenciar um local que será capaz de testar todo o projeto continuamente. Tal local é chamado de \emph{CI Daemon} ou servidor de integração. Esse servidor será responsável por realizar a bateria de testes e compilar o código a cada \emph{commit}, e disponibilizar informações e relatórios sobre os passos executados, assim mantendo a qualidade do código e possibilitando a compilação contínua. \cite{martin-fowler-continuous-integration}
+
+\subsubsection{Consertar compilações quebradas imediatamente}
+O principal ponto de usar a integração contínua é que a equipe sempre estará trabalhando a partir de uma base estável. Se há uma base instável, é tarefa de toda a equipe resolver o problema o mais rápido possível, pois nenhum novo \emph{commit} poderá ser feito em cima daquela base até que esteja estável e confiável novamente. Geralmente o melhor meio de resolver esse problema é reverter os \emph{commits} problemáticos, trazendo o sistema de volta a um ponto funcional. Não deve-se tentar \emph{debugar} no ramo principal do repositório. \cite{martin-fowler-continuous-integration}
+
+% A continuous integration server acts as a monitor to the repository. Every time a commit against the repository finishes the server automatically checks out the sources onto the integration machine, initiates a build, and notifies the committer of the result of the build. The committer isn't done until she gets the notification - usually an email.
+
+% Not everyone prefers to use a CI server. Jim Shore gave a well argued description of why he prefers the manual approach. I agree with him that CI is much more than just installing some software. All the practices here need to be in play to do Continuous Integration effectively. But equally many teams who do CI well find a CI server to be a helpful tool.
+
+\subsection{CD}
+CD refere-se à entrega contínua e/ou à implantação contínua, conceitos relacionados e às vezes usados alternadamente. Em ambos os casos, se trata da automação de fases avançadas do pipeline. A entrega contínua é uma evolução da integração contínua e envolve todo o ciclo do projeto, até a criação da nova versão da aplicação, mas a implantação dessa nova versão no ambiente de execução é feita manualmente. A implantação contínua engloba a entrega contínua e adiciona o passo de automatizar a implantação da nova versão no ambiente de execução. A finalidade da entrega contínua é garantir o mínimo de esforço na implantação de novas alterações, enquanto a da implantação contínua é sempre manter o ambiente de execução atualizado com as últimas alterações. A adoção da implantação contínua deve ser pensada, pois para alguns negócios é preferível uma taxa de implantações mais baixa. Embora seja possível realizar integração contínua sem entrega contínua, o oposto é impossível na prática, pois entregar alterações que ainda não foram devidamente integradas no repositório não faz sentido no desenvolvimento de \emph{software} em equipes. \cite{gitlab-ci-cd,redhat-ci-cd}
+
+Os benefícios da entrega contínua incluem: risco reduzido na implantação, pois como as mudanças são menores, há menos possibilidades de problemas, e caso haja, o conserto é mais simples; visualização do progresso, que não será simplesmente por trabalho "completo", mas sim por trabalho entregue; e \emph{feedback} do usuário mais rápida e frequentemente. \cite{martin-fowler-continuous-delivery}
+
+% Um deployment pipeline é um fluxo em que o artefato passa e cada etapa incrementa e agrega mais segurança ao se aproximar do ambiente de produção. Deploys de baixo risco são aqueles experimentais, contínuos, atualizações pontuais acompanhadas. Devemos separar a ideia de "deploy" e "publicação".Otimizar para resiliência é prevenir erros. No contexto de integração e entrega contínua temos o deploy contínuo. As equipes de desenvolvimento normalmente possuem divisões, como as pessoas do QA,deploy e operações. As tarefas são delegadas para os subgrupos durante o projeto. Equipes separadas que mal se comunicam dificultam o andamento do trabalho, aumentam a possibilidade de problemas e atrasam os deploys. A entrega contínua também exige uma mudança no comportamento e na cultura da empresa: as pessoas precisam trabalhar integradas.
+
+% Continuous deployment enables organizations to automatically deploy their applications – eliminating the need for human intervention. With continuous deployment, DevOps teams set the criteria for code releases ahead of time and when those criteria are met and validated, the code is deployed into the production environment. Thanks to this type of automation, organizations are able to be more nimble and get new features into the hands of users faster. \cite{gitlab-ci-cd}
+
+% While you can do continuous integration without continuous delivery or deployment, you can’t really do CD without already having CI in place. That’s because it would be extremely difficult to be able to deploy to production at any time if you aren’t practicing CI fundamentals like integrating code to a shared repo, automating testing and builds, and doing it all in small batches on a daily basis. \cite{gitlab-ci-cd}
+
+% Where Continuous Deployment focuses on the actual deployment, Continuous Delivery focuses on the release and release strategy. An elusive goal would be a “push of a button” to get changes into production. That “push of a button” is Continuous Delivery. \cite{harness-ci-cd}
+
+\section{Mono-repo ou Multi-repo}
+
+% O que é mais natural é utilizar um repositório para cada projeto, de um tamanho razoável com escopo bem definido. Essa forma de organização é chamada Multi-repo. Há possibilidade de definir permissões de acesso por projeto. clone, commit e build do projeto é mais simples e rápido
+
+% No entanto, nos últimos anos, surgiu uma nova forma de organização dos nossos projetos dentro de repositórios. Empresas grandes de tecnologia como Google e Facebook não utilizam o esquema Multi-repo, porque são empresas que trabalham em inúmeros projetos de maneira concomitante. Empresas que atuam com outra dimensão de projetos utilizam o Mono-repo, ou seja, um único e gigantesco repositório que acumula todos os projetos.
+
+% A desvantagem do segundo modelo é o repositório precisará ser realmente grande, e o build pode ser lento, talvez nem o Git seja mais a ferramenta adequada para fazer o controle de versões para esta situação. Contudo, como temos apenas um grande repositório temos uma administração relativamente mais simples, então a verificação de padrões é facilitada. A refatorações são globais, afinal estão todos dentro da mesma base. 
+\subsection{Estratégias de ramificação}
+
+\section{Implantação em containers}
 
 After you build your microservice, you must containerize it. A microservice running in its own container doesn’t affect the microservices deployed in the other containers.
 
@@ -135,7 +196,37 @@ Standard: The microservices are portable. They can run anywhere.
 Lightweight: Docker shares the operating system (OS) kernel, doesn’t require an OS for each instance, and runs as a lightweight process.
 Secure: Each container runs as an isolated process. So the microservices are secure.
 
-The process of containerizing a microservice involves creating a Dockerfile, creating and building a container image that includes its dependencies and the environmental configuration, deploying the image to a Docker engine, and uploading the image to a container registry for storage and retrieval. 
+The process of containerizing a microservice involves creating a Dockerfile, creating and building a container image that includes its dependencies and the environmental configuration, deploying the image to a Docker engine, and uploading the image to a container registry for storage and retrieval. \cite{oracle_microservices}
+
+\section{DevOps}
+
+A velocidade de equipes pode ser medida por meio de tarefas que são implementadas, essa é uma ideia. Por outro lado, a equipe de operações valoriza a estabilidade, afinal cada alteração é uma possível causa de problemas. O operacional deseja controlar o ambiente de produção. Temos diferenças importantes na forma de trabalho: um preza velocidade em novas funcionalidades e outro estabilidade. As equipes precisam trabalhar em conjunto para conseguir chegar à entrega contínua e ter um software funcional em ambiente de produção. DevOps é um movimento cultural que visa a integração e otimizar o processo de aprendizagem entre os integrantes da equipe. DevOps não é um título de cargo, mas uma visão de organização de trabalho que visa criar um pipeline veloz, seguro e integrado. Precisamos, claro, de ferramentas que irão facilitar as integrações e monitoramento, mas é muito mais um movimento cultural do que uma aparelhagem técnica.
+
+\section{Testes}
+
+Traditionally a build means compiling, linking, and all the additional stuff required to get a program to execute. A program may run, but that doesn't mean it does the right thing. Modern statically typed languages can catch many bugs, but far more slip through that net. A good way to catch bugs more quickly and efficiently is to include automated tests in the build process. Testing isn't perfect, of course, but it can catch a lot of bugs - enough to be useful. In particular the rise of Extreme Programming (XP) and Test Driven Development (TDD) have done a great deal to popularize self-testing code and as a result many people have seen the value of the technique. \cite{martin-fowler-continuous-integration}
+
+Testes fazem parte da construção do software. Devem ser realizados antes do commit. TDD pode ajudar neste processo. Deve-se prezar por um bom desempenho em testes, pois testes demorados podem ser uma barreira para a integração contínua. Testes automatizados são essenciais para a integração contínua.
+
+O processo de testes para microsserviços engloba várias estratégias diferentes de testes. Essas estratégias podem incluir testes funcionais, como um teste de unidade, ou testes não-funcionais, como um teste de desempenho. Usar múltiplas estratégias de testes garante que a aplicação opera com sucesso em ambientes e plataformas diferentes. De acordo com \citeonline{design-monitoring-testing-waseem}, testes de unidade e testes fim-a-fim são as estratégias de testes mais usadas.
+
+% We identified 12 testing strategies (see Table 28), which are listed in our survey question, from the literature (e.g., [9, 6, 61, 63, 64, 65, 66, 67]).
+
+\citeonline{Familiar2015} afirma que além de usar os métodos mais comuns de testes, deve-se também testar os microsserviços conforme passam pelo \emph{pipeline} de implantação. Isso inclui:
+
+- Testes internos: Testar as funções internas do serviço, inclusive uso de acesso de dados, e caching.
+
+- Teste de serviço: Testar a a implementação de serviço da API. Essa é uma implementação privada da API e seus modelos associados.
+
+- Teste de protocolo: Testar o serviço no nível de protocolo, chamando a API sobre o determinado protocolo (geralmente HTTP).
+
+- Teste de composição: Testar o serviço em cooperação com outros serviços no contexto de uma solução.
+
+- Teste de escalabilidade/taxa de transferência: Testar a escalabilidade e elasticidade do microsserviço implantado.
+
+- Teste de tolerância a falha: Testar a capacidade do microsserviço de recupera-se após uma falha.
+
+- Teste de penetração: Trabalhar com uma empresa terceirizada de segurança de software para realizar testes de penetração no sistema. \cite{Familiar2015}
 
 \section{Comunicação}
 
@@ -177,28 +268,6 @@ Métricas nos permitem saber o que está acontecendo em qualquer momento, e deci
 Enquanto históricos precisam ser desenvolvidos, métricas apenas precisam de instrumentação pois muitas ferramentas já possuem as próprias métricas ou já existem métodos consolidados para as obter. Nos servidores web mais populares, por exemplo, as informações básicas sobre uma requisição já são gravadas por padrão.
 
 É recomendado usar dashboards de alto nível para melhorar a visualização e monitoramento do status da aplicação a partir de suas métricas.
-
-\section{Testes}
-
-O processo de testes para microsserviços engloba várias estratégias diferentes de testes. Essas estratégias podem incluir testes funcionais, como um teste de unidade, ou testes não-funcionais, como um teste de desempenho. Usar múltiplas estratégias de testes garante que a aplicação opera com sucesso em ambientes e plataformas diferentes. De acordo com \citeonline{design-monitoring-testing-waseem}, testes de unidade e testes fim-a-fim são as estratégias de testes mais usadas.
-
-% We identified 12 testing strategies (see Table 28), which are listed in our survey question, from the literature (e.g., [9, 6, 61, 63, 64, 65, 66, 67]).
-
-\citeonline{Familiar2015} afirma que além de usar os métodos mais comuns de testes, deve-se também testar os microsserviços conforme passam pelo \emph{pipeline} de implantação. Isso inclui:
-
-- Testes internos: Testar as funções internas do serviço, inclusive uso de acesso de dados, e caching.
-
-- Teste de serviço: Testar a a implementação de serviço da API. Essa é uma implementação privada da API e seus modelos associados.
-
-- Teste de protocolo: Testar o serviço no nível de protocolo, chamando a API sobre o determinado protocolo (geralmente HTTP).
-
-- Teste de composição: Testar o serviço em cooperação com outros serviços no contexto de uma solução.
-
-- Teste de escalabilidade/taxa de transferência: Testar a escalabilidade e elasticidade do microsserviço implantado.
-
-- Teste de tolerância a falha: Testar a capacidade do microsserviço de recupera-se após uma falha.
-
-- Teste de penetração: Trabalhar com uma empresa terceirizada de segurança de software para realizar testes de penetração no sistema. \cite{Familiar2015}
 
 \section{APIs}\label{boas-praticas-apis}
 

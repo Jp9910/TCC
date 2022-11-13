@@ -34,8 +34,8 @@ Abordar em maior profundidade (opções):
 - melhorar introdução .. falar sobre
 - adicionar mais trabalhos relacionados 
 
-- 4.6 implantação
-- 4.8 monitoramento
+- 4.8 implantação em containers
+- 4.12 monitoramento
 - 4.9.3 protocol buffers
 - usar imagem do eShopOnContainers?
 - ler o resto do artigo 'microservices' de martin fowler (infrastructure automation)
