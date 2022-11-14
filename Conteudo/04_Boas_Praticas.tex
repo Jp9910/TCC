@@ -1,6 +1,6 @@
 \chapter{Boas práticas}\label{chapter-boas-praticas}
 
-\chapterprecis{Este capítulo aprensenta as boas práticas comumente seguidas na construção de aplicações com arquitetura de microsserviços.}\index{sinopse de capítulo}
+\chapterprecis{Este capítulo aprensenta as boas práticas comumente seguidas no desenvolvimento de aplicações com arquitetura de microsserviços.}\index{sinopse de capítulo}
 
 \section{Começar pela arquitetura monolítica}
 
@@ -119,7 +119,7 @@ Entretanto, essa descentralização tem implicações para o gerenciamento de at
 \section{CI/CD}
 CI/CD é um método para entregar aplicações e mudanças nelas com frequência aos clientes. CI é um acrônimo de \emph{Continuous Integration}, e diz respeito à automação de como o novo código feito pelo desenvolvedor chega no repositório principal e se transforma em um artefato lançável. Já CD é um acrônimo de \emph{Continuous Deployment} e/ou \emph{Continuous Delivery}. \emph{Continuous Delivery} diz respeito à automação de como os artefatos se transformam em novas versões lançadas que são implantáveis num ambiente de execução a qualquer hora. \emph{Continuous Deployment} diz respeito a automação de como as novas versões lançadas são de fato implantadas no ambiente de execução. A \autoref{figura-ci-cd} ilustra as definições e limites da integração, entrega e implantação contínua. Apesar de determinar essas definições para este trabalho, foram observados conflitos na bibliografia revisada tanto nas definições para os termos CI e CD quanto nos limites do que essas práticas englobam, em particular para o termo CD, que pode significar \emph{Continuous Delivery}, \emph{Continuous Deployment}, ou mesmo os dois. No fim, não é importante se ater à semântica - apenas deve-se lembrar que CI/CD é um processo, muitas vezes visualizado como um \emph{pipeline}, que envolve a adição de um alto nível de automação e monitoramento no desenvolvimento de aplicações. \cite{redhat-ci-cd, harness-ci-cd, gitlab-ci-cd}
 
-CI/CD é importante porque auxilia profissionais de desenvolvimento e de operações a trabalhar mais eficiente e efetivamente, por diminuir tarefas manuais lentas e processos de aprovação antiquados. Além disso, a automação faz com que os processos sejam previsíveis e repetíveis enquanto diminui o espaço para erro humano. \cite{gitlab-ci-cd}
+CI/CD auxilia profissionais de desenvolvimento e de operações a trabalhar mais eficiente e efetivamente, por diminuir tarefas manuais lentas e processos de aprovação antiquados. Além disso, faz com que os processos sejam previsíveis e repetíveis enquanto diminui o espaço para erro humano. Considerando que o ciclo de vida de um microsserviço deve ser tão automatizado quanto possível, CI/CD é uma prática de extrema importância. \cite{gitlab-ci-cd}
 
 \begin{figure}[htb]
 	\caption{\label{figura-ci-cd}CI/CD}
