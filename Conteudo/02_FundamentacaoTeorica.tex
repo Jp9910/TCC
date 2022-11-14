@@ -2,6 +2,8 @@
 
 \chapterprecis{Este capítulo aprensenta uma introdução sobre as arquiteturas monolítica e de microsserviços, e investiga trabalhos relacionados.}\index{sinopse de capítulo}
 
+Assim como este capítulo, a maioria dos engenheiros de \emph{software} fala da arquitetura de microsserviços contrastando-a com a arquitetura monolítica porque esta última é o estilo mais comum de se desenvolver aplicações, mas é importante ter em mente que existem outros tipos de arquitetura que não se encaixam nem como microsserviços nem monólito. \cite{martin-fowler-microservice-tradeoffs}
+
 \section{As aplicações monolíticas}\label{sessao-monolitos}
 
 Aplicações monolíticas, também chamadas de monólitos, são aplicações que possuem as camadas de acesso aos dados, de regras de negócios, e de interface de usuário em um único programa em uma única plataforma. Os monólitos são autocontidos e totalmente independentes de outras aplicações. Eles são feitos não para uma tarefa em particular, mas sim para serem responsáveis por todo o processo para completar determinada função. Em outras palavras, as aplicações monolíticas têm problema de modularidade. Elas podem ser organizadas das mais variadas formas e fazer uso de padrões arquiteturais, mas são limitadas em muitos outros aspectos, citados na \autoref{subsection-monolitos-limitacoes}. \cite{wiki_monolithic_2022}
