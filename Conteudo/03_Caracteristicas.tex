@@ -1,10 +1,10 @@
-\chapter{Características}\label{chapter-caracteristicas}
+\chapter{Características da arquitetura}\label{chapter-caracteristicas}
 
-\chapterprecis{Este capítulo aprensenta as características e as vantagens dos microsserviços, assim como os riscos, desafios e desvantagens que as acompanham.}\index{sinopse de capítulo}
+\chapterprecis{Este capítulo aprensenta as características e as vantagens da arquitetura de microsserviços, assim como os riscos, desafios e desvantagens que as acompanham.}\index{sinopse de capítulo}
 
 % \section{Propriedades dos microsserviços}
 
-Em geral não existe uma definição formal do que o estilo de arquitetura de microsserviços tem ou não tem, entretanto as características aqui apresentadas são características comuns observadas em arquiteturas que se encaixam como microsserviços. Assim sendo, nem todas as arquiteturas de microsserviços terão essas características, apesar de ser esperado que a maioria delas estejam presentes \cite{martin-fowler-microservices}.
+Em geral não existe uma definição formal do que a arquitetura de microsserviços tem ou não tem, entretanto as características aqui apresentadas são características comuns observadas em arquiteturas que se encaixam como microsserviços. Assim sendo, nem todas as arquiteturas de microsserviços terão essas características, apesar de ser esperado que a maioria delas estejam presentes \cite{martin-fowler-microservices}.
 
 \section{Sistema distribuído}
 A arquitetura de microsserviços forma naturalmente um sistema altamente distribuido, o que implica em alguns comportamentos e características. Uma delas é que qualquer chamada a um serviço está sujeita a falhas, e portanto microsserviços devem ser projetados para serem resilientes, isso é, tolerantes a falhas e ter um tempo de recuperação razoável quando algum problema acontecer \cite{Familiar2015}.
@@ -49,7 +49,7 @@ Como explicado na \autoref{sessao-monolitos}, quanto maior e mais antigo o \emph
 
 \section{Complexidade e desafios}
 
-O uso da arquitetura de microsserviços implica num grande aumento de complexidade não apenas na infraestrutura, mas também em muitas etapas do ciclo de desenvolvimento do \emph{software}, como no \emph{debug}, nos testes, e no monitoramento por exemplo. Além disso, o uso de diversas tecnologias geralmente traz problemas por inexperiência dos desenvolvedores. Dessa forma, existem muitos desafios no desenvolvimento de aplicações com arquitetura de microsserviços, que normalmente só conseguem ser compensados em aplicações mais complexas. Assim como em qualquer estilo de arquitetura, existem benefícios, riscos, desvantagens e desafios, e para determinar se adotá-la é uma escolha sábia é necessário entendê-los e aplicá-los ao contexto específico da aplicação e dos desenvolvedores \cite{top10-microservices-challenges,martin-fowler-microservice-tradeoffs}.
+O uso da arquitetura de microsserviços implica num grande aumento de complexidade não apenas na infraestrutura, mas também em muitas etapas do ciclo de desenvolvimento do \emph{software}, como no \emph{debug}, nos testes, e no monitoramento por exemplo. Além disso, o uso de diversas tecnologias geralmente traz problemas por inexperiência dos desenvolvedores. Dessa forma, existem muitos desafios no desenvolvimento de aplicações com arquitetura de microsserviços, que normalmente só conseguem ser compensados em aplicações mais complexas. Assim como em qualquer tipo de arquitetura, existem benefícios, riscos, desvantagens e desafios, e para determinar se adotá-la é uma escolha sábia é necessário entendê-los e aplicá-los ao contexto específico da aplicação e dos desenvolvedores \cite{top10-microservices-challenges,martin-fowler-microservice-tradeoffs}.
 
 Um desafio considerado crítico para o bom funcionamento da aplicação é a definição adequada dos limites de cada microsserviço. Outros desafios são: complexidade de projeto, complexidade operacional, gerenciamento de redes, consistência de dados, comunicação, e manutenção. De acordo com \citeonline{CAOPLE}, os três grandes desafios do desenvolvimento de aplicações com arquitetura de microsserviços são (1) Como programar sistemas que consistem de um grande número de serviços executando em paralelo e distribuidos em um conjunto de máquinas, (2) Como reduzir a sobrecarga de comunicação causada pela execução de grandes números de pequenos serviços, e (3) Como sustentar a implantação flexível de serviços em uma rede para conseguir realizar o balanceamento de carga \cite{martin-fowler-monolith-first}.
 
