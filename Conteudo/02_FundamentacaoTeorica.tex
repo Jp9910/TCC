@@ -29,7 +29,7 @@ Escalar a aplicação pode ser um problema, pois ela só pode ser escalada em um
 % Scaling the application can be difficult - a monolithic architecture is that it can only scale in one dimension. On the one hand, it can scale with an increasing transaction volume by running more copies of the application. Some clouds can even adjust the number of instances dynamically based on load. But on the other hand, this architecture can’t scale with an increasing data volume. Each copy of application instance will access all of the data, which makes caching less effective and increases memory consumption and I/O traffic. Also, different application components have different resource requirements - one might be CPU intensive while another might memory intensive. With a monolithic architecture we cannot scale each component independently. \cite{microservicesIO_monolithic_architecture}
 
 \subsubsection{Reutilização}
-O alto acoplamento entre as partes da aplicação dificulta a reutilização delas, o que pode causar esforço e código duplicado.
+O alto acoplamento entre as partes da aplicação dificulta a reutilização delas, o que pode causar esforço e código repetidos.
 
 \subsubsection{Implantação}
 Realizar alterações em qualquer componente implica na necessidade de reimplantar toda a aplicação, mesmo as partes que não têm ligação com as alterações. Isso aumenta riscos associados a falhas na implantação e consequentemente desencoraja a prática de implantação contínua \cite{microservicesIO_monolithic_architecture}.
@@ -38,10 +38,10 @@ Realizar alterações em qualquer componente implica na necessidade de reimplant
 O alto acoplamento existente entre as partes da aplicação permite que falhas relativamente pequenas possam prejudicar toda a aplicação, inclusive as partes que não tiveram relação com a falha.
 
 \subsubsection{Flexibilidade de tecnologias}
-As escolhas de tecnologias são mais limitadas - um projeto tende a usar apenas um grupo de tecnologias por ser muito difícil fazer \emph{upgrade} ou mudar e por desafios de compatibilidade que surgem ao usar tecnologias diferentes \cite{microservicesIO_monolithic_architecture}.
+As escolhas de tecnologias são mais limitadas - um projeto tende a usar apenas um grupo de tecnologias porque realizar \emph{upgrades} ou mudanças de tecnologias é uma tarefa complexa e pode causar problemas de compatibilidade \cite{microservicesIO_monolithic_architecture}.
 
 \subsubsection{Divisão de times}
-Quando a aplicação alcança determinado tamanho, é desejável dividir os desenvolvedores em times que têm foco em partes funcionais específicas. Entretanto, uma aplicação monolítica dificulta esse desenvolvimento independente porque com elas os times precisam coordenar o desenvolvimento e as implantações \cite{microservicesIO_monolithic_architecture}.
+Quando a aplicação alcança determinado tamanho, é desejável dividir os desenvolvedores em times que têm foco em partes funcionais específicas. Entretanto, as aplicações monolíticas dificultam esse desenvolvimento independente porque com elas os times precisam coordenar o desenvolvimento e as implantações \cite{microservicesIO_monolithic_architecture}.
 
 % ---
 \section{Os microsserviços}
@@ -71,23 +71,23 @@ A \autoref{figura_arquitetura_microsservicos} exemplifica uma aplicação com ar
 
 \subsection{Tipos de microsserviços}\label{fundamentacao-tipos-microsservicos}
 
-\subsubsection{Serviço de dados \emph{(data service)}}
+\subsubsection{Serviço de dados (\emph{data service})}
 Tipo de serviço de mais baixo-nível. É responsável por receber e tratar dados, assim fornecendo acesso a determinado domínio e suas regras. Quando um serviço de dados realiza apenas operações relacionadas a um determinado domínio da aplicação, ele também é chamado de serviço de domínio.
 
-\subsubsection{Serviço de negócio \emph{(business service)}}
+\subsubsection{Serviço de negócio (\emph{business service})}
 Em determinados momentos as operações precisam de mais de um modelo do domínio para serem representadas em um serviço. Assim, os serviços de negócio agregam dados e oferecem operações mais complexas. Eles englobam vários serviços de domínio e proveem uma funcionalidade do negócio de nível mais alto, podendo também encapsular domínios relacionados. Por exemplo, em um site de cursos online, um serviço de negócio poderia prover uma funcionalidade chamada "Matricular Aluno", que envolveria as operações de inserir aluno no serviço de cursos, inserir aluno no serviço de pagamento, e inserir aluno no serviço de gamificação.
 
-\subsubsection{Serviço de tradução \emph{(translation service)}}
+\subsubsection{Serviço de tradução (\emph{translation service})}
 Um serviço de tradução é um intermediário entre a aplicação e um recurso externo, provendo uma forma de acessar esse recurso. No caso desse serviço externo sofrer mudanças, pode-se realizar as alterações consequentemente necessárias em apenas um lugar, nesse serviço de tradução. Por exemplo, a aplicação pode consumir uma API externa por meio do serviço de tradução, pedindo para que ele faça uma requisição para essa API, e então recebendo a resposta. % App --> translation service --> Api externa
 
-\subsubsection{Serviço de ponta \emph{(edge service)}}
+\subsubsection{Serviço de ponta (\emph{edge service})}
 É um serviço que serve diretamente ao cliente, sendo customizado para atender necessidades específicas desse cliente. Por exemplo, pode existir um serviço de ponta para clientes móveis e outro serviço de ponta para clientes web.
 
 \section{Trabalhos relacionados}
 
 \subsection{Microservices, IoT and Azure - capítulo 2: What is a microservice, por \citeonline{Familiar2015}}
 
-O Capítulo 2 do livro de Bob Familiar descreve o que é um microsserviço, suas características e implicações, benefícios, e desafios. 
+O Capítulo 2 do livro de Bob Familiar descreve o que é um microsserviço, suas características e implicações, benefícios e desafios. 
 
 Como explicado por \citeonline{Familiar2015}, microsserviços fazem uma coisa e fazem bem. Eles representam capacidades de negócio definidas usando o projeto orientado a domínio (DDD), são testados a cada passo do \emph{pipeline} de implantação, e lançados por meio de automação como serviços independentes, isolados, altamente escaláveis e resilientes em uma infraestrutura em nuvem distribuída. Pertecem a um time único de desenvolvedores, que trata o desenvolvimento do microsserviço como um produto, entregando \emph{software} de alta qualidade em um processo rápido e iterativo com envolvimento do cliente e satisfação como métrica de sucesso.
 
