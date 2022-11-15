@@ -4,22 +4,20 @@
 
 % \section{Propriedades dos microsserviços}
 
-Em geral não existe uma definição formal do que o estilo de arquitetura de microsserviços tem ou não tem, mas as características aqui apresentadas são características comuns observadas em arquiteturas que se encaixam como microsserviços. Assim sendo, nem todas as arquiteturas de microsserviços terão essas características, mas é esperado que a maioria delas estejam presentes. \cite{martin-fowler-microservices}
+Em geral não existe uma definição formal do que o estilo de arquitetura de microsserviços tem ou não tem, entretanto as características aqui apresentadas são características comuns observadas em arquiteturas que se encaixam como microsserviços. Assim sendo, nem todas as arquiteturas de microsserviços terão essas características, apesar de ser esperado que a maioria delas estejam presentes \cite{martin-fowler-microservices}.
 
 \section{Sistema distribuído}
-A arquitetura de microsserviços forma naturalmente um sistema altamente distribuido, o que implica em alguns comportamentos e características. Uma delas é que qualquer chamada a um serviço está sujeita a falhas, e portanto microsserviços devem ser projetados para serem resilientes, isso é, tolerantes a falhas e ter um tempo de recuperação razoável quando algum problema acontecer. Outra característica é que microsserviços podem ser usados e reusados em soluções e cenários de uso diferentes, então devem ser escaláveis, responsivos e configuráveis, para assim alcançar um bom desempenho independente do cenário de uso. \cite{martin-fowler-microservices,Familiar2015}
+A arquitetura de microsserviços forma naturalmente um sistema altamente distribuido, o que implica em alguns comportamentos e características. Uma delas é que qualquer chamada a um serviço está sujeita a falhas, e portanto microsserviços devem ser projetados para serem resilientes, isso é, tolerantes a falhas e ter um tempo de recuperação razoável quando algum problema acontecer \cite{Familiar2015}.
 
-% \section{Autonomia e Isolamento}
-Um grande benefício da formação de um sistema distribuido vem na forma da autonomia e do isolamento, o que significa que microsserviços são unidades auto-contidas de funcionalidade, com dependências de outros serviços fracamente acopladas, então podem ser projetados, desenvolvidos, testados e implantados independentemente. O termo autônomo pode ser definido como "existe ou é capaz de existir independetemente das outras partes". O termo isolado, como "separado das outras partes". \cite{Familiar2015}
+Um benefício proveniente dessa distribuição é que microsserviços podem ser usados em soluções e cenários de uso diferentes, contudo para tanto devem ser escaláveis, responsivos e configuráveis, para assim alcançar um bom desempenho independente do cenário de uso. Outro benefício dessa distribuição é a autonomia e o isolamento, o que significa que microsserviços são unidades auto-contidas de funcionalidade, com dependências de outros serviços fracamente acopladas, então podem ser projetados, desenvolvidos, testados e implantados independentemente. \cite{martin-fowler-microservices,Familiar2015}.
 
-% \section{Orientação-a-mensagens e programabilidade}
 Um desafio advindo dessa distribuição é que a comunicação é complexa e falível. Geralmente ela depende de APIs e contratos de dados para definir como os microsserviços interagem, ou seja, os microsserviços são orientados-a-mensagens. A API define um conjunto de \emph{endpoints} acessíveis por rede, e o contrato de dados define a estrutura da mensagem que é enviada ou retornada. \cite{Familiar2015}
 
 % \section{Vantagens}
 
 \section{Flexibilidade na escolha de tecnologias}
 
-Como mencionado anteriormente, cada microsserviço disponibiliza suas funcionalidades por meio de APIs e contratos de dados em uma rede. Usando esse meio, a comunicação independe da arquitetura que o microsserviço faz uso, o que possibilita que cada microsserviço possa escolher seu sistema operacional, linguagem e banco de dados. Além disso, eles podem ser desenvolvidos usando uma linguagem de programação e estrutura que melhor se adapte ao problema que ele é projetado para resolver. Embora essa flexibilidade seja algo positivo, usar muitas tecnologias diferentes tende a aumentar a complexidade do sistema. \cite{oracle_microservices, Familiar2015}
+Como mencionado anteriormente, cada microsserviço disponibiliza suas funcionalidades por meio de APIs e contratos de dados em uma rede. Usando esse meio, a comunicação independe da arquitetura que o microsserviço faz uso, o que possibilita que cada microsserviço possa escolher seu sistema operacional, linguagem e outras tecnologias. Além disso, eles podem ser desenvolvidos usando uma linguagem de programação e estrutura que melhor se adapte ao problema que ele é projetado para resolver. Embora essa flexibilidade seja algo positivo, usar muitas tecnologias diferentes aumenta a complexidade do sistema. \cite{oracle_microservices, Familiar2015}
 
 \section{Alta velocidade de desenvolvimento}
 
@@ -35,7 +33,7 @@ Contudo, usar serviços dessa forma traz algumas desvantagens. A comunicação r
 
 \section{Flexibilidade no ambiente de execução}
 
-A implantação de microsserviços é altamente dependente de sua automação. Para garantir flexibilidade de ambiente de execução, essa automação deve incluir configuração de cenários diferentes de uso, não apenas para produção, mas também para desenvolvimento e testagem, possibilitando que o microsserviço tenha o melhor desempenho em diversos cenários. Para tanto, é necessário o uso de ferramentas que configurem essa flexibilidade. Tais ferramentas serão melhor discutidas no \autoref{chapter-ferramentas}. \cite{Familiar2015}
+A implantação de microsserviços é altamente dependente de sua automação. Para garantir flexibilidade de ambiente de execução, essa automação deve incluir configuração de cenários diferentes de uso, não apenas para produção, mas também para desenvolvimento e testagem, possibilitando que o microsserviço tenha o melhor desempenho em diversos cenários. Para tanto, é necessário o uso de ferramentas que configurem essa flexibilidade. \cite{Familiar2015}
 
 \section{Versionável e substituível}
 
@@ -88,7 +86,7 @@ Um desafio considerado crítico para o bom funcionamento da aplicação é a def
 % \end{citacao}
 
 % \subsection{Plataforma}
-% Criar o ambiente de execução para microsserviços requer um grande investimento em infraestrutura dinâmica em \emph{data centers} dispersos para garantir maior disponibilidade. Se sua atual plataforma \emph{on-premises} não suporta automação, infraestrutura dinâmica, escalamento elástico e alta disponibilidade, deve-se considerar uma plataforma na núvem. \cite{Familiar2015}. Mais sobre soluções na núvem será discutido no \autoref{chapter-ferramentas}.
+% Criar o ambiente de execução para microsserviços requer um grande investimento em infraestrutura dinâmica em \emph{data centers} dispersos para garantir maior disponibilidade. Se sua atual plataforma \emph{on-premises} não suporta automação, infraestrutura dinâmica, escalamento elástico e alta disponibilidade, deve-se considerar uma plataforma na nuvem. \cite{Familiar2015}. Mais sobre soluções na nuvem será discutido no \autoref{chapter-ferramentas}.
 
 % % \subsection{Monitoramento}
 
