@@ -266,7 +266,7 @@ Métricas nos permitem saber o que está acontecendo em qualquer momento, e deci
 
 Enquanto históricos precisam ser desenvolvidos, métricas apenas precisam de instrumentação pois muitas ferramentas já possuem as próprias métricas ou já existem métodos consolidados para as obter. Nos servidores web mais populares, por exemplo, as informações básicas sobre uma requisição já são gravadas por padrão.
 
-É recomendado usar dashboards de alto nível para melhorar a visualização e monitoramento do status da aplicação a partir de suas métricas.
+É recomendado usar paineis de controle de alto nível para melhorar a visualização e monitoramento do status da aplicação e diversas outras informações operacionais e de negócio a partir de suas métricas \cite{martin-fowler-microservices}.
 
 \section{APIs}\label{boas-praticas-apis}
 
@@ -279,12 +279,12 @@ Esses códigos são números entre 100 e 599, cada um tendo um significado difer
 Atualmente JSON é um dos formatos mais populares para troca de dados na web, pelo fato de ser facilmente lido tanto por humanos quanto por máquinas. Em APIs, JSON é usado para enviar e receber requisições por meio do protocolo HTTP, sendo uma solução robusta para a comunicação entre cliente e servidor. Embora seja derivado do JavaScript, JSON também é suportado por muitas outras linguagens, seja nativamente ou por meio de bibliotecas.  \cite{json_bourhis_2020}
 
 \subsection{Troca de dados com \emph{Buffers} de Protocolo}
-\emph{Buffers} de protocolo, ou \emph{Protocol buffers} é uma ferramenta de código aberto desenvolvida pelo Google que oferece um método de serialização de dados estruturados para envio de informações. Ela é neutra em linguagem e plataforma, é extensível e funciona como alternativa ao JSON na troca de dados. Essa ferramenta serializa os dados a serem enviados de modo a tornar o pacote mais leve e mais rápido, mas introduz uma complexidade extra. Por introduzir essa complexidade na troca de dados e não ser otimizada para quantidades de dados que excedem alguns megabytes, essa ferramenta não é recomendada para todo caso de uso. \cite{google-protocol-buffers}
+\emph{Buffers} de protocolo, ou \emph{Protocol buffers} é uma ferramenta de código aberto desenvolvida pelo Google que oferece um método de serialização de dados estruturados para envio de informações. Ela é neutra em linguagem e plataforma, é extensível e funciona como alternativa ao JSON na troca de dados. Essa ferramenta serializa os dados a serem enviados de modo a tornar o pacote mais leve e mais rápido, mas introduz uma complexidade extra. Por introduzir essa complexidade na troca de dados e não ser otimizada para quantidades de dados que excedem alguns megabytes, essa ferramenta não é recomendada para todo caso de uso \cite{google-protocol-buffers}.
 
 \subsection{Contratos de dados e versionamento}
 Uma API depende de contratos de dados, isso é, uma definição dos dados que serão recebidos e retornados. Esse contrato implica num compromisso de manter o serviço correspondente funcionando e inalterado. Entretanto, é possível desenvolver melhorias ou adicionar funcionalidades sem quebrar o contrato. Para tanto, deve ser feito um versionamento da API e deve ser mantida a transparência com os clientes que a usam. Por exemplo, sempre que algo for alterado é preciso atualizar a documentação.
 
-Para fazer o versionamento, pode-se usar o processo de versionamento de software para representar os estados da API. Nesta técnica, usa-se três números para representar a versão, por exemplo "2.3.7". O primeiro representa a versão maior, o segundo, a versão menor, e o terceiro, o patch (pequena atualização para consertar ou melhorar algo). \cite{wiki_software_versioning_2022}
+Para fazer o versionamento, pode-se usar o processo de versionamento de software para representar os estados da API. Nesta técnica, usa-se três números para representar a versão, por exemplo "2.3.7". O primeiro representa a versão maior, o segundo, a versão menor, e o terceiro, o patch (pequena atualização para consertar ou melhorar algo) \cite{wiki_software_versioning_2022}.
 
 Em uma API, para cumprir o contrato de dados, apenas modificações aditivas podem ser feitas, tais como novos endpoints ou novos campos opcionais em algum recurso. Quando isso é feito, a versão da API muda de 2.3.7 para 2.4.0 ou para 2.3.8 dependendo do tamanho da mudança.
 
@@ -298,7 +298,7 @@ Um \emph{API Gateway} é um padrão de projeto e funciona como uma porta única 
 
 Outra vantagem é que esse \emph{API Gateway} pode agregar requisições, permitindo que o cliente envie apenas uma requisição para o \emph{API Gateway} para recuperar informações de diferentes microsserviços, o que normalmente exigiria múltiplas requisições. Nesse caso, quando recebida a requisição do cliente, o \emph{API Gateway} fica responsável por disparar as requisições correspondentes, agregar as respostas e as devolver ao cliente.
 
-Entretando, também há desvantagens no uso desse padrão: (1) há um acoplamento forte entre os microsserviços e o \emph{API Gateway}, (2) surge um possível ponto massivo de falha nesse \emph{API Gateway}, (3) Se não escalado adequadamente, esse \emph{API Gateway} pode se tornar um gargalo. \cite{microsoft-api-gateway}
+Entretando, também há desvantagens no uso desse padrão: (1) há um acoplamento forte entre os microsserviços e o \emph{API Gateway}, (2) surge um possível ponto massivo de falha nesse \emph{API Gateway}, (3) Se não escalado adequadamente, esse \emph{API Gateway} pode se tornar um gargalo \cite{microsoft-api-gateway}.
 
 \subsection{Segurança em APIs}
 
@@ -308,16 +308,16 @@ Incluir autenticação em uma API consiste em exigir uma prova de autorização 
 
 \subsubsection*{Validação de entradas}
 
-Validar entradas significa verificar as requisições que chegam com o intuito de garantir que elas não contém dados impróprios, tais como injeções de SQL ou \emph{scripting} entre sites (scripting significa executar uma determinada sequência de comandos). Essa validação deve ser implementada tanto em nível sintático como em semântico, isso é, tanto impondo correção da sintaxe quanto impondo correção de valores. \cite{rapidAPI-twitter}
+Validar entradas significa verificar as requisições que chegam com o intuito de garantir que elas não contém dados impróprios, tais como injeções de SQL ou \emph{scripting} entre sites (scripting significa executar uma determinada sequência de comandos). Essa validação deve ser implementada tanto em nível sintático como em semântico, isso é, tanto impondo correção da sintaxe quanto impondo correção de valores \cite{rapidAPI-twitter}.
 
 \subsubsection*{Certificado Secute Socket Layer (SSL)}
-Usar um certificado SSL permite que o protocolo HTTPS seja usado em vez do HTTP, criptografando as informações que estão trafegando, o que adiciona uma camada de segurança. \cite{rapidAPI-twitter}
+Usar um certificado SSL permite que o protocolo HTTPS seja usado em vez do HTTP, criptografando as informações que estão trafegando, o que adiciona uma camada de segurança \cite{rapidAPI-twitter}.
 
 \subsubsection*{Limitação de taxa de requisições}
-Limitar a taxa de requisições é um jeito de proteger a infraestrutura do servidor nos casos de acontecerem grandes fluxos de requisições, tal como em um ataque de \emph{DoS} (negação de serviço). Clientes terão seu acesso bloqueado caso enviem uma quantidade de requisições acima do limite determinado. \cite{rapidAPI-twitter}
+Limitar a taxa de requisições é um jeito de proteger a infraestrutura do servidor nos casos de acontecerem grandes fluxos de requisições, tal como em um ataque de \emph{DoS} (negação de serviço). Clientes terão seu acesso bloqueado caso enviem uma quantidade de requisições acima do limite determinado \cite{rapidAPI-twitter}.
 
 \subsubsection*{Compartilhar o mínimo possível}
-Compartilhar o mínimo possível é uma medida de segurança genérica que pode ser adotada em qualquer microsserviço. Especificamente nas APIs, deve-se retornar estritamente apenas os dados necessários para o cliente. Muitas ferramentas usadas para implementar APIs incluem por padrão informações como se fossem marcas d'água, mas que podem ser removidas, tal como headers "X-Powered-By", que vazam informações do servidor que podem auxiliar usuários mal-intencionados. \cite{rapidAPI-twitter}
+Compartilhar o mínimo possível é uma medida de segurança genérica que pode ser adotada em qualquer microsserviço. Especificamente nas APIs, deve-se retornar estritamente apenas os dados necessários para o cliente. Muitas ferramentas usadas para implementar APIs incluem por padrão informações como se fossem marcas d'água, mas que podem ser removidas, tal como headers "X-Powered-By", que vazam informações do servidor que podem auxiliar usuários mal-intencionados \cite{rapidAPI-twitter}.
 
 \subsection{Testar a API}
 Testar uma API isoladamente serve para determinar se ela atende a parâmetros pré-definidos ou não. Tais parâmetros podem ser o cumprimento da funcionalidade, a confiabilidade, a latência, o desempenho, e a segurança. Quando um teste de API falha, deverá ser possível saber precisamente onde o problema se encontra, assim aumentando a velocidade de desenvolvimento e a qualidade do produto.
@@ -331,10 +331,10 @@ Testar uma API isoladamente serve para determinar se ela atende a parâmetros pr
 % - API testing also helps to release the next API version faster. \cite{rapidAPI-twitter}
 
 \subsection{Salvar a resposta no \emph{cache}}
-Às vezes referido como \emph{cachear}, salvar informações no \emph{cache} melhora o tempo de busca da informação. Em uma API podem haver múltiplas requisições para a mesma informação em um curto intervalo de tempo, e para cada requisição será necessário buscar a informação. Entretanto, se a informação estiver salva no \emph{cache}, não será necessário buscar essa informação, o que melhora o tempo de resposta da API, especialmente em \emph{endpoints} que frequentemente retornam a mesma resposta. \cite{rapidAPI-twitter}
+Às vezes referido como \emph{cachear}, salvar informações no \emph{cache} melhora o tempo de busca da informação. Em uma API podem haver múltiplas requisições para a mesma informação em um curto intervalo de tempo, e para cada requisição será necessário buscar a informação. Entretanto, se a informação estiver salva no \emph{cache}, não será necessário buscar essa informação, o que melhora o tempo de resposta da API, especialmente em \emph{endpoints} que frequentemente retornam a mesma resposta \cite{rapidAPI-twitter}.
 
 \subsection{Comprimir os dados}
-A transferência de cargas grandes pode diminuir a velocidade da API. Comprimir os dados auxilia nesse problema, diminuindo o tamanho da carga e aumentando a velocidade de transferência. \cite{rapidAPI-twitter}
+A transferência de cargas grandes pode diminuir a velocidade da API. Comprimir os dados auxilia nesse problema, diminuindo o tamanho da carga e aumentando a velocidade de transferência \cite{rapidAPI-twitter}.
 
 % There are various compression methods available, a common one being GZIP. \cite{rapidAPI-twitter}
 
@@ -342,10 +342,10 @@ A transferência de cargas grandes pode diminuir a velocidade da API. Comprimir 
 % Over-fetching results in unnecessary and unusable data, and under-fetching results in an incomplete response. Good architecture, planning, and appropriate API management tools are essential to avoid these. \cite{rapidAPI-twitter}
 
 \subsection{Paginar e filtrar}
-A Paginação separa e categoriza resultados, enquanto a filtragem retorna apenas os resultados relevantes de acordo com os parâmetros da requisição. A paginação e filtragem de resultados reduz a complexidade da resposta e facilitam o uso da API. \cite{rapidAPI-twitter}
+A Paginação separa e categoriza resultados, enquanto a filtragem retorna apenas os resultados relevantes de acordo com os parâmetros da requisição. A paginação e filtragem de resultados reduz a complexidade da resposta e facilitam o uso da API \cite{rapidAPI-twitter}.
 
 \subsection{PATCH ou PUT}
-Quando é necessário modificar um recurso em uma API, usa-se os métodos HTTP PUT ou PATCH. Enquanto PUT atualiza o recurso inteiro, PATCH atualiza apenas uma parte específica do recurso, assim usando uma carga de dados menor. Portanto, quando possível deve-se usar PATCH em vez de PUT para modificar um recurso. \cite{rapidAPI-twitter}
+Quando é necessário modificar um recurso em uma API, usa-se os métodos HTTP PUT ou PATCH. Enquanto PUT atualiza o recurso inteiro, PATCH atualiza apenas uma parte específica do recurso, assim usando uma carga de dados menor. Portanto, quando possível deve-se usar PATCH em vez de PUT para modificar um recurso \cite{rapidAPI-twitter}.
 
 % \section{Agregando serviços (process agregator pattern)}
 % Um padrão popular Agregar serviços de negócio em um único serviço mantém as funções em um nível mais alto. 
