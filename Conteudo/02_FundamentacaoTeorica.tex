@@ -1,6 +1,6 @@
 \chapter{Fundamentação teórica}\label{chapter-fundamentacao}
 
-\chapterprecis{Este capítulo aprensenta uma introdução sobre as arquiteturas monolítica e de microsserviços, e investiga trabalhos relacionados.}\index{sinopse de capítulo}
+\chapterprecis{Este capítulo aprensenta uma introdução sobre as arquiteturas monolítica e de microsserviços e analisa trabalhos relacionados.}\index{sinopse de capítulo}
 
 Assim como este capítulo, a maioria dos engenheiros de \emph{software} fala da arquitetura de microsserviços contrastando-a com a arquitetura monolítica porque esta última é o estilo mais comum de se desenvolver aplicações, porém é importante ter em mente que existem outros tipos de arquitetura que não se encaixam nem como microsserviços nem como monólito \cite{martin-fowler-microservice-tradeoffs}.
 
@@ -21,7 +21,7 @@ Entretanto, esses benefícios só são válidos até certo ponto. Depois que uma
 
 \subsubsection{Crescimento, velocidade de desenvolvimento, e manutenção}
 % subsubsection tamanho da aplicação
-Depois de chegar num certo tamanho, pode se tornar muito difícil desenvolver funcionalidades novas, ou mesmo prover manutenção às já existentes, devido a diversos problemas que começam a surgir, tais como: lentidão da IDE por conta do tamanho do código, prejudicando a produtividade dos desenvolvedores; sobrecarregamento do container ou máquina que hospeda a aplicação, aumentando o tempo de implantação; e dificuldade de entendimento da aplicação e de realizar alterações nela, diminuindo a velocidade de desenvolvimento e a qualidade do código. Padrões de organização podem amenizar a situação, mas não eliminam o problema \cite{microservicesIO_monolithic_architecture}.
+Depois de chegar num certo tamanho, pode se tornar muito difícil desenvolver funcionalidades novas, ou mesmo prover manutenção às já existentes, devido a diversos problemas que começam a surgir, tais como: lentidão da IDE por conta do tamanho do código, prejudicando a produtividade dos desenvolvedores; sobrecarregamento do container ou máquina que hospeda a aplicação, aumentando o tempo de início; e dificuldade de entendimento da aplicação e de realizar alterações nela, diminuindo a velocidade de desenvolvimento e a qualidade do código. Padrões de organização podem amenizar a situação, mas não eliminam o problema \cite{microservicesIO_monolithic_architecture}.
 
 \subsubsection{Escalabilidade}
 Escalar a aplicação pode ser um problema, pois ela só pode ser escalada em uma dimensão. É possível escalar o volume de operações executando mais cópias de um monólito, mas não é possível escalar o volume dos dados, pois cada cópia precisará acessar todos os dados, o que aumenta o consumo de memória e o tráfego de entradas e saídas (\emph{I/O}). Também não é possível escalar os componentes independentemente, não permitindo ajustar poder de processamento ou memória quando/onde adequado \cite{microservicesIO_monolithic_architecture}.
@@ -29,13 +29,13 @@ Escalar a aplicação pode ser um problema, pois ela só pode ser escalada em um
 % Scaling the application can be difficult - a monolithic architecture is that it can only scale in one dimension. On the one hand, it can scale with an increasing transaction volume by running more copies of the application. Some clouds can even adjust the number of instances dynamically based on load. But on the other hand, this architecture can’t scale with an increasing data volume. Each copy of application instance will access all of the data, which makes caching less effective and increases memory consumption and I/O traffic. Also, different application components have different resource requirements - one might be CPU intensive while another might memory intensive. With a monolithic architecture we cannot scale each component independently. \cite{microservicesIO_monolithic_architecture}
 
 \subsubsection{Reutilização}
-O acoplamento forte entre as partes da aplicação dificulta a reutilização delas, o que pode causar esforço e código duplicado.
+O alto acoplamento entre as partes da aplicação dificulta a reutilização delas, o que pode causar esforço e código duplicado.
 
 \subsubsection{Implantação}
 Realizar alterações em qualquer componente implica na necessidade de reimplantar toda a aplicação, mesmo as partes que não têm ligação com as alterações. Isso aumenta riscos associados a falhas na implantação e consequentemente desencoraja a prática de implantação contínua \cite{microservicesIO_monolithic_architecture}.
 
 \subsubsection{Confiabilidade e resiliência}
-O acoplamento forte existente entre as partes da aplicação permite que falhas relativamente pequenas possam prejudicar toda a aplicação, inclusive as partes que não tiveram relação com a falha.
+O alto acoplamento existente entre as partes da aplicação permite que falhas relativamente pequenas possam prejudicar toda a aplicação, inclusive as partes que não tiveram relação com a falha.
 
 \subsubsection{Flexibilidade de tecnologias}
 As escolhas de tecnologias são mais limitadas - um projeto tende a usar apenas um grupo de tecnologias por ser muito difícil fazer \emph{upgrade} ou mudar e por desafios de compatibilidade que surgem ao usar tecnologias diferentes \cite{microservicesIO_monolithic_architecture}.

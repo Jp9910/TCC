@@ -1,4 +1,4 @@
-\chapter{Práticas no desenvolvimento}\label{chapter-boas-praticas}
+\chapter{Práticas}\label{chapter-boas-praticas}
 
 \chapterprecis{Este capítulo apresenta e discute práticas comumente seguidas no desenvolvimento de aplicações com arquitetura de microsserviços.}\index{sinopse de capítulo}
 
@@ -102,6 +102,9 @@ Para o gerenciamento de dados, há a possibilidade de compartilhar um banco de d
 
 Entretanto, essa descentralização tem implicações para o gerenciamento de atualizações. Geralmente a abordagem para se garantir consistência nas atualizações é pelo uso de transações quando atualizando múltiplos recursos. Contudo, o uso de transações resultada em um acoplamento temporal, o que é problemático quando se tem muitos serviços. Além disso, transações distribuidas são notoriamente difíceis de implementar, e portanto arquiteturas de microsserviços realizam coordenação sem transações entre serviços, com reconhecimento claro de que consistência pode ser apenas consistência eventual e que problemas serão lidados pela compensação de operações \cite{martin-fowler-microservices}.
 
+% \subsection{Arquitetura orientada por eventos}
+
+% \subsection{CQRS}
 % Existe um padrão ...
 
 % - Um padrão de codificação: CQRS - Command Query Resposibility Segregation (Segregação da responsabilidade entre o comando e uma busca)
@@ -175,14 +178,41 @@ Os benefícios da entrega contínua incluem: risco reduzido na implantação, po
 
 % Where Continuous Deployment focuses on the actual deployment, Continuous Delivery focuses on the release and release strategy. An elusive goal would be a “push of a button” to get changes into production. That “push of a button” is Continuous Delivery. \cite{harness-ci-cd}
 
-\section{Mono-repo ou Multi-repo}
+\section{Organização de código}
+% Monorepo e polirepo são estratégias de organização de código.
+% Para a organização de código no sistema de controle de versionamento, há duas abordagens - monorepo ou polirepo. Também tem a abordagem híbrida.
+
+\subsection{Monorepo}
+Monorepo é uma estratégia de organização de código onde usa-se apenas um repositório no sistema de controle de versionamento para gerenciar múltiplos projetos. Ela é usada por diversas grandes empresas como Google, Facebook e Microsoft para gerenciar inúmeros projetos que formam um repositório enorme. O benefício mais tangível dessa abordagem é a simplificação do gerenciamento do versionamento dos projetos - como todos ficam em apenas um repositório, é mais fácil entender o histórico de mudanças e acompanhar o estado da aplicação, também facilitando restaurações de estados anteriores (\emph{rollbacks}). Segundo \citeonline{monorepo-polirepo-nicolas}, o uso dessa estratégia de organização de código também causa um impacto cultural nos times envolvidos com os projetos, encorajando código consistente e de alta qualidade e melhorando a cognição e o trabalho em equipe deles. Por outro lado, essa estratégia também pode causar problemas como: pior desempenho da IDE e de ações como a compilação devido ao grande tamanho do repositório; sobrecarga do servidor de integração devido ao maior número de operações no repositório; aumento do acoplamento entre os projetos caso os desenvolvedores não sigam práticas adequadas para manter o acoplamento baixo; e aumento na complexidade da automação de processos relacionados a integração, entrega e implantação contínua. \cite{monorepo-polirepo-semaphoreci, monorepo-do-or-do-not, monorepo-polirepo-nicolas}
+
+% Por que usar monorepo, que aumenta o acoplamento dos projetos, quando uma grande vantagem dos microsserviços é justamente o baixo acoplamento? 
+
+% Simplifica a documentação . Um único \emph{pipeline} de implantação só que bem mais complexo. Testes de integração e de aceitação são mais fáceis de implementar. Usado por empresas grandes empresas como Google, Facebook e Uber.
+
+% Pros
+% 1. Since code for all the services lands in the same place, all issues related to multiple repositories — the proliferation of commits, PRs, code review, etc. disappear. Making the same change across multiple files like Kubernetes templates or logging settings becomes as easy as a global find & replace.
+% 2. We also planned on developing a single CI/CD pipeline for all the services, to not have to monitor multiple jobs for failures. More on this below.
+% 3. Also, the adoption of a monorepo would not compromise our microservice architecture, like decreasing the number of services would. Despite the move to a single repository each service would remain decoupled from others. All in all, the benefits sounded promising.
+
+% many large enterprises benefit from a mono-repository for source code management because of the improved team cognition that results from eroding barriers between teams and from influencing enhanced teamwork quality.
+% it has observed that the benefit of monorepo is the cultural impact. It has asserted that a monorepo facilitates cultural change and enables a holistic team cognition that ensures high quality work and improves communication, while preserving necessary autonomy.
+% more research is necessary on source control repository structures and their direct impacts on team cognitions. \cite{monorepo-polirepo-nicolas} 
+% a monorepo or polyrepo architecture involves a comparison of tradeoffs while still highlighting that monorepos "encourages consistent and high-quality code, and empowers engineers
+
+\subsection{Polirepo}
+Polirepo (também conhecido como multirepo) é uma estratégia de organização de código onde usa-se múltiplos repositórios no sistema de controle de versionamento para o gerenciamento de múltiplos projetos. Na arquitetura de microsserviços isso geralmente significa ter um repositório para cada microsserviço e é a estratégia mais comum de organização de código. Suas vantagens em contraste com o monorepo incluem: tamanho razoável; escopo bem definido; definição de permissões diferentes para cada projeto; e operações no repositório têm melhor desempenho. Essa abordagem é mais adequada quando não há necessidade de gerenciar cuidadosamente a versão da aplicação como um todo e esse versionamento é transparente para os usuários. \cite{monorepo-polirepo-semaphoreci}
+
+% Usar um pipeline para cada repo implica em uma microimplantação. É mais cabível para aplicações praticando implantação contínua dos microsserviços, onde o gerenciamento da versão não tem grande importância. Requer mais esforço do que o monorepo mas oferece mais autonomia
+
+% \subsection{Híbrido}
 
 % O que é mais natural é utilizar um repositório para cada projeto, de um tamanho razoável com escopo bem definido. Essa forma de organização é chamada Multi-repo. Há possibilidade de definir permissões de acesso por projeto. clone, commit e build do projeto é mais simples e rápido
 
 % No entanto, nos últimos anos, surgiu uma nova forma de organização dos nossos projetos dentro de repositórios. Empresas grandes de tecnologia como Google e Facebook não utilizam o esquema Multi-repo, porque são empresas que trabalham em inúmeros projetos de maneira concomitante. Empresas que atuam com outra dimensão de projetos utilizam o Mono-repo, ou seja, um único e gigantesco repositório que acumula todos os projetos.
 
 % A desvantagem do segundo modelo é o repositório precisará ser realmente grande, e o build pode ser lento, talvez nem o Git seja mais a ferramenta adequada para fazer o controle de versões para esta situação. Contudo, como temos apenas um grande repositório temos uma administração relativamente mais simples, então a verificação de padrões é facilitada. A refatorações são globais, afinal estão todos dentro da mesma base. 
-\subsection{Estratégias de ramificação}
+
+% \subsection{Estratégias de ramificação} <<
 
 \section{Implantação em containers}
 
@@ -213,19 +243,19 @@ Tradicionalmente uma compilação engloba tudo que é necessário para que um pr
 
 Além de usar os métodos mais comuns de testes, deve-se também testar os microsserviços conforme passam pelo \emph{pipeline} de implantação. Isso inclui: \cite{Familiar2015}
 
-- Testes internos: Testar as funções internas do serviço, inclusive uso de acesso de dados, e caching.
+- Testes internos: Testar as funções internas do serviço, inclusive uso de acesso de dados, e caching;
 
-- Teste de serviço: Testar a a implementação de serviço da API. Essa é uma implementação privada da API e seus modelos associados.
+- Teste de serviço: Testar a a implementação de serviço da API. Essa é uma implementação privada da API e seus modelos associados;
 
-- Teste de protocolo: Testar o serviço no nível de protocolo, chamando a API sobre o determinado protocolo (geralmente HTTP).
+- Teste de protocolo: Testar o serviço no nível de protocolo, chamando a API sobre o determinado protocolo (geralmente HTTP);
 
-- Teste de composição: Testar o serviço em cooperação com outros serviços no contexto de uma solução.
+- Teste de composição: Testar o serviço em cooperação com outros serviços no contexto de uma solução;
 
-- Teste de escalabilidade/taxa de transferência: Testar a escalabilidade e elasticidade do microsserviço implantado.
+- Teste de escalabilidade/taxa de transferência: Testar a escalabilidade e elasticidade do microsserviço implantado;
 
-- Teste de tolerância a falha: Testar a capacidade do microsserviço de recupera-se após uma falha.
+- Teste de tolerância a falha: Testar a capacidade do microsserviço de recupera-se após uma falha;
 
-- Teste de penetração: Trabalhar com uma empresa terceirizada de segurança de \emph{software} para realizar testes de penetração no sistema. 
+- Teste de penetração: Trabalhar com uma empresa terceirizada de segurança de \emph{software} para realizar testes de penetração no sistema.
 
 \section{Comunicação}
 
@@ -298,7 +328,7 @@ Um \emph{API Gateway} é um padrão de projeto e funciona como uma porta única 
 
 Outra vantagem é que esse \emph{API Gateway} pode agregar requisições, permitindo que o cliente envie apenas uma requisição para o \emph{API Gateway} para recuperar informações de diferentes microsserviços, o que normalmente exigiria múltiplas requisições. Nesse caso, quando recebida a requisição do cliente, o \emph{API Gateway} fica responsável por disparar as requisições correspondentes, agregar as respostas e as devolver ao cliente.
 
-Entretando, também há desvantagens no uso desse padrão: (1) há um acoplamento forte entre os microsserviços e o \emph{API Gateway}, (2) surge um possível ponto massivo de falha nesse \emph{API Gateway}, (3) Se não escalado adequadamente, esse \emph{API Gateway} pode se tornar um gargalo \cite{microsoft-api-gateway}.
+Entretando, também há desvantagens no uso desse padrão: (1) cria-se um alto acoplamento entre os microsserviços e o \emph{API Gateway}, (2) surge um possível ponto massivo de falha nesse \emph{API Gateway}, (3) Se não escalado adequadamente, esse \emph{API Gateway} pode se tornar um gargalo \cite{microsoft-api-gateway}.
 
 \subsection{Segurança em APIs}
 
