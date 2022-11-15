@@ -2,7 +2,7 @@
 
 O crescimento da internet e a onipresença da computação móvel tem mudado o jeito como software é desenvolvido nos últimos tempos. Todos que têm contato com o ramo do desenvolvimento de software provavelmente já ouviram o termo \emph{SaaS (Software as a Service)}, ou software como um serviço. Entretanto, essa expressão significa mais do que apenas um modelo de negócio. A tendência que tem-se observado é a de oferecer software não mais como um pacote completo e fechado, mas sim como um pacote flexível e em constante melhoria, o que implica na mudança do foco dos desenvolvedores para construir componentes leves e auto-contidos, que permitam que mudanças sejam desenvolvidas e implantadas rápida e independetemente. A partir disso originou-se um novo paradigma de desenvolvimento, chamado de "microsserviços", inspirado pela arquitetura orientada a serviços, e que tem ganho grande popularidade nos últimos anos \cite{middleware-microservices,design-monitoring-testing-waseem}.
 
-Para projetar um aplicativo que seja multilíngue, facilmente escalável, fácil de manter e implantar, altamente disponível e que minimize falhas, considere a arquitetura de microsserviços. Esse estilo de arquitetura de software é amplamente considerado a melhor maneira de estruturar um sistema de software como um serviço atualmente. Entretanto, como quase tudo na computação, trata-se de uma troca (um \emph{trade-off}), pois assim como há benefícios, também há desvantagens e desafios na adoção de uma arquitetura de microsserviços, os quais também serão discutidos neste trabalho \cite{CAOPLE, oracle_microservices}.
+Para projetar um aplicativo que seja multilíngue, facilmente escalável, fácil de manter e implantar, altamente disponível e que minimize falhas, considere a arquitetura de microsserviços. Esse estilo de arquitetura de software é amplamente considerado a melhor maneira de estruturar um sistema de software como um serviço atualmente. Entretanto, como quase tudo na computação, trata-se de uma troca (um \emph{trade-off}), pois assim como há benefícios, também há riscos, desvantagens e desafios na adoção de uma arquitetura de microsserviços, os quais também serão discutidos neste trabalho \cite{CAOPLE, oracle_microservices}.
 
 % Many development teams have found the microservices architectural style to be a superior approach to a monolithic architecture. But other teams have found them to be a productivity-sapping burden. Like any architectural style, microservices bring costs and benefits. To make a sensible choice you have to understand these and apply them to your specific context. microservice tradeoffs - https://martinfowler.com/articles/microservice-trade-offs.html#summary
 
@@ -22,7 +22,8 @@ Para projetar um aplicativo que seja multilíngue, facilmente escalável, fácil
 
 \subsection{Objetivo geral}\label{sec-objetivo-geral}
 
-Analisar boas práticas e soluções comumente usadas no desenvolvimento de aplicações que utilizam a arquitetura de microsserviços.
+Analisar o desenvolvimento de aplicações com arquitetura de microsserviços.
+% , discutindo boas práticas e ferramentas comumente usadas.
 % Analisar e resumir o estado da arte em desenvolvimento de aplicações com arquitetura de microsserviços
 
 \subsection{Objetivos específicos}\label{sec-objetivos-especificos}
@@ -30,19 +31,21 @@ Analisar boas práticas e soluções comumente usadas no desenvolvimento de apli
 % (TCC 1:)
 - Caracterizar a arquitetura de microsserviços;
 
-- Discutir boas práticas usadas na implementação de aplicações com arquitetura de microsserviços;
+- Discutir boas práticas usadas no desenvolvimento de aplicações com arquitetura de microsserviços;
 
-- Reunir ferramentas usadas na implementação de aplicações com arquitetura de microsserviços;
+% - Reunir ferramentas usadas na implementação de aplicações com arquitetura de microsserviços;
 
 % (TCC 2:)
 % Analisar a eficiência dessas boas práticas;
 % - Analisar/testar a eficiência desses padrões e práticas, por meio de (estudos de caso? análise da literatura? exemplos de empresas que as usam?);
-- Propor uma combinação dessas ferramentas para o desenvolvimento de aplicações com arquitetura de microsserviços;
+- Propor uma combinação de ferramentas para o desenvolvimento de aplicações com arquitetura de microsserviços;
+
+- Contextualizar essas ferramentas e apontar os problemas que elas resolvem;
 
 - Desenvolver uma aplicação de exemplo com arquitetura de microsserviços, usando a combinação de ferramentas proposta e as boas práticas discutidas;
 % - Analisar/testar a eficiência dessas soluções e ferramentas, por meio de (estudos de caso? análise da literatura? exemplos de empresas que as usam?);
 
-- Analisar pontos positivos e negativos das ferramentas usadas nessa aplicação de exemplo.
+- Discutir pontos positivos e negativos das ferramentas usadas nessa aplicação de exemplo.
 % - Propor uma combinação das boas práticas e das ferramentas para o desenvolvimento de aplicações com arquitetura de microsserviços.
 
 \section{Metodologia}
@@ -53,10 +56,8 @@ Como foi constatado que não existe uma definição formal para a arquitetura de
 %As boas práticas que abordavam questões de código profundamente foram desconsideradas por serem extensas e específicas.
 % apenas boas práticas relacionadas a infraestrutura foram consideradas?
 
-Para a coleta de ferramentas usadas no desenvolvimento de aplicações com arquitetura de microsserviços, foi feita uma nova pesquisa bibliográfica para conhecer as mais comumente usadas e entender o seu funcionamento. Também foram extraídas ferramentas mencionadas no material bibliográfico revisado anteriormente.  
-%contextualiar o seu uso?
-
-Para a contextualização e detalhamento das ferramentas, será feita uma nova pesquisa bibliográfica 
+Para a proposta da combinação de ferramentas e a contextualização delas, será feita uma nova pesquisa bibliográfica para conhecer as mais comumente usadas em aplicações com arquitetura de microsserviços, para entender os problemas que elas resolvem e para compreender seus funcionamentos. Durante o desenvolvimento da aplicação de exemplo, serão reunidos e discutidos pontos positivos e negativos observados no uso das ferramentas.  
+%contextualiar o seu uso? 
 
 % (metodologia quanto aos objetivos, quanto a execução. passo a passo que vai seguir durante o trabalho. explicar como analisar/testar essa eficiencia (objetivos especificos))
 
