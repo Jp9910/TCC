@@ -178,6 +178,14 @@ Os benefícios da entrega contínua incluem: risco reduzido na implantação, po
 
 % Where Continuous Deployment focuses on the actual deployment, Continuous Delivery focuses on the release and release strategy. An elusive goal would be a “push of a button” to get changes into production. That “push of a button” is Continuous Delivery. \cite{harness-ci-cd}
 
+\section{DevOps}
+
+Por um lado, as equipes de desenvolvimento tentam ser o mais eficientes possível, entregando tarefas completas sempre que possível. Por outro lado, a equipe de operações valoriza a estabilidade, considerando cada alteração como uma possível causa de problemas. Assim, tem-se diferenças importantes no foco do trabalho - uma equipe preza pela velocidade em novas funcionalidades e outra pela estabilidade. Com isso em mente, as equipes precisam aprender a trabalhar em conjunto para conseguir alcançar uma entrega contínua e ao mesmo tempo manter um \emph{software} funcional no ambiente de execução.
+
+DevOps é um movimento cultural que visa a integração e otimização do processo de aprendizagem e cooperação entre os integrantes de equipes relacionadas ao desenvolvimento de \emph{software}. Não se trata de um cargo, mas sim uma visão organizacional de trabalho que tem o objetivo de automatizar o ciclo de desenvolvimento do \emph{software} de modo que seja veloz, seguro e integrado, com foco nas necessidades do usuário e \emph{feedback} rápido. Para tanto, precisa-se de ferramentas para facilitar as automações e monitoramento, mas é importante lembrar que DevOps trata-se mais de um movimento cultural do que uma aparelhagem técnica. Práticas de DevOps, como integração e entrega contínua, são essenciais para o sucesso de aplicações com arquitetura de microsserviços pelos benefícios que traz ao time e ao desenvolvimento da aplicação \cite{gitlab-devops}.
+
+% CI/CD is an essential part of DevOps and any modern software development practice. A purpose-built CI/CD platform can maximize development time by improving an organization’s productivity, increasing efficiency, and streamlining workflows through built-in automation, testing, and collaboration. As applications grow larger, the features of CI/CD can help decrease development complexity. Adopting other DevOps practices — like shifting left on security and creating tighter feedback loops — helps break down development silos, scale safely, and get the most out of CI/CD.
+
 \section{Organização de código}
 % Monorepo e polirepo são estratégias de organização de código.
 % Para a organização de código no sistema de controle de versionamento, há duas abordagens - monorepo ou polirepo. Também tem a abordagem híbrida.
@@ -225,14 +233,6 @@ Containers configuram isolamentos lógicos em uma máquina. Eles são leves e al
 % Secure: Each container runs as an isolated process. So the microservices are secure.
 
 % The process of containerizing a microservice involves creating a Dockerfile, creating and building a container image that includes its dependencies and the environmental configuration, deploying the image to a Docker engine, and uploading the image to a container registry for storage and retrieval. \cite{oracle_microservices}
-
-\section{DevOps}
-
-Por um lado, as equipes de desenvolvimento tentam ser o mais eficientes possível, entregando tarefas completas sempre que possível. Por outro lado, a equipe de operações valoriza a estabilidade, considerando cada alteração como uma possível causa de problemas. Assim, tem-se diferenças importantes no foco do trabalho - uma equipe preza pela velocidade em novas funcionalidades e outra pela estabilidade. Com isso em mente, as equipes precisam aprender a trabalhar em conjunto para conseguir alcançar uma entrega contínua e ao mesmo tempo manter um \emph{software} funcional no ambiente de execução.
-
-DevOps é um movimento cultural que visa a integração e otimização do processo de aprendizagem e cooperação entre os integrantes da equipe. Não é um cargo, mas sim uma visão de organização de trabalho que tem o objetivo de criar um \emph{pipeline} de implantação que seja veloz, seguro e integrado. Para tanto, precisa-se, é claro, de ferramentas que irão facilitar as integrações e monitoramento, mas DevOps trata-se mais de um movimento cultural do que uma aparelhagem técnica. Práticas de DevOps, como integração e entrega contínua são essenciais para o sucesso de uma aplicação com arquitetura de microsserviços.
-
-% CI/CD is an essential part of DevOps and any modern software development practice. A purpose-built CI/CD platform can maximize development time by improving an organization’s productivity, increasing efficiency, and streamlining workflows through built-in automation, testing, and collaboration. As applications grow larger, the features of CI/CD can help decrease development complexity. Adopting other DevOps practices — like shifting left on security and creating tighter feedback loops — helps break down development silos, scale safely, and get the most out of CI/CD.
 
 \section{Testes}
 
