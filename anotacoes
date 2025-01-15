@@ -61,21 +61,54 @@ Propor uma combinação de ferramentas:
         GitHub
     Organização de código:
         Monorepo
+    Containers:
+        Docker, kubernetes
+    CI/CD:
+        GitHub actions, jenkins
+    Testes:
+        Selenium, contract cesting with Pact?
+    Comunicação:
+        HTTP, APIs e REST
 
+>>> Tudo isso eu já estudei - docker, rabbit, http, APIs, projeto no laravel, git, ci/cd? testes?
 TO DO:
     Decidir qual framework usar: Node? Dotnet? (Procurar um tutorial?)
+        não, pode ser varios, um para cada microsserviço
 
-    Programar o código pra cada funcionalidade do site, e separar em (micro)serviços
+    > Esquematizar cada funcionalidade do site, e separar em (micro)serviços
 
-    Fazer a comunicação entre os serviços
+    > Criar o projeto inicial do site
+        (haverá diferentes projetos (projeto laravel, node, python, etc) para diferentes microserviços)
 
-    Aplicar as práticas estudadas
+    Fazer a comunicação entre os projetos/serviços
+
+    Aplicar as práticas/ferramentas estudadas
+
+Planejamento:
+    Propor uma combinação de ferramentas para o desenvolvimento de aplicações com arquitetura de microsserviços
+
+    Contextualizar essas ferramentas e apontar os problemas que elas resolvem
+    
+    Desenvolver uma aplicação de exemplo usando as práticas/ferramentas propostas
+    
+    Discutir pontos positivos e negativos das ferramentas usadas
+    
+    Preparar apresentação do trabalho
+
+Ideias:
+- Comparar quais fatores dos 12-factors a aplicação segue
+- Etapas de build: lint, verificar estilo de codigo, analise estatica, testes...
+- adicionar réplicas a cada microserviços (orquestradores)
+- monitoramento: prometheus, grafana, telegraph, 
+- api gateway: nginx?
+- nginx: plugin para gerar logs e mandar para ferramenta de monitoramento
+- backend for frontend
 
 
 
 "Here’s some other lessons we’ve learned along the way:
 
-    Networking/debugging now becomes a PITA.
+    Networking/debugging now becomes a Pain In The Ass.
 
     Try to separate microservices by the business domain they cover and have one service handle one action completely (I.E, signing up a new user). If you start having to reach out to several services for one action, you’re going down a dark path with a lot of failure points.
 
