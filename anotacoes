@@ -44,6 +44,10 @@ Abordar em maior profundidade (opções):
 
 TCC 2 <<<<<<
 
+Perguntar:
+    - mudar o nome do orientador?
+    - remover capitulo de plano de continuidade?
+    - analise de viabilidade?
 
 Propor uma combinação de ferramentas:
     Linguagens/Framework:?
@@ -71,13 +75,15 @@ Propor uma combinação de ferramentas:
         HTTP, APIs e REST
 
 >>> Tudo isso eu já estudei - docker, rabbit, http, APIs, projeto no laravel, git, ci/cd? testes?
+
 TO DO:
     Decidir qual framework usar: Node? Dotnet? (Procurar um tutorial?)
         não, pode ser varios, um para cada microsserviço
 
-    > Esquematizar cada funcionalidade do site, e separar em (micro)serviços
+    >>>>> Esquematizar cada funcionalidade do site, e separar em (micro)serviços
 
     > Criar o projeto inicial do site
+        - Aproveitar o site que eu fiz com php e html??
         (haverá diferentes projetos (projeto laravel, node, python, etc) para diferentes microserviços)
 
     Fazer a comunicação entre os projetos/serviços
