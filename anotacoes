@@ -1,3 +1,110 @@
+# TCC 2 <<<<<<
+
+Perguntar:
+    - mudar o nome do orientador?
+    - remover capitulo de plano de continuidade?
+    - como ficaria o capitulo de analise de viabilidade?
+    - solicitar creditos na conta academica aws
+
+TO DO:
+    >>>>> Esquematizar cada funcionalidade do site, e separar em (micro)serviços. (Usar Domain-Driven Design?)
+        - site de compras?
+            Possíveis microsserviços
+            * Frontend - (micro)serviço de ponta: website ou aplicativo mobile
+            * catálogo
+            * carrinho
+            * pagamento
+            * recomendações, marketing
+            * cadastro - feito em um (micro)serviço de negócio: envia os dados necessários para o microsserviço de pagamento, de gamificação, e de cursos, que seriam 3 inserts and 3 bancos de dados diferentes
+            * recompensas, gamificação
+            * microsserviço de tradução - acesso à uma API externa (de pagamento por exemplo), um serviço de logs ou de notificação
+
+    > Criar o projeto inicial do site
+        - Aproveitar o site que eu fiz com php e html? quebrar em microsserviços? (isolando os dados ou os domínios) (sidecar pattern - usar pacote de código)
+        (haverá diferentes projetos (projeto laravel, node, python, etc) para diferentes microserviços)
+
+    Fazer a comunicação entre os projetos/serviços
+        api gateway
+        mensageria rabbitmq
+
+    Aplicar as práticas/ferramentas estudadas
+
+Planejamento:
+    Propor uma combinação de ferramentas para o desenvolvimento de aplicações com arquitetura de microsserviços
+
+    Contextualizar essas ferramentas e apontar os problemas que elas resolvem
+
+    --> Esquematizar cada funcionalidade do site, separando em (micro)serviços. (Usar Domain-Driven Design? Aplicando as camadas do DDD na arq. de microserv)
+    
+    Desenvolver uma aplicação de exemplo usando as práticas/ferramentas propostas
+    
+    Discutir pontos positivos e negativos das ferramentas usadas
+    
+    Preparar apresentação do trabalho
+
+Ideias:
+- Comparar quais fatores dos 12-factors a aplicação segue
+- Etapas de build: lint, verificar estilo de codigo, analise estatica, testes...
+- adicionar réplicas a cada microserviços (orquestradores)
+- monitoramento: prometheus, grafana, telegraph, 
+- api gateway: nginx?
+- nginx: plugin para gerar logs e mandar para ferramenta de monitoramento. (formato de logs deve ser igual entre os microsservicos)
+- Ponto importante para a apresentação ou em alguma parte do texto escrito: 
+    * As soluções para os requisitos/problemas de **negócio** podem ser iguais tanto na arquitetura monolítica quanto na de microsserviços, ou seja, podem ser satisfeitos/solucionados nas duas arquiteturas. E esses problemas naturalmente tem maior prioridade de serem solucionados do que os técnicos. E conhecendo o domínio, é mais fácil dividir a aplicação em microsserviços. É a solução para requisitos/problemas técnicos que geralmente mudam, como a escalabilidade por exemplo. E esse é um dos motivos para que seja recomendado a abordagem monolítica primeiro.
+    * E apesar de ser recomendado começar na monolitica, também é válido ir direto para os microserviços se o domínio da aplicação for bem conhecido, e soubermos que a aplicação é grande e precisará de uma infra mais flexível. O aplicativo aqui demonstrado é uma aplicação pequena, e por isso faria mais sentido usar a abordagem monolitica. Mas esse trabalho trata da arquitetura de microsserviços, então é claro, foi usada esta arquitetura, mesmo que para algumas questões usá-la não faça muito sentido.
+
+Propor uma combinação de ferramentas e contextualiza-las (problema/solução):
+    Linguagens/Framework:?
+        HTML/CSS
+        PHP
+        JS: Node+ExpressJS 
+        Python: PyMS, Nameko, Django
+        C#: Dotnet?
+    Mensageria:
+        RabbitMQ
+    Banco de Dados:
+        MySQL*, PostgreSQL*, MongoDB*, Couchbase*, Redis*, Amazon DynamoDB
+    Controle de versão:
+        Git
+    Gerenciamento de repositórios:
+        GitHub
+    Organização de código:
+        Monorepo
+    Containers:
+        Docker
+    Orquestração de containers:
+            Docker Swarm ou Kubernetes
+    CI/CD:
+        GitHub actions ou jenkins
+    Testes:
+        Selenium, contract cesting with Pact?
+    Comunicação:
+        HTTP, APIs e REST
+
+>>> Tudo isso eu já estudei - docker, rabbit, http, APIs, projeto no laravel, git, ci/cd? testes?
+
+
+"Here’s some other lessons we’ve learned along the way:
+
+    Networking/debugging now becomes a Pain In The Ass.
+
+    Try to separate microservices by the business domain they cover and have one service handle one action completely (I.E, signing up a new user). If you start having to reach out to several services for one action, you’re going down a dark path with a lot of failure points.
+
+    Using something like Apache Kafka as an event source that is central source of truth in your system. You are eventually going to have failures which will cause discrepancies in your data. You need someplace to go to rebuild a service when that happens.
+
+    Copying data is okay. Every service should be able to query its own materialized view of the global data in its own database. This means that some pieces of data (I.E., user data) might be saved in a lot of places which may lead to different results from different services.
+
+    “No service should know anything about the other” is a hard concept to grasp. This tripped us up in the beginning as we were trying to follow this mantra too closely. It should read “no service should know about the internal workings of another.” We found though that exposing a global REST API that’s a conglomerate of an individual REST APIs per service is a good practice for command based actions that require validation.
+
+    Change data capture is your friend for events."
+    https://www.reddit.com/r/node/comments/106qfbb/first_time_building_microservicebased_application/
+
+
+
+
+
+# TCC 1
+
 \citeonline{WASEEM2020110798} diz que ...
 [...] \cite{WASEEM2020110798}
 
@@ -7,7 +114,6 @@
 - pode usar a imagem do mapeamento de problemas e soluções no anexo? sim, citação comum
 imagem
 fonte: ()
-
 
 Separar em
 1- introduçao
@@ -37,92 +143,3 @@ Abordar em maior profundidade (opções):
 
 - 4.7 monorepo ou multirepo
 - soluções: cd
-
-
-
-
-
-TCC 2 <<<<<<
-
-Perguntar:
-    - mudar o nome do orientador?
-    - remover capitulo de plano de continuidade?
-    - analise de viabilidade?
-
-Propor uma combinação de ferramentas:
-    Linguagens/Framework:?
-        JS: Node - ExpressJS, 
-        Python: PyMS, Nameko, Django
-        C#: Dotnet
-    Mensageria:?
-        Apache Kafka
-        RabbitMQ
-    Banco de Dados:?
-        MySQL*, PostgreSQL*, MongoDB*, Couchbase*, Redis*, Amazon DynamoDB
-    Controle de versão:
-        Git
-    Gerenciamento de repositórios:
-        GitHub
-    Organização de código:
-        Monorepo
-    Containers:
-        Docker, kubernetes
-    CI/CD:
-        GitHub actions, jenkins
-    Testes:
-        Selenium, contract cesting with Pact?
-    Comunicação:
-        HTTP, APIs e REST
-
->>> Tudo isso eu já estudei - docker, rabbit, http, APIs, projeto no laravel, git, ci/cd? testes?
-
-TO DO:
-    Decidir qual framework usar: Node? Dotnet? (Procurar um tutorial?)
-        não, pode ser varios, um para cada microsserviço
-
-    >>>>> Esquematizar cada funcionalidade do site, e separar em (micro)serviços
-
-    > Criar o projeto inicial do site
-        - Aproveitar o site que eu fiz com php e html??
-        (haverá diferentes projetos (projeto laravel, node, python, etc) para diferentes microserviços)
-
-    Fazer a comunicação entre os projetos/serviços
-
-    Aplicar as práticas/ferramentas estudadas
-
-Planejamento:
-    Propor uma combinação de ferramentas para o desenvolvimento de aplicações com arquitetura de microsserviços
-
-    Contextualizar essas ferramentas e apontar os problemas que elas resolvem
-    
-    Desenvolver uma aplicação de exemplo usando as práticas/ferramentas propostas
-    
-    Discutir pontos positivos e negativos das ferramentas usadas
-    
-    Preparar apresentação do trabalho
-
-Ideias:
-- Comparar quais fatores dos 12-factors a aplicação segue
-- Etapas de build: lint, verificar estilo de codigo, analise estatica, testes...
-- adicionar réplicas a cada microserviços (orquestradores)
-- monitoramento: prometheus, grafana, telegraph, 
-- api gateway: nginx?
-- nginx: plugin para gerar logs e mandar para ferramenta de monitoramento
-- backend for frontend
-
-
-
-"Here’s some other lessons we’ve learned along the way:
-
-    Networking/debugging now becomes a Pain In The Ass.
-
-    Try to separate microservices by the business domain they cover and have one service handle one action completely (I.E, signing up a new user). If you start having to reach out to several services for one action, you’re going down a dark path with a lot of failure points.
-
-    Using something like Apache Kafka as an event source that is central source of truth in your system. You are eventually going to have failures which will cause discrepancies in your data. You need someplace to go to rebuild a service when that happens.
-
-    Copying data is okay. Every service should be able to query its own materialized view of the global data in its own database. This means that some pieces of data (I.E., user data) might be saved in a lot of places which may lead to different results from different services.
-
-    “No service should know anything about the other” is a hard concept to grasp. This tripped us up in the beginning as we were trying to follow this mantra too closely. It should read “no service should know about the internal workings of another.” We found though that exposing a global REST API that’s a conglomerate of an individual REST APIs per service is a good practice for command based actions that require validation.
-
-    Change data capture is your friend for events."
-    https://www.reddit.com/r/node/comments/106qfbb/first_time_building_microservicebased_application/
