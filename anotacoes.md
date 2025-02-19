@@ -5,12 +5,34 @@ Perguntar:
     - como ficaria o capitulo de analise de viabilidade? considerar no final
     - remover capitulo de plano de continuidade?
     - Seria válido alterar os objetivos específicos? Dependendo do que eu consegui fazer. Ou se eu achar que o trabalho fica melhor mudando o objetivo mesmo.
-        - Pq eu escrevi de um modo que fica parecendo que eu quero estudar as ferramentas, mas eu só quero estudar a arquitetura mesmo (e o desenvolvimento?).
+           -Pq eu escrevi de um modo que fica parecendo que eu quero estudar as ferramentas, mas eu só quero estudar a arquitetura mesmo (e o desenvolvimento?).
+
+    - Enviar como artigo?
+        https://www.computer.org/digital-library/magazines/ic/cfp-programming-flexible-systems?preview=true
+
+    - Análise de viabilidade poderia ter a ver com os requisitos funcionais e não funcionais do sistema e alguns diagrama UML, relacionando com ferramentas.
+
+    - Sobre o objetivo específico de **Propor** uma combinação de ferramentas:
+        Eu reescrevi o objetivo para alinhar com o que eu queria fazer com o trabalho. O que o senhor acha?
+        
+        (A arq de microsserviços geralmente são usados em aplicações grandes, mas claro que não tenho condição de construir um sistema assim em poucos meses. 
+        Então a aplicação que fiz é pequena (pequena como? em termos de que?). 
+        Acontece que "quais ferramentas usar" depende muito do sistema desenvolvido. 
+        E quais vão ser usadas se limitam às funcionalidades de infraestrutura que eu desenvolvi. 
+        Além disso, também se limitam a ferramentas open-source pq n faria sentido, no contexto academico, pagar pra fazer um projeto de demonstração
+        Sendo assim, as ferramentas que usei foram rabbitmq para implementar fila de mensageria... etc)
+
+
 
 ### pra lembrar:
-Sobre o script de entrypoint nos dockerfiles do projeto do curso:
-https://docs.docker.com/reference/compose-file/services/#command
-(Pode ser usado para rodar um shell, por exemplo `sh ./entrypoint.sh`.)
+- Sobre o script de entrypoint nos dockerfiles do projeto do curso:
+    https://docs.docker.com/reference/compose-file/services/#command
+    (Pode ser usado para rodar um shell, por exemplo `sh ./entrypoint.sh`.)
+
+- Tipos de autenticação (https://www.alura.com.br/artigos/tipos-de-autenticacao):
+    Autenticação em APIs é _stateless_, ou seja, o server não guarda uma sessão do usuário. Não lembra das requisições passadas; cada requisição é independente.
+    Autenticação em apps web tradicionais é _stateful_ - o servidor guarda o estado como uma sessão, e nas próximas requisições consegue identificar o usuário e se já foi autenticado. 
+
 
 ## TO DO:
     > Esquematizar cada funcionalidade do site, e separar em (micro)serviços. (Usar Domain-Driven Design?)
@@ -19,8 +41,9 @@ https://docs.docker.com/reference/compose-file/services/#command
             * Frontend - (micro)serviço de ponta: website ou aplicativo mobile
             * catálogo
             * carrinho
-            * pagamento
-            * recomendações (usar IA? AM?), marketing
+            * pedidos
+            * pagamento/financeiro
+            * recomendações/marketing (usar IA? AM?)
             * cadastro - feito em um (micro)serviço de negócio: envia os dados necessários para o microsserviço de pagamento, de gamificação, e de cursos, que seriam 3 inserts and 3 bancos de dados diferentes
             * recompensas, gamificação
             * microsserviço de tradução - acesso à uma API externa (de pagamento por exemplo), um serviço de logs ou de notificação
@@ -50,9 +73,11 @@ https://docs.docker.com/reference/compose-file/services/#command
     6. Preparar apresentação do trabalho
 
 ## Ideias:
+    - Comentar sobre segurança em camadas (defense in depth)
+
     - Comparar quais fatores dos 12-factors a aplicação segue
     
-    - Etapas de build: lint, verificar estilo de codigo, analise estatica, testes...
+    - Etapas de build: lint (ex: https://prettier.io/docs/install#git-hooks), verificar estilo de codigo, analise estatica, testes...
     
     - adicionar réplicas a cada microserviços (orquestradores)
     
@@ -67,63 +92,152 @@ https://docs.docker.com/reference/compose-file/services/#command
         - plugin para gerar logs e mandar para ferramenta de monitoramento. (formato de logs deve ser igual entre os microsservicos)
 
     - Ponto importante para a apresentação ou em alguma parte do texto escrito: 
-        * As soluções para os requisitos/problemas de **negócio** podem ser iguais tanto na arquitetura monolítica quanto na de microsserviços, ou >seja, podem ser satisfeitos/solucionados nas duas arquiteturas. E esses problemas naturalmente tem maior prioridade de serem solucionados do >que os técnicos. E conhecendo o domínio, é mais fácil dividir a aplicação em microsserviços. É a solução para requisitos/problemas técnicos que >geralmente mudam, como a escalabilidade por exemplo. E esse é um dos motivos para que seja recomendado a abordagem monolítica primeiro.
-        * E apesar de ser recomendado começar na monolitica, também é válido ir direto para os microserviços se o domínio da aplicação for bem >conhecido, e soubermos que a aplicação é grande e precisará de uma infra mais flexível. O aplicativo aqui demonstrado é uma aplicação pequena, >e por isso faria mais sentido usar a abordagem monolitica. Mas esse trabalho trata da arquitetura de microsserviços, então é claro, foi usada >esta arquitetura, mesmo que para algumas questões usá-la não faça muito sentido.
-        * Vai muito da questão de conhecer o domínio da aplicação
+        * Vinicius Dias: As soluções para os requisitos/problemas de **negócio** podem ser iguais tanto na arquitetura monolítica quanto na de microsserviços, ou >seja, podem ser satisfeitos/solucionados nas duas arquiteturas. E esses problemas naturalmente tem maior prioridade de serem solucionados do >que os técnicos. E conhecendo o domínio, é mais fácil dividir a aplicação em microsserviços. É a solução para requisitos/problemas técnicos que >geralmente mudam, como a escalabilidade por exemplo. E esse é um dos motivos para que seja recomendado a abordagem monolítica primeiro.
+        Fonte: Vídeo-aula do vinicius dias
+
+        * EU: E apesar de ser recomendado começar na monolitica, também é válido ir direto para os microserviços se o domínio da aplicação for bem >conhecido, e soubermos que a aplicação é grande e precisará de uma infra mais flexível. O aplicativo aqui demonstrado é uma aplicação pequena, >e por isso faria mais sentido usar a abordagem monolitica. Mas esse trabalho trata da arquitetura de microsserviços, então é claro, foi usada >esta arquitetura, mesmo que para algumas questões usá-la não faça muito sentido.
+
+        * EU: Vai muito da questão de conhecer o domínio da aplicação. Como essa divisão do domínio e serviços é feita define como a comunicação no sistema e o armazenamento de dados acontece, e certas divisões vão acarretar em mais ou menos comunicação/duplicação de dados. Por exemplo, onde será que deveria ser armazenados os pedidos feitos na loja? No serviço de catálogo (passaria a ser loja), ou serviço de carrinho (passaria a ser pedidos)?
+
+        *There's no single primary data store with which all services interact. Instead, coordination and communication between the services is done on an as-needed basis and by using a message bus. Fonte: <https://learn.microsoft.com/en-us/dotnet/architecture/cloud-native/introduce-eshoponcontainers-reference-app>
 
     - Substituir alguma chamada HTTP no sistema por uma RPC
         - ler: https://www.geeksforgeeks.org/remote-procedure-call-rpc-in-operating-system/
+                https://medium.com/@karthikheyan.mgn/remote-procedure-calls-rpc-in-javascript-enhancing-inter-service-communication-7bc45517c00e
         - ver frameworks de RPC no node: https://www.reddit.com/r/node/comments/zz6h8z/ive_made_a_big_comparison_table_of_nodejs_rpc/
-        - ou tentar usar o gRPC
+        - ou tentar usar o gRPC (projeto .net?)
+            https://learn.microsoft.com/en-us/aspnet/core/grpc/?view=aspnetcore-9.0
+        - ou tentar usar no node com rabbitmq?
+            https://github.com/toa-io/comq
+            https://www.rabbitmq.com/client-libraries/devtools#node-dev
 
     - API gateway pode ser um ponto massivo de falha
-        - tentar usar alguma outra técnica no lugar
+        - tentar usar alguma outra técnica no lugar (gRPC)
 
     - Replicação de databases:
         - https://stackoverflow.com/questions/58399450/keeping-databases-in-sync-after-write-update-across-regions-zones
         - ler: https://atlan.com/what-is/database-replication/
         - ler: https://release.com/blog/syncing-databases-how-to-do-it-and-best-practices
+        - Um servidor para escrita e outro para leitura?
+        - ver se tem algum serviço assim na AWS
     
-    - Sobre o objetivo específico de Propor uma combinação de ferramentas:
+    - Sobre o objetivo específico de **Propor** uma combinação de ferramentas:
         A arq de microsserviços geralmente são usados em aplicações grandes, mas claro que não tenho condição de construir um sistema assim em poucos meses. 
         Então a aplicação que fiz é pequena (pequena como? em termos de que?). 
         Acontece que "quais ferramentas usar" depende muito do sistema desenvolvido. 
-        E quais vão ser usadas se limitam às funcionalidades de infraestrutura que eu desenvolvidas. 
+        E quais vão ser usadas se limitam às funcionalidades de infraestrutura que eu desenvolvi. 
         Além disso, também se limitam a ferramentas open-source pq n faria sentido, no contexto academico, pagar pra fazer um projeto de demonstração
         Sendo assim, as ferramentas que usei foram rabbitmq para implementar fila de mensageria... etc
 
         - Eu poderia também analisar as ferramentas usadas em uma aplicação grande já pronta, 
         talvez algum produto transparente de uma empresa, ou então o eShopOnContainers.
 
+    - Certificado https
+        único que emite gratuitamente: https://letsencrypt.org/
+        openssl
+        dotnet enforce https: https://learn.microsoft.com/en-us/aspnet/core/security/enforcing-ssl?view=aspnetcore-5.0&tabs=visual-studio%2Clinux-sles
+
+    - hoje em dia é mais comum armazenar imagens em um sistema de arquivos na núvem (como o S3 da amazon), mas pra manter o projeto mais independente de serviços pagos, decidi armazenar no banco de dados mesmo
+
+    - Requerimentos não funcionais:
+        The application also has the following non-functional requirements:
+            It needs to be highly available and it must scale automatically to meet increased traffic (and scale back down once traffic subsides).
+            It should provide easy-to-use monitoring of its health and diagnostic logs to help troubleshoot any issues it encounters.
+            It should support an agile development process, including support for continuous integration and deployment (CI/CD).
+            In addition to the two web front ends (traditional and Single Page Application), the application must also support mobile client apps running different kinds of operating systems.
+            It should support cross-platform hosting and cross-platform development.
+
+    - Microsserviços podem se comunicar de forma síncrona?
+        Provavelmente não
+        https://stackoverflow.com/questions/64166853/is-synchronous-communication-between-services-anti-pattern-in-microservices
+
+    - Os microsserviços devem estar em redes internas exclusivamente com os microsserviços que precisam estar lá. O frontend é a interface entre a internet e essa rede interna. Toda requisição passaria pelo api gateway, então só precisaria existir autenticação e autorização alí (?)
+    >>> Como fazer autentição no api gateway: 
+                https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/
+                https://stackoverflow.com/questions/72434853/ways-of-authentication-with-nginx
+
+    - Parametrizar configurações de desenvolvimento e de release em todos os serviços (aumenta a portabilidade dos serviços)
+
+    - Fazer algum caching em algum serviço. no spring é muito fácil: https://spring.io/guides/gs/caching
+
+    - Parte escrita: Sobre os problemas de alguns frameworks aplicados a microsserviços:
+            https://python-microservices.github.io/
+            https://microservices.io/patterns/observability/distributed-tracing.html
+            https://microservices.io/patterns/microservice-chassis.html --> Ver o spring initializr, que parece seguir esse padrão
+
+    - Parte escrita: Containers, e Docker especificamente, é uma enorme mão na roda para o desenvolvimento de microsserviços
+
+    - Parte escrita: Sobre bancos de dados - Qual banco de dados escolher? SQL, NoSQL, newSQL? Discutir 
+            Palavras-chave: integridade (de dados), disponibilidade, tolerancia, ACID
+            Teorema CAP (Consistency, Availabilty and Partition Tolerance) - https://www.ibm.com/think/topics/cap-theorem
+            https://www.ibm.com/think/insights/choosing-the-right-databases-for-microservices
+            https://www.reddit.com/r/learnprogramming/comments/lo5kpt/can_someone_explain_with_example_when_to_choose/
+            https://stackoverflow.com/questions/3713313/when-should-i-use-a-nosql-database-instead-of-a-relational-database-is-it-okay
+            https://www.mongodb.com/resources/basics/databases/nosql-explained/nosql-vs-sql
+            O site do MongoDB possui um artigo bastante rico sobre as diversas formas que os dados de um banco de dados podem ser modelados em uma relação 1:N. Artigo https://www.mongodb.com/blog/post/6-rules-of-thumb-for-mongodb-schema-design
+
+            Comparação de bancos de dados: https://www.altexsoft.com/blog/comparing-database-management-systems-mysql-postgresql-mssql-server-mongodb-elasticsearch-and-others/
+                Aparentemente postgresql é comum entre instituições financeiras?
+
+    - Parte escrita: Discutir aplicações serverless e a abordagem cloud native
+            https://cursos.alura.com.br/extra/alura-mais/o-que-e-cloud-native--c874
+    
+    - Parte escrita: Considerar comunicação com graphql. Discutir sobre APIs com GraphQL, e como é uma alternativa ao REST.
+
+    - Análise de viabilidade poderia ter a ver com os requisitos funcionais e não funcionais do sistema e alguns diagrama UML, relacionando com ferramentas.
+
+    - Documentação das APIs para demonstração de contratos de dados e versionamento (como é discutido em um dos tópicos do tcc)
+
+
 ## Propor uma combinação de ferramentas e contextualiza-las (problema/solução):
     - Linguagens/Framework:
-        HTML/CSS
-        PHP
-        JS: Node+ExpressJS 
-        Python: PyMS, Nameko, Django
-        C#: Dotnet?
+        - Backend:
+            ExpressJS - minimalista, unopinionated
+            Django/PyMS (python) https://python-microservices.github.io/
+            Dotnet <-- mais alto nível
+            Spring (https://spring.io/microservices) <-- ecosistema maduro, de alto nível e com muita biblioteca. facilita a padronização de serviços e redução de código boilerplate. já tem muita coisa pronta, e facilita a externalização da configurabilidade. por outro lado, reduz a clareza do código (ex classe para tratar qualquer erro na api. o programador pode ficar perdido sem saber de onde vem esse tratamento) e a liberdade do programador (é um framework >>opinionated<<). da pra compilar o app todo em um jar, o que melhora a portabilidade do app. documentação não concisa, incompleta e desatualizada. ver sobre spring cloud?
+            Laravel
+            Gin, Micro (https://github.com/micro/micro) - (golang)
+            (PHP, JavaScript, Python, C#, Java, Golang)
+            Comparação frameworks: https://www.youtube.com/watch?v=FQPlEnKav48
+        - Frontend:
+            HTML/CSS/JS
+            Angular, >React< (muito usado, muito suporte pra infinitos plugins), Vue (apropriado para projetos de pequeno a médio porte e com requisitos flexíveis)
+            Javascript, >Typescript<,
+            Vite (inicialização e configuração da aplicação bem fácil), create-react-app (abandonado), Snowpack (abandonado), webpack, rollup, parcel
+            - CSS:
+                ref: https://www.alura.com.br/artigos/tailwind-framework-bootstrap-tailwind
+                TailwindCSS (baseado em utilidades. reutilizar componenetes feitos por outros. estilo mais customizável. amplamente usado e bem avaliado em enquetes, mas é muito baixo-nível), 
+                react-bootstrap (baseado em componentes. praticidade e facilidade mas falta de originalidade), 
+                materialize (já conheço mas não parece mais ter muito suporte),
+                PureCSS (leve e responsivo)
+                SASS (?)
+                CSSModules (para organização de css em formato de módulos)
+                DaisyUI -> framework (plugin) para tailwind
     - Mensageria:
         RabbitMQ
+        Apache Kafka
     - Banco de Dados:
-        PostgreSQL*, MongoDB*, Couchbase*, Redis*, Amazon DynamoDB
+        PostgreSQL*, MongoDB*, ... Sobre escolher BDs: https://www.ibm.com/think/insights/choosing-the-right-databases-for-microservices
     - Controle de versão:
-        Git
+        Git, Svn
     - Gerenciamento de repositórios:
-        GitHub
+        GitHub<, GitLab, bitbucket, amazon s3
     - Organização de código:
-        Monorepo
+        Multirepo<, Monorepo
     - Containers:
-        Docker
+        >Docker<, LXC (linux containers)
     - Orquestração de containers:
             Docker Swarm ou Kubernetes
     - CI/CD:
-        GitHub Actions ou Jenkins
-    - Testes:
-        Selenium, contract cesting with Pact?
+        >GitHub Actions<, Jenkins, CircleCI, GitLab (both ci/cd), travisCI
     - Comunicação:
-        HTTP, APIs e REST, RPC com gRPC?
+        HTTP, APIs (REST ou GraphQL), RPC com gRPC?, fastCGI?
     - Testes:
-        ?
+        Selenium, contract cesting with Pact?, Playwright, cypress, postman/thunderclient, aws device farm
+        Ler: https://www.atlassian.com/continuous-delivery/software-testing/types-of-software-testing
+    - Logging:
+        nginx (com plugins), 
 
 
 >"Here’s some other lessons we’ve learned along the way:

@@ -1,4 +1,4 @@
-\chapter{Ferramentas}\label{chapter-ferramentas}
+\chapter{Desenvolvimento da aplicação}\label{chapter-ferramentas}
 %https://dzone.com/articles/30top-tools-for-building-microservices-on-all-leve
 \chapterprecis{Este capítulo aprensenta ferramentas que podem ser usadas na construção de aplicações com arquitetura de microsserviços}\index{sinopse de capítulo}
 
@@ -6,14 +6,54 @@
 
 % De acordo com \citeonline{design-monitoring-testing-waseem}, mais pesquisas são necessárias para lidar com a complexidade dos microsserviços no nível de \emph{design} (projeto), de monitoramento, e de testes, desafios para qual não há soluções dedicadas.
 
-Ferramentas de código aberto estão seguidas de um asterisco (*).
+Ferramentas de código aberto ou com opções gratuitas estão seguidas de um asterisco (*).
+Expor uma boa quantidade de ferramentas tal que supra as necessidades mais frequentes de uma arquitetura de microsserviços, com espaço para alternativas.
+
+>>> Manter em mente: Focar em soluções de infraestrutura, pois As soluções para os requisitos/problemas de **negócio** podem ser iguais tanto na arquitetura monolítica quanto na de microsserviços, ou >seja, podem ser satisfeitos/solucionados nas duas arquiteturas.
+
+asdfasdf. \cite{Tanembaum-Steen}.
+
+\citeonline{Tanembaum-Steen} afirma que...
+
+\section{Parametrização de configurações}
+TODO: Encontrar um lugar apropriado no trabalho para colocar esse tópico. Tem a ver com **portabilidade** de código
 
 \section{Linguagens de programação}
 Java, JavaScript, Python, Elixir. \footnote{Uma linguagem de programação não pode, por sí só, ser caracterizada como código aberto ou não, mas uma implementação de uma linguagem pode. Para o escopo deste trabalho, todas as implementações mais comuns das linguages de programação citadas são válidas.}
 
 % A programming language isn't in it self open source or not, but an implementation of it might be. Yes, there are open source implementations of Java. Sun's Java implementation (the most popular one), is one of them.
 
+\section{Frameworks}
+TODO: Para microsserviços, ...
+
+\section{Servidor Web}
+TODO: nginx, apache. 
+Importante distinguir servidores web de servidores de aplicação...
+
 \section{Bancos de dados}
+TODO:
+
+\subsection{Tipos de bancos de dados}
+
+
+\subsection{Escalamento}
+
+\subsubsection{CQRS}
+\emph{Command Query Responsibility Segregation (CQRS)} - Segregação de Responsabilidade de Consulta de Comando. 
+
+Trata-se de usar um modelo para escrita e outro para leitura. Adicionar complexidade. 
+
+"CQRS stands for Command Query Responsibility Segregation, which is a software design pattern that separates the operations for reading data (queries) from those for writing data (commands). This separation allows each operation to be optimized independently, improving performance and scalability in complex applications."
+
+
+- ler: https://martinfowler.com/bliki/CQRS.html
+
+
+\subsubsection{Replicação}
+- ler: https://atlan.com/what-is/database-replication/
+- ler: https://release.com/blog/syncing-databases-how-to-do-it-and-best-practices
+- Aplicação: https://stackoverflow.com/questions/58399450/keeping-databases-in-sync-after-write-update-across-regions-zones
+- ver se tem algum serviço assim na AWS
 
 \subsection{Relacionais}
 MySQL*, PostgreSQL*, MariaDB*
@@ -21,7 +61,14 @@ MySQL*, PostgreSQL*, MariaDB*
 \subsection{Not-only SQL}
 MongoDB*, Couchbase*, Redis*, Amazon DynamoDB
 
-\section{Integração contínua}
+\section{Integração contínua (CI)}
+
+\subsection{Sistema de controle de versão}
+Git, VCS
+
+\subsection{Gerenciamento de repositórios}
+GitHub, Bitbucket, GitLab, amazon S3
+
 % Many software tools are available to support implementing CI/CD practices. These CI/CD tools range from repository management such as Github and Bitbucket, Jenkins for build automation, and Selenium and Katalon Studio for test automation.
 
 % What are some common CI/CD tools?
@@ -41,19 +88,15 @@ MongoDB*, Couchbase*, Redis*, Amazon DynamoDB
 % Teams may also want to consider managed CI/CD tools, which are available from a variety of vendors. The major public cloud providers all offer CI/CD solutions, along with GitLab, CircleCI, Travis CI, Atlassian Bamboo, and many others.
 % Additionally, any tool that’s foundational to DevOps is likely to be part of a CI/CD process. Tools for configuration automation (such as Ansible, Chef, and Puppet), container runtimes (such as Docker, rkt, and cri-o), and container orchestration (Kubernetes) aren’t strictly CI/CD tools, but they’ll show up in many CI/CD workflows. \cite{redhat-ci-cd}
 
-\subsection{Sistema de controle de versão}
-Git, VCS
-
-\subsection{Gerenciamento de repositórios}
-GitHub, Bitbucket, GitLab
 
 \subsection{Automação de compilação}
 Jenkins
 
-\subsection{Testes automáticos}
+\subsection{Automação de testes}
 Selenium
 
 \subsection{Servidor de integração}
+https://about.gitlab.com/topics/ci-cd/continuous-integration-server/
 CruiseControl*
 % Listamos abaixo alguns servidores de integração disponíveis no mercado. Isso não é uma lista ordenada por popularidade e algum outro critério. Alguns servidores são opensource, outros não, alguns são pagos ou podem ser alocados na nuvem e outros só existem para nuvem ou instalação local.
 
@@ -69,41 +112,63 @@ CruiseControl*
 %     Azure (https://azure.microsoft.com/pt-br/services/devops/server/)
 
 % At Thoughtworks, we're big fans of continuous integration servers - indeed we led the original development of CruiseControl and CruiseControl.NET, the widely used open-source CI servers. Since then we've also built the commercial Cruise CI server. We use a CI server on nearly every project we do and have been very happy with the results.
+\section{Testes}
+Teste Manual vs Automatizado vs Contínuo
+Existem inúmeros tipos de testes: 
+https://www.geeksforgeeks.org/types-software-testing/
+https://www.perfecto.io/resources/types-of-testing
+
+\subsection{Testes Manuais}
+\subsection{Testes unitários}
+\subsection{Testes de integração}
+
+\subsection{Testes de API}\label{ferramentas-testes-apis}
+Postman*, Hoppscotch*, Thunder Client (VSCode)
+programar os testes em uma linguagem de programação
+cURL
+postman
+solução integrada ao VSCode - thunderclient, rapidAPI
+
+
+\section{Entrega contínua e implantação contínua}
+GitLab... Ler melhor sobre CD
 
 \section{Comunicação}
 
 \subsection{RPC}
 gRPC (\url{https://grpc.io/})
 
-\subsection{Mensagens}
+\subsection{Mensageria}
 RabbitMQ*, Azure Service Bus, Amazon Simple Queue Service, Google Cloud Pub/Sub.
 
-\subsection{Streaming de dados e mensagens}
+\subsection{Streaming de Dados}
 Apache Kafka*
 
 \subsection{APIs}
 
 \subsubsection{API Gateway}
-Tyk*, Amazon API Gateway
+nginx (free and paid version), Tyk*, Amazon API Gateway
 
-\subsubsection{Linguagem de consulta}
-GraphQL*
+\subsubsection{Tipos de API}
+
+\subsubsubsection{GraphQL}
+GraphQL 
+
+\subsubsubsection{REST}
+REST is not a protocol or a standard, it is an architectural style. During the development phase, API developers can implement REST in a variety of ways.
+
+Like the other architectural styles, REST also has its guiding principles and constraints. These principles must be satisfied if a service interface has to be referred to as RESTful.
+
+A Web API (or Web Service) conforming to the REST architectural style is called a REST API (or RESTful API). 
+
+6 princípios: https://www.ibm.com/think/topics/graphql-vs-rest-api
 
 \subsubsection{Documentação}
-Swagger Inspector
+Swagger (free and paid version)
 
 % \subsection*{GraphQL}
 % A query language for your API
 % GraphQL is a query language for APIs and a runtime for fulfilling those queries with your existing data. GraphQL provides a complete and understandable description of the data in your API, gives clients the power to ask for exactly what they need and nothing more, makes it easier to evolve APIs over time, and enables powerful developer tools. \cite{GraphQL-site}
-
-\subsubsection{Testes de API}\label{ferramentas-testes-apis}
-Postman*, Hoppscotch*, API Fortress
-
-% RapidAPI offers RapidAPI Client for VS Code to test APIs locally inside Visual Studio Code. You can also schedule API tests using RapidAPI Studio.
-% programar os testes em uma linguagem de programação
-% cURL
-% postman
-% solução integrada ao VSCode - thunderclient
 
 \section{Provisionamento}
 
@@ -111,7 +176,7 @@ Postman*, Hoppscotch*, API Fortress
 VirtualBox*
 
 \subsection{de containers}
-Docker*
+Docker*, LXC (Linux containers)
 
 \subsection{na nuvem}
 AWS EC2
@@ -138,7 +203,7 @@ AWS Launch Templates
 
 % Ferramenta para rate limiting. \cite{rapidAPI-twitter}
 
-\section{Orquestração}
+\section{Orquestração de Containers}
 
 Docker Swarm*, Kubernetes*, Conductor*, Azure Kubernetes Service (AKS)
 
@@ -169,7 +234,7 @@ Docker Swarm*, Kubernetes*, Conductor*, Azure Kubernetes Service (AKS)
 
 % The following diagram shows the process for deploying a containerized microservices application to Oracle Cloud Infrastructure Container Engine for Kubernetes. \cite{oracle_microservices}
 
-\section{Monitoramento}
+\section{Monitoramento e \emph{Logging}}
 Logstash*, Middleware, Elastic Stack, Graylog*
 
 \section{Conjunto de ferramentas}

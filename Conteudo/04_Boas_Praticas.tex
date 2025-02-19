@@ -223,8 +223,9 @@ Polirepo (também conhecido como multirepo) é uma estratégia de organização 
 % \subsection{Estratégias de ramificação} <<
 
 \section{Implantação em containers}
+TODO: Elaborar sobre orquestração de containers.
 
-Containers configuram isolamentos lógicos em uma máquina. Eles são leves e altamente flexíveis, permitindo serem parados, alterados e reiniciados rapidamente. Depois de construido o microsserviço, recomenda-se lançá-lo dentro de um container para torná-los padronizados, leves, seguros e evitar interferências com outros microsserviços. Uma opção de mecanismo de gerenciamento de containers é o Docker\footnote{Docker: \url{https://www.docker.com/}} \cite{oracle_microservices}.
+Containers configuram isolamentos lógicos em uma máquina. Eles são leves e altamente flexíveis, permitindo serem parados, alterados e reiniciados rapidamente. Depois de desenvolvido o microsserviço, recomenda-se implantá-lo dentro de um container para torná-los padronizados, leves, seguros e evitar interferências com outros microsserviços. Uma opção de mecanismo de gerenciamento de containers é o Docker\footnote{Docker: \url{https://www.docker.com/}} \cite{oracle_microservices}.
 
 % A container is a standardized unit of software, used to develop, ship and deploy applications. Containers are managed using a container engine, such as Docker. The container engine provides the tools that are necessary to bundle all the application dependencies as a container. You can use the Docker engine to create, deploy, and run your microservices applications in containers. Microservices running in Docker containers have the following characteristics:
 
@@ -258,6 +259,8 @@ Além de usar os métodos mais comuns de testes, deve-se também testar os micro
 - Teste de penetração: Trabalhar com uma empresa terceirizada de segurança de \emph{software} para realizar testes de penetração no sistema.
 
 \section{Comunicação}
+
+TODO: Elaborar sobre o FastCGI. (geralmente usado para servidores de aplicação de linguagem interpretada como uma alternativa ao http)
 
 Na construção de estruturas de comunicação entre diferentes processos, nota-se muitos produtos e abordagens que enfatizam o emprego de grande inteligência no próprio mecanismo de comunicação. Um exemplo disso é o Enterprise Service Bus (ESB), onde os mecanismos dessa abordagem geralmente incluem recursos sofisticados para roteamento, tratamento e transformação de mensagens e aplicação das regras de negócios \cite{martin-fowler-microservices}.
 
