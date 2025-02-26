@@ -1,8 +1,9 @@
 \chapter{Introdução}\label{chapter-introducao}
 
-O crescimento da internet e a onipresença da computação móvel tem mudado o jeito como \emph{software} é desenvolvido nos últimos tempos. Todos que têm contato com o ramo do desenvolvimento de \emph{software} provavelmente já ouviram o termo \emph{SaaS (Software as a Service)}, ou \emph{software} como um serviço. Entretanto, essa expressão significa mais do que apenas um modelo de negócio. A tendência que tem-se observado é a de oferecer \emph{software} não mais como um pacote completo e fechado, mas sim como um pacote flexível e em constante melhoria, o que implica na mudança do foco dos desenvolvedores para construir componentes leves e auto-contidos, que permitam que mudanças sejam desenvolvidas e implantadas rápida e independetemente. A partir disso originou-se um novo paradigma de desenvolvimento, chamado de "microsserviços", inspirado pela arquitetura orientada a serviços, e que tem ganho grande popularidade nos últimos anos \cite{middleware-microservices,design-monitoring-testing-waseem}.
+O crescimento da internet e a onipresença da computação móvel tem mudado o jeito como \emph{software} é desenvolvido nos últimos tempos. Todos que têm contato com a área do desenvolvimento de \emph{software} provavelmente conhecem o termo \emph{SaaS (Software as a Service)}, ou \emph{software} como um serviço. Entretanto, essa expressão significa mais do que apenas um modelo de negócio. A tendência que tem-se observado na indústria do \emph{software} é a de oferecer \emph{software} não mais como um pacote completo e fechado, mas sim como um pacote flexível e em constante melhoria, o que implica na mudança do foco dos desenvolvedores para a criação de aplicações modulares, e que permitam que mudanças sejam desenvolvidas e implantadas rápida, fácil e independetemente \cite{CAOPLE, oracle_microservices}.
 
-Para projetar um aplicativo que seja multilíngue, facilmente escalável, fácil de manter e implantar, altamente disponível e que minimize falhas, considere a arquitetura de microsserviços. Esse tipo de arquitetura de \emph{software} é amplamente considerado a melhor maneira de estruturar um sistema de \emph{software} como um serviço atualmente. Entretanto, como quase tudo na computação, trata-se de uma troca (um \emph{trade-off}), pois assim como há benefícios, também há riscos, desvantagens e desafios na adoção de uma arquitetura de microsserviços, os quais também serão discutidos neste trabalho \cite{CAOPLE, oracle_microservices}.
+Essa mudança de foco implicou no surgimento de novas abordagens de arquitetura e organização de \emph{software}, e uma dessas tem ganho grande popularidade na indústria do \emph{software} por facilitar a criação de aplicações que são multilíngues, facilmente mantidas e implantadas, escaláveis, e altamente disponíveis. Inspirada na arquitetura orientada a serviços, ela se chama arquitetura de microsserviços, e é considerada por muitos profissionais da engenharia de software como a melhor maneira de arquitetar uma aplicação de \emph{software} como um serviço atualmente. Entretanto, como tudo na computação, há um \emph{trade-off} (uma troca), pois assim como há benefícios, também há desvantagens e desafios no emprego de uma arquitetura de microsserviços, os quais também serão discutidos neste trabalho \cite{middleware-microservices,design-monitoring-testing-waseem}.
+
 
 % Many development teams have found the microservices architectural style to be a superior approach to a monolithic architecture. But other teams have found them to be a productivity-sapping burden. Like any architectural style, microservices bring costs and benefits. To make a sensible choice you have to understand these and apply them to your specific context. microservice tradeoffs - https://martinfowler.com/articles/microservice-trade-offs.html#summary
 
@@ -31,7 +32,7 @@ Analisar o desenvolvimento de aplicações com arquitetura de microsserviços.
 % (TCC 1:)
 - Caracterizar a arquitetura de microsserviços;
 
-- Discutir práticas usadas no desenvolvimento de aplicações com arquitetura de microsserviços;
+- Apresentar e discutir práticas comumente usadas no desenvolvimento de aplicações com arquitetura de microsserviços;
 
 - Analisar a viabilidade da aplicação a ser desenvolvida no TCC 2
 % - Reunir ferramentas usadas na implementação de aplicações com arquitetura de microsserviços;
@@ -53,7 +54,7 @@ Analisar o desenvolvimento de aplicações com arquitetura de microsserviços.
 
 - Contextualizar essas ferramentas e apontar os problemas que resolvem e necessidades que suprem;
 
-- Desenvolver uma aplicação de exemplo com arquitetura de microsserviços, usando uma combinação dessas ferramentas apresentadas e algumas práticas discutidas;
+- Desenvolver uma aplicação (exemplar/protótipo?) com arquitetura de microsserviços, usando uma combinação dessas ferramentas apresentadas e algumas práticas discutidas;
 % - Analisar/testar a eficiência dessas soluções e ferramentas, por meio de (estudos de caso? análise da literatura? exemplos de empresas que as usam?);
 
 \textbf{Será que dá pra fazer isso mesmo??:}
@@ -64,11 +65,11 @@ Analisar o desenvolvimento de aplicações com arquitetura de microsserviços.
 
 Para o desenvolvimento deste trabalho, inicialmente foi feita uma pesquisa exploratória sobre a arquitetura de microsserviços, com o objetivo de ganhar maior familiaridade com o tema. Depois de definidos os objetivos iniciou-se uma pesquisa bibliográfica e os trabalhos mais relevantes foram filtrados e revisados. 
 
-Como foi constatado que não existe uma definição formal para a arquitetura de microsserviços, para caracterizá-la e para reunir práticas, foram extraídas dos trabalhos as características ou práticas mencionadas como imprescindíveis pelos autores e as que apareceram com mais frequência. 
+Como foi constatado que não existe uma definição formal para a arquitetura de microsserviços, para caracterizá-la e para reunir práticas foram extraídas dos trabalhos as características ou práticas mencionadas como imprescindíveis pelos autores e as que apareceram com mais frequência. 
 %As boas práticas que abordavam questões de código profundamente foram desconsideradas por serem extensas e específicas.
 % apenas boas práticas relacionadas a infraestrutura foram consideradas?
 
-Para a proposta da combinação de ferramentas e a contextualização delas, será feita uma nova pesquisa bibliográfica para conhecer as mais comumente usadas em aplicações com arquitetura de microsserviços e entender como funcionam e os problemas que elas resolvem. Durante o desenvolvimento da aplicação de exemplo, serão reunidos e discutidos pontos positivos e negativos observados no uso das ferramentas.  
+\textbf{TODO}: Para a proposta da combinação de ferramentas e a contextualização delas, será feita uma nova pesquisa bibliográfica para conhecer as mais comumente usadas em aplicações com arquitetura de microsserviços e entender como funcionam e os problemas que elas resolvem. Durante o desenvolvimento da aplicação de exemplo, serão reunidos e discutidos pontos positivos e negativos observados no uso das ferramentas.  
 %contextualiar o seu uso? 
 
 % (metodologia quanto aos objetivos, quanto a execução. passo a passo que vai seguir durante o trabalho. explicar como analisar/testar essa eficiencia (objetivos especificos))

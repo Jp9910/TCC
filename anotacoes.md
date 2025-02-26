@@ -1,11 +1,12 @@
 # TCC 2
 
 Perguntar:
-    - mudar o nome do orientador? deixar os 2
-    - como ficaria o capitulo de analise de viabilidade? considerar no final
+    
+    -V mudar o nome do orientador? deixar os 2
+    
+    -V como ficaria o capitulo de analise de viabilidade? considerar no final
+    
     - remover capitulo de plano de continuidade?
-    - Seria válido alterar os objetivos específicos? Dependendo do que eu consegui fazer. Ou se eu achar que o trabalho fica melhor mudando o objetivo mesmo.
-           -Pq eu escrevi de um modo que fica parecendo que eu quero estudar as ferramentas, mas eu só quero estudar a arquitetura mesmo (e o desenvolvimento?).
 
     - Enviar como artigo?
         https://www.computer.org/digital-library/magazines/ic/cfp-programming-flexible-systems?preview=true
@@ -14,6 +15,8 @@ Perguntar:
 
     - Sobre o objetivo específico de **Propor** uma combinação de ferramentas:
         Eu reescrevi o objetivo para alinhar com o que eu queria fazer com o trabalho. O que o senhor acha?
+
+        Desenvolver uma aplicação -> exemplar/protótipo? ...
         
         (A arq de microsserviços geralmente são usados em aplicações grandes, mas claro que não tenho condição de construir um sistema assim em poucos meses. 
         Então a aplicação que fiz é pequena (pequena como? em termos de que?). 
@@ -21,6 +24,49 @@ Perguntar:
         E quais vão ser usadas se limitam às funcionalidades de infraestrutura que eu desenvolvi. 
         Além disso, também se limitam a ferramentas open-source pq n faria sentido, no contexto academico, pagar pra fazer um projeto de demonstração
         Sendo assim, as ferramentas que usei foram rabbitmq para implementar fila de mensageria... etc)
+    
+    - Seria válido alterar os objetivos específicos? Dependendo do que eu consegui fazer. Ou se eu achar que o trabalho fica melhor mudando o objetivo mesmo.
+           -Pq eu escrevi de um modo que fica parecendo que eu quero estudar as ferramentas, mas eu só quero estudar a arquitetura mesmo (e o desenvolvimento?).
+
+    - Qual tipo de leitor eu devo presumir que está lendo? Alguem com conhecimento técnico? Imagino que seria alguem da área de computaácão que está interessado em aprender sobre microsserviços. Então eu não precisaria, por exemplo, explicar o que é um "commit"
+
+## TO DO:
+
+    #### Prioridade alta:
+    - Implementar login de cliente (front)
+    - Implementar o front de carrinho
+    - Orquestração de serviços (kubernetes ou docker swarm)
+    - Implementar mensageria - carrinho e loja ✅
+    - Parametrizar configurações dos serviços - Front✅, FrontAdmin✅, Loja✅, Auth✅, Carrinho✅
+    - API Gateway (Nginx ou AWS ElasticLoadBalancing)
+    - Monitoramento e Logging
+    - CI (com GitHub Actions) ✅
+    - CD (decidir entre deploy na AWS ou local com imagens de containers e kubernetes)
+    
+    #### Prioridade média
+    - Implementar salvamento de imagens dos produtos no banco de dados e gerenciamento no front de administração (?)
+    - Testes na teoria
+    - Testes na prática
+    - Proteger todos os endpoints do serviços - FrontAdmin ✅, Auth ✅, Loja ❌, Carrinho? ❌, Front? ❌
+    - Implementar gerenciamento de usuários no front de administracao ✅
+    - Implementar login de admin (front-admin) ✅
+
+    #### Prioridade baixa:
+    - Caching na Loja (com Memcached)
+    - Serviço de Financeiro
+    - Serviço de Recomendação
+    - Clustering no rabbitmq
+        https://www.rabbitmq.com/docs/distributed
+        https://www.rabbitmq.com/docs/clustering
+
+    - Sobre CI/CD na parte escrita: 
+        -Compilação vem antes ou depois do merge? Ou os dois?? Para testar é preciso compilar o código primeiro..? Talvez seja melhor remover essa etapa e colocá-la na mesma etapa de testes: "Testes (após compilação, caso não seja linguagem interpretada)"
+        -Então essa ilustração pode mudar um pouco, dependendo da linguagem (compilada ou interpretada).
+        - Em linguagens compiladas, o artefato geralmente é o executável gerado pela compilação. Em linguagens interpretadas, o artefato depende do que é o ambiente de produção. Se for um servidor web, por exemplo, o artefato é o próprio código-fonte. Se for num servidor de aplicação usando java e TomCat, por exemplo, o artefato é o .war (ou .jar?) compilado, e o deploy é mandar esse .war para o servidor e executá-lo. Se o ambiente de produção está em containers docker, o artefato é a geração de uma nova versão da imagem sendo usada, e o deploy seria usar buildar um container com essa nova versão. Fonte: curso de integraçao continua do vinicius dias
+        -A etapa "Testes de unidade e integração" na imagem que retrata CI/CD deveria ser "Esteira (pipeline) de CI", que pode englobar diversas etapas, tal como lint, testes, formatação, etc
+        -Revisão (mesma coisa que versão?) deveria ser antes do merge??
+
+    - Reorganizar os tópicos no 4.1
 
 
 
@@ -33,9 +79,19 @@ Perguntar:
     Autenticação em APIs é _stateless_, ou seja, o server não guarda uma sessão do usuário. Não lembra das requisições passadas; cada requisição é independente.
     Autenticação em apps web tradicionais é _stateful_ - o servidor guarda o estado como uma sessão, e nas próximas requisições consegue identificar o usuário e se já foi autenticado. 
 
+- no linux, `echo $?` mostra o retorno do ultimo comando usado. 0 significa sucesso, qualquer outra coisa é não sucesso. então pode ser usado após cada etapa de testes para verificar o resultado do teste que acabou de ser executado.
 
-## TO DO:
-    > Esquematizar cada funcionalidade do site, e separar em (micro)serviços. (Usar Domain-Driven Design?)
+- O docker-compose dentro de cada repositório dos microsserviços deve rodar todos, e apenas todos, os serviços necessários para aquele microsserviço operar. No front-admin por exemplo, vai ter o próprio front-admin, a api de usuarios e a api de produtos. No carrinho, vai ter o próprio carrinho, o mongo, e o rabbitmq.
+- O docker-compose no multi-repo principal é que vai conter tudo da aplicação. E poderá servir como base para o deploy..? Ou será que vai ser melhor ver isso com Kubernetes
+
+
+## Passos gerais
+    Fazer a comunicação entre os projetos/serviços
+        apis, mensageria e talvez RPC
+
+    Aplicar as práticas/ferramentas estudadas
+    
+    Esquematizar cada funcionalidade do site, e separar em (micro)serviços. (Usar Domain-Driven Design?)
         - site de compras?
             Possíveis microsserviços
             * Frontend - (micro)serviço de ponta: website ou aplicativo mobile
@@ -48,21 +104,15 @@ Perguntar:
             * recompensas, gamificação
             * microsserviço de tradução - acesso à uma API externa (de pagamento por exemplo), um serviço de logs ou de notificação
 
-    > Criar o projeto inicial do site
+    Desenvolver o site
         - Aproveitar o site que eu fiz com php e html? quebrar em microsserviços? (isolando os dados ou os domínios) (sidecar pattern - usar pacote de código)
         (haverá diferentes projetos (projeto laravel, node, python, etc) para diferentes microserviços)
 
-    Fazer a comunicação entre os projetos/serviços
-        api gateway
-        mensageria rabbitmq
-        rpc?
-
-    Aplicar as práticas/ferramentas estudadas
-
 ## Planejamento:
-    1. Propor uma combinação de ferramentas para o desenvolvimento de aplicações com arquitetura de microsserviços
+    1. Apresentar ferramentas que frequentemente são usadas em aplicativos com arquitetura de microsserviços
+    ~Propor uma combinação de ferramentas para o desenvolvimento de aplicações com arquitetura de microsserviços~
 
-    2. Contextualizar essas ferramentas e apontar os problemas que elas resolvem
+    2. Contextualizar essas ferramentas e apontar os problemas que resolvem e necessidades que suprem
 
     3. --> Esquematizar cada funcionalidade do site, separando em (micro)serviços. (Usar Domain-Driven Design? Aplicando as camadas do DDD na arq. de microserv)
     
@@ -73,11 +123,21 @@ Perguntar:
     6. Preparar apresentação do trabalho
 
 ## Ideias:
+    - AMQP 1.0 não é necessariamente melhor do que AMQP 0.9. E 0.9 ainda é bem mais usado
+        https://www.rabbitmq.com/blog/2024/08/05/native-amqp#the-pervasiveness-of-amqp-091
+
+    - Usar alguma referencia para o livro Distributed Systems
+
     - Comentar sobre segurança em camadas (defense in depth)
 
     - Comparar quais fatores dos 12-factors a aplicação segue
     
-    - Etapas de build: lint (ex: https://prettier.io/docs/install#git-hooks), verificar estilo de codigo, analise estatica, testes...
+    - Etapas de build (pipeline): 
+            lint - (eslint);
+            formatação de código - (prettier https://prettier.io/docs/install#git-hooks);
+            analise estatica;
+            testes
+            (um projeto real provavelmente teria bem mais etapas)
     
     - adicionar réplicas a cada microserviços (orquestradores)
     
@@ -101,7 +161,7 @@ Perguntar:
 
         *There's no single primary data store with which all services interact. Instead, coordination and communication between the services is done on an as-needed basis and by using a message bus. Fonte: <https://learn.microsoft.com/en-us/dotnet/architecture/cloud-native/introduce-eshoponcontainers-reference-app>
 
-    - Substituir alguma chamada HTTP no sistema por uma RPC
+    - Substituir alguma chamada HTTP no sistema por uma RPC (tem RPC no rabbitmq)
         - ler: https://www.geeksforgeeks.org/remote-procedure-call-rpc-in-operating-system/
                 https://medium.com/@karthikheyan.mgn/remote-procedure-calls-rpc-in-javascript-enhancing-inter-service-communication-7bc45517c00e
         - ver frameworks de RPC no node: https://www.reddit.com/r/node/comments/zz6h8z/ive_made_a_big_comparison_table_of_nodejs_rpc/
@@ -234,7 +294,7 @@ Perguntar:
     - Comunicação:
         HTTP, APIs (REST ou GraphQL), RPC com gRPC?, fastCGI?
     - Testes:
-        Selenium, contract cesting with Pact?, Playwright, cypress, postman/thunderclient, aws device farm
+        Selenium, jest (javascript), contract cesting with Pact?, Playwright, cypress, postman/thunderclient, aws device farm
         Ler: https://www.atlassian.com/continuous-delivery/software-testing/types-of-software-testing
     - Logging:
         nginx (com plugins), 
