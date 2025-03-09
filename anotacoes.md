@@ -2,16 +2,16 @@
 
 Perguntar:
     
-    -V mudar o nome do orientador? deixar os 2
+    - ✅ mudar o nome do orientador? deixar os 2
     
-    -V como ficaria o capitulo de analise de viabilidade? considerar no final
+    - ✅ como ficaria o capitulo de analise de viabilidade? considerar no final
     
     - remover capitulo de plano de continuidade?
 
     - Enviar como artigo?
         https://www.computer.org/digital-library/magazines/ic/cfp-programming-flexible-systems?preview=true
 
-    - Análise de viabilidade poderia ter a ver com os requisitos funcionais e não funcionais do sistema e alguns diagrama UML, relacionando com ferramentas.
+    - *Se der tempo*, Análise de viabilidade poderia ter a ver com os requisitos funcionais e não funcionais do sistema e alguns diagrama UML, relacionando com ferramentas.
 
     - Sobre o objetivo específico de **Propor** uma combinação de ferramentas:
         Eu reescrevi o objetivo para alinhar com o que eu queria fazer com o trabalho. O que o senhor acha?
@@ -30,35 +30,50 @@ Perguntar:
 
     - Qual tipo de leitor eu devo presumir que está lendo? Alguem com conhecimento técnico? Imagino que seria alguem da área de computaácão que está interessado em aprender sobre microsserviços. Então eu não precisaria, por exemplo, explicar o que é um "commit"
 
+    - O código é parte da entrega do trabalho? Ou como isso é feito?
+
+    - O código pertence a ufs? Ou eu posso usar para outros fins depois de concluir o trabalho?
+
+    - Como funciona a apresentação e a defesa do tcc?
+
+    - Como é a correção pós-defesa? Oq geralmente se é corrigido?
+
 ## TO DO:
 
     #### Prioridade alta:
-    - Implementar login de cliente (front)
-    - Implementar o front de carrinho
     - Orquestração de serviços (kubernetes ou docker swarm)
+    - API Gateway (Nginx ou AWS ElasticLoadBalancing, que pode ser feito pelo kubernetes)
+    - Monitoramento e Logging 
+    - CD (Kubernetes localmente? Ver o curso de EKS (aws)? Só um docker-compose?) 
+    - Implementar login de cliente (front) ✅
+    - Implementar o front de carrinho ✅
+    - Implementar cadastro no front ✅
+    - Página de pedidos no front ✅
     - Implementar mensageria - carrinho e loja ✅
     - Parametrizar configurações dos serviços - Front✅, FrontAdmin✅, Loja✅, Auth✅, Carrinho✅
-    - API Gateway (Nginx ou AWS ElasticLoadBalancing)
-    - Monitoramento e Logging
     - CI (com GitHub Actions) ✅
-    - CD (decidir entre deploy na AWS ou local com imagens de containers e kubernetes)
-    
+
     #### Prioridade média
     - Implementar salvamento de imagens dos produtos no banco de dados e gerenciamento no front de administração (?)
-    - Testes na teoria
-    - Testes na prática
+    - Testes na teoria ✅
+    - Testes na prática - unidade, end2end, e de aceitação (selenium)
     - Proteger todos os endpoints do serviços - FrontAdmin ✅, Auth ✅, Loja ❌, Carrinho? ❌, Front? ❌
     - Implementar gerenciamento de usuários no front de administracao ✅
     - Implementar login de admin (front-admin) ✅
 
     #### Prioridade baixa:
     - Caching na Loja (com Memcached)
+    - Busca de produtos no front e api de loja
+    - Implementar quantidade de produtos no carrinho, pedido e loja
+    - Melhorar a página de pedidos
     - Serviço de Financeiro
     - Serviço de Recomendação
     - Clustering no rabbitmq
         https://www.rabbitmq.com/docs/distributed
         https://www.rabbitmq.com/docs/clustering
 
+
+    #### Parte escrita
     - Sobre CI/CD na parte escrita: 
         -Compilação vem antes ou depois do merge? Ou os dois?? Para testar é preciso compilar o código primeiro..? Talvez seja melhor remover essa etapa e colocá-la na mesma etapa de testes: "Testes (após compilação, caso não seja linguagem interpretada)"
         -Então essa ilustração pode mudar um pouco, dependendo da linguagem (compilada ou interpretada).

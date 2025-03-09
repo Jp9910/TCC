@@ -36,7 +36,7 @@ Muitas coisas podem dar errado em qualquer tipo de arquitetura, mas em especial 
 
 Na arquitetura de microserviços a implantação é feita separadamente para cada microsserviço. Com muitos serviços para gerenciar, ela pode se tornar uma tarefa árdua, portanto será novamente necessário um grande nível de automação nessa etapa, geralmente envolvendo um \emph{pipeline} de implantação, que deve ser automatizado o máximo possível \cite{martin-fowler-microservice-prereq}.
 
-\section{\emph{Domain-Driven Design} (DDD)}
+\section{\emph{Domain-Driven Design} (DDD)}\label{section-ddd}
 TODO: 
 
 \section{A metodologia 12-fatores}
@@ -201,9 +201,11 @@ Os benefícios da entrega contínua incluem: risco reduzido na implantação, po
 
 \section{DevOps}
 
-Por um lado, as equipes de desenvolvimento tentam ser o mais eficientes possível, entregando tarefas completas sempre que possível. Por outro lado, a equipe de operações valoriza a estabilidade, considerando cada alteração como uma possível causa de problemas. Assim, tem-se diferenças importantes no foco do trabalho - uma equipe preza pela velocidade em novas funcionalidades e outra pela estabilidade. Com isso em mente, as equipes precisam aprender a trabalhar em conjunto para conseguir alcançar uma entrega contínua e ao mesmo tempo manter um \emph{software} funcional no ambiente de execução.
+Enquanto por um lado as equipes de desenvolvimento tentam ser o mais eficientes possível, entregando tarefas completas sempre que possível, por outro, a equipe de operações valoriza a estabilidade, considerando cada alteração como uma possível causa de problemas. Assim, tem-se diferenças importantes no foco do trabalho - uma equipe preza pela velocidade em novas funcionalidades e outra pela estabilidade. Com isso em mente, as equipes precisam aprender a trabalhar em conjunto para conseguir alcançar uma entrega contínua e ao mesmo tempo manter um \emph{software} funcional no ambiente de execução.
 
 DevOps é um movimento cultural que visa a integração e otimização do processo de aprendizagem e cooperação entre os integrantes de equipes relacionadas ao desenvolvimento de \emph{software}. Não se trata de um cargo, mas sim uma visão organizacional de trabalho que tem o objetivo de automatizar o ciclo de desenvolvimento do \emph{software} de modo que seja veloz, seguro e integrado, com foco nas necessidades do usuário e \emph{feedback} rápido. Para tanto, precisa-se de ferramentas para facilitar as automações e monitoramento, mas é importante lembrar que DevOps trata-se mais de um movimento cultural do que uma aparelhagem técnica. Práticas de DevOps, como integração e entrega contínua, são essenciais para o sucesso de aplicações com arquitetura de microsserviços pelos benefícios que traz ao time e ao desenvolvimento da aplicação \cite{gitlab-devops}.
+
+TODO: Imagem do ciclo DevOps
 
 % CI/CD is an essential part of DevOps and any modern software development practice. A purpose-built CI/CD platform can maximize development time by improving an organization’s productivity, increasing efficiency, and streamlining workflows through built-in automation, testing, and collaboration. As applications grow larger, the features of CI/CD can help decrease development complexity. Adopting other DevOps practices — like shifting left on security and creating tighter feedback loops — helps break down development silos, scale safely, and get the most out of CI/CD.
 
@@ -297,17 +299,17 @@ De acordo com \citeonline{design-monitoring-testing-waseem}, \emph{API Gateway} 
 
 % Considerando que APIs são um tópico essencial na comunicação entre microsserviços, elas serão abordadas em maior profundidade na \autoref{boas-praticas-apis}.
 
-\section{Monitoramento}
+\section{Observabilidade e Monitoramento}
 
-Em qualquer aplicação o monitoramento é importante para garantir um bom funcionamento. Entretanto, na arquitetura de microsserviços o monitoramento se torna indispensável e mais complexo. % Automação e monitoramento estão altamente ligados.
+A observabilidade se trata de permitir a observação do estado de um sistema por meio da externalização de seu comportamento. O monitoramento engloba a observabilidade e se trata de acompanhar o estado de um sistema por meio de registros e ações que podem ser tomadas como resposta a eles. O monitoramento é fundamental para promover o funcionamento adequado de qualquer aplicação, especialmente em arquiteturas distribuidas, como a de microsserviços. Nelas, esse se torna ainda mais importante e complexo. Além disso, a automação e o monitoramento estão altamente ligados.
 
 % resource usage and load balancing as monitoring metrics, log management and exception tracking as monitoring practices are widely used \cite{design-monitoring-testing-waseem}
 
 \subsection{Registros}\label{subsecao-registros}
 
-Um registro, ou \emph{log}, descreve o que aconteceu em um dado momento em um dado processo, provendo informações sobre o estado e a saúde do processo. Manter um histórico de registros do microsserviço é uma forma simples e eficiente de se implementar monitoramento, e é fortemente indicado. Para manter registros, pode-se desenvolver um serviço dedicado a isso, para ser reutilizado onde necessário. Outra possibilidade é utilizar bibliotecas, próprias ou desenvolvidas por terceiros.
+Um registro, ou \emph{log}, descreve o que aconteceu em um dado momento em um dado processo, provendo informações sobre o estado e a saúde dele. Manter um histórico de registros do microsserviço é uma forma simples e eficiente de se implementar monitoramento, e é fortemente indicado. Para manter registros, pode-se desenvolver um serviço dedicado a isso ou utilizar bibliotecas, para poder ser reutilizado onde necessário.
 
-Para facilitar a escrita, leitura e operação dos registros, deve-se padronizar o formato deles em todos os microsserviços e diferenciar entradas de erros, de avisos e de informação. Além disso, eles devem ser agregados e organizados em um único lugar para que possam ser facilmente consultados.
+Para facilitar uma eficiente escrita, leitura e operação dos registros, deve-se padronizar o formato dos registros em todos os microsserviços e diferenciar entradas de erros, de avisos e de informação. Além disso, eles devem ser agregados e organizados em um único lugar para que possam ser facilmente consultados.
 
 % Pode haver um serviço dedicado para logs, ou um sidecar de logs (pacote instalável).
 
@@ -316,7 +318,7 @@ Para facilitar a escrita, leitura e operação dos registros, deve-se padronizar
 % Usar ferramentas de gerenciamento (APMs - Application performance management) para visualizar essas stack-traces.
 
 \subsection{Métricas}
-Métricas nos permitem saber o que está acontecendo em qualquer momento, e decidir que ações devem ser tomadas a partir disso. Por exemplo, escalar um serviço que recebe muitas requisições ou diminuir um que não. Métricas podem inclusive servir para questões de negócios e de \emph{business inteligence}. 
+Uma métrica é uma medição de uma propriedade do sistema numa dada janela de tempo, e possui um objetivo específico, seja para questões de desenvolvimento, de infraestrutura ou mesmo de negócios e \emph{business inteligence}. Disponibilizar a porcentagem de uso de CPU em uma máquina, por exemplo, tem o objetivo de informar o operador sobre esse uso para que ele possa decidir que ações precisam ser tomadas. Recomenda-se ter métricas para todo ponto de atenção do sistema, que, é claro, variam de acordo com o sistema e suas regras de negócio, porém geralmente incluem uso de recursos, tempo de resposta e quantidade de acessos.
 
 Enquanto registros precisam ser desenvolvidos, métricas apenas precisam de instrumentação pois muitas ferramentas já possuem as próprias métricas ou já existem métodos consolidados para as obter. Nos servidores web mais populares, por exemplo, as informações básicas sobre uma requisição já são gravadas por padrão.
 
