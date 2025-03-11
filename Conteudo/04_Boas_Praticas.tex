@@ -245,6 +245,9 @@ Polirepo (também conhecido como multirepo) é uma estratégia de organização 
 
 % \subsection{Estratégias de ramificação} <<
 
+\section{Externalização/parametrização de configurações}
+TODO: Falar sobre externalização da configuração do ambiente. Traz mais portabilidade ao código. Fazer paralelo com o 12-factor app fator 3
+
 \section{Implantação em containers}
 TODO: Elaborar sobre orquestração de containers.
 
@@ -300,18 +303,18 @@ De acordo com \citeonline{design-monitoring-testing-waseem}, \emph{API Gateway} 
 % Considerando que APIs são um tópico essencial na comunicação entre microsserviços, elas serão abordadas em maior profundidade na \autoref{boas-praticas-apis}.
 
 \section{Observabilidade e Monitoramento}
+% Ambos são uma parte muito importante do \emph{Site Reability Engineering} (SRE)
+A observabilidade se trata de permitir a observação do estado de um sistema por meio da externalização de seu comportamento. O monitoramento engloba a observabilidade e se trata de acompanhar o estado de um sistema por meio de registros e ações que podem ser tomadas como resposta a eles. O monitoramento é fundamental para promover o funcionamento adequado de um sistema, especialmente os com arquiteturas distribuidas, como a de microsserviços. Com essas arquiteturas, o monitoramento se torna ainda mais importante e complexo, entretanto, traz diversos benefícios, como redução de tempo médio de detecção e reparo de incidentes e favorecimento do cumprimento do Acordo de Nível de Serviço (\emph{Service Level Agreement} - SLA). Além disso, para que se possa ter um alto nível de automação, também é necessário haver um alto nível de monitoramento. As formas mais comuns de implementar monitoramento é por meio de \emph{logs} (registros) e métricas.
 
-A observabilidade se trata de permitir a observação do estado de um sistema por meio da externalização de seu comportamento. O monitoramento engloba a observabilidade e se trata de acompanhar o estado de um sistema por meio de registros e ações que podem ser tomadas como resposta a eles. O monitoramento é fundamental para promover o funcionamento adequado de qualquer aplicação, especialmente em arquiteturas distribuidas, como a de microsserviços. Nelas, esse se torna ainda mais importante e complexo. Além disso, a automação e o monitoramento estão altamente ligados.
+\citeonline{livro-sre-google} afirma que os aspectos mais importantes para se monitorar em sistemas distribuidos são latência (tempo de resposta do sistema), tráfego (demanda colocada no sistema), saturação (uso excedente de recursos do sistema) e erros occorridos, sejam erros explicítos (p. ex. erros 500 em uma requisição HTTP), implícitos (p. ex. respostas incorretas à requisição) ou por política (p. ex. tempo de resposta inadequado). O monitoramento desses aspectos muitas vezes são divididos em duas metodologias - RED e USE, que significam \emph{Rate, Errors, Duration} (Taxa, Erros, Duração) e \emph{Utilization, Saturation, Errors} (Utilização, Saturação, Erros), respectivamente. Enquanto RED foca na experiência do usuário, USE foca no funcionamento apropriado da infraestrutura, mas ambos são metodologias abrangentes e complementam um ao outro. \cite{livro-sre-google, grafana-blog}
 
 % resource usage and load balancing as monitoring metrics, log management and exception tracking as monitoring practices are widely used \cite{design-monitoring-testing-waseem}
 
-\subsection{Registros}\label{subsecao-registros}
+\subsection{\emph{Logs} (registros)}\label{subsecao-registros}
 
-Um registro, ou \emph{log}, descreve o que aconteceu em um dado momento em um dado processo, provendo informações sobre o estado e a saúde dele. Manter um histórico de registros do microsserviço é uma forma simples e eficiente de se implementar monitoramento, e é fortemente indicado. Para manter registros, pode-se desenvolver um serviço dedicado a isso ou utilizar bibliotecas, para poder ser reutilizado onde necessário.
+Um registro, ou \emph{log}, descreve o que aconteceu em um dado momento em um dado processo, provendo informações rastreáveis sobre o estado e a saúde dele. Manter um histórico de registros de uma aplicação é uma forma simples e eficiente de se implementar monitoramento, e é fortemente indicado para qualquer sistema, especialmente os distribuidos. 
 
-Para facilitar uma eficiente escrita, leitura e operação dos registros, deve-se padronizar o formato dos registros em todos os microsserviços e diferenciar entradas de erros, de avisos e de informação. Além disso, eles devem ser agregados e organizados em um único lugar para que possam ser facilmente consultados.
-
-% Pode haver um serviço dedicado para logs, ou um sidecar de logs (pacote instalável).
+Para favorecer uma eficiente escrita, leitura e operação dos registros, eles devem possuir ao menos: um código do evento ocorrido, uma mensagem descritiva, a condição tratada em caso de exceção ou erro e o período de retenção. Também deve-se padronizar o formato dos registros emitidos por todos os microsserviços e diferenciar entradas de erros, de avisos e de informação. Além disso, os registros devem ser agregados e organizados em um único lugar para que possam ser facilmente consultados. \cite{livro-sre-google-workbook}
 
 % Um motivo importante para organizar os logs é rastrear as chamadas de uma execução. Devemos poder reconstruir uma operação a partir de um identificador. Isso é o equivalente à stack-trace de um sistema monolítico.
 
@@ -329,7 +332,7 @@ Enquanto registros precisam ser desenvolvidos, métricas apenas precisam de inst
 Considerando que APIs são uma parte crucial no desenvolvimento de microserviços, sendo responsável por grande parte da comunicação que se faz necessária para conectar tantos serviços separados e manter um funcionamento eficiente e livre de falhas, este trabalho explorará diversas práticas no desenvolvimento de APIs.
 
 \subsection{Códigos de status de respostas HTTP}
-Esses códigos são números entre 100 e 599, cada um tendo um significado diferente, e cada centena sendo classificada em tipos diferentes de resposta. 100-199 representam respostas de informação. 200-299 representam respostas de sucesso. 300-399 representam tipos de redirecionamentos. 400-499 representam erros por parte do cliente. 500-599 representam erros por parte do servidor. Isso é um padrão definido na seção 10 da RFC 2616 \cite{rfc_http_nielsen_1999}, e facilita com que o cliente entenda o que aconteceu com a requisição à API. Esses códigos devem ser enviados juntos com a resposta à requisição.
+Esses códigos são números entre 100 e 599 que devem ser enviados com a resposta à requisição, cada um tendo um significado diferente, e cada centena sendo classificada em tipos diferentes de resposta. 100-199 representam respostas de informação, 200-299, respostas de sucesso, 300-399, tipos de redirecionamentos, 400-499, erros por parte do cliente e 500-599, erros por parte do servidor. Esse é um padrão definido na seção 10 da RFC 2616 \cite{rfc_http_nielsen_1999}, e facilita o entendimento do cliente sobre o que aconteceu com a requisição à API.
 
 \subsection{Troca de dados com JSON}
 Atualmente JSON é um dos formatos mais populares para troca de dados na web, pelo fato de ser facilmente lido tanto por humanos quanto por máquinas. Em APIs, JSON é usado para enviar e receber requisições por meio do protocolo HTTP, sendo uma solução robusta para a comunicação entre cliente e servidor. Embora seja derivado do JavaScript, JSON também é suportado por muitas outras linguagens, seja nativamente ou por meio de bibliotecas.  \cite{json_bourhis_2020}

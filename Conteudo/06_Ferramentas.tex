@@ -6,7 +6,7 @@
 
 % De acordo com \citeonline{design-monitoring-testing-waseem}, mais pesquisas são necessárias para lidar com a complexidade dos microsserviços no nível de \emph{design} (projeto), de monitoramento, e de testes, desafios para qual não há soluções dedicadas.
 
-Quando se está procurando por ferramentas para o desenvolvimento de aplicações, a quantidade imensa de opções disponíveis pode ser opressiva. Perguntas como "Para que serve a ferramenta X"? "Qual a diferença entre a ferramenta X e a ferramenta Y", "Em qual cenário eu devo usar a ferramenta X?", "Qual ferramenta funciona melhor com a ferramenta X?" são muito comuns para iniciantes ou mesmo para pessoas experientes em poucas ferramentas. E apesar de nem sempre existirem respostas concretas para essas perguntas ou das respostas mudarem com o passar do tempo, esse capítulo provê uma orientação superficial para o desenvolvedor que procure entender o contexto de cada ferramenta e o que tem a oferecer.
+Quando se está procurando por ferramentas para o desenvolvimento de aplicações, a quantidade imensa de opções disponíveis pode ser opressiva. Perguntas como "Para que serve a ferramenta X"? "Qual a diferença entre a ferramenta X e a ferramenta Y", "Em qual cenário eu devo usar a ferramenta X?", "Qual ferramenta funciona melhor com a ferramenta X?" são muito comuns para iniciantes ou mesmo para pessoas experientes, mas em poucas ferramentas. E apesar de nem sempre existirem respostas concretas para essas perguntas ou das respostas mudarem com o passar do tempo, esse capítulo provê uma orientação superficial para o desenvolvedor que procure entender o contexto de cada ferramenta e o que elas têm a oferecer.
 
 Ferramentas de código aberto ou com opções gratuitas estão seguidas de um asterisco (*).
 Expor uma boa quantidade de ferramentas tal que supra as necessidades mais frequentes de uma arquitetura de microsserviços, com espaço para alternativas.
@@ -20,8 +20,6 @@ asdfasdf. \cite{Tanembaum-Steen}.
 
 \citeonline{Tanembaum-Steen} afirma que...
 
-\section{Parametrização de configurações}
-TODO: Encontrar um lugar apropriado no trabalho para colocar esse tópico. Tem a ver com **portabilidade** de código
 
 \section{Linguagens de programação}
 Java, JavaScript, Python, Elixir. \footnote{Uma linguagem de programação não pode, por sí só, ser caracterizada como código aberto ou não, mas uma implementação de uma linguagem pode. Para o escopo deste trabalho, todas as implementações mais comuns das linguages de programação citadas são válidas.}
@@ -258,6 +256,10 @@ Docker Swarm*, Kubernetes*, Conductor*, AWS EKS, Azure Kubernetes Service (AKS)
 % The following diagram shows the process for deploying a containerized microservices application to Oracle Cloud Infrastructure Container Engine for Kubernetes. \cite{oracle_microservices}
 
 \section{Monitoramento e \emph{Logging}}
+% Pode haver um serviço dedicado para logs, ou um sidecar de logs (pacote instalável).
+
+Para manter registros, pode-se desenvolver um serviço dedicado a isso ou utilizar bibliotecas, para poder ser reutilizado onde necessário.
+
 Logstash*, Sentry, Middleware, Elastic Stack, Graylog*
 
 \section{Conjunto de ferramentas}

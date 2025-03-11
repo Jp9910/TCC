@@ -43,7 +43,8 @@ Perguntar:
     #### Prioridade alta:
     - Orquestração de serviços (kubernetes ou docker swarm)
     - API Gateway (Nginx ou AWS ElasticLoadBalancing, que pode ser feito pelo kubernetes)
-    - Monitoramento e Logging 
+    - Logging 
+    - Monitoramento ✅
     - CD (Kubernetes localmente? Ver o curso de EKS (aws)? Só um docker-compose?) 
     - Implementar login de cliente (front) ✅
     - Implementar o front de carrinho ✅
