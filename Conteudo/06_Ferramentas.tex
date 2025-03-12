@@ -255,7 +255,18 @@ Docker Swarm*, Kubernetes*, Conductor*, AWS EKS, Azure Kubernetes Service (AKS)
 
 % The following diagram shows the process for deploying a containerized microservices application to Oracle Cloud Infrastructure Container Engine for Kubernetes. \cite{oracle_microservices}
 
-\section{Monitoramento e \emph{Logging}}
+\section{Observabilidade e Monitoramento}
+
+Modern tracing tools, such as Jaeger, Zipkin, and OpenTelemetry, help organizations implement distributed tracing efficiently. These tools collect, process, and visualize traces, often integrating with dashboards and monitoring platforms like Grafana or Prometheus for deeper insights. OpenTelemetry, in particular, is gaining traction as a vendor-neutral, open-source standard that unifies telemetry data across logs, metrics, and traces, making it easier to achieve full observability. As distributed systems continue to grow in complexity, tracing has become an essential practice for ensuring system reliability, minimizing downtime, and optimizing application performance.
+
+\subsection{Métricas: Prometheus e Grafana}
+Prometheus is an open-source monitoring and alerting tool designed for collecting and analyzing time-series data (metrics). It is widely used for monitoring infrastructure, applications, and services, especially in cloud-native and Kubernetes environments. \cite{prometheus-docs}
+
+\subsection{Logging: Grafana Loki}
+Grafana Loki, ou apenas Loki, é uma \emph{stack} para agregação e indexação de \emph{logs}, sendo composto por um conjunto de componentes independentes. Ele funciona recebendo um fluxo de \emph{logs} a partir de um agente que os captura da aplicação, e em seguida faz a indexação apenas de metadados deles, como um \emph{label} (rótulo), que apontam para os dados do \emph{log}, que são compactados e armazenados como objeto, assim consumindo pouco armazenamento. Além de consumir pouco armazenamento, o Loki também faz uso eficiente de memória; tem possibilidade para multilocação, ou seja, consegue escutar múltiplas aplicações enviando logs ao mesmo tempo, o que é importante em sistemas distribuidos; é altamente escalável, permitindo diferentes configurações de implantação; e permite que diversas outras ferramentas de observabilidade se conectem com ele. Entretanto, ele usa a própria linguagem de consulta - \emph{LogQL}, o que dificulta o aprendizado da ferramenta. Além disso, por indexar apenas metadados, a busca de \emph{logs} por conteúdo é mais dificil, e é preciso que os \emph{logs} sejam bem estruturados e rotulados para ser eficiente. \cite{grafana-loki}
+
+\subsection{Logging: Graylog}
+Graylog é um sistema de gerenciamento de \emph{logs} mais simples do que o Loki.
 % Pode haver um serviço dedicado para logs, ou um sidecar de logs (pacote instalável).
 
 Para manter registros, pode-se desenvolver um serviço dedicado a isso ou utilizar bibliotecas, para poder ser reutilizado onde necessário.
