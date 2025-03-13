@@ -21,27 +21,27 @@ Entretanto, esses benefícios só são válidos até certo ponto. Depois que uma
 
 \subsubsection{Crescimento, velocidade de desenvolvimento, e manutenção}
 % subsubsection tamanho da aplicação
-Depois de chegar num certo tamanho, pode se tornar muito difícil desenvolver funcionalidades novas, ou mesmo prover manutenção às já existentes, devido a diversos problemas que começam a surgir, tais como: lentidão da IDE por conta do tamanho do código, prejudicando a produtividade dos desenvolvedores; sobrecarregamento do container ou máquina que hospeda a aplicação, aumentando o tempo de início; e dificuldade de entendimento da aplicação e de realizar alterações nela, diminuindo a velocidade de desenvolvimento e a qualidade do código. Padrões de organização podem amenizar a situação, mas não eliminam o problema \cite{microservicesIO_monolithic_architecture}.
+Quando aplicações monolíticas chegam a certo tamanho, pode se tornar muito difícil desenvolver funcionalidades novas, ou mesmo prover manutenção às já existentes, devido a diversos problemas que começam a surgir, tais como: lentidão da IDE por conta do tamanho do código, prejudicando a produtividade dos desenvolvedores; sobrecarregamento do container ou máquina que hospeda a aplicação, aumentando o tempo de início; e dificuldade de entendimento da aplicação e de realizar alterações nela, diminuindo a velocidade de desenvolvimento e a qualidade do código. Padrões de organização podem amenizar a situação, mas não eliminam o problema \cite{microservicesIO_monolithic_architecture}.
 
 \subsubsection{Escalabilidade}
-O escalamento da aplicação pode se tornar um problema, pois ele só pode ser feito em uma dimensão. É possível escalar o volume de operações executando mais cópias de um monólito, mas não é possível fazer isso com o volume dos dados, pois cada cópia precisará acessar todos os dados, o que aumenta o consumo de memória e o tráfego de entradas e saídas (\emph{I/O}). Também não é possível escalar os componentes independentemente, não permitindo ajustar poder de processamento ou memória quando/onde adequado \cite{microservicesIO_monolithic_architecture}.
+O escalamento de aplicações monolíticas também pode se tornar um problema, pois ele só pode ser feito em uma dimensão. É possível escalar o volume de operações executando mais cópias de um monólito, mas não é possível fazer isso com o volume dos dados, pois cada cópia precisará acessar todos os dados, o que aumenta o consumo de memória e o tráfego de entradas e saídas (\emph{I/O}). Também não é possível escalar os componentes independentemente, não permitindo ajustar poder de processamento ou memória quando ou onde adequado \cite{microservicesIO_monolithic_architecture}.
 
 % Scaling the application can be difficult - a monolithic architecture is that it can only scale in one dimension. On the one hand, it can scale with an increasing transaction volume by running more copies of the application. Some clouds can even adjust the number of instances dynamically based on load. But on the other hand, this architecture can’t scale with an increasing data volume. Each copy of application instance will access all of the data, which makes caching less effective and increases memory consumption and I/O traffic. Also, different application components have different resource requirements - one might be CPU intensive while another might memory intensive. With a monolithic architecture we cannot scale each component independently. \cite{microservicesIO_monolithic_architecture}
 
 \subsubsection{Reutilização}
-O alto acoplamento entre as partes da aplicação dificulta a reutilização delas, o que pode causar esforço e código repetidos.
+O alto acoplamento entre as partes de aplicações monolíticas dificulta a reutilização delas, o que pode causar esforço e código repetidos.
 
 \subsubsection{Implantação}
-Realizar alterações em qualquer componente implica na necessidade de reimplantar toda a aplicação, mesmo as partes que não têm ligação com as alterações. Isso aumenta riscos associados a falhas na implantação e consequentemente desencoraja a prática de implantação contínua \cite{microservicesIO_monolithic_architecture}.
+Realizar alterações em qualquer componente de um monólito implica na necessidade de reimplantar toda a aplicação, mesmo as partes que não têm ligação com as alterações, o que aumenta riscos associados a falhas na implantação e consequentemente desencoraja a prática de implantação contínua \cite{microservicesIO_monolithic_architecture}.
 
 \subsubsection{Confiabilidade e resiliência}
-O alto acoplamento existente entre as partes da aplicação permite que falhas relativamente pequenas possam prejudicar toda a aplicação, inclusive as partes que não tiveram relação com a falha.
+O alto acoplamento existente entre as partes da aplicação monolítica permite que falhas relativamente pequenas possam prejudicar toda a aplicação, inclusive as partes que não tiveram relação com a falha.
 
 \subsubsection{Flexibilidade de tecnologias}
-As escolhas de tecnologias são mais limitadas - um projeto tende a usar apenas um grupo de tecnologias porque realizar \emph{upgrades} ou mudanças de tecnologias é uma tarefa complexa e pode causar problemas de compatibilidade \cite{microservicesIO_monolithic_architecture}.
+As escolhas de tecnologias para novas funcionalidades são mais limitadas - um projeto tende a usar apenas um certo grupo de tecnologias porque realizar \emph{upgrades} ou mudanças de tecnologias é uma tarefa complexa e pode causar problemas de compatibilidade \cite{microservicesIO_monolithic_architecture}.
 
 \subsubsection{Divisão de times}
-Quando a aplicação alcança determinado tamanho, é desejável dividir os desenvolvedores em times que têm foco em partes funcionais específicas. Entretanto, as aplicações monolíticas dificultam esse desenvolvimento independente porque com elas os times precisam coordenar o desenvolvimento e as implantações \cite{microservicesIO_monolithic_architecture}.
+Quando um monólito alcança determinado tamanho, é desejável dividir os desenvolvedores em times que têm foco em partes funcionais ou do domínio específicas da aplicação. Entretanto, ter times separados no desenvolvimento de uma mesma aplicação monolítica é mais difícil e menos proveitoso, porque nunca serão totalmente independentes, visto que precisam coordenar o desenvolvimento e as implantações da aplicação \cite{microservicesIO_monolithic_architecture}.
 
 % ---
 \section{Os microsserviços}
@@ -55,11 +55,11 @@ Quando a aplicação alcança determinado tamanho, é desejável dividir os dese
 	\legend{Fonte: \citeonline{oracle_microservices}}
 \end{figure}
 
-Microsserviços é uma abordagem de arquitetura de \emph{software}. Aplicações com uma arquitetura de microsserviços são separadas em partes, chamadas de microsserviços, que são classificadas em tipos (apresentados na \autoref{fundamentacao-tipos-microsservicos}) e se comunicam por meio de uma rede. Microsserviços oferecem capacidades de negócio (funcionalidades relacionadas às regras de negócio da aplicação) ou capacidades de plataforma (funcionalidades relacionadas ao ambiente de execução da aplicação), tratando um aspecto em particular da aplicação. Eles se comunicam por meio de APIs bem definidas, contratos de dados e configurações. O "micro" em microsserviços faz referência não ao tamanho do serviço, mas sim ao seu escopo de funcionalidade. Eles oferecem apenas uma determinada funcionalidade, tornando-se especialistas nela. Assim sendo, microsserviços não necessariamente devem ser pequenos em tamanho, mas fazem apenas uma tarefa e a fazem eficientemente \cite{Familiar2015}.
+Microsserviços é uma abordagem de arquitetura de \emph{software}. Aplicações com uma arquitetura de microsserviços são separadas em partes, chamadas de microsserviços, que são classificadas em tipos (apresentados na \autoref{fundamentacao-tipos-microsservicos}) e se comunicam por meio de uma rede. Microsserviços oferecem capacidades de negócio (funcionalidades relacionadas às regras de negócio da aplicação) ou capacidades de plataforma (funcionalidades relacionadas ao ambiente de execução da aplicação), tratando um aspecto em particular da aplicação. Eles se comunicam por meio de APIs bem definidas, contratos de dados e configurações. O “micro” em microsserviços faz referência não ao tamanho do serviço, mas sim ao seu escopo de funcionalidade, pois trata-se de oferecer apenas uma determinada funcionalidade, tornando-se especialistas nela. Assim sendo, microsserviços não necessariamente devem ser pequenos em tamanho, mas fazem apenas uma tarefa e a fazem bem \cite{Familiar2015,livro-building-microservices}.
  
 Sendo especialistas em apenas uma tarefa, microsserviços têm características e comportamentos que os diferenciam de outras arquiteturas orientadas a serviços, os quais serão discutidos no \autoref{chapter-caracteristicas}.
 
-A \autoref{figura_arquitetura_microsservicos} exemplifica uma aplicação com arquitetura de microserviços. Inicialmente os usuários da aplicação (camada \emph{Clients}) fazem requisições à API para obter as informações desejadas. O \emph{API Gateway} - que é reponsável por gerenciar as chamadas aos microsserviços e será melhor discutido na \autoref{boas-praticas-api-gateway} - fará as devidas requisições para os devidos microsserviços (localizados na camada \emph{Container Orchestration}). Esses microsserviços então buscarão a informação necessária no banco de dados apropriado (camada \emph{Data Store}).
+A \autoref{figura_arquitetura_microsservicos} exemplifica uma aplicação com arquitetura de microserviços. Inicialmente os usuários da aplicação (camada \emph{Clients}) fazem requisições à API para obter as informações desejadas. O \emph{API Gateway} (\autoref{boas-praticas-api-gateway}) é reponsável por gerenciar as chamadas aos microsserviços e fará as devidas requisições para os devidos microsserviços (localizados na camada \emph{Container Orchestration}). Esses microsserviços, então, executarão a lógica apropriada de acordo com a requisição recebida, possivelmente usando informações registradas no banco de dados apropriado (camada \emph{Data Store}).
 
 % A ilustração mostra as camadas da arquitetura de microsserviços. A primeira camada é a camada do cliente, que contém: os computadores, laptops e dispositivos móveis. A segunda camada é a camada do gateway de API, que redireciona as solicitações do cliente para os microsserviços apropriados. A terceira camada é a camada de orquestração de contêineres, com todos os microsserviços agrupados dentro de uma orquestração de contêineres. Cada um dos microsserviços está em contêiner. Eles se comunicam com os clientes por meio do gateway de API. A quarta camada é a camada de armazenamento de dados. Cada um dos microsserviços em contêiner que implementam persistência se comunica a apenas um armazenamento de dados. Os armazenamentos de dados exibidos são NoSQL e SQL.
 
@@ -112,6 +112,28 @@ empregadas.
 Esse trabalho tem o objetivo de entender como sistemas de microsserviços são projetados, monitorados e testados na indústria. Foi conduzida uma pesquisa relativamente grande que obteve 106 respostas e 6 entrevistas com praticantes de microsserviços. Os resultados obtidos identificam os desafios que os praticantes enfrentam e as soluções empregadas no projeto, monitoramento e teste de microsserviços. Também é feita uma discussão profunda sobre os resultados, da perspectiva dos praticantes, e sobre as implicações para pesquisadores e praticantes.
 
 Em contraste com o presente trabalho, \citeonline{design-monitoring-testing-waseem} não abordam as características dos microsserviços.
+
+\subsection{Building Microservices: Designing Fine-Grained Systems, por \texorpdfstring{\citeonline{livro-building-microservices}}{Newman (2015)}}
+
+\citeonline{livro-building-microservices} aborda as caracterísicas e o desenvolvimento de microsserviços, desde a modelagem até a implantação, entretanto foca em ideias em vez de tecnologias, pois reconhece que detalhes de implementação e ferramentas estão sempre em mudança.
+
+Diferente do presente trabalho, \citeonline{livro-building-microservices} não discute ferramentas para a implementação dos conceitos e práticas discutidas.
+
+% A Word on Microservices Today
+% Microservices is a fast-moving topic. Although the idea is not new (even if the term
+% itself is), experiences from people all over the world, along with the emergence of new
+% technologies, are having a profound effect on how they are used. Due to the fast pace
+% of change, I have tried to focus this book on ideas more than specific technologies,
+% knowing that implementation details always change faster than the thoughts behind
+% them. Nonetheless, I fully expect that in a few years from now we’ll have learned even
+% more about where microservices fit, and how to use them well.
+% So while I have done my best to distill out the essence of the topic in this book, if this
+% topic interests you, be prepared for many years of continuous learning to keep on top
+% of the state of the art!
+
+
+
+
 
 % It identifies the challenges that practitioners face and the solutions employed by them when designing, monitoring, and testing microservices systems.
 

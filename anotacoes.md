@@ -29,22 +29,34 @@ Perguntar:
            -Pq eu escrevi de um modo que fica parecendo que eu quero estudar as ferramentas, mas eu só quero estudar a arquitetura mesmo (e o desenvolvimento?).
 
     - Qual tipo de leitor eu devo presumir que está lendo? Alguem com conhecimento técnico? Imagino que seria alguem da área de computaácão que está interessado em aprender sobre microsserviços. Então eu não precisaria, por exemplo, explicar o que é um "commit"
+        > alguem no nível graduado, no nível acadêmico, e da área, então não.
 
-    - O código é parte da entrega do trabalho? Ou como isso é feito?
+    - O código é parte da entrega do trabalho? Ou como o código e a aplicação é apresentado? 
+        > É parte da entrega, mas não deve ser entrado em detalhes na parte escrita. "Esse sistema está todo desenvolvido em <link_repositorio>"
+        > Fazer diagrama de classes, diagrama de pacotes, e diagrama de sequencia da aplicação, que tambem entram na parte escrita e na apresentação
 
-    - O código pertence a ufs? Ou eu posso usar para outros fins depois de concluir o trabalho?
+    - O código pertence a ufs? Ou eu posso usar para outros fins depois de concluir o trabalho? 
+        > sim, mas vamos ver se um registro de software é possível
 
     - Como funciona a apresentação e a defesa do tcc?
+        > a apresentação vai ter o acompanhamento do orientador, ele vai ajudando a bolar. E a apresentação é focada na parte prática
+        > Objetivos, justificativas, experimento e resultado
+        > Tambem vale nota para o tcc2
 
     - Como é a correção pós-defesa? Oq geralmente se é corrigido?
+        > Geralmente é texto escrito, se tiver alguma coisa estrutural vai dar nota baixa
+
+    - Eu acho que não vou conseguir fazer uma comparação prática sobre as ferramentas, dependendo de como isso seria escrito no trabalho ou apresentado. Mas eu poderia falar um pouco sobre elas, só que não sei se isso agrega muito ao trabalho. acho que sim ne? Só que ai eu precisaria tambem alterar o objetivo específico né?
+        > pode deixar um objetivo especifico que não tenha sido cumprido, mas tem que comentar/justificar no final, ou então pode reduzir o escopo também
+        > Na conclusao pode ter menção a: trabalhos futuros a serem feitos, limitações do trabalho 
 
 ## TO DO:
 
     #### Prioridade alta:
+    - Enviar o trabalho escrito para o professor revisar
     - Orquestração de serviços (kubernetes ou docker swarm)
     - API Gateway (Nginx ou AWS ElasticLoadBalancing, que pode ser feito pelo kubernetes)
-    - Logging 
-    - Monitoramento ✅
+    - Monitoramento - Métricas ✅ e Logging ✅
     - CD (Kubernetes localmente? Ver o curso de EKS (aws)? Só um docker-compose?) 
     - Implementar login de cliente (front) ✅
     - Implementar o front de carrinho ✅
@@ -245,7 +257,7 @@ Perguntar:
 
     - Parte escrita: Sobre bancos de dados - Qual banco de dados escolher? SQL, NoSQL, newSQL? Discutir 
             Palavras-chave: integridade (de dados), disponibilidade, tolerancia, ACID
-            Teorema CAP (Consistency, Availabilty and Partition Tolerance) - https://www.ibm.com/think/topics/cap-theorem
+            Teorema CAP (Consistency, Availabilty and Partition Tolerance) - https://www.ibm.com/think/topics/cap-theorem e livro building microservices capitulo 11
             https://www.ibm.com/think/insights/choosing-the-right-databases-for-microservices
             https://www.reddit.com/r/learnprogramming/comments/lo5kpt/can_someone_explain_with_example_when_to_choose/
             https://stackoverflow.com/questions/3713313/when-should-i-use-a-nosql-database-instead-of-a-relational-database-is-it-okay
