@@ -18,13 +18,60 @@ Quando se está procurando por ferramentas para o desenvolvimento de aplicaçõe
 
 % asdfasdf. \cite{Tanembaum-Steen}.
 
-\section{Linguagens de programação}
-Java, JavaScript, Python, Elixir. \footnote{Uma linguagem de programação não pode, por sí só, ser caracterizada como código aberto ou não, mas uma implementação de uma linguagem pode. Para o escopo deste trabalho, todas as implementações mais comuns das linguages de programação citadas são válidas.}
+\section{Frameworks e linguagens de programação}
+
+Frameworks desempenham um papel fundamental no desenvolvimento de microsserviços, permitindo que os desenvolvedores criem sistemas modulares, escaláveis e de fácil manutenção de forma mais simples e evitando grande parte do código \emph{boilerplate}. A escolha do framework e da linguagem pode dependender de diversos fatores, como os requisitos do sistema, a experiência da equipe e as preferências tecnológicas. Existem diversas opções disponíveis no mercado, cada uma com suas características, vantagens e desvantagens, sendo impossível abordar todas em detalhes. Dessa forma, aqui são discutidas apenas algumas das mais populares.
+
+\subsection{Java e Spring Boot}
+Java é uma linguagem amplamente utilizada no desenvolvimento de microsserviços devido à sua robustez, escalabilidade e vasta gama de bibliotecas e ferramentas disponíveis. Spring Boot é um dos frameworks mais populares para construir microsserviços em Java por simplificar o desenvolvimento de aplicações autônomas e de alto desempenho, permitindo que os desenvolvedores criem rapidamente serviços que podem ser facilmente integrados com outros sistemas. O Spring Boot oferece funcionalidades como configuração automática, injeção de dependência e integração com outros módulos do Spring, como o Spring Cloud, que facilita a implementação de microsserviços com capacidades de descoberta, balanceamento de carga e segurança. 
+\cite{springboot}
+
+A combinação de Java com Spring Boot é especialmente útil para empresas que já possuem uma base de código em Java ou que precisam de um ecossistema maduro com suporte a múltiplas ferramentas de monitoramento, escalabilidade e segurança. Além disso, a linguagem é fortemente tipada, o que ajuda a reduzir erros e a melhorar a manutenibilidade em sistemas grandes e complexos.
+
+\subsection{Python e Flask ou Django}
+
+Python é uma linguagem conhecida por sua simplicidade e rapidez de desenvolvimento, o que a torna uma escolha popular para prototipagem e desenvolvimento de microsserviços, especialmente quando o tempo é um fator crítico. Para a construção de microsserviços, frameworks como Flask e Django são frequentemente usados. O Flask é um micro-framework leve e flexível, ideal para a criação de APIs simples e escaláveis. Ele fornece apenas os recursos essenciais, permitindo que os desenvolvedores escolham bibliotecas adicionais conforme necessário, o que dá flexibilidade para criar soluções sob medida. 
+\cite{flask}
+
+Por outro lado, Django é um framework mais completo e robusto, adequado para aplicações maiores que exigem uma estrutura mais rígida. Embora o Django seja tradicionalmente mais utilizado para aplicações monolíticas, ele pode ser adaptado para um estilo de arquitetura de microsserviços. Ele vem com uma série de funcionalidades, como ORM, autenticação e gerenciamento de usuários, que podem ser valiosas em microsserviços que exigem manipulação de dados ou integração com bancos de dados relacionais. 
+\cite{django}
+
+\subsection{Golang}
+
+Go, também conhecido como Golang, é uma linguagem desenvolvida pelo Google que se destaca pela sua alta performance e simplicidade. A principal vantagem do Go em microsserviços é a sua capacidade de lidar com concorrência de forma eficiente, com seu modelo de \emph{goroutines} e \emph{channels} (canais), que facilita o desenvolvimento de sistemas altamente concorrentes e escaláveis. O Go é especialmente popular em sistemas que exigem alta taxa de transferência e baixos tempos de latência, como sistemas de \emph{streaming} ou microsserviços que lidam com grandes volumes de dados em tempo real. Além disso, o Go possui uma abrangente biblioteca padrão e ótimas bibliotecas desenvolvidas por terceiros, muitas vezes dispensando a necessidade de um framework para a linguagem, tornando o microsserviço ainda mais simples.
+\cite{golang}
+
+\subsection{JavaScript com Node.js e Express}
+
+Node.js também é muito popular para o desenvolvimento de microsserviços, especialmente em sistemas que exigem alta performance em \emph{I/O} e processamento assíncrono. O Node.js usa um modelo de event loop não bloqueante, que é ideal para microsserviços que precisam lidar com uma grande quantidade de requisições simultâneas, como APIs RESTful. Seu ecossistema vasto e a popularidade do JavaScript no desenvolvimento frontend também tornam o Node.js uma escolha atraente para equipes que desejam manter uma stack unificada em todo o sistema. Além disso, a enorme comunidade de desenvolvedores e a abundância de pacotes disponíveis facilmente instaláveis permitem que os microsserviços sejam desenvolvidos rapidamente e com uma ampla variedade de funcionalidades. O Express, um framework minimalista para Node.js, facilita o desenvolvimento de APIs simples e eficientes. 
+\cite{expressjs,nodejs}
+
+\subsection{C\# e .NET}
+
+C\# é uma das linguagens mais utilizadas no ecossistema Microsoft e tem se tornado uma escolha popular para o desenvolvimento de microsserviços, principalmente quando combinada com o framework .NET Core, que é uma plataforma de desenvolvimento de código aberto, alto desempenho e com suporte a diversos sistemas operacionais. O ASP.NET Core é um subconjunto do .NET focado em criar aplicações web, incluindo APIs RESTful, que são comumente usadas para comunicação entre microsserviços. Desenvolver microsserviços com .NET ou ASP.NET é especialmente adequado para empresas que já operam em ecossistemas Microsoft. Ambos frameworks têm uma comunidade ativa e suporte contínuo, o que os torna uma escolha confiável para o desenvolvimento de microsserviços. 
+\cite{dotnetcore,aspnetcore}
+
+% \subsection{Ruby e Ruby on Rails}
+
+% Ruby, combinada com o framework Ruby on Rails, é outra escolha popular, especialmente para equipes que precisam de uma solução rápida e eficiente para construir microsserviços. Ruby on Rails é um framework opinativo que segue a filosofia "convention over configuration" (convenção sobre configuração), o que acelera o desenvolvimento e reduz a complexidade do projeto. Embora o Rails tenha sido inicialmente mais associado a aplicações monolíticas, ele também pode ser usado para desenvolver microsserviços, especialmente quando é necessário criar APIs RESTful rapidamente.
+
+% Uma das principais vantagens do Ruby e Ruby on Rails é a rapidez no desenvolvimento, o que o torna ideal para startups ou projetos que precisam ser lançados rapidamente no mercado. Além disso, Ruby possui uma sintaxe simples e legível, o que facilita a manutenção do código. No entanto, a linguagem pode não ser tão eficiente quanto Go ou Java em termos de desempenho, o que pode ser uma desvantagem em sistemas que exigem alta performance.
+
+% \subsection{PHP e Laravel}
+
+% Embora o PHP seja tradicionalmente associado ao desenvolvimento de aplicações web monolíticas, ele também pode ser utilizado com frameworks modernos para construir microsserviços. O Laravel, um dos frameworks PHP mais populares, pode ser adaptado para criar microsserviços ao construir APIs RESTful ou integrar com outras partes de um sistema distribuído. Laravel oferece uma série de ferramentas que facilitam o desenvolvimento de microsserviços, como suporte a autenticação, roteamento flexível e integração com serviços externos.
+
+% O Laravel é uma ótima escolha para equipes que já estão familiarizadas com o ecossistema PHP e que buscam uma solução rápida e eficiente para microsserviços. Ele permite criar sistemas escaláveis por meio de recursos como queues e jobs, que podem ser usados para processamento assíncrono. Além disso, o Laravel também tem forte integração com o Docker e Kubernetes, facilitando a implantação e a escalabilidade de microsserviços. Contudo, embora o Laravel seja muito eficaz para aplicações menores e médias, pode ser desafiador quando se trata de grandes sistemas distribuídos que exigem alta performance em processamento simultâneo, em comparação com outras linguagens como Go ou Java.
+
+% Em arquiteturas de microsserviços, diversas linguagens de programação podem ser usadas, dependendo das necessidades do sistema e da equipe de desenvolvimento. Java é uma das linguagens mais populares para microsserviços, especialmente quando combinada com frameworks como Spring Boot, que facilita a criação de serviços autônomos e escaláveis de forma simples e com pouco código \emph{boilerplate}, além de ser um ecossistema maduro e com suporte a diversas ferramentas prontas para integração, monitoramento e segurança em microsserviços.
+
+% Outra linguagem amplamente utilizada em microsserviços é o Python, que se destaca pela simplicidade e rapidez no desenvolvimento. Python é especialmente útil quando se trabalha com microsserviços baseados em APIs, processamento de dados ou integrações rápidas. Frameworks como Flask e Django permitem a construção de serviços rápidos, enquanto bibliotecas como Celery facilitam o processamento assíncrono. Sua comunidade ativa e a extensa gama de bibliotecas ajudam a resolver muitos problemas comuns em microsserviços de forma rápida e fácil.
+
+% Além disso, linguagens como Go e JavaScript (Node.js) são cada vez mais populares em ambientes de microsserviços. Go é conhecida por sua alta performance, simplicidade e suporte nativo a concorrência, o que a torna ideal para criar serviços altamente escaláveis e eficientes. Já Node.js, com seu modelo de I/O não bloqueante, é ideal para microsserviços que precisam de alta performance em operações de rede e processamento em tempo real. Ambas as linguagens favorecem a criação de microsserviços rápidos e eficientes, com alta escalabilidade, o que as torna bastante atrativas para sistemas distribuídos modernos.
+
+% \footnote{Uma linguagem de programação não pode, por sí só, ser caracterizada como código aberto ou não, mas uma implementação de uma linguagem pode. Para o escopo deste trabalho, todas as implementações mais comuns das linguages de programação citadas são válidas.}
 
 % A programming language isn't in it self open source or not, but an implementation of it might be. Yes, there are open source implementations of Java. Sun's Java implementation (the most popular one), is one of them.
-
-\section{Frameworks}
-  Para microsserviços, ...
 
 \section{Servidor Web}
 Importante distinguir servidores web de servidores de aplicação...
@@ -103,7 +150,7 @@ Memcached (*), Redis
 
 \subsection{Sistemas de controle de versão}
 % Usar um sistema de controle de versão é estritamente necessário para se ter integração contínua. 
-Existem sistemas de controle de versão distribuidos (DVCS) ou centralizados (CVCS), porém atualmente os distribuitos são o padrão no desenvolvimento de \emph{software}, e pouco se ouve falar dos centralizados. O \textbf{Git} é, empiricamente, o mais popular entre todos os sistemas de controle de versão, e é uma solução elegante e completa para o controle de versão no desenvolvimento de \emph{software}.
+Um sistema de controle de versão é imprescindível para o desenvolvimento de \emph{software} atualmente e é impossível se ter integração contínua sem um. Existem sistemas de controle de versão distribuidos (DVCS) ou centralizados (CVCS), porém atualmente os distribuitos são o padrão no desenvolvimento de \emph{software}, e pouco se ouve falar dos centralizados. O \textbf{Git} é, empiricamente, o mais popular entre todos os sistemas de controle de versão, e é uma solução elegante e completa para o controle de versão no desenvolvimento de \emph{software}.
 
 \subsection{Gerenciamento de repositórios}
 GitHub, Bitbucket, GitLab, amazon S3
@@ -137,8 +184,10 @@ CruiseControl*, Jenkins, GitHub Actions, GitLab CI, etc...
 % At Thoughtworks, we're big fans of continuous integration servers - indeed we led the original development of CruiseControl and CruiseControl.NET, the widely used open-source CI servers. Since then we've also built the commercial Cruise CI server. We use a CI server on nearly every project we do and have been very happy with the results.
 
 \section{Testes}
+Testes não necessariamente requerem uma ferramenta para serem implementados, mas usar uma pode facilitar bastante o trabalho do programador.
 
 \subsection{Testes de unidade}
+Testes de unidade são mais baixo-nível e as ferramentas usadas para implentá-los dependem da linguagem de programação e framework em questão. No Java por exemplo, uma biblioteca muito comum para testes de unidade é o JUnit. No python, tem-se o pacote \emph{unittest}. No C\#, tem-se o pacote \emph{xUnit}. No Go, tem-se o pacote \emph{testing}. No JavaScript tem-se a biblioteca \emph{Jest}.
 
 \subsection{Testes de serviços}
 
@@ -151,8 +200,9 @@ Selenium para navegadores...
 \section{Comunicação}
 
 \subsection{RPC}
-% https://grpc.io/
-gRPC 
+gRPC é uma ferramenta moderna com alto desempenho que tem ganhado grande popularidade em meio aos praticantes de microsserviços e é considerada um "projeto de incubação" pela Cloud Native Computing Foundation \cite{grpc}
+
+% \footnote{gRPC: \url{https://grpc.io/}} 
 
 \subsection{Mensageria}
 RabbitMQ*, Azure Service Bus, Amazon Simple Queue Service, Google Cloud Pub/Sub.

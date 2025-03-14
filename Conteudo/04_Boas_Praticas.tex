@@ -108,7 +108,7 @@ Para o gerenciamento de dados, há a possibilidade de compartilhar um banco de d
 Entretanto, essa descentralização tem implicações para o gerenciamento de fluxos de negócios que envolvem escritas em múltiplos bancos de dados. Geralmente a abordagem para se garantir consistência nas escritas é pelo uso de transações quando atualizando múltiplos recursos. Contudo, o uso de transações resulta em um acoplamento temporal, o que é problemático quando se tem muitos serviços. Além disso, transações distribuidas são notoriamente difíceis de implementar, portanto arquiteturas de microsserviços realizam coordenação sem transações entre serviços, com reconhecimento claro de que consistência pode ser apenas consistência eventual (em vez de estrita) e que problemas serão lidados pela compensação de operações \cite{martin-fowler-microservices}. 
 
 % \subsection{CQRS}
-\emph{Command Query Responsibility Segregation (CQRS)} - Segregação de Responsabilidade de Consulta de Comando. 
+% \emph{Command Query Responsibility Segregation (CQRS)} - Segregação de Responsabilidade de Consulta de Comando. 
 
 % Trata-se de usar um modelo para escrita e outro para leitura. Adiciona complexidade. 
 
@@ -262,13 +262,13 @@ Polirepo (também conhecido como multirepo) é uma estratégia de organização 
 
 % \subsection{Estratégias de ramificação} <<
 
-\section{Externalização/parametrização de configurações}\label{secao-externalizacao-de-configuracoes}
-TODO: Falar sobre externalização da configuração do ambiente. Traz mais portabilidade ao código. Fazer paralelo com o 12-factor app fator 3
+% \section{Externalização/parametrização de configurações}\label{secao-externalizacao-de-configuracoes}
+% TODO: Falar sobre externalização da configuração do ambiente. Traz mais portabilidade ao código. Fazer paralelo com o 12-factor app fator 3
 
 \section{Implantação em containers}
 % TODO: Elaborar melhor sobre orquestração de containers.
 
-Containers configuram isolamentos lógicos em uma máquina. Eles são leves e altamente flexíveis, permitindo serem parados, alterados e reiniciados rapidamente. Depois de desenvolvido o microsserviço, recomenda-se implantá-lo dentro de um container para torná-los padronizados, leves, seguros e evitar interferências com outros microsserviços. \cite{oracle_microservices}.
+Containers configuram isolamentos lógicos em uma máquina, sendo leves e altamente flexíveis e permitindo paradas, alterações e reinicios velozes. Depois de desenvolvido o microsserviço, é altamente recomendado que ele seja implantado em um container, assim favorecendo sua padronização, flexibilidade e dificultar interferências imprevistas com outros microsserviços. \cite{oracle_microservices}.
 % Docker\footnote{Docker: \url{https://www.docker.com/}} 
 
 % A container is a standardized unit of software, used to develop, ship and deploy applications. Containers are managed using a container engine, such as Docker. The container engine provides the tools that are necessary to bundle all the application dependencies as a container. You can use the Docker engine to create, deploy, and run your microservices applications in containers. Microservices running in Docker containers have the following characteristics:
@@ -283,28 +283,30 @@ Containers configuram isolamentos lógicos em uma máquina. Eles são leves e al
 
 % Testes é um assunto complexo, especialmente em arquiteturas distribuidas.
 
-Tradicionalmente, um \emph{build} engloba tudo que é necessário para que um programa possa executar. Entretanto, só porque um programa executa não significa que ele fará o que é esperado. Para tanto, deve-se testar o programa, idealmente de forma automática e para toda funcionalidade, assim falhas e \emph{bugs} podem ser descobertos antes de serem lançados. Existem inúmeros tipos e abordagens de testes de \emph{software}, porém é impossível ter uma cobertura completa de testes. Trata-se, portanto, de quão testada é a aplicação - quanto mais bem testada, pelo uso de abordagens diversas e apropriadas, maior é a confiabilidade e a qualidade do sistema. Entretanto, é importante também não só automatizar a bateria de testes, mas também prezar pelo seu desempenho, pois testes demorados tornam-se um obstáculo para a integração e \emph{feedback} contínuos. \cite{martin-fowler-continuous-integration}
+Tradicionalmente, um \emph{build} engloba tudo que é necessário para que um programa possa executar. Entretanto, só porque um programa executa não significa que ele fará o que é esperado. Para tanto, deve-se testar o programa, idealmente de forma automática e para toda funcionalidade, assim falhas e \emph{bugs} podem ser descobertos antes de serem lançados. Existem inúmeros tipos e abordagens de testes de \emph{software}, porém é impossível ter uma cobertura completa de testes. Trata-se, portanto, de quão testada é a aplicação - quanto mais bem testada, pelo uso de abordagens diversas e apropriadas, maior é a confiabilidade e a qualidade do sistema. Entretanto, é importante também não só automatizar a bateria de testes, mas também prezar pelo seu desempenho, pois testes demorados tornam-se um obstáculo para a integração e \emph{feedback} contínuos, portanto antes de sair criando vários testes complexos para a aplicação, deve-se avaliar se a confiabilidade resultante justifica a complexidade de implementação e execução. \cite{martin-fowler-continuous-integration,livro-building-microservices}
 
 
-Na arquitetura de microsserviços, o processo de testes torna-se mais abrangente, por haver mais pontos passíveis de falha, e mais complexo, por se tratar de um sistema altamente distribuido. Além disso, os microsserviços, de maneira isolada, também podem (e devem) ser testados com abordagens de testes comumente usadas em aplicações monolíticas. 
+Na arquitetura de microsserviços, o processo de testes torna-se mais abrangente, por haver mais pontos passíveis de falha, e mais complexo, por se tratar de um sistema altamente distribuido. Além disso, um microsserviço, de maneira isolada, também pode ser testado com tipos de testes comumente usados em aplicações monolíticas, como testes de unidade e de serviço.
 % porém não existe uma definição formal de quais testes devem ser utilizados em quais casos, 
 % Existem inúmeros tipos e abordagens de testes de \emph{software}, que compõem diversos livros por ótimos autores focados no assunto, que explicariam melhor do que eu jamais poderia, portanto este trabalho não entrará em detalhes sobre como implementá-los ou como funcionam, e serão apenas apontados algumas estratégias apropriadas de testes no contexto de aplicações com arquitetura de microsserviços.
 
 % Recomenda-se usar todas as abordagens comuns de testes, como \emph{mocking}, testes de unidade, testes de regressão e testes funcionais. \cite{design-monitoring-testing-waseem}
 
 \subsection{Testes de unidade}
-TODO: 
+Testes de unidade verificam funções ou métodos isoladamente, sem depender de serviços externos ou conexões de rede. Esse tipo de teste é voltado para desenvolvedores, ajudando-os a detectar \emph{bugs} e facilitando a refatoração do código, por garantir que alterações estruturais não quebrem funcionalidades existentes. Além disso, esses testes têm custo muito baixo, tanto para implentar quanto para executar, então é muito difícil uma aplicação chegar a um ponto que tenha testes de unidade demais. Em específico para linguagens interpretadas, eles podem ser acionados automaticamente ao modificar arquivos, proporcionando ciclos de \emph{feedback} mais rápidos \cite{livro-building-microservices}. 
 
-\subsection{Testes de serviços}
-TODO: 
+\subsection{Testes de serviço}
+Testes de serviço são projetados para testar microsserviços diretamente, ignorando a interface do usuário. Em aplicações monolíticas, isso envolveria testar classes que fornecem serviços à essa interface, enquanto em sistemas baseados em microserviços, cada teste de serviço foca nas capacidades individuais de um microsserviço. Esses testes aumentam a confiança no comportamento do serviço, contanto que o escopo seja isolado, isso é, qualquer falha detectada deve estar restrita ao microsserviço testado. Para garantir esse isolamento, muitas vezes é necessário substituir todas as dependências externas por simulações delas (\emph{stubs}) \cite{livro-building-microservices}.
 
-\subsection{Testes \emph{end-to-end} (fim-a-fim)}
-\citeonline{livro-building-microservices} argumenta em seu livro “Building Microservices” que muitos desenvolvedores de microsserviços em escala dispensam testes fim-a-fim apesar do ótimo escopo que eles provêem, devido a grande quantidade de recursos que exigem para serem executados e por serem suscetíveis a problemas que não necessariamente tem relação com a funcionalidade testada, o que pode introduzir indeterminismo nos testes. Em vez disso, esses desenvolvedores optam por compensar em monitoramento e contratos de dados orientados ao consumidor (CDCs), que trata-se de especificar uma API com base em contratos compartilhados que ditam o que consumidor espera, facilitando testes de integração. \cite{livro-building-microservices}.
+Alguns testes de serviço podem ser tão rápidos quanto testes unitários, mas a velocidade pode diminuir ao envolver bancos de dados reais ou conexões de rede com serviços simulados. Apesar de cobrirem um escopo maior que os testes unitários, tornando a identificação precisa de falhas mais difícil, eles ainda possuem menos variáveis do que testes de maior escala como os testes fim-a-fim, sendo assim mais confiáveis. \cite{livro-building-microservices}.
 
-Dito isso, de acordo com \cite{design-monitoring-testing-waseem}, testes fim-a-fim são muito comumente usados em aplicações com arquitetura de microsserviços. 
+\subsection{Testes \emph{end-to-end} (fim-a-fim)}\label{subsecao-testes-fimafim}
+\citeonline{livro-building-microservices} argumenta em seu livro “Building Microservices” que muitos desenvolvedores de microsserviços em escala dispensam testes fim-a-fim apesar do ótimo escopo que eles provêem, devido à grande quantidade de recursos que exigem para serem executados e por serem suscetíveis a problemas que não necessariamente tem relação com a funcionalidade testada, o que pode introduzir indeterminismo nos testes. É recomendado então usar testes fim-a-fim apenas quando o sistema não é muito grande, e a confiabilidade agregada por eles supera o custo de os manter. Conforme uma aplicação de microsserviços cresce, muitos desenvolvedores preferem aumentar a confiabilidade pelo uso de monitoramento avançado, estratégias de implantação cuidadosas e uso de contratos de dados orientados ao consumidor (CDCs), que trata-se de especificar uma API com base em contratos compartilhados que ditam o que consumidor espera, facilitando testes de integração \cite{livro-building-microservices}.
+
+% Dito isso, testes fim-a-fim ainda são muito comumente usados em aplicações com arquitetura de microsserviços. Cabe ao desenvolvedor estudar o contexto atual da aplicação para determinar se testes fim-a-fim são apropriados. \cite{design-monitoring-testing-waseem}
 
 \subsection{Testes, testes e mais testes}
-Além de recomendar os tipos de testes comuns em monólitos, \citeonline{Familiar2015} recomenda também testar os microsserviços conforme passam pelo \emph{pipeline} de implantação, incluindo: \textbf{Testes internos}, que testam as funções internas do serviço, incluindo uso de acesso de dados, caching e relacionados; \textbf{Testes de serviço}, que testam serviços da API e seus modelos associados; \textbf{Testes de protocolo}, que testam o serviço a nível de protocolo, chamando a API usando o protocolo escolhido; \textbf{Testes de composição}, que testam o serviço em cooperação com outros serviços no contexto de uma solução; \textbf{Testes de escalabilidade e taxa de transferência}, que testam a escalabilidade e elasticidade do microsserviço implantado; \textbf{Testes de tolerância a falha}, que testam a capacidade do microsserviço de se recuperar após uma falha; e \textbf{Teste de penetração}, que consiste em envolver uma empresa terceirizada de segurança de \emph{software} para realizar testes de penetração no sistema. \cite{Familiar2015}
+Além de recomendar os tipos de testes comuns em monólitos, \citeonline{Familiar2015} recomenda também testar os microsserviços conforme passam pelo \emph{pipeline} de implantação, incluindo: \textbf{Testes internos}, que testam as funções internas do serviço, incluindo uso de acesso de dados, caching e relacionados; \textbf{Testes de serviço}, que testam serviços da API e seus modelos associados; \textbf{Testes de protocolo}, que testam o serviço a nível de protocolo, chamando a API usando o protocolo escolhido; \textbf{Testes de composição}, que testam o serviço em cooperação com outros serviços no contexto de uma solução; \textbf{Testes de escalabilidade e taxa de transferência}, que testam a escalabilidade e elasticidade do microsserviço implantado; \textbf{Testes de tolerância a falha}, que testam a capacidade do microsserviço de se recuperar após uma falha; e \textbf{Testes de penetração}, que consiste em envolver uma empresa terceirizada de segurança de \emph{software} para realizar testes de penetração no sistema. \cite{Familiar2015}
 
 % Testes fazem parte da construção do software. Devem ser realizados antes do commit. TDD pode ajudar neste processo. Deve-se prezar por um bom desempenho em testes, pois testes demorados podem ser uma barreira para a integração contínua. Testes automatizados são essenciais para a integração contínua.
 
@@ -312,19 +314,20 @@ Além de recomendar os tipos de testes comuns em monólitos, \citeonline{Familia
 
 \section{Comunicação}\label{secao-comunicacao}
 
-TODO: Elaborar sobre o FastCGI. (geralmente usado para servidores de aplicação de linguagem interpretada como uma alternativa ao http)
+% TODO: Elaborar sobre o FastCGI. (geralmente usado para servidores de aplicação de linguagem interpretada como uma alternativa ao http)
 
 No desenvolvimento de estruturas de comunicação entre diferentes processos, nota-se muitos produtos e abordagens que enfatizam o emprego de grande inteligência no próprio mecanismo de comunicação. Um exemplo disso é o Enterprise Service Bus (ESB), onde os mecanismos dessa abordagem geralmente incluem recursos sofisticados para roteamento, tratamento e transformação de mensagens e aplicação das regras de negócios \cite{martin-fowler-microservices}.
 
-A comunidade de microsserviços favorece uma abordagem alternativa - \emph{endpoints} inteligentes e canais simples. Os aplicativos criados a partir de microsserviços visam ser o mais desacoplados e coesos possível - eles possuem sua própria lógica de domínio e agem mais como filtros - recebendo uma solicitação, aplicando a lógica conforme apropriado e produzindo uma resposta. Isso é feito usando protocolos REST simples em vez de protocolos complexos como \emph{Web Service Choreography} ou orquestração por uma ferramenta central \cite{martin-fowler-microservices}.
+A comunidade de microsserviços favorece uma abordagem alternativa - \emph{endpoints} inteligentes e canais simples. Os microsserviços visam ser o mais desacoplados e coesos possível - eles possuem sua própria lógica de domínio e agem mais como filtros - recebendo uma solicitação, aplicando a lógica conforme apropriado e produzindo uma resposta. Isso geralmente é feito usando protocolos REST simples em vez de protocolos complexos como \emph{Web Service Choreography} ou orquestração por uma ferramenta central \cite{martin-fowler-microservices}.
 
-Requisições HTTP em conjunto com uma API de recursos é o método mais usado para realizar comunicação síncrona na arquitetura de microsserviços. Uma requisição HTTP é feita por um cliente para um dado \emph{host} em um servidor, com o propósito de acessar um recurso nesse servidor. Por usar o \emph{Transmition Control Protocol} (TCP), é um método de comunicação confiável, mas não tão eficiente quanto poderia ser \cite{martin-fowler-microservices}.
+O uso de APIs em conjunto com requisições HTTP é o método mais usado para realizar comunicação síncrona na arquitetura de microsserviços. Uma requisição HTTP é feita por um cliente (ou consumidor) para um dado provedor em um endereço, com o propósito de acessar um recurso dele. Por usar o \emph{Transmition Control Protocol} (TCP), é um método de comunicação confiável, mas não tão eficiente quanto poderia ser \cite{martin-fowler-microservices}.
 
-Para comunicação assíncrona, filas de mensagens são amplamente usadas. Quando um serviço precisa enviar informações a outro de modo assíncrono, ele envia uma mensagem para a fila de mensagens, e ela será armazenada até ser processada ou excluída. Cada mensagem é processada uma única vez, por um único consumidor. As filas de mensagens podem ser usadas para dividir um processamento pesado, para armazenar trabalho em \emph{buffers} ou lotes, ou para amenizar picos de cargas de trabalho \cite{amazon-filas-de-mensagens}.
+Para comunicação assíncrona, filas de mensagens são amplamente usadas. Quando um serviço precisa enviar informações a outro de modo assíncrono, ele envia uma mensagem para a fila de mensagens, e ela será armazenada até ser processada ou excluída. As filas de mensagens podem ser usadas para dividir um processamento pesado, para armazenar trabalho em \emph{buffers} ou lotes, ou para amenizar picos de cargas de trabalho \cite{amazon-filas-de-mensagens}.
+% Cada mensagem é processada uma única vez, por um único consumidor. (?)
 
-Embora menos comum, chamada de procedimento remoto (RPC) também é utilizado para realizar comunicação síncrona ou assíncrona nos microsserviços. Uma chamada de procedimento remoto se dá quando um programa faz com que um procedimento ou uma sub-rotina execute em um espaço de endereço diferente, comumente em outra máquina numa rede compartilhada. Essa chamada é feita como se fosse um procedimento local, isso é, o programador não precisa explicitar que se trata de um procedimento remoto. gRPC\footnote{gRPC: \url{https://grpc.io/}} é uma ferramenta moderna com alto desempenho que tem ganhado grande popularidade em meio aos praticantes de microsserviços e é considerada um "projeto de incubação" pela Cloud Native Computing Foundation \cite{microsoft-grpc}.
+Embora menos comum, chamada de procedimento remoto (RPC) também é utilizado para realizar comunicação síncrona ou assíncrona nos microsserviços. Uma chamada de procedimento remoto se dá quando um programa faz com que um procedimento ou uma sub-rotina execute em um espaço de endereço diferente, comumente em outra máquina numa rede compartilhada. Essa chamada é feita como se fosse um procedimento local, isso é, o programador não precisa explicitar que se trata de um procedimento remoto. \cite{microsoft-grpc}.
 
-De acordo com \citeonline{design-monitoring-testing-waseem}, \emph{API Gateway} e \emph{Backend for frontend} são os padrões de projeto mais utilizados para lidar com a comunicação de microsserviços. São padrões similares - a diferença é que no \emph{Backend for Frontend} há um \emph{gateway} para cada tipo de cliente. Esses padrões são discutidos na \autoref{boas-praticas-api-gateway}.
+De acordo com \citeonline{design-monitoring-testing-waseem}, \emph{API Gateway} e \emph{Backend for frontend} são os padrões de projeto mais utilizados na implementação da comunicação entre microsserviços. Eles são padrões similares - a diferença é que no \emph{Backend for Frontend} há um \emph{gateway} para cada tipo de cliente ou serviço de ponta.
 
 \subsection{Descoberta de serviços (\emph{Service Discovery})}
 TODO: Elaborar sobre descoberta de serviços
@@ -337,8 +340,15 @@ A descoberta de serviço é uma parte muito importante da comunicação entre mi
 
 Considerando que APIs são uma parte crucial no desenvolvimento de microserviços, sendo responsável por grande parte da comunicação que se faz necessária para conectar tantos serviços separados e manter um funcionamento eficiente e livre de falhas, este trabalho explorará diversas práticas no desenvolvimento de APIs.
 
-\subsection{Códigos de status de respostas HTTP}
-Esses códigos são números entre 100 e 599 que devem ser enviados com a resposta à requisição, cada um tendo um significado diferente, e cada centena sendo classificada em tipos diferentes de resposta. 100-199 representam respostas de informação, 200-299, respostas de sucesso, 300-399, tipos de redirecionamentos, 400-499, erros por parte do cliente e 500-599, erros por parte do servidor. Esse é um padrão definido na seção 10 da RFC 2616 \cite{rfc_http_nielsen_1999}, e facilita o entendimento do cliente sobre o que aconteceu com a requisição à API.
+
+\subsection{Contratos de dados}\label{subsecao-contratos-de-dados}
+Contratos de dados representam os acordos formais sobre a estrutura e formato das informações trocadas entre uma API e seus consumidores, bem como definem os campos, tipos de dados e regras de comunicação usadas, garantindo uma interação sem inconsistências. Esses contratos também implicam num compromisso de manter o serviço correspondente funcionando e inalterado. Entretanto, com a evolução de um serviço, surge a necessidade de serem introduzidas melhorias e mudanças que podem impactar nesses contratos \cite{martin-fowler-microservices}.
+
+Embora o versionamento de APIs seja uma solução tradicional para lidar com essa evolução, no contexto de microsserviços ele deve ser a última alternativa, pois tende a aumentar a complexidade da manutenção deles. Em vez disso, é recomendável projetar contratos que sejam flexíveis e resilientes a mudanças e introduzir apenas modificações aditivas nos provedores, assim não comprometendo consumidores existentes \cite{martin-fowler-microservices}.
+
+Contratos de dados orientados ao consumidor (CDC) é uma abordagem para garantir que contratos de comunicação entre serviços estejam alinhados com as necessidades dos consumidores. Em vez de o provedor da API definir unilateralmente o contrato, os consumidores especificam suas expectativas, criando um contrato que o provedor formaliza por meio de testes automatizados a nível de serviço, permitindo que provedores validem continuamente se suas mudanças mantêm a compatibilidade com os consumidores sem aumentar a carga de testes consideravelmente, o que também reduz a necessidade de testes fim-a-fim, que tendem a ser custosos, como discutido na \autoref{subsecao-testes-fimafim} \cite{consumer-driven-contracts,livro-building-microservices}.
+
+Ao projetar serviços de forma mais tolerante a mudanças e validar contratos dinamicamente, as equipes podem trabalhar de forma independente e lançar atualizações sem impactar outros sistemas. No entanto, para que essa abordagem funcione bem, é necessário uma boa colaboração entre as equipes e o uso de ferramentas adequadas que facilitem a criação e verificação automática desses contratos. Quando bem aplicado, o CDC promove maior estabilidade em sistemas distribuídos, permitindo que microsserviços evoluam de forma mais previsível e segura. \cite{consumer-driven-contracts}
 
 \subsection{Formatos de dados}\label{subsecao-trocas-de-dados}
 % TODO: Essa parte deveria estar no capitulo de ferramentas..?
@@ -346,12 +356,18 @@ Atualmente JSON é um dos formatos mais populares para troca de dados na web, po
 
 Outra opção para trocas de dados é usar \emph{Buffers} de protocolo, ou \emph{Protocol buffers}, uma ferramenta de código aberto desenvolvida pelo Google que oferece um método de serialização de dados estruturados para envio de informações. Ela é neutra em linguagem e plataforma, é extensível e funciona como alternativa ao JSON na troca de dados. Essa ferramenta serializa os dados a serem enviados de modo a tornar o pacote mais leve e mais rápido, mas introduz uma complexidade extra. Por introduzir essa complexidade na troca de dados e não ser otimizada para quantidades de dados que excedem alguns megabytes, essa ferramenta não é recomendada para todo caso de uso \cite{google-protocol-buffers}.
 
-\subsection{Contratos de dados e versionamento}\label{subsecao-contratos-de-dados}
-Uma API depende de contratos de dados, isso é, uma definição dos dados que serão recebidos e retornados. Esse contrato implica num compromisso de manter o serviço correspondente funcionando e inalterado. Entretanto, é possível desenvolver melhorias ou adicionar funcionalidades sem quebrar o contrato. Para tanto, deve ser feito um versionamento da API e deve ser mantida a transparência com os clientes que a usam. Por exemplo, sempre que algo for alterado é preciso atualizar a documentação.
+\subsection{Códigos de status de respostas HTTP}
+Esses códigos são números entre 100 e 599 que devem ser enviados com a resposta à requisição, cada um tendo um significado diferente, e cada centena sendo classificada em tipos diferentes de resposta. 100-199 representam respostas de informação, 200-299, respostas de sucesso, 300-399, tipos de redirecionamentos, 400-499, erros por parte do cliente e 500-599, erros por parte do servidor. Esse é um padrão definido na seção 10 da RFC 2616, e facilita o entendimento do cliente sobre o que aconteceu com a requisição à API. \cite{rfc_http_nielsen_1999}
 
-Para fazer o versionamento, pode-se usar o processo de versionamento de \emph{software} para representar os estados da API. Nesta técnica, usa-se três números para representar a versão, por exemplo "2.3.7". O primeiro representa a versão maior, o segundo, a versão menor, e o terceiro, o patch (pequena atualização para consertar ou melhorar algo) \cite{wiki_software_versioning_2022}.
 
-Em uma API, para cumprir o contrato de dados, apenas modificações aditivas podem ser feitas, tais como novos endpoints ou novos campos opcionais em algum recurso. Quando isso é feito, a versão da API muda de 2.3.7 para 2.4.0 ou para 2.3.8 dependendo do tamanho da mudança. Quando é necessário realizar alterações que descumprem o contrato, deve-se alterar a versão maior da API, por exemplo passando de 2.3.7 para 3.0.0. Nesses casos, é importante manter a versão anterior funcionando e inalterada, criando uma nova rota para acessar a versão nova, para que clientes usando a versão anterior não apresentem falhas.
+% Dessa forma, serviços podem evoluir continuamente sem uso de versionamento, reduzindo o acoplamento entre serviços, simplificando a implantação e mantendo a flexibilidade da arquitetura.
+
+% Para que essa evolução não resulte numa quebra do contrato de dados, deve-se projetar contratos que sejam flexíveis e resilientes a mudanças pode ser feito um versionamento da API e mantida a transparência com os consumidores, pela atualização da documentação, mas como mencionado na \autoref{secao-componentizacao}, essa prática não é recomendada \cite{martin-fowler-microservices}.
+
+% Quando isso é feito, a versão da API muda de 2.3.7 para 2.4.0 ou para 2.3.8 dependendo do tamanho da mudança. Quando é necessário realizar alterações que descumprem o contrato, deve-se alterar a versão maior da API, por exemplo passando de 2.3.7 para 3.0.0. Nesses casos, é importante manter a versão anterior funcionando e inalterada, criando uma nova rota para acessar a versão nova, para que clientes usando a versão anterior não apresentem falhas.
+
+
+% Para fazer o versionamento, pode-se usar o processo de versionamento de \emph{software} para representar os estados da API. Nesta técnica, usa-se três números para representar a versão, por exemplo "2.3.7". O primeiro representa a versão maior, o segundo, a versão menor, e o terceiro, o patch (pequena atualização para consertar ou melhorar algo) \cite{wiki_software_versioning_2022}.
 % citar o curso da alura
 
 \subsection{API Gateway}\label{boas-praticas-api-gateway}
@@ -365,9 +381,9 @@ Entretando, também há desvantagens no uso desse padrão: (1) cria-se um alto a
 
 \subsection{Segurança em APIs}
 
-\subsubsection*{Autenticação}
+\subsubsection*{Autenticação e autorização}
 
-Incluir autenticação em uma API consiste em exigir uma prova de autorização do uso da API. A autenticação nas APIs é indispensável para aumentar a segurança, e existem formas diferentes de implementá-la.
+Incluir autenticação em uma API consiste em exigir uma prova de autorização do uso daquele recurso. A autenticação nas APIs é altamente recomendada por aumentar a segurança de forma simples, e existem várias formas de implementá-la, sendo um dos mais comuns pelo uso de \emph{JSON Web Tokens (JWT)}, definido na RFC 7519 \cite{rfc_http_nielsen_1999}.
 
 \subsubsection*{Validação de entradas}
 
@@ -382,8 +398,8 @@ Limitar a taxa de requisições é um jeito de proteger a infraestrutura do serv
 \subsubsection*{Compartilhar o mínimo possível}
 Compartilhar o mínimo possível é uma medida de segurança genérica que pode ser adotada em qualquer microsserviço. Especificamente nas APIs, deve-se retornar estritamente apenas os dados necessários para o cliente. Muitas ferramentas usadas para implementar APIs incluem por padrão informações como se fossem marcas d'água, mas que podem ser removidas, tal como headers "X-Powered-By", que vazam informações do servidor que podem auxiliar usuários mal-intencionados \cite{rapidAPI-twitter}.
 
-\subsection{Testes isolados}
-Testar uma API isoladamente serve para determinar se ela atende a parâmetros pré-definidos ou não. Tais parâmetros podem ser o cumprimento da funcionalidade, a confiabilidade, a latência, o desempenho, e a segurança. Quando um teste de API falha, deverá ser possível saber precisamente onde o problema se encontra, assim aumentando a velocidade de desenvolvimento e a qualidade do produto.
+% \subsection{Testes isolados}
+% Testar uma API isoladamente serve para determinar se ela atende a parâmetros pré-definidos ou não. Tais parâmetros podem ser o cumprimento da funcionalidade, a confiabilidade, a latência, o desempenho, e a segurança. Quando um teste de API falha, deverá ser possível saber precisamente onde o problema se encontra, assim aumentando a velocidade de desenvolvimento e a qualidade do produto.
 
 % Why should you perform API testing?
 % - Testing your APIs timely helps to ensure your app is up all the time.
@@ -393,7 +409,7 @@ Testar uma API isoladamente serve para determinar se ela atende a parâmetros pr
 % - As data is exchanged via XML or JSON, you can write API tests in your preferred language.
 % - API testing also helps to release the next API version faster. \cite{rapidAPI-twitter}
 
-\subsection{Salvar a resposta no \emph{cache}}
+\subsection{\emph{Caching}}
 Às vezes referido como \emph{cachear}, salvar informações no \emph{cache} melhora o tempo de busca da informação. Em uma API podem haver múltiplas requisições para a mesma informação em um curto intervalo de tempo, e para cada requisição será necessário buscar a informação. Entretanto, se a informação estiver salva no \emph{cache}, não será necessário buscar essa informação, o que melhora o tempo de resposta da API, especialmente em \emph{endpoints} que frequentemente retornam a mesma resposta \cite{rapidAPI-twitter}.
 
 \subsection{Comprimir os dados}
@@ -407,8 +423,8 @@ A transferência de cargas grandes pode diminuir a velocidade da API. Comprimir 
 \subsection{Paginar e filtrar}
 A Paginação separa e categoriza resultados, enquanto a filtragem retorna apenas os resultados relevantes de acordo com os parâmetros da requisição. A paginação e filtragem de resultados reduz a complexidade da resposta e facilitam o uso da API \cite{rapidAPI-twitter}.
 
-\subsection{PATCH ou PUT}
-Quando é necessário modificar um recurso em uma API, usa-se os métodos HTTP PUT ou PATCH. Enquanto PUT atualiza o recurso inteiro, PATCH atualiza apenas uma parte específica do recurso, assim usando uma carga de dados menor. Portanto, quando possível deve-se usar PATCH em vez de PUT para modificar um recurso \cite{rapidAPI-twitter}.
+% \subsection{PATCH ou PUT}
+% Quando é necessário modificar um recurso em uma API, usa-se os métodos HTTP PUT ou PATCH. Enquanto PUT atualiza o recurso inteiro, PATCH atualiza apenas uma parte específica do recurso, assim usando uma carga de dados menor. Portanto, quando possível deve-se usar PATCH em vez de PUT para modificar um recurso \cite{rapidAPI-twitter}.
 
 \section{Observabilidade e Monitoramento}
 % Ambos são uma parte muito importante do \emph{Site Reability Engineering} (SRE)

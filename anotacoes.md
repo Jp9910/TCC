@@ -67,6 +67,7 @@ Perguntar:
     - CI (com GitHub Actions) ✅
 
     #### Prioridade média
+    - Ver pedidos no microsserviço de administração
     - Implementar salvamento de imagens dos produtos no banco de dados e gerenciamento no front de administração (?)
     - Testes na teoria ✅
     - Testes na prática - unidade, end2end, e de aceitação (selenium)

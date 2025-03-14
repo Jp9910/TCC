@@ -3,3 +3,23 @@
 \chapterprecis{Este capítulo apresenta a aplicação exemplar desenvolvida.}\index{sinopse de capítulo}
 
 \section{Domínio}
+A aplicação desenvolvida trata-se de um sistema web de e-commerce. Nela, um cliente da loja pode buscar e comprar produtos, enquanto um administrador pode gerenciar produtos e usuários cadastrados, tudo a partir de uma interface de usuário em um navegador.
+
+\section{Divisão dos microsserviços}
+
+\subsection{Loja}
+O microsserviço de loja trata da lógica de negócios relacionada a produtos e pedidos.
+
+TODO: diagramas de classes, de pacotes, e de sequencia dos microsserviços
+
+\subsection{Carrinho}
+O microsserviço de carrinho trata da lógica de negócios relacionada ao carrinho e realização da compra.
+
+\subsection{Usuários}
+O microsserviço de usuários trata da lógica de negócios relacionada ao cadastro e autenticação de usuários.
+
+\subsection{Serviço de ponta - Clientes}
+O microsserviço de ponta de clientes é o serviço usado pelos clientes da loja para realizar todas as operações relevantes a eles a partir de uma interface de usuário, tal como ver e buscar produtos, adicionar produtos ao carrinho e realizar um pedido a partir de um carrinho.
+
+\subsection{Serviço de ponta - Administração}
+O microsserviço de ponta de administração é o serviço usado pelos administradores da loja para realizar todas as operações relevantes a eles a partir de uma interface de usuário, tal como gerenciar produtos e usuários.
