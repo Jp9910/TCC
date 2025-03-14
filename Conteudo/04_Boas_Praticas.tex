@@ -107,10 +107,14 @@ Para o gerenciamento de dados, há a possibilidade de compartilhar um banco de d
 
 Entretanto, essa descentralização tem implicações para o gerenciamento de fluxos de negócios que envolvem escritas em múltiplos bancos de dados. Geralmente a abordagem para se garantir consistência nas escritas é pelo uso de transações quando atualizando múltiplos recursos. Contudo, o uso de transações resulta em um acoplamento temporal, o que é problemático quando se tem muitos serviços. Além disso, transações distribuidas são notoriamente difíceis de implementar, portanto arquiteturas de microsserviços realizam coordenação sem transações entre serviços, com reconhecimento claro de que consistência pode ser apenas consistência eventual (em vez de estrita) e que problemas serão lidados pela compensação de operações \cite{martin-fowler-microservices}. 
 
-% \subsection{Arquitetura orientada por eventos}
-
 % \subsection{CQRS}
-% Existe um padrão ...
+\emph{Command Query Responsibility Segregation (CQRS)} - Segregação de Responsabilidade de Consulta de Comando. 
+
+% Trata-se de usar um modelo para escrita e outro para leitura. Adiciona complexidade. 
+
+% "CQRS stands for Command Query Responsibility Segregation, which is a software design pattern that separates the operations for reading data (queries) from those for writing data (commands). This separation allows each operation to be optimized independently, improving performance and scalability in complex applications."
+
+% - ler: https://martinfowler.com/bliki/CQRS.html
 
 % - Um padrão de codificação: CQRS - Command Query Resposibility Segregation (Segregação da responsabilidade entre o comando e uma busca)
 %     "At its heart, [CQRS] is the notion that you can use a different model to update information than the model you use to read information. For some situations, this separation can be valuable, but beware that **for most systems, CQRS adds risky complexity**."
@@ -124,6 +128,8 @@ Entretanto, essa descentralização tem implicações para o gerenciamento de fl
 
 
 % Choosing to manage inconsistencies in this way is a new challenge for many development teams, but it is one that often matches business practice. Often businesses handle a degree of inconsistency in order to respond quickly to demand, while having some kind of reversal process to deal with mistakes. The trade-off is worth it as long as the cost of fixing mistakes is less than the cost of lost business under greater consistency. \cite{martin-fowler-microservices}
+
+
 \section{CI/CD}\label{secao-cicd}
 CI/CD é um método para entregar aplicações e mudanças nelas aos clientes com frequência. CI é um acrônimo de \emph{Continuous Integration} (integração contínua), e diz respeito à automação de como o novo código feito pelo desenvolvedor integra-se ao repositório principal. CD é um acrônimo de \emph{Continuous Delivery} e/ou \emph{Continuous Deployment} (entrega contínua e/ou implantação contínua). Entrega contínua diz respeito à automação de como o código no repositório se transforma em artefatos, que definem uma versão da aplicação, e que são implantáveis num ambiente de execução. Implantação contínua diz respeito a automação de como esses artefatos são de fato implantados no ambiente de execução. Apesar de determinar essas definições para o presente trabalho, foram observadas inconsistencias nas referências utilizadas tanto nas definições para os termos CI e CD quanto nos limites do que essas práticas englobam, em particular para o termo CD, que pode significar \emph{Continuous Delivery}, \emph{Continuous Deployment}, ou mesmo os dois. \cite{harness-ci-cd,redhat-ci-cd}
 
@@ -208,7 +214,7 @@ TODO: Elaborar sobre Blue-green deployment, feature toggles, canary release.
 
 Historicamente, existe uma diferença no foco do trabalho entre desenvolvedores e operadores que já está arraigada em muitas empresas que lidam com o desenvolvimento de \emph{software}. Enquanto por um lado as equipes de desenvolvimento tentam ser o mais eficientes possível, entregando tarefas completas sempre que possível, por outro, a equipe de operações valoriza a estabilidade, considerando cada alteração como uma possível causa de problemas. Assim, uma equipe preza pela velocidade em novas funcionalidades, enquanto a outra, pela estabilidade. Com isso em mente, integrantes da indústria do desenvolvimento de \emph{software} começaram a conceber um movimento, chamado DevOps, com o objetivo de alinhar o foco das equipes e favorecer o trabalho em conjunto para conseguir alcançar uma entrega contínua e ao mesmo tempo manter o \emph{software} funcional no ambiente de execução.
 
-DevOps, ilustrado na \autoref{figura_devops}, é um movimento cultural que visa a integração e otimização do processo de aprendizagem e colaboração entre os integrantes de equipes relacionadas ao desenvolvimento de \emph{software}. Ao contrário do que alguns pensam, não se trata de um cargo ou de um conjunto de ferramentas, mas sim uma visão organizacional de trabalho que tem o objetivo de automatizar o ciclo de desenvolvimento do \emph{software} de modo que seja veloz, seguro e integrado, com foco nas necessidades do usuário e \emph{feedback} rápido. Práticas de DevOps, como integração e entrega contínua, são fundamentais para o sucesso de aplicações com arquitetura de microsserviços pelos benefícios que agrega ao time e ao desenvolvimento e operação da aplicação \cite{gitlab-devops}.
+DevOps, ilustrado na \autoref{figura_devops}, é um movimento cultural que visa a integração e otimização do processo de aprendizagem e colaboração entre os integrantes de equipes relacionadas ao desenvolvimento de \emph{software}. Ao contrário do que alguns pensam, não se trata de um cargo ou de um conjunto de ferramentas, mas sim de uma visão organizacional de trabalho que tem o objetivo de automatizar o ciclo de desenvolvimento do \emph{software} de modo que seja veloz, seguro e integrado, com foco nas necessidades do usuário e \emph{feedback} rápido. Práticas de DevOps, como integração e entrega contínua, são fundamentais para o sucesso de aplicações com arquitetura de microsserviços pelos benefícios que agrega ao time e ao desenvolvimento e operação da aplicação \cite{gitlab-devops}.
 
 \begin{figure}[htb]
 	\caption{\label{figura_devops}Ciclo DevOps}
@@ -260,9 +266,10 @@ Polirepo (também conhecido como multirepo) é uma estratégia de organização 
 TODO: Falar sobre externalização da configuração do ambiente. Traz mais portabilidade ao código. Fazer paralelo com o 12-factor app fator 3
 
 \section{Implantação em containers}
-TODO: Elaborar melhor sobre orquestração de containers.
+% TODO: Elaborar melhor sobre orquestração de containers.
 
-Containers configuram isolamentos lógicos em uma máquina. Eles são leves e altamente flexíveis, permitindo serem parados, alterados e reiniciados rapidamente. Depois de desenvolvido o microsserviço, recomenda-se implantá-lo dentro de um container para torná-los padronizados, leves, seguros e evitar interferências com outros microsserviços. Uma opção de mecanismo de gerenciamento de containers é o Docker\footnote{Docker: \url{https://www.docker.com/}} \cite{oracle_microservices}.
+Containers configuram isolamentos lógicos em uma máquina. Eles são leves e altamente flexíveis, permitindo serem parados, alterados e reiniciados rapidamente. Depois de desenvolvido o microsserviço, recomenda-se implantá-lo dentro de um container para torná-los padronizados, leves, seguros e evitar interferências com outros microsserviços. \cite{oracle_microservices}.
+% Docker\footnote{Docker: \url{https://www.docker.com/}} 
 
 % A container is a standardized unit of software, used to develop, ship and deploy applications. Containers are managed using a container engine, such as Docker. The container engine provides the tools that are necessary to bundle all the application dependencies as a container. You can use the Docker engine to create, deploy, and run your microservices applications in containers. Microservices running in Docker containers have the following characteristics:
 
@@ -274,26 +281,34 @@ Containers configuram isolamentos lógicos em uma máquina. Eles são leves e al
 
 \section{Testes}
 
-Tradicionalmente um \emph{build} engloba tudo que é necessário para que um programa possa executar. Entretanto, só porque um programa executa não significa que ele fará o que se esperava. Para isso deve-se testar o programa, idealmente de forma automática e para toda funcionalidade, assim falhas e \emph{bugs} podem ser descobertos antes de serem lançados. Em uma arquitetura de microsserviços, o processo de testes deve englobar várias estratégias diferentes de testes. Essas estratégias podem incluir testes funcionais, como um teste de unidade, ou testes não-funcionais, como um teste de desempenho. Usar múltiplas estratégias de testes aumenta as chances da aplicação operar com sucesso em ambientes e plataformas diferentes. De acordo com \citeonline{design-monitoring-testing-waseem}, testes de unidade e testes fim-a-fim são as estratégias de testes mais usadas no desenvolvimento de microsserviços \cite{martin-fowler-continuous-integration,Familiar2015}.
+% Testes é um assunto complexo, especialmente em arquiteturas distribuidas.
+
+Tradicionalmente, um \emph{build} engloba tudo que é necessário para que um programa possa executar. Entretanto, só porque um programa executa não significa que ele fará o que é esperado. Para tanto, deve-se testar o programa, idealmente de forma automática e para toda funcionalidade, assim falhas e \emph{bugs} podem ser descobertos antes de serem lançados. Existem inúmeros tipos e abordagens de testes de \emph{software}, porém é impossível ter uma cobertura completa de testes. Trata-se, portanto, de quão testada é a aplicação - quanto mais bem testada, pelo uso de abordagens diversas e apropriadas, maior é a confiabilidade e a qualidade do sistema. Entretanto, é importante também não só automatizar a bateria de testes, mas também prezar pelo seu desempenho, pois testes demorados tornam-se um obstáculo para a integração e \emph{feedback} contínuos. \cite{martin-fowler-continuous-integration}
+
+
+Na arquitetura de microsserviços, o processo de testes torna-se mais abrangente, por haver mais pontos passíveis de falha, e mais complexo, por se tratar de um sistema altamente distribuido. Além disso, os microsserviços, de maneira isolada, também podem (e devem) ser testados com abordagens de testes comumente usadas em aplicações monolíticas. 
+% porém não existe uma definição formal de quais testes devem ser utilizados em quais casos, 
+% Existem inúmeros tipos e abordagens de testes de \emph{software}, que compõem diversos livros por ótimos autores focados no assunto, que explicariam melhor do que eu jamais poderia, portanto este trabalho não entrará em detalhes sobre como implementá-los ou como funcionam, e serão apenas apontados algumas estratégias apropriadas de testes no contexto de aplicações com arquitetura de microsserviços.
+
+% Recomenda-se usar todas as abordagens comuns de testes, como \emph{mocking}, testes de unidade, testes de regressão e testes funcionais. \cite{design-monitoring-testing-waseem}
+
+\subsection{Testes de unidade}
+TODO: 
+
+\subsection{Testes de serviços}
+TODO: 
+
+\subsection{Testes \emph{end-to-end} (fim-a-fim)}
+\citeonline{livro-building-microservices} argumenta em seu livro “Building Microservices” que muitos desenvolvedores de microsserviços em escala dispensam testes fim-a-fim apesar do ótimo escopo que eles provêem, devido a grande quantidade de recursos que exigem para serem executados e por serem suscetíveis a problemas que não necessariamente tem relação com a funcionalidade testada, o que pode introduzir indeterminismo nos testes. Em vez disso, esses desenvolvedores optam por compensar em monitoramento e contratos de dados orientados ao consumidor (CDCs), que trata-se de especificar uma API com base em contratos compartilhados que ditam o que consumidor espera, facilitando testes de integração. \cite{livro-building-microservices}.
+
+Dito isso, de acordo com \cite{design-monitoring-testing-waseem}, testes fim-a-fim são muito comumente usados em aplicações com arquitetura de microsserviços. 
+
+\subsection{Testes, testes e mais testes}
+Além de recomendar os tipos de testes comuns em monólitos, \citeonline{Familiar2015} recomenda também testar os microsserviços conforme passam pelo \emph{pipeline} de implantação, incluindo: \textbf{Testes internos}, que testam as funções internas do serviço, incluindo uso de acesso de dados, caching e relacionados; \textbf{Testes de serviço}, que testam serviços da API e seus modelos associados; \textbf{Testes de protocolo}, que testam o serviço a nível de protocolo, chamando a API usando o protocolo escolhido; \textbf{Testes de composição}, que testam o serviço em cooperação com outros serviços no contexto de uma solução; \textbf{Testes de escalabilidade e taxa de transferência}, que testam a escalabilidade e elasticidade do microsserviço implantado; \textbf{Testes de tolerância a falha}, que testam a capacidade do microsserviço de se recuperar após uma falha; e \textbf{Teste de penetração}, que consiste em envolver uma empresa terceirizada de segurança de \emph{software} para realizar testes de penetração no sistema. \cite{Familiar2015}
 
 % Testes fazem parte da construção do software. Devem ser realizados antes do commit. TDD pode ajudar neste processo. Deve-se prezar por um bom desempenho em testes, pois testes demorados podem ser uma barreira para a integração contínua. Testes automatizados são essenciais para a integração contínua.
+
 % We identified 12 testing strategies (see Table 28), which are listed in our survey question, from the literature (e.g., [9, 6, 61, 63, 64, 65, 66, 67]).
-
-Além de usar os métodos mais comuns de testes, deve-se também testar os microsserviços conforme passam pelo \emph{pipeline} de implantação. Isso inclui: \cite{Familiar2015}
-
-- Testes internos: Testar as funções internas do serviço, inclusive uso de acesso de dados, e caching;
-
-- Teste de serviço: Testar a a implementação de serviço da API. Essa é uma implementação privada da API e seus modelos associados;
-
-- Teste de protocolo: Testar o serviço no nível de protocolo, chamando a API sobre o determinado protocolo (geralmente HTTP);
-
-- Teste de composição: Testar o serviço em cooperação com outros serviços no contexto de uma solução;
-
-- Teste de escalabilidade/taxa de transferência: Testar a escalabilidade e elasticidade do microsserviço implantado;
-
-- Teste de tolerância a falha: Testar a capacidade do microsserviço de recupera-se após uma falha;
-
-- Teste de penetração: Trabalhar com uma empresa terceirizada de segurança de \emph{software} para realizar testes de penetração no sistema.
 
 \section{Comunicação}\label{secao-comunicacao}
 
@@ -420,7 +435,7 @@ Enquanto registros precisam ser desenvolvidos, métricas apenas precisam de inst
 
 É recomendado usar paineis de controle de alto nível para melhorar a visualização e monitoramento do status da aplicação e diversas outras informações operacionais e de negócio a partir de suas métricas \cite{martin-fowler-microservices}.
 
-\subsection{Rastreamento}
+\subsection{\emph{Tracing} (rastreamento)}
 Em aplicações com arquitetura distribuida, como os microsserviços, uma única requisição de um usuário irá frequentemente interagir com múltiplos serviços antes de retornar uma resposta, assim havendo possibilidade de ocorrer problemas em múltiplos locais diferentes. Rastreamento trata-se de acompanhar um fluxo transacional (geralmente iniciado por uma requisição de um usuário), desde onde foi originado até onde terminou, atribuindo um identificador único a cada fluxo, que será propagado em cada serviço por onde o fluxo passar. Isso provê visibilidade fim-a-fim sobre os fluxos no sistema, permitindo que desenvolvedores e operadores identifiquem problemas mais precisa e rapidamente, independentemente de onde eles ocorram. 
 
 % \section{Agregando serviços (process agregator pattern)}
