@@ -19,7 +19,7 @@ Um desafio advindo dessa distribuição é que a comunicação é complexa e fal
 
 \section{Flexibilidade na escolha de ferramentas}
 
-Como mencionado anteriormente, cada microsserviço disponibiliza suas funcionalidades por meio de APIs e contratos de dados em uma rede. Usando esse meio, a comunicação independe da arquitetura que o microsserviço faz uso, o que possibilita que cada microsserviço escolha seu sistema operacional, linguagem e serviços de apoio. Além disso, os microsserviços podem ser desenvolvidos usando uma linguagem de programação e estrutura que melhor se adapte ao problema que ele é projetado para resolver, possuindo mais flexibilidade, entretanto é importante notar que usar muitas ferramentas diferentes aumenta a complexidade do sistema \cite{oracle_microservices, Familiar2015}.
+Como mencionado anteriormente, cada microsserviço disponibiliza suas funcionalidades por meio de APIs e contratos de dados em uma rede. Usando esse meio, a comunicação independe da arquitetura que o microsserviço faz uso, o que possibilita que cada microsserviço escolha seu sistema operacional, linguagem, serviços de apoio e demais ferramentas necessárias. Além disso, os microsserviços podem ser desenvolvidos usando uma linguagem de programação e estrutura que melhor se adapte ao problema que ele é projetado para resolver, possuindo mais flexibilidade, entretanto é importante notar que usar muitas ferramentas diferentes aumenta a complexidade do sistema \cite{oracle_microservices, Familiar2015}.
 
 \section{Alta velocidade de desenvolvimento}
 
@@ -33,10 +33,10 @@ Como mencionado acima, uma maneira de se alcançar certo nível de componentiza�
 
 Contudo, usar serviços dessa forma também traz algumas desvantagens. Uma delas é que será necessário considerar como mudanças em um serviço podem afetar seus consumidores. A abordagem tradicional para resolver esse problema é o uso de versionamento no serviço, entretanto essa prática não é bem-vista no mundo dos microsserviços. A melhor solução é projetar serviços para serem o mais tolerante possíveis a mudanças nos serviços a que consomem. Outra desvantagem é que a comunicação remota é muito mais complexa e custosa, portanto o método de comunicação escolhido deve ser implementado de modo flexível. Ademais, realocar responsabilidades entre componentes é mais difícil quando se trata de processos diferentes \cite{martin-fowler-microservices}.
 
-\section{Portabilidade} % Flexibilidade no ambiente de execução
+\section{Portabilidade}\label{sec:portabilidade} % Flexibilidade no ambiente de execução
 
 % TODO: Melhorar essa parte?
-Ter portabilidade em uma aplicação significa permitir que ela seja executada facilmente em diferentes plataformas. Apesar de lista-la como uma característica dos microsserviços, a portabilidade não os é inerente - ela deve ser alcançada por meio de automação e externalização de configurações, para assim os microsserviços serem implantados de forma fácil e eficiente. \cite{Familiar2015}.
+A portabilidade de uma aplicação diz respeito a quão facilmente ela pode ser executada em diferentes ambientes de execução com variadas configurações de plataforma e infraestrutura. Ela não é inerente aos microsserviços, mas é facilitada por terem escopo e tamanho limitados. No entanto, faz-se necessário o uso de técnicas que aumentem essa portabilidade, como por meio de automação e externalização de configurações, para que assim os microsserviços possam ser implantados de forma fácil e eficiente em ambientes de execução variados. \cite{Familiar2015}.
 % \autoref{secao-externalizacao-de-configuracoes}
 
 \section{Versionável e substituível}
