@@ -58,7 +58,7 @@ O uso da arquitetura de microsserviços implica num grande aumento de complexida
 
 Um dos principais desafios no desenvolvimento de uma aplicação com arquitetura de microsserviços é a definição adequada dos limites de cada microsserviço, que pode ser facilitado pelo uso de abordagens bem consolidadadas de design de \emph{software}, como o DDD. Outros desafios são: complexidade de projeto, complexidade operacional, consistência de dados, comunicação e manutenção. De acordo com \citeonline{CAOPLE}, os \textbf{três grandes desafios} do desenvolvimento de aplicações com arquitetura de microsserviços são (1) Como programar sistemas que consistem de um grande número de serviços executando em paralelo e distribuidos em um conjunto de máquinas, (2) Como reduzir a sobrecarga de comunicação causada pela execução de grandes números de pequenos serviços e (3) Como sustentar a implantação flexível de serviços em uma rede para conseguir realizar o balanceamento de carga \cite{martin-fowler-monolith-first}.
 
-\subsection{Teorema CAP}
+\subsection{Teorema CAP}\label{teorema-cap}
 CAP é um acrônimo para \emph{Consistency, Availability and Partition tolerance} (Consistencia, Disponibilidade e Tolerância à partição), e o teorema CAP prova que é impossível, em um sistema distribuido, se ter consistência estrita de dados, disponibilidade contínua de todos os nós e tolerância à falhas de comunicação entre os nós ao mesmo tempo.
 % Só é possível então se ter 2 desses - AP, CP ou CA.
 

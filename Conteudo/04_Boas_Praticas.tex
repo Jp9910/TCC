@@ -124,9 +124,9 @@ Em vez de apenas usar um conjunto de padrões definidos para desenvolver micross
 
 A Netflix é um exemplo de organização que segue essa filosofia. Compartilhar código útil e muito bem testado como bibliotecas incentiva outros desenvolvedores a resolver problemas semelhantes de maneiras semelhantes, ao mesmo tempo que mantém a possibilidade de escolher uma abordagem diferente, se necessário. As bibliotecas compartilhadas tendem a se concentrar em problemas comuns, como armazenamento de dados, comunicação entre processos e automação de infraestrutura \cite{martin-fowler-microservices}.
 
-\section{Descentralização dos dados}
+\section{Descentralização dos dados}\label{descentralizacao-dados}
 
-Para o gerenciamento de dados, há a possibilidade de compartilhar um banco de dados entre diferentes microsserviços, mas isso é visto como um anti-padrão. Uma aplicação com arquitetura de microsserviços tem melhor isolamento, segurança e disponibilidade quando cada serviço gerencia seu próprio banco de dados particular, inclusive tendo a possibilidade de ser instâncias diferentes da mesma tecnologia ou usar sistemas de banco de dados totalmente diferentes. Os dados persistidos por esses bancos de dados particulares só devem ser acessados diretamente pelo serviço que o contém, e outros serviços que necessitem desses dados precisarão enviar uma requisição. Com cada serviço tendo seu próprio banco de dados, a escalabilidade dele e do seu banco de dados pode ser feita independentemente dos outros serviços. Assim, serviços que recebem poucos acessos podem ter bancos menos potentes e mais baratos, e vice-versa \cite{oracle_microservices,martin-fowler-microservices}.
+Para o gerenciamento de dados, há a possibilidade de compartilhar um banco de dados entre diferentes microsserviços, porém isso é visto como um anti-padrão, pois microsserviços diferentes possuem necessidades distintas de armazenamento e acesso a dados. Dessa forma, uma aplicação com arquitetura de microsserviços tem melhor isolamento, segurança e disponibilidade quando os microsserviços possuem um modelo de dados independente e gerenciam seu próprio banco de dados particular, inclusive tendo a possibilidade de usar sistemas de banco de dados diferentes. Além disso, os dados persistidos por esses bancos de dados particulares só devem ser acessados diretamente pelo serviço que o contém, e outros serviços que necessitem desses dados precisarão enviar uma requisição. Com cada serviço tendo seu próprio banco de dados, a escalabilidade dele e do seu banco de dados pode ser feita independentemente dos outros serviços. Assim, serviços que recebem poucos acessos podem ter bancos menos potentes e mais baratos, e vice-versa \cite{oracle_microservices,martin-fowler-microservices}.
 
 Entretanto, essa descentralização tem implicações para o gerenciamento de fluxos de negócios que envolvem escritas em múltiplos bancos de dados. Geralmente a abordagem para se garantir consistência nas escritas é pelo uso de transações quando atualizando múltiplos recursos, porém o uso de transações resulta em um acoplamento temporal, o que pode resultar em problemas quando existem muitos serviços envolvidos em um único fluxo. Ademais, transações distribuidas são notoriamente difíceis de implementar, portanto arquiteturas de microsserviços normalmente realizam coordenação sem transações entre serviços, com reconhecimento claro de que consistência pode ser apenas consistência eventual (em vez de estrita) e que problemas serão lidados pela compensação de operações \cite{martin-fowler-microservices}. 
 
@@ -301,8 +301,8 @@ Monorepo é uma estratégia de organização de código onde usa-se apenas um re
 % more research is necessary on source control repository structures and their direct impacts on team cognitions. \cite{monorepo-polirepo-nicolas} 
 % a monorepo or polyrepo architecture involves a comparison of tradeoffs while still highlighting that monorepos "encourages consistent and high-quality code, and empowers engineers
 
-\subsection{Polirepo}
-Polirepo (também conhecido como multirepo) é uma estratégia de organização de código onde usa-se múltiplos repositórios no sistema de controle de versionamento para o gerenciamento de múltiplos projetos. Na arquitetura de microsserviços isso geralmente significa ter um repositório para cada microsserviço e é a estratégia mais comum de organização de código. Suas vantagens em contraste com o monorepo incluem: tamanho razoável do repositório; escopo do repositório bem definido; definição de permissões diferentes para cada projeto; e operações no repositório têm melhor desempenho. Essa abordagem é mais adequada quando não há necessidade de gerenciar cuidadosamente a versão da aplicação como um todo e esse versionamento é transparente para os usuários \cite{monorepo-polirepo-semaphoreci}.
+\subsection{Multirepo}
+Multirepo, ou polirepo, é uma estratégia de organização de código onde usa-se múltiplos repositórios no sistema de controle de versionamento para o gerenciamento de múltiplos projetos. Na arquitetura de microsserviços isso geralmente significa ter um repositório para cada microsserviço e é a estratégia mais comum de organização de código. Suas vantagens em contraste com o monorepo incluem: tamanho razoável do repositório; escopo do repositório bem definido; definição de permissões diferentes para cada projeto; e operações no repositório têm melhor desempenho. Essa abordagem é mais adequada quando não há necessidade de gerenciar cuidadosamente a versão da aplicação como um todo e esse versionamento é transparente para os usuários \cite{monorepo-polirepo-semaphoreci}.
 
 % Usar um pipeline para cada repo implica em uma microimplantação. É mais cabível para aplicações praticando implantação contínua dos microsserviços, onde o gerenciamento da versão não tem grande importância. Requer mais esforço do que o monorepo mas oferece mais autonomia
 
@@ -317,10 +317,10 @@ Polirepo (também conhecido como multirepo) é uma estratégia de organização 
 % \subsection{Estratégias de ramificação} <<
 
 % \section{Externalização/parametrização de configurações}\label{secao-externalizacao-de-configuracoes}
-% TODO: Falar sobre externalização da configuração do ambiente. Traz mais portabilidade ao código. Fazer paralelo com o 12-factor app fator 3
+% TODO:? Falar sobre externalização da configuração do ambiente. Traz mais portabilidade ao código. Fazer paralelo com o 12-factor app fator 3
 
 \section{Implantação em containers}
-% TODO: Elaborar melhor sobre orquestração de containers.
+% TODO:? Elaborar melhor sobre orquestração de containers.
 
 Containers configuram isolamentos lógicos em uma máquina, sendo leves e altamente flexíveis e permitindo paradas, alterações e reinicios velozes. Depois de desenvolvido o microsserviço, é altamente recomendado que ele seja implantado em um container, assim favorecendo sua padronização, flexibilidade e dificultar interferências imprevistas com outros microsserviços. \cite{oracle_microservices}.
 % Por se tratar mais de uma questão tecnológica do que de prática, a implantação em containers é melhor discutida no capítulo 5
@@ -370,7 +370,7 @@ Além de recomendar os tipos de testes comuns em monólitos, \citeonline{Familia
 
 \section{Comunicação}\label{secao-comunicacao}
 
-% TODO: Elaborar sobre o FastCGI. (geralmente usado para servidores de aplicação de linguagem interpretada como uma alternativa ao http)
+% TODO:? Elaborar sobre o FastCGI. (geralmente usado para servidores de aplicação de linguagem interpretada como uma alternativa ao http)
 
 No desenvolvimento de estruturas de comunicação entre diferentes processos, nota-se muitos produtos e abordagens que enfatizam o emprego de grande inteligência no próprio mecanismo de comunicação. Um exemplo disso é o Enterprise Service Bus (ESB), onde os mecanismos dessa abordagem geralmente incluem recursos sofisticados para roteamento, tratamento e transformação de mensagens e aplicação das regras de negócios \cite{martin-fowler-microservices}.
 
@@ -386,7 +386,7 @@ Embora menos comum, chamada de procedimento remoto (RPC) também é utilizado pa
 De acordo com \citeonline{design-monitoring-testing-waseem}, \emph{API Gateway} e \emph{Backend for frontend} são os padrões de projeto mais utilizados na implementação da comunicação entre microsserviços. Eles são padrões similares - a diferença é que no \emph{Backend for Frontend} há um \emph{gateway} para cada tipo de cliente ou serviço de ponta.
 
 % \subsection{Descoberta de serviços (\emph{Service Discovery})}
-% TODO: Elaborar sobre descoberta de serviços
+% TODO:? Elaborar sobre descoberta de serviços
 % https://www.baeldung.com/cs/service-discovery-microservices
 % https://medium.com/@jeslurrahman/understanding-service-discovery-in-microservices-architecture-2098b10e7439
 % A descoberta de serviço é uma parte muito importante da comunicação entre microsserviços \cite{livro-building-microservices, service-discovery-baeldung}.
@@ -407,13 +407,13 @@ Contratos de dados orientados ao consumidor (CDC) é uma abordagem para garantir
 Ao projetar serviços de forma mais tolerante a mudanças e validar contratos dinamicamente, as equipes podem trabalhar de forma independente e lançar atualizações sem impactar outros sistemas. No entanto, para que essa abordagem funcione bem, é necessário uma boa colaboração entre as equipes e o uso de ferramentas adequadas que facilitem a criação e verificação automática desses contratos. Quando bem aplicado, o CDC promove maior estabilidade em sistemas distribuídos, permitindo que microsserviços evoluam de forma mais previsível e segura. \cite{consumer-driven-contracts}
 
 \subsection{Formatos de dados}\label{subsecao-trocas-de-dados}
-% TODO: Essa parte deveria estar no capitulo de ferramentas..?
+% TODO:? Essa parte deveria estar no capitulo de ferramentas..?
 Atualmente JSON é um dos formatos mais populares para troca de dados na web, por ser facilmente lido tanto por humanos quanto por máquinas e não precisar de muitos metadados, como no formato XML. Em APIs, JSON é usado para enviar e receber requisições por meio do protocolo HTTP, sendo uma solução robusta para a comunicação entre cliente e servidor. Embora seja derivado do JavaScript, JSON também é suportado por muitas outras linguagens, seja nativamente ou por meio de bibliotecas. \cite{json_bourhis_2020}
 
 Outra opção para trocas de dados é usar \emph{Buffers} de protocolo, ou \emph{Protocol buffers}, uma ferramenta de código aberto desenvolvida pelo Google que oferece um método de serialização de dados estruturados para envio de informações. Ela é neutra em linguagem e plataforma, é extensível e funciona como alternativa ao JSON na troca de dados. Essa ferramenta serializa os dados a serem enviados de modo a tornar o pacote mais leve e mais rápido, mas introduz uma complexidade extra. Por introduzir essa complexidade na troca de dados e não ser otimizada para quantidades de dados que excedem alguns megabytes, essa ferramenta não é recomendada para todo caso de uso \cite{google-protocol-buffers}.
 
 \subsection{Códigos de status de respostas HTTP}
-Esses códigos são números entre 100 e 599 que devem ser enviados com a resposta à requisição, cada um tendo um significado diferente, e cada centena sendo classificada em tipos diferentes de resposta. 100-199 representam respostas de informação, 200-299, respostas de sucesso, 300-399, tipos de redirecionamentos, 400-499, erros por parte do cliente e 500-599, erros por parte do servidor. Esse é um padrão definido na seção 10 da RFC 2616, e facilita o entendimento do cliente sobre o que aconteceu com a requisição à API. \cite{rfc_http_nielsen_1999}
+Esses códigos são números entre 100 e 599 que devem ser enviados com a resposta à requisição, cada um tendo um significado diferente, e cada centena sendo classificada em tipos diferentes de resposta. 100-199 representam respostas de informação, 200-299, respostas de sucesso, 300-399, tipos de redirecionamentos, 400-499, erros por parte do cliente e 500-599, erros por parte do servidor. Esse é um padrão definido na seção 10 da RFC 2616, e facilita o entendimento do cliente sobre o que aconteceu com a requisição à API. \cite{rfc_http_nielsen_1999, api-design-restfulapi}
 
 
 % Dessa forma, serviços podem evoluir continuamente sem uso de versionamento, reduzindo o acoplamento entre serviços, simplificando a implantação e mantendo a flexibilidade da arquitetura.
@@ -427,32 +427,34 @@ Esses códigos são números entre 100 e 599 que devem ser enviados com a respos
 % citar o curso da alura
 
 \subsection{API Gateway}\label{boas-praticas-api-gateway}
-Numa arquitetura de microsserviços, os clientes geralmente consomem funcionalidades de mais de um microsserviço. Se esse consumo é feito do cliente diretamente para o microsserviço, o cliente precisa lidar com várias requisições aos \emph{endpoints}. Quando os microsserviços mudam ou mais microsserviços surgem frequentemente, fica inviável tratar tantos endpoints por parte do cliente. Uma solução para isso é usar um \emph{API Gateway}. 
+% TODO:? Mudar o nome para Gateway, mover para uma seção, e tornar o texto mais genérico em vez de focado nas APIs.
+% sessão Central Aggregating Gateway no livro building microservices
+Na arquitetura de microsserviços, muitas vezes a comunicação acontece de muitos pra muitos, podendo um microsserviço enviar e receber requisições para e de múltiplos outros microsserviços. Caso essa comunicação não seja gerenciada de forma adequada, a escalabilidade e segurança do sistema podem ser afetadas negativamente. Conforme mais microsserviços são criados e os já existentes evoluem, torna-se inviável gerenciar tantos \emph{endpoints} em todo microsserviço que precisar usá-los. Uma solução para isso é usar um \emph{API Gateway}. \cite{livro-building-microservices}
 
-Um \emph{API Gateway} é um padrão de projeto e funciona como uma porta única de entrada para as APIs de cada microsserviço, padronizando e controlando o acesso aos microsserviços e APIs. Esse gateway fica situado entre o cliente e os microsserviços, e é responsável por redirecionar as requisições recebidas para os microsserviços apropriados, assim o gerenciamento das chamadas pode ser feita em apenas um lugar em vez de em cada API de cada microsserviço. Além disso, nele também podem ser implementadas camadas de segurança e de monitoramento.
+Um \emph{API Gateway} é um padrão de projeto onde tem-se um servidor que age como uma porta única de entrada para as APIs de um sistema, padronizando e controlando o acesso a elas. Esse \emph{gateway} fica situado entre o consumidor e os microsserviços, e é responsável por redirecionar as requisições recebidas para os microsserviços apropriados, assim o gerenciamento das chamadas pode ser feita em apenas um lugar em vez de em cada consumidor. Além disso, nele também podem ser implementadas camadas de segurança, como autenticação, e de monitoramento, como \hyperref[subsecao-registros]{\emph{logging}}.
 
-Outra vantagem é que esse \emph{API Gateway} pode agregar requisições, permitindo que o cliente envie apenas uma requisição para o \emph{API Gateway} para recuperar informações de diferentes microsserviços, o que normalmente exigiria múltiplas requisições. Nesse caso, quando recebida a requisição do cliente, o \emph{API Gateway} fica responsável por disparar as requisições correspondentes, agregar as respostas e as devolver ao cliente.
+Outra vantagem é que esse \emph{API Gateway} pode agregar requisições, permitindo que o consumidor envie apenas uma requisição para o \emph{API Gateway} para recuperar informações de diferentes microsserviços, o que normalmente exigiria múltiplas requisições. Nesse caso, quando recebida a requisição do consumidor, o \emph{API Gateway} fica responsável por disparar as requisições correspondentes, agregar as respostas e as devolver ao consumidor.
 
-Entretando, também há desvantagens no uso desse padrão: (1) cria-se um alto acoplamento entre os microsserviços e o \emph{API Gateway}, (2) surge um possível ponto massivo de falha nesse \emph{API Gateway} e (3) se não escalado adequadamente, esse \emph{API Gateway} pode se tornar um gargalo \cite{microsoft-api-gateway}.
+Entretando, também há desvantagens no uso desse padrão: (1) cria-se um alto acoplamento entre os microsserviços e o \emph{API Gateway}, (2) ele pode se tornar um ponto massivo de falha e (3) se não escalado adequadamente, esse \emph{API Gateway} pode diminuir o de todas as requisições que passarem por ele \cite{microsoft-api-gateway}.
 
 \subsection{Segurança em APIs}
 
 \subsubsection*{Autenticação e autorização}
 
-Incluir autenticação em uma API consiste em exigir uma prova de autorização do uso daquele recurso. A autenticação nas APIs é altamente recomendada por aumentar a segurança de forma simples, e existem várias formas de implementá-la, sendo um dos mais comuns pelo uso de \emph{JSON Web Tokens (JWT)}, definido na RFC 7519 \cite{rfc_http_nielsen_1999}.
+Incluir autenticação em uma API consiste em exigir uma prova de autorização do uso daquele recurso. A autenticação nas APIs é altamente recomendada por aumentar a segurança de forma simples, e existem várias formas de implementá-la, sendo um dos mais comuns pelo uso de \emph{JSON Web Tokens (JWT)}, definidos na RFC 7519 \cite{rfc_http_nielsen_1999}.
 
 \subsubsection*{Validação de entradas}
 
-Validar entradas significa verificar as requisições que chegam com o intuito de garantir que elas não contém dados impróprios, tais como injeções de SQL ou \emph{scripting} (execução de uma determinada sequência de comandos) entre sites. Essa validação deve ser implementada tanto em nível sintático como em semântico, isso é, tanto impondo correção da sintaxe quanto impondo correção de valores \cite{rapidAPI-twitter}.
+Validar entradas significa verificar as requisições que chegam com o intuito de garantir que elas não contém dados impróprios, tais como injeções de SQL ou \emph{scripting} (execução de uma determinada sequência de comandos) entre sites. Essa validação deve ser implementada tanto em nível sintático como em semântico, isso é, tanto impondo correção da sintaxe quanto impondo correção de valores \cite{api-design-restfulapi}.
 
 \subsubsection*{Certificado Secute Socket Layer (SSL)}
-Usar um certificado SSL permite que o protocolo HTTPS seja usado em vez do HTTP, criptografando as informações que estão trafegando, o que adiciona uma camada de segurança \cite{rapidAPI-twitter}.
+Usar um certificado SSL permite que o protocolo HTTPS seja usado em vez do HTTP, criptografando as informações que estão trafegando, aumentando a privacidade da informação trafegada. \cite{api-design-restfulapi}
 
 \subsubsection*{Limitação de taxa de requisições}
-Limitar a taxa de requisições é um jeito de proteger a infraestrutura do servidor nos casos de acontecerem grandes fluxos de requisições, tal como em um ataque de \emph{DoS} (negação de serviço). Clientes terão seu acesso bloqueado caso enviem uma quantidade de requisições acima do limite determinado \cite{rapidAPI-twitter}.
+Limitar a taxa de requisições é um jeito de proteger a infraestrutura do servidor nos casos de acontecerem grandes fluxos de requisições, tal como em um ataque de \emph{DoS} (negação de serviço). Clientes terão seu acesso bloqueado caso enviem uma quantidade de requisições acima do limite determinado \cite{api-design-restfulapi}.
 
-\subsubsection*{Compartilhar o mínimo possível}
-Compartilhar o mínimo possível é uma medida de segurança genérica que pode ser adotada em qualquer microsserviço. Especificamente nas APIs, deve-se retornar estritamente apenas os dados necessários para o cliente. Muitas ferramentas usadas para implementar APIs incluem por padrão informações como se fossem marcas d'água, mas que podem ser removidas, tal como headers "X-Powered-By", que vazam informações do servidor que podem auxiliar usuários mal-intencionados \cite{rapidAPI-twitter}.
+% \subsubsection*{Compartilhar o mínimo possível}
+% Compartilhar o mínimo possível é uma medida de segurança genérica que pode ser adotada em qualquer microsserviço. Especificamente nas APIs, é recomendado retornar apenas os dados necessários para o cliente. Muitas ferramentas usadas para implementar APIs incluem por padrão informações como se fossem marcas d'água, mas que podem ser removidas, tal como headers "X-Powered-By", que vazam informações do servidor que podem auxiliar usuários mal-intencionados \cite{rapidAPI-twitter}.
 
 % \subsection{Testes isolados}
 % Testar uma API isoladamente serve para determinar se ela atende a parâmetros pré-definidos ou não. Tais parâmetros podem ser o cumprimento da funcionalidade, a confiabilidade, a latência, o desempenho, e a segurança. Quando um teste de API falha, deverá ser possível saber precisamente onde o problema se encontra, assim aumentando a velocidade de desenvolvimento e a qualidade do produto.
@@ -466,10 +468,13 @@ Compartilhar o mínimo possível é uma medida de segurança genérica que pode 
 % - API testing also helps to release the next API version faster. \cite{rapidAPI-twitter}
 
 \subsection{\emph{Caching}}
-Às vezes referido como \emph{cachear}, salvar informações no \emph{cache} melhora o tempo de busca da informação. Em uma API podem haver múltiplas requisições para a mesma informação em um curto intervalo de tempo, e para cada requisição será necessário buscar a informação. Entretanto, se a informação estiver salva no \emph{cache}, não será necessário buscar essa informação, o que melhora o tempo de resposta da API, especialmente em \emph{endpoints} que frequentemente retornam a mesma resposta \cite{rapidAPI-twitter}.
+Às vezes referido como \emph{cachear}, salvar informações em \emph{cache} pode melhorar significativemente o tempo de busca da informação pelo cliente. Em uma API podem haver múltiplas requisições para a mesma informação em um curto intervalo de tempo, e para cada requisição será necessário buscar a informação. Entretanto, se a informação estiver salva no \emph{cache}, não será necessário buscar essa informação, o que melhora o tempo de resposta da API, especialmente em \emph{endpoints} que frequentemente retornam a mesma resposta \cite{api-design-restfulapi}.
 
 \subsection{Comprimir os dados}
-A transferência de cargas grandes pode diminuir a velocidade da API. Comprimir os dados auxilia nesse problema, diminuindo o tamanho da carga e aumentando a velocidade de transferência. Uma possibilidade é usar \emph{buffers} de protocolo (discutido na \autoref{subsecao-trocas-de-dados}) \cite{rapidAPI-twitter}.
+A transferência de cargas grandes pode diminuir a velocidade da API. Comprimir os dados auxilia nesse problema, diminuindo o tamanho da carga e aumentando a velocidade de transferência. Uma possibilidade é usar \hyperref[subsecao-trocas-de-dados]{\emph{buffers} de protocolo} \cite{api-design-restfulapi}.
+
+\subsection{Documentação}
+Uma API é apenas tão boa quanto sua documentação, e a falta de informações claras sobre seu uso pode ser um motivo suficiente para não utilizá-la. A documentação deve ser bem formatada e de fácil navegação, preferencialmente usando ferramentas populares para reduzir a curva de aprendizado dos desenvolvedores. Além disso, é importante incluir exemplos práticos de requisições e respostas, permitindo que os usuários testem facilmente a API. \cite{api-design-restfulapi}
 
 % There are various compression methods available, a common one being GZIP. \cite{rapidAPI-twitter}
 
@@ -477,7 +482,7 @@ A transferência de cargas grandes pode diminuir a velocidade da API. Comprimir 
 % Over-fetching results in unnecessary and unusable data, and under-fetching results in an incomplete response. Good architecture, planning, and appropriate API management tools are essential to avoid these. \cite{rapidAPI-twitter}
 
 \subsection{Paginar e filtrar}
-A Paginação separa e categoriza resultados, enquanto a filtragem retorna apenas os resultados relevantes de acordo com os parâmetros da requisição. A paginação e filtragem de resultados reduz a complexidade da resposta e facilitam o uso da API \cite{rapidAPI-twitter}.
+Em APIs, a paginação separa e categoriza resultados, enquanto a filtragem garante que apenas os resultados relevantes de acordo com os parâmetros da requisição são retornados. A paginação e a filtragem de resultados reduzem a complexidade da resposta e a quantidade de dados trafegados, assim poupando recursos \cite{api-design-restfulapi}.
 
 % \subsection{PATCH ou PUT}
 % Quando é necessário modificar um recurso em uma API, usa-se os métodos HTTP PUT ou PATCH. Enquanto PUT atualiza o recurso inteiro, PATCH atualiza apenas uma parte específica do recurso, assim usando uma carga de dados menor. Portanto, quando possível deve-se usar PATCH em vez de PUT para modificar um recurso \cite{rapidAPI-twitter}.

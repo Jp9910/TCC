@@ -1,6 +1,6 @@
 \chapter{Ferramentas para desenvolvimento de microsserviços}\label{chapter-ferramentas}
 %https://dzone.com/articles/30top-tools-for-building-microservices-on-all-leve
-\chapterprecis{Este capítulo aprensenta ferramentas frequentemente usadas no desenvolvimento de aplicações com arquitetura de microsserviços.}\index{sinopse de capítulo}
+\chapterprecis{Este capítulo aprensenta ferramentas frequentemente usadas e que cumprem propósitos importantes no desenvolvimento de aplicações com arquitetura de microsserviços.}\index{sinopse de capítulo}
 
 % Ferramentas de código aberto ou com opções gratuitas estão seguidas de um asterisco (*).
 
@@ -73,48 +73,51 @@ C\# é uma das linguagens mais utilizadas no ecossistema Microsoft e tem se torn
 
 % A programming language isn't in it self open source or not, but an implementation of it might be. Yes, there are open source implementations of Java. Sun's Java implementation (the most popular one), is one of them.
 
-\section{Servidor Web}
-Importante distinguir servidores web de servidores de aplicação...
+\section{Servidores Web}
+Servidores web são responsáveis por receber e tratar requisições, agindo como um \emph{middleware} (meio-termo) entre o consumidor e o provedor. Eles podem disponibilizar diversas funcionalidades úteis na comunicação por meio de requisições, tal como \emph{caching}, compressão de dados, limitação de requisições e balanceamento de carga, assim não havendo necessidade de implementá-las manualmente. Além disso, servidores web também podem ser utilizados como \emph{API Gateways}, técnica crucial para gestão da comunicação entre microsserviços, por centralizar o tráfego e se encarregar de redirecionar requisições para os microsserviços adequados. 
 
-\subsection{Nginx*}
-\dots
+% podendo inclusive (facilmente?) implementar um API Gateway, subconjunto do padrão Gateways
 
-\subsection{Apache*}
-...
+% Diferença entre servidor web e servidor de aplicação: 
+% Enquanto os servidores de aplicação executam a lógica de negócio e processam requisições dinâmicas, os servidores web podem atuar como intermediários, otimizando a comunicação entre clientes e serviços. Eles permitem a implementação eficiente de práticas comuns em arquiteturas de microsserviços, como autenticação centralizada, gerenciamento de certificados SSL/TLS e limitação de requisições, reduzindo a carga sobre os servidores de aplicação e melhorando a segurança do sistema.
 
-\section{Bancos de dados}
-Elaborar sobre a escolha apropriada de um banco de dados...
 
-% - Parte escrita: Sobre bancos de dados - Qual banco de dados escolher? SQL, NoSQL, newSQL? Discutir 
-%             Palavras-chave: integridade (de dados), disponibilidade, tolerancia, ACID
-%             Teorema CAP (Consistency, Availabilty and Partition Tolerance) - https://www.ibm.com/think/topics/cap-theorem e livro building microservices capitulo 11
-%             https://www.ibm.com/think/insights/choosing-the-right-databases-for-microservices
-%             https://www.reddit.com/r/learnprogramming/comments/lo5kpt/can_someone_explain_with_example_when_to_choose/
-%             https://stackoverflow.com/questions/3713313/when-should-i-use-a-nosql-database-instead-of-a-relational-database-is-it-okay
-%             https://www.mongodb.com/resources/basics/databases/nosql-explained/nosql-vs-sql
-%             O site do MongoDB possui um artigo bastante rico sobre as diversas formas que os dados de um banco de dados podem ser modelados em uma relação 1:N. Artigo https://www.mongodb.com/blog/post/6-rules-of-thumb-for-mongodb-schema-design
+\subsection{Nginx e Apache HTTP Server}
+O Nginx é um servidor web projetado para lidar com um grande número de conexões simultâneas com consumo eficiente de recursos, tornando-o uma excelente escolha para aplicações escaláveis e dinâmicas. Sua arquitetura baseada em eventos permite melhor desempenho e escalabilidade em comparação com servidores baseados em threads, tornando-o ideal para aplicações modernas e de alto tráfego. Além disso, o Nginx pode ser facilmente utilizado como \emph{API Gateway} e \emph{proxy}, técnicas muito pertinentes para auxiliar na comunicação entre microsserviços. \cite{nginx}
 
-%             Comparação de bancos de dados: https://www.altexsoft.com/blog/comparing-database-management-systems-mysql-postgresql-mssql-server-mongodb-elasticsearch-and-others/
-%                 Aparentemente postgresql é comum entre instituições financeiras?
- 
-\subsection{Bancos de dados relacionais}
-MySQL*, PostgreSQL*, MariaDB*
+% \subsection{Apache HTTP Server}
+O Apache HTTP Server, ou apenas Apache, é um servidor web antigo mas muito bem consolidado e muito usado até hoje. Seu suporte a módulos dinâmicos e seu modelo híbrido de processamento permitem ótima adaptação, mas podem resultar em maior consumo de recursos quando comparado ao NGINX em cenários de alto tráfego. Apesar disso, o Apache ainda é uma ótima opção para aplicações tradicionais ou que necessitem de compatibilidade com tecnologias legadas. \cite{nginx-vs-apache}
 
-\subsection{Bancos de dados \emph{NoSQL}}
-MongoDB*, Couchbase*, Redis*, Amazon DynamoDB
+% \subsection{Caddy}
+% TODO:? Já vem com HTTPS configurado e parece bem moderno
 
-\subsection{Bancos de dados para caching}
-Memcached (*), Redis
+\section{Bancos de dados persistentes - SQL e NoSQL}
+Como mencionado na \autoref{descentralizacao-dados}, cada microsserviço deve possuir seu próprio modelo de dados independente, podendo usar bancos de dados distintos. Portanto, a escolha do banco de dados adequado é um aspecto importante no projeto de um microsserviço, sendo importante considerar alguns fatores.
 
-\subsection{Escalamento de bancos de dados}
+Os bancos de dados relacionais (SQL), como MySQL e PostgreSQL, armazenam dados em tabelas estruturadas, utilizando esquemas predefinidos. Eles são ideais para aplicações que requerem alta consistência e integridade dos dados, especialmente quando há muitas relações entre entidades. Esses bancos seguem o modelo ACID (Atomicidade, Consistência, Isolamento e Durabilidade), o que os torna indicados para cenários onde transações complexas e confiabilidade são essenciais. \cite{mongodb-sql-nosql}
 
-\subsubsection{Replicação de bancos de dados}
+Por outro lado, os bancos de dados NoSQL, como MongoDB e Cassandra, oferecem maior flexibilidade ao lidar com dados não estruturados ou semi-estruturados. Eles diferem entre sí em como armazenam informações, podendo ser em documentos JSON (como o MongoDB), em \emph{wide column store} (como o Cassandra), em grafos (como o Neo4j), ou vários outros, sendo a escolha desse tipo de armazenamento também importante. Em contraste com o formato de tabelas estruturadas, esses formatos tendem a facilitar a escalabilidade horizontal e a manipulação de grandes volumes de dados. Bancos de dados NoSQL são especialmente úteis para aplicações que exigem alta disponibilidade e rápida adaptação a mudanças nos dados. \cite{mongodb-sql-nosql}
+
+O modelo de dados deve ser avaliado para determinar se ele é altamente estruturado e relacional, favorecendo SQL, ou se é mais flexível e variável, onde NoSQL pode ser mais apropriado. Além disso, a escalabilidade é um fator essencial: enquanto bancos SQL geralmente escalam melhor verticalmente (aumentando os recursos de um único servidor), bancos NoSQL são melhor projetados para escalabilidade horizontal (adicionando mais servidores conforme a necessidade). \cite{mongodb-sql-nosql}
+
+Outro ponto importante é a escolha entre consistência e disponibilidade. Bancos de dados relacionais enfatizam consistência rigorosa, facilitando que todas as transações sejam processadas corretamente antes de serem confirmadas. Já os bancos NoSQL são mais flexíveis nesse quesito. Por serem projetados para serem descentralizados, podem oferecer ou disponibilidade (caso do Cassandra) ou consistência de dados (caso do MongoDB), \hyperref[teorema-cap]{mas nunca os dois}. Assim sendo, se um microsserviço precisa de transações complexas e forte integridade referencial, um banco de dados SQL tende a ser a melhor opção. \cite{ibm-choosing-database,mongodb-sql-nosql}
+
+Ademais, a decisão entre bancos de dados SQL e NoSQL deve ser feita com base nos requisitos específicos de cada microsserviço. Algumas partes do sistema podem se beneficiar da confiabilidade e estrutura dos bancos relacionais, enquanto outras podem precisar da flexibilidade e escalabilidade dos bancos NoSQL. Uma análise cuidadosa desses aspectos ajudará a construir uma arquitetura de microsserviços mais eficiente e escalável, garantindo o desempenho e a confiabilidade da aplicação.
+
+\section{Bancos de dados em memória - Memcached e Redis}
+Outro tipo de banco de dados importante para microsserviços são os em memória, como o Memcached e o Redis, que são ideais para \emph{caching}. O Memcached, apoiado pela Netflix, é simples e eficiente para armazenamento de chave-valor puro, sendo altamente escalável e consumindo pouca memória por não armazenar metadados complexos. No entanto, ele não oferece suporte a estruturas de dados avançadas, persistência, replicação nativa ou recursos como pub/sub. Já o Redis é mais versátil, suportando listas, conjuntos, hashes e permitindo também persistência dos dados no disco, além de replicação e \emph{clustering}, tornando-se útil para aplicações além do cache, como filas e contadores. Enquanto o Memcached tende a ser mais rápido para o propósito puro de \emph{cache} devido à sua leveza, o Redis é mais poderoso e flexível, mas pode exigir mais recursos dependendo do uso. \cite{memcached,redis}
+
+% \subsubsection{Memcached}
+% \subsubsection{Redis}
+
+% \subsection{Escalamento de bancos de dados}
+
+% \subsubsection{Replicação de bancos de dados}
+% TODO:?
+
 % - ler: https://atlan.com/what-is/database-replication/
-
 % - ler: https://release.com/blog/syncing-databases-how-to-do-it-and-best-practices
-
 % - Aplicação: https://stackoverflow.com/questions/58399450/keeping-databases-in-sync-after-write-update-across-regions-zones
-
 % - ver se tem algum serviço assim na AWS
 
 \section{Integração contínua e Entrega Contínua (CI/CD)}
@@ -150,7 +153,9 @@ Memcached (*), Redis
 
 \subsection{Sistemas de controle de versão}
 % Usar um sistema de controle de versão é estritamente necessário para se ter integração contínua. 
-Um sistema de controle de versão é imprescindível para o desenvolvimento de \emph{software} atualmente e é impossível se ter integração contínua sem um. Existem sistemas de controle de versão distribuidos (DVCS) ou centralizados (CVCS), porém atualmente os distribuitos são o padrão no desenvolvimento de \emph{software}, e pouco se ouve falar dos centralizados. O \textbf{Git} é, empiricamente, o mais popular entre todos os sistemas de controle de versão, e é uma solução elegante e completa para o controle de versão no desenvolvimento de \emph{software}.
+Um sistema de controle de versão é imprescindível para o desenvolvimento de \emph{software} atualmente e é impossível se ter integração contínua sem um. Os sistemas de controle de versão podem ser categorizados em distribuidos (DVCS), como o Git, ou centralizados (CVCS), como o SVN. Os centralizados mantêm um repositório central onde todas as versões são armazenadas, e os usuários precisam se conectar a ele para obter ou enviar alterações, enquanto nos distribuidos cada usuário possui uma cópia completa do repositório, permitindo trabalho offline e melhor gerenciamento de versões. 
+
+Atualmente os distribuidos são o padrão no desenvolvimento de \emph{software}, e pouco se ouve falar dos centralizados. O \textbf{Git} é, empiricamente, o mais popular entre todos os sistemas de controle de versão, e é uma solução elegante e completa para o controle de versão no desenvolvimento de \emph{software}, seja para um único desenvolvedor ou para equipes numerosas.
 
 \subsection{Gerenciamento de repositórios}
 GitHub, Bitbucket, GitLab, amazon S3
@@ -158,7 +163,14 @@ GitHub, Bitbucket, GitLab, amazon S3
 \subsection{Servidor de integração}
 Como mencionado na \autoref{subsecao-servidor-de-integracao}, normalmente a responsabilidade de executar a pipeline de integração é delegada para um servidor de integração, assim tem-se a garantia de que o pipeline será de fato executado e o desenvolvedor não precisa ficar aguardando ela ser executada na máquina dele.
 
-CruiseControl*, Jenkins, GitHub Actions, GitLab CI, etc...
+\subsubsection*{GitHub Actions}
+\dots
+
+\subsubsection*{Jenkins}
+\dots
+
+\subsubsection*{GitLab}
+\dots
 
 % Mostrar o exemplo do pipeline CI rodando no GitHub Actions, com proteções de branch e requerimento de revisão de código
 
