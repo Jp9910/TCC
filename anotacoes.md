@@ -1,5 +1,22 @@
 # TCC 2
 
+Defesa: Total de 1 hora
+Apresentação é 20 minutos
+Em seguida, membros da banca por 40 minutos fazem perguntas e arguição
+
+banca composta pelo orientador/coorientador e examinador externo
+o orientador tem peso 60% (se tiver coorientador 30-30), e examinador 40%
+
+nota no sigaa é colocada pelo orientador, depois de fazer as correções no prazo devido
+
+>> aprofundar mais nas ferramentas que usei
+
+>> Cap 3 - Título 
+trocar para características e vantagens da arquitetura de microsserviços
+
+
+defesa segunda 31/03
+
 Perguntar:
     
     - ✅ mudar o nome do orientador? deixar os 2
@@ -53,9 +70,10 @@ Perguntar:
 ## TO DO:
 
     #### Prioridade alta:
-    - Enviar o trabalho escrito para o professor revisar
+    - Terminar o trabalho escrito
     - Orquestração de serviços (kubernetes ou docker swarm)
     - API Gateway (Nginx ou AWS ElasticLoadBalancing, que pode ser feito pelo kubernetes)
+    - API Gateway pelo Nginx ✅
     - Monitoramento - Métricas ✅ e Logging ✅
     - CD (Kubernetes localmente? Ver o curso de EKS (aws)? Só um docker-compose?) 
     - Implementar login de cliente (front) ✅
@@ -67,8 +85,10 @@ Perguntar:
     - CI (com GitHub Actions) ✅
 
     #### Prioridade média
+    - Serviço de Financeiro
     - Ver pedidos no microsserviço de administração
     - Implementar salvamento de imagens dos produtos no banco de dados e gerenciamento no front de administração (?)
+    - remover produto do carrinho ✅
     - Testes na teoria ✅
     - Testes na prática - unidade, end2end, e de aceitação (selenium)
     - Proteger todos os endpoints do serviços - FrontAdmin ✅, Auth ✅, Loja ❌, Carrinho? ❌, Front? ❌
@@ -78,10 +98,12 @@ Perguntar:
     #### Prioridade baixa:
     - Caching na Loja (com Memcached)
     - Busca de produtos no front e api de loja
-    - Implementar quantidade de produtos no carrinho, pedido e loja
+    - Implementar imagem/linkImagem na loja e carrinho.
+    - Implementar quantidade de produtos no carrinho, pedido e loja. precisaria de uma classe intermediaria entre Pedido e Produto na ms-loja e Carrinho e Produto no ms-carrinho ..?
     - Melhorar a página de pedidos
-    - Serviço de Financeiro
     - Serviço de Recomendação
+    - Bug de não poder navegar pra nenhum lugar depois de completar o pedido.
+    - Em vez de alerts nos frontends, usar uma janela de mensagem ou algo assim
     - Clustering no rabbitmq
         https://www.rabbitmq.com/docs/distributed
         https://www.rabbitmq.com/docs/clustering

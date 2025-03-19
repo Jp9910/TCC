@@ -20,7 +20,7 @@ Quando se está procurando por ferramentas para o desenvolvimento de aplicaçõe
 
 \section{Frameworks e linguagens de programação}
 
-Frameworks desempenham um papel fundamental no desenvolvimento de microsserviços, permitindo que os desenvolvedores criem sistemas modulares, escaláveis e de fácil manutenção de forma mais simples e evitando grande parte do código \emph{boilerplate}. A escolha do framework e da linguagem pode dependender de diversos fatores, como os requisitos do sistema, a experiência da equipe e as preferências tecnológicas. Existem diversas opções disponíveis no mercado, cada uma com suas características, vantagens e desvantagens, sendo impossível abordar todas em detalhes. Dessa forma, aqui são discutidas apenas algumas das mais populares.
+Frameworks desempenham um papel fundamental no desenvolvimento de microsserviços, permitindo que os desenvolvedores criem sistemas modulares, escaláveis e de fácil manutenção de forma mais simples e evitando grande parte do código \emph{boilerplate}. A escolha do framework e da linguagem pode dependender de diversos fatores, como os requisitos do sistema, a experiência da equipe e as preferências tecnológicas. Existem diversas opções disponíveis no mercado, cada uma com suas características, vantagens e desvantagens, sendo impossível abordar todas em detalhes. Dessa forma, aqui são discutidas apenas algumas das mais populares para o desenvolvimento de microsserviços.
 
 \subsection{Java e Spring Boot}
 Java é uma linguagem amplamente utilizada no desenvolvimento de microsserviços devido à sua robustez, escalabilidade e vasta gama de bibliotecas e ferramentas disponíveis. Spring Boot é um dos frameworks mais populares para construir microsserviços em Java por simplificar o desenvolvimento de aplicações autônomas e de alto desempenho, permitindo que os desenvolvedores criem rapidamente serviços que podem ser facilmente integrados com outros sistemas. O Spring Boot oferece funcionalidades como configuração automática, injeção de dependência e integração com outros módulos do Spring, como o Spring Cloud, que facilita a implementação de microsserviços com capacidades de descoberta, balanceamento de carga e segurança. 
@@ -41,7 +41,7 @@ Por outro lado, Django é um framework mais completo e robusto, adequado para ap
 Go, também conhecido como Golang, é uma linguagem desenvolvida pelo Google que se destaca pela sua alta performance e simplicidade. A principal vantagem do Go em microsserviços é a sua capacidade de lidar com concorrência de forma eficiente, com seu modelo de \emph{goroutines} e \emph{channels} (canais), que facilita o desenvolvimento de sistemas altamente concorrentes e escaláveis. O Go é especialmente popular em sistemas que exigem alta taxa de transferência e baixos tempos de latência, como sistemas de \emph{streaming} ou microsserviços que lidam com grandes volumes de dados em tempo real. Além disso, o Go possui uma abrangente biblioteca padrão e ótimas bibliotecas desenvolvidas por terceiros, muitas vezes dispensando a necessidade de um framework para a linguagem, tornando o microsserviço ainda mais simples.
 \cite{golang}
 
-\subsection{JavaScript com Node.js e Express}
+\subsection{JavaScript/TypeScript com Node.js e Express}
 
 Node.js também é muito popular para o desenvolvimento de microsserviços, especialmente em sistemas que exigem alta performance em \emph{I/O} e processamento assíncrono. O Node.js usa um modelo de event loop não bloqueante, que é ideal para microsserviços que precisam lidar com uma grande quantidade de requisições simultâneas, como APIs RESTful. Seu ecossistema vasto e a popularidade do JavaScript no desenvolvimento frontend também tornam o Node.js uma escolha atraente para equipes que desejam manter uma stack unificada em todo o sistema. Além disso, a enorme comunidade de desenvolvedores e a abundância de pacotes disponíveis facilmente instaláveis permitem que os microsserviços sejam desenvolvidos rapidamente e com uma ampla variedade de funcionalidades. O Express, um framework minimalista para Node.js, facilita o desenvolvimento de APIs simples e eficientes. 
 \cite{expressjs,nodejs}
@@ -157,31 +157,46 @@ Um sistema de controle de versão é imprescindível para o desenvolvimento de \
 
 Atualmente os distribuidos são o padrão no desenvolvimento de \emph{software}, e pouco se ouve falar dos centralizados. O \textbf{Git} é, empiricamente, o mais popular entre todos os sistemas de controle de versão, e é uma solução elegante e completa para o controle de versão no desenvolvimento de \emph{software}, seja para um único desenvolvedor ou para equipes numerosas.
 
-\subsection{Gerenciamento de repositórios}
-GitHub, Bitbucket, GitLab, amazon S3
+% \subsection{Gerenciamento de repositórios}
+\subsection{Plataformas para CI/CD}
+% https://about.gitlab.com/topics/devops-platform/
 
-\subsection{Servidor de integração}
-Como mencionado na \autoref{subsecao-servidor-de-integracao}, normalmente a responsabilidade de executar a pipeline de integração é delegada para um servidor de integração, assim tem-se a garantia de que o pipeline será de fato executado e o desenvolvedor não precisa ficar aguardando ela ser executada na máquina dele.
+\subsubsection*{GitHub}
+O GitHub é uma plataforma parcial de CI/CD focada no gerenciamento de código-fonte e é extremamente popular, especialmente para projetos de código aberto. Ela oferece uma interface simples e fácil de usar, assim como diversas ferramentas de colaboração e gerenciamento de repositório. Entretanto, não oferece tantas ferramentas quanto o GitLab, então uma solução mais completa de CI/CD requeriria uso de outras ferramentas. Normalmente o GitHub pode ser usado apenas como serviço na nuvem, mas no plano \emph{enterprise} há opções para auto-hospedagem.
 
-\subsubsection*{GitHub Actions}
-\dots
-
-\subsubsection*{Jenkins}
-\dots
+% \subsubsection*{Bitbucket}
+% O Bitbucket é outra plataforma popular de CI/CD e se destaca por sua integração com outras ferramentas da Atlassian, como o Jira e o Confluence. O Bitbucket permite o uso de repositórios Git e Mercurial (embora o suporte ao Mercurial tenha sido descontinuado em 2020), o que é útil para equipes que ainda mantêm repositórios antigos. O Bitbucket é muito popular entre equipes que já utilizam outras ferramentas Atlassian e preferem uma solução centralizada para todo o ciclo de vida do desenvolvimento.
 
 \subsubsection*{GitLab}
-\dots
+O GitLab é uma plataforma de CI/CD abrangente, oferecendo um conjunto mais completo de ferramentas para o ciclo de vida do desenvolvimento de \emph{software}, desde ferramentas de controle de versão até ferramentas de implantação e monitoramento, simplificando a gestão e a integração de ferramentas por estarem todas em uma única plataforma. Além disso, o GitLab possui funcionalidades embutidas para trabalhar com as ferramentas Kubernetes e Docker, facilitando o uso delas e tornando a plataforma especialmente atraente para quem busca uma solução de CI/CD completa. O GitLab pode ser auto-hospedado ou usado como serviço na nuvem.
 
-% Mostrar o exemplo do pipeline CI rodando no GitHub Actions, com proteções de branch e requerimento de revisão de código
+% \subsubsection*{Gerenciadores em provedores da nuvem}
+% Além das plataformas mencionadas, muitas empresas estão adotando provedores de cloud para gerenciar seus repositórios. Ferramentas como AWS CodeCommit, Azure Repos e Google Cloud Source Repositories oferecem soluções de gerenciamento de código-fonte que são profundamente integradas com os serviços de nuvem dessas plataformas. Por exemplo, o AWS CodeCommit é completamente integrado com o AWS, facilitando a automação do deploy e a utilização de outros serviços da AWS, como Lambda, ECS, e EKS. O Azure Repos, parte do Azure DevOps, oferece uma solução altamente escalável e de integração com ferramentas de DevOps da Microsoft, como Azure Pipelines. O Google Cloud Source Repositories oferece uma experiência semelhante, integrada com outros serviços do Google Cloud Platform, o que pode ser uma vantagem para empresas que já utilizam essas nuvens. Esses provedores de repositórios em nuvem são ideais para organizações que já estão fortemente imersas em um ecossistema de nuvem e preferem uma solução que se integre diretamente com seus outros serviços e infraestrutura de nuvem.
+
+\subsection{Servidores de integração}
+% Como mencionado na \autoref{subsecao-servidor-de-integracao}, normalmente a responsabilidade de executar o pipeline de integração é delegada para um servidor de integração, assim tem-se a garantia de que o pipeline será de fato executado e o desenvolvedor não precisará ficar aguardando ela ser executada na máquina dele. 
+A escolha do servidor de integração para um microsserviço ou projeto afeterá alguns fatores como facilidade de configuração, escalabilidade, suporte a plugins e integração com outras ferramentas. Aqui são apresentadas 3 das opções mais populares, cada um tendo vantagens e desvantagens dependendo do contexto de uso.
+
+\subsubsection*{GitHub Actions}
+O GitHub Actions se destaca pela integração nativa com repositórios do GitHub, tornando o processo de configuração bastante simples para projetos já hospedados no GitHub. Os \emph{pipelines} para um repositório podem ser definidos diretamente nele, usando a linguagem YAML. Sua maior vantagem está na facilidade de uso e na integração com o GitHub, permitindo a execução condicional e configurável do \emph{pipeline} de acordo com eventos do repositório. No entanto, sua desvantagem principal é a dependência do ecossistema GitHub, o que requer uma migração de plataforma para projetos hospedados em outras plataformas de gerenciamento de repositórios.
+
+\subsubsection*{Jenkins}
+O Jenkins é um dos sistemas de CI/CD mais bem estabelecidos e flexíveis do mercado. Sendo \emph{open-source} e auto-hospedado, ele oferece uma grande variedade de plugins e suporte a diversas ferramentas. Os \emph{pipelines} podem ser definidos para cada projeto usando arquivos jenkinsfile, que são baseados na linguagem Groovy. Sua principal vantagem é a personalização e flexibilidade, podendo ser configurado para praticamente qualquer \emph{pipeline} de CI/CD. No entanto, essa configuração tende a ser mais complexa, exigindo maior conhecimento e manutenção por parte da equipe responsável, além da necessidade de gerenciar sua própria infraestrutura, o que aumenta a complexidade operacional.
+% https://faun.pub/github-actions-vs-jenkins-which-should-you-use-d7ba6800e8bb
+% https://www.jenkins.io/doc/book/pipeline/jenkinsfile/
+% https://geekflare.com/devops/gitlab-ci-vs-jenkins/
+
+\subsubsection*{GitLab CI/CD}
+Já o GitLab CI/CD oferece um meio-termo entre a simplicidade do GitHub Actions e a flexibilidade do Jenkins. Ele é integrado ao GitLab, mas não dependente, funcionando nativamente dentro da plataforma porém também podendo ser auto-hospedado, pelo uso da ferramenta GitLab Runner, o que constitui uma de suas maiores vantagens. Semelhante ao GitHub Actions, os \emph{pipelines} podem ser definidos diretamente no repositório do GitLab usando a linguagem YAML. No entanto, para cenários com necessidades bem específicas, pode ser menos aplicável que o Jenkins.
+% GitLab CI/CD tem Suporte nativo a Kubernetes e Docker
+% GitHub Actions tem Suporte nativo apenas para Docker, mas também pode ser configurado para executar pipelines relacionados a kubernetes
+% https://docs.gitlab.com/ci/
 
 % \url{https://about.gitlab.com/topics/ci-cd/continuous-integration-server/}
-
 % \url{https://www.ibm.com/docs/en/integration-bus/10.1?topic=environment-integration-servers}
-
 % \url{https://www.ibm.com/docs/en/app-connect/11.0.0?topic=overview-integration-servers-integration-nodes}
 
 % Listamos abaixo alguns servidores de integração disponíveis no mercado. Isso não é uma lista ordenada por popularidade e algum outro critério. Alguns servidores são opensource, outros não, alguns são pagos ou podem ser alocados na nuvem e outros só existem para nuvem ou instalação local.
-
 % Em geral, não existe uma bala de prata e a melhor ferramenta é aquela que te serve bem:
 %     Jenkins (https://jenkins.io/)
 %     GoCD (https://www.gocd.org/)
@@ -193,64 +208,142 @@ Como mencionado na \autoref{subsecao-servidor-de-integracao}, normalmente a resp
 %     AWS Code Pipeline https://aws.amazon.com/codepipeline/
 %     Azure (https://azure.microsoft.com/pt-br/services/devops/server/)
 
-% At Thoughtworks, we're big fans of continuous integration servers - indeed we led the original development of CruiseControl and CruiseControl.NET, the widely used open-source CI servers. Since then we've also built the commercial Cruise CI server. We use a CI server on nearly every project we do and have been very happy with the results.
-
 \section{Testes}
-Testes não necessariamente requerem uma ferramenta para serem implementados, mas usar uma pode facilitar bastante o trabalho do programador.
+% Existem inúmeras coisas que podem ser testadas em um \emph{software}. 
+% Testes não necessariamente requerem uma ferramenta para serem implementados, mas usar uma pode facilitar bastante o trabalho do programador. 
+% Eles podem ser muito abrangentes ou específicos. 
+% Existem diversas ferramentas, então a escolha adequada depende do contexto.
+
+A escolha de uma ferramenta adequada para determinado teste depende do projeto em questão e do tipo de teste a ser executado. Embora muitos testes não exijam o uso de ferramentas além de uma linguagem de programação, elas podem diminuir significativamente o trabalho necessário. Contudo, como existem inúmeras coisas que podem ser testadas em um sistema, desde a eficácia de uma única função até uma funcionalidade abrangendo todo o sistema, apenas são listados aqui algumas das ferramentas para os testes mais comuns em microsserviços.
+% o que torna a seleção de uma ferramenta adequada crucial para otimizar o processo de testes.
 
 \subsection{Testes de unidade}
 Testes de unidade são mais baixo-nível e as ferramentas usadas para implentá-los dependem da linguagem de programação e framework em questão. No Java por exemplo, uma biblioteca muito comum para testes de unidade é o JUnit. No python, tem-se o pacote \emph{unittest}. No C\#, tem-se o pacote \emph{xUnit}. No Go, tem-se o pacote \emph{testing}. No JavaScript tem-se a biblioteca \emph{Jest}.
 
 \subsection{Testes de serviços}
+% Testar um microsserviço pode significar diversas coisas dependendo do que se trata o microsserviço. Pode ser por exemplo testar os endpoints de uma API ou então testar se o serviço está produzindo \emph{logs} como esperado. 
+% Portanto não serão discutidas ferramentas para esses tipos de testes
 
-\subsection{Testes fim-a-fim}
-Selenium para navegadores...
+\subsubsection*{Testes de APIs}
+[EM PROGRESSO]
 
-% \subsection{Testes de API}\label{ferramentas-testes-apis}
-% Postman*, Hoppscotch*, Thunder Client (integrado ao VSCode), programar os testes em uma linguagem de programação, cURL
+Postman, Insomnia, Thunder Client (integrado ao VSCode), cURL.
+% programar os testes de api em uma linguagem de programação,
+
+\subsubsection*{Testes de contratos}
+[EM PROGRESSO]
+
+Pact, Spring Cloud Contract (para o framework Spring)
+
+% \subsubsection*{TestContainers} 
+% Uma biblioteca Java usada para testes de integração com contêineres Docker, permitindo iniciar e parar serviços no Docker para simular cenários do mundo real.
+
+\subsection{Testes \emph{end-to-end} (ponta a ponta)}
+[EM PROGRESSO]
+
+- Cypress: Uma poderosa ferramenta de teste de ponta a ponta para aplicativos da web que também pode testar APIs como parte do fluxo de trabalho de ponta a ponta.
+
+- Selenium: Uma ferramenta para automatizar testes baseados em navegador para microsserviços que são expostos por meio de interfaces da web.
+
+- Playwright: Uma biblioteca Node.js para automatizar navegadores Chromium, Firefox e WebKit, comumente usada para testes E2E de aplicativos da web.
+
+- TestCafe: Uma ferramenta para automatizar testes da web, com suporte para testes entre navegadores e execução de testes paralelos.
+
+- Appium: Uma estrutura para testar aplicativos móveis (nativos, híbridos ou web móvel).
 
 \section{Comunicação}
 
-\subsection{RPC}
-gRPC é uma ferramenta moderna com alto desempenho que tem ganhado grande popularidade em meio aos praticantes de microsserviços e é considerada um "projeto de incubação" pela Cloud Native Computing Foundation \cite{grpc}
+\subsection{RPC - gRPC}
+% gRPC é uma ferramenta moderna com alto desempenho que tem ganhado grande popularidade em meio aos praticantes de microsserviços e é considerada um "projeto de incubação" pela Cloud Native Computing Foundation 
 
-% \footnote{gRPC: \url{https://grpc.io/}} 
+gRPC é uma ferramenta open-source desenvolvida pelo Google que permite o uso de Remote Procedure Call (RPC) entre sistemas distribuídos. Ele usa o formato \emph{Buffers de protocolo} para trocas de dados com menor consumo de recursos. Uma característica importante do gRPC é seu suporte a streaming bidirecional e multiplexação, o que o torna ideal para cenários que exigem comunicação em tempo real e transferências de dados grandes entre serviços. Ele suporta tanto comunicação síncrona quanto assíncrona, oferecendo flexibilidade na interação entre os serviços. O gRPC também usa o HTTP/2, que permite recursos como \emph{streams} de dados multiplexados, compressão de cabeçalhos e gerenciamento eficiente de conexões, tornando-o mais performático do que as APIs REST tradicionais baseadas em HTTP, especialmente em ambientes com baixa latência e alto fluxo. Além disso, seu forte sistema de tipagem por meio de Protocol Buffers e suporte embutido para autenticação, balanceamento de carga e descoberta de serviços fazem do gRPC uma ferramenta poderosa para a construção de microsserviços de alto desempenho, escaláveis e seguros. \cite{grpc}
 
-\subsection{Mensageria}
-RabbitMQ*, Azure Service Bus, Amazon Simple Queue Service, Google Cloud Pub/Sub.
+\subsection{Sistemas de mensagens}
+Sistemas de mensagens são plataformas que permitem a comunicação entre diferentes componentes ou serviços de um sistema distribuído por meio de mensagens. Eles facilitam a comunicação assíncrona entre sistemas, desacoplando produtores e consumidores de mensagens. Esses sistemas são essenciais para arquiteturas escaláveis, como microserviços, permitindo a transmissão eficiente de dados entre diferentes partes do sistema sem interdependências diretas. Aqui são apontados alguns sistemas de mensagens comumente usados em arquiteturas distribuidas, sendo a escolha entre eles dependente da forma das mensagens, requisitos de escalabilidade e se a solução é auto-hospedada ou com infraestrutura gerenciada.
+% CITAR AS DOCUMENTAÇÕES ?
 
-\subsection{Streaming de Dados}
-Apache Kafka*
+\subsubsection*{RabbitMQ}
+% RabbitMQ é um sistema de mensagens que usa o protocolo AMQP para garantir uma comunicação eficiente e confiável entre serviços. Ele é ideal para mensagens de fila, com suporte a padrões como ponto a ponto e publicação/assinatura. Suas vantagens incluem baixa latência, confiabilidade nas mensagens, fácil configuração e suporte a mensagens persistentes. As desvantagens incluem menor escalabilidade em comparação com o Kafka, que é projetado para grandes volumes de dados e eventos em tempo real. Em plataformas na nuvem, RabbitMQ é comparado a soluções como AWS SQS, que oferecem maior escalabilidade e menos sobrecarga de gerenciamento.
 
-\subsection{APIs}
+O RabbitMQ é um sistema de mensagens baseado no protocolo AMQP que facilita a comunicação assíncrona entre aplicações, oferecendo funcionalidades de publicação e consumo de mensagens. Ele garante confiabilidade na entrega de mensagens e flexibilidade para diversos padrões de troca de mensagens. Contudo, RabbitMQ pode ter limitações de escalabilidade em comparação com sistemas como o Kafka, que são mais adequados para grandes fluxos de dados em tempo real.
 
-\subsubsection{API Gateway}
-nginx (free and paid version), Tyk*, Amazon API Gateway
+\subsubsection*{Apache Kafka}
+O Kafka é uma plataforma de streaming distribuído de dados, projetada para lidar com grandes volumes de dados em tempo real. Ele é utilizado principalmente para publicar, armazenar e processar fluxos de dados como eventos e logs. O Kafka oferece alta escalabilidade, durabilidade e alta taxa de transferência, suportando casos de uso como rastreamento de atividades de websites, agregação de logs e processamento de fluxos de dados. Com recursos como particionamento e replicação, o Kafka é ideal para arquiteturas de microserviços e sistemas de processamento de dados distribuídos que têm grandes fluxos de dados.
 
-\subsubsection{Tipos de API}
+\subsubsection{Sistemas de mensagens em provedores na nuvem}
+% Azure Service Bus, Amazon Simple Queue Service, Google Cloud Pub/Sub.
+Nos provedores de nuvem AWS, Azure e GCP, tem-se o SQS, Azure Service Bus e Google Pub/Sub, respectivamente. Esses são plataformas como serviços (PAAS) que oferecem sistemas de mensagens totalmente gerenciados, abstraindo assuntos de infraestrutura para o usuário. Eles são escaláveis e fornecem alta disponibilidade, mas podem oferecer menos opções de configuração em comparação com soluções auto-hospedadas como RabbitMQ e Kafka. Enquanto o RabbitMQ se destaca em enfileiramento de baixa latência e Kafka em streaming de eventos em tempo real, soluções em provedores na nuvem tendem a se concentrar em simplicidade, escalabilidade e fácil integração com outros serviços em seus respectivos ecossistemas.
 
-\subsubsubsection*{GraphQL}
-GraphQL 
+% \subsection{Streaming de Dados}
+% Apache Kafka*
 
-\subsubsubsection*{REST}
-REST is not a protocol or a standard, it is an architectural style. During the development phase, API developers can implement REST in a variety of ways.
+% \subsection{APIs}
 
-Like the other architectural styles, REST also has its guiding principles and constraints. These principles must be satisfied if a service interface has to be referred to as RESTful.
+% \subsubsection{API Gateway}
+% nginx (free and paid version), Tyk*, Amazon API Gateway
 
-A Web API (or Web Service) conforming to the REST architectural style is called a REST API (or RESTful API). 
+% \subsubsection{Tipos de API}
 
-6 princípios: https://www.ibm.com/think/topics/graphql-vs-rest-api
+% \subsubsubsection*{GraphQL}
+% GraphQL 
 
-\subsubsection{Documentação}
-Swagger (free and paid version)
+% \subsubsubsection*{REST}
+% REST is not a protocol or a standard, it is an architectural style. During the development phase, API developers can implement REST in a variety of ways.
+
+% Like the other architectural styles, REST also has its guiding principles and constraints. These principles must be satisfied if a service interface has to be referred to as RESTful.
+
+% A Web API (or Web Service) conforming to the REST architectural style is called a REST API (or RESTful API). 
+
+% 6 princípios: https://www.ibm.com/think/topics/graphql-vs-rest-api
+
+% \subsubsection{Documentação}
+% TODO:?
+% Swagger (free and paid version)
 
 % \subsection*{GraphQL}
 % A query language for your API
 % GraphQL is a query language for APIs and a runtime for fulfilling those queries with your existing data. GraphQL provides a complete and understandable description of the data in your API, gives clients the power to ask for exactly what they need and nothing more, makes it easier to evolve APIs over time, and enables powerful developer tools. \cite{GraphQL-site}
 
-\section{Containers}
+\section{Conteinerização}
 
-Docker*, LXC* (Linux containers)
+\subsection*{Docker}
+O Docker é uma ferramenta de conteinerização amplamente adotada devido à sua facilidade de uso, documentação abrangente e grande comunidade. Ele segue um modelo cliente-servidor, onde um \emph{daemon} (processo em segundo plano) gerencia os contêineres. Os benefícios do Docker incluem configuração simples; implantação e escalamento de contêineres independentemente; grande diversidade de imagens de contêineres disponíveis; e integração com o Kubernetes, uma ferramenta popular e poderosa para gerenciamento de infraestrutura em contêineres. Tais benefícios fazem do Docker uma excelente escolha para o desenvolvimento e implantação de microsserviços. 
+
+% Os principais casos de uso para o Docker são implantações simplificadas ou automáticas,
+% Essa abordagem facilita a orquestração de múltiplos contêineres e a integração com ferramentas como Kubernetes, tornando-o uma opção confiável para aplicações distribuídas. 
+
+% Key benefits of Docker containers
+
+%     Portability: Containers can be moved effortlessly between environments, from development to testing to production, without needing changes, thanks to Docker’s ability to ensure consistency across platforms.
+    
+%     Ease of use: Docker simplifies container management with intuitive commands like docker run, significantly lowering the learning curve for new users.
+    
+%     Vast ecosystem: Docker’s extensive library of container images available on Docker Hub and a wide array of management tools support rapid application development and deployment.
+
+% The evolution of Docker from a product that simplified the use of LXC to a comprehensive ecosystem that defines modern containerization practices showcases its transformative impact on the technology landscape. Docker made containers mainstream and established a global community of developers and organizations that continue to innovate on its platform.
+
+% Docker use cases:
+% Docker excels in environments where deployment speed and configuration simplicity are paramount, making it an ideal choice for modern software development. Key use cases where Docker demonstrates its strengths include:
+
+%     Streamlined deployment: Docker packages applications into containers along with all their dependencies, ensuring consistent operation across any environment, from development through to production. This eliminates common deployment issues and enhances reliability.
+    
+%     Microservices architecture: Docker supports the development, deployment, and scaling of microservices independently, enhancing application agility and system resilience. Its integration with Kubernetes further streamlines the orchestration of complex containerized applications, managing their deployment and scaling efficiently.
+    
+%     CI/CD pipelines: Docker containers facilitate continuous integration and deployment, allowing developers to automate the testing and deployment processes. This approach reduces manual intervention and accelerates release cycles.
+
+%     Extensive image repository and configuration management: Docker Hub offers a vast repository of pre-configured Docker images, simplifying application setup. Docker’s configuration management capabilities ensure consistent container setups, easing maintenance and updates.
+
+% Docker’s utility in supporting rapid development cycles and complex architectures makes it a valuable tool for developers aiming to improve efficiency and operational consistency in their projects.
+
+\subsection*{Podman}
+O Podman adota uma arquitetura sem \emph{daemon}, eliminando a necessidade de um serviço central para gerenciar os contêineres. Isso o torna mais seguro, pois permite a execução de contêineres sem privilégios de \emph{root}. O Podman também oferece compatibilidade com a CLI do Docker, facilitando a migração de projetos. Além disso, sua capacidade de gerenciar pods - um grupo de contêineres compartilhando recursos - também o torna uma opção adequada para arquiteturas de microsserviços, especialmente em ambientes com requisitos elevados de segurança.
+% https://medium.com/@supportfly/podman-vs-docker-a-comprehensive-comparison-77b1b41e67e0
+% https://www.docker.com/blog/lxc-vs-docker/
+
+\subsection*{LXC}
+O LXC (Linux Containers) adota uma abordagem diferente, fornecendo contêineres em nível de sistema operacional, assim permitindo a criação de ambientes virtuais que se comportam como sistemas Linux completos. Isso o torna ideal para casos onde se deseja uma alternativa leve às máquinas virtuais ou um acesso altamente eficiente a recursos do \emph{hardware}, como em aplicações com enormes volumes de dados ou cargas de processamento. Entretanto, não é uma opção comum para implantação de microsserviços, que se beneficiam de contêineres mais isolados e especializados, como os oferecidos pelo Docker e pelo Podman.
+
+% O LXD, uma ferramenta contruída em cima do LXC, fornece uma interface mais alto-nível e recursos de gerenciamento adicionais, tornando-o mais comparável às soluções de gerenciamento de máquinas virtuadas baseadas na nuvem.
 
 % \subsection{na nuvem}
 % AWS EC2
@@ -277,16 +370,16 @@ Docker*, LXC* (Linux containers)
 
 % Ferramenta para rate limiting. \cite{rapidAPI-twitter}
 
-\subsection{Orquestração de containers com Kubernetes}
+\subsection{Orquestração de contêineres com Kubernetes}
 Kubernetes*
 
-\subsection{Orquestração de containers com Docker Swarm}
+\subsection{Orquestração de contêineres com Docker Swarm}
 Docker Swarm*
 
-\subsection{Orquestração de containers com Conductor}
+% \subsection{Orquestração de contêineres com Conductor}
 % Conductor* (https://conductor-oss.github.io/conductor/devguide/concepts/index.html)
 
-\subsection{Orquestração de containers em provedores na núvem}
+\subsection{Orquestração de contêineres em provedores na nuvem}
 AWS EKS, Azure Kubernetes Service (AKS)
 
 % Learn About Orchestrating Microservices Using Kubernetes
@@ -328,6 +421,8 @@ Grafana Loki, ou apenas Loki, é uma \emph{stack} para agregação e indexação
   Graylog é um sistema de gerenciamento de \emph{logs} mais simples do que o Loki.
 
 \subsection{\emph{Tracing} (rastremanento)}
+% https://www.redhat.com/en/topics/microservices/what-is-jaeger
+Jaeger 
   
 % Modern tracing tools, such as Jaeger, Zipkin, and OpenTelemetry, help organizations implement distributed tracing efficiently. These tools collect, process, and visualize traces, often integrating with dashboards and monitoring platforms like Grafana or Prometheus for deeper insights. OpenTelemetry, in particular, is gaining traction as a vendor-neutral, open-source standard that unifies telemetry data across logs, metrics, and traces, making it easier to achieve full observability. As distributed systems continue to grow in complexity, tracing has become an essential practice for ensuring system reliability, minimizing downtime, and optimizing application performance.
 
