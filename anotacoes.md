@@ -67,12 +67,13 @@ Perguntar:
 ## TO DO:
 
     #### Prioridade alta:
-    - Terminar o trabalho escrito
+    - Terminar o capítulo 6
     - Logs/Caching no Nginx (gateway apenas?)
+    - Implementar o Jaeger para tracing?
+    - Terminar a orquestração de serviços com kubernetes
+        API Gateway pelo AWS ElasticLoadBalancing, que pode ser feito pelo kubernetes ??
     - Serviço de Financeiro ✅
     - Caching na Loja (com Memcached) ✅
-    - Orquestração de serviços (kubernetes ou docker swarm)
-        API Gateway pelo AWS ElasticLoadBalancing, que pode ser feito pelo kubernetes ??
     - API Gateway pelo Nginx ✅
     - Monitoramento - Métricas ✅ e Logging ✅
     - CD (Kubernetes localmente? Ver o curso de EKS (aws)? Só um docker-compose?) 

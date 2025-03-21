@@ -82,7 +82,7 @@ Servidores web são responsáveis por receber e tratar requisições, agindo com
 % Enquanto os servidores de aplicação executam a lógica de negócio e processam requisições dinâmicas, os servidores web podem atuar como intermediários, otimizando a comunicação entre clientes e serviços. Eles permitem a implementação eficiente de práticas comuns em arquiteturas de microsserviços, como autenticação centralizada, gerenciamento de certificados SSL/TLS e limitação de requisições, reduzindo a carga sobre os servidores de aplicação e melhorando a segurança do sistema.
 
 
-\subsection{Nginx e Apache HTTP Server}
+\subsection{Nginx ou Apache HTTP Server}
 O Nginx é um servidor web projetado para lidar com um grande número de conexões simultâneas com consumo eficiente de recursos, tornando-o uma excelente escolha para aplicações escaláveis e dinâmicas. Sua arquitetura baseada em eventos permite melhor desempenho e escalabilidade em comparação com servidores baseados em \emph{threads}, tornando-o ideal para aplicações modernas e de alto tráfego. Além disso, o Nginx pode ser facilmente utilizado como \emph{API Gateway} e \emph{proxy}, técnicas muito pertinentes para auxiliar na comunicação entre microsserviços. \cite{nginx}
 
 % \subsection{Apache HTTP Server}
@@ -153,9 +153,9 @@ Outro tipo de banco de dados importante para microsserviços são os em memória
 
 \subsection{Sistemas de controle de versão}\label{secao-vcs}
 % Usar um sistema de controle de versão é estritamente necessário para se ter integração contínua. 
-Um sistema de controle de versão é imprescindível para o desenvolvimento de \emph{software} atualmente e é impossível se ter integração contínua sem um. Os sistemas de controle de versão podem ser categorizados em distribuidos (DVCS), como o Git, ou centralizados (CVCS), como o SVN. Os centralizados mantêm um repositório central onde todas as versões são armazenadas, e os usuários precisam se conectar a ele para obter ou enviar alterações, enquanto nos distribuidos cada usuário possui uma cópia completa do repositório, permitindo trabalho \emph{offline} e melhor gerenciamento de versões. 
+Um sistema de controle de versão é imprescindível para o desenvolvimento de \emph{software} atualmente e é impossível se ter integração contínua sem um. Os sistemas de controle de versão podem ser categorizados em distribuídos (DVCS), como o Git, ou centralizados (CVCS), como o SVN. Os centralizados mantêm um repositório central onde todas as versões são armazenadas, e os usuários precisam se conectar a ele para obter ou enviar alterações, enquanto nos distribuídos cada usuário possui uma cópia completa do repositório, permitindo trabalho \emph{offline} e melhor gerenciamento de versões. 
 
-Atualmente os distribuidos são o padrão no desenvolvimento de \emph{software}, e pouco se ouve falar dos centralizados. O \textbf{Git} é, empiricamente, o mais popular entre todos os sistemas de controle de versão, e é uma solução elegante e completa para o controle de versão no desenvolvimento de \emph{software}, seja para um único desenvolvedor ou para equipes numerosas.
+Atualmente os distribuídos são o padrão no desenvolvimento de \emph{software}, e pouco se ouve falar dos centralizados. O \textbf{Git} é, empiricamente, o mais popular entre todos os sistemas de controle de versão, e é uma solução elegante e completa para o controle de versão no desenvolvimento de \emph{software}, seja para um único desenvolvedor ou para equipes numerosas.
 
 % \subsection{Gerenciamento de repositórios}
 \subsection{Plataformas para CI/CD}
@@ -181,6 +181,7 @@ A escolha do servidor de integração para um microsserviço ou projeto afeta al
 O GitHub Actions se destaca pela integração nativa com repositórios do GitHub, tornando o processo de configuração bastante simples para projetos já hospedados no GitHub. Os \emph{pipelines} para um repositório podem ser definidos diretamente nele, usando a linguagem YAML. Sua maior vantagem está na facilidade de uso e na integração com o GitHub, permitindo a execução condicional e configurável do \emph{pipeline} de acordo com eventos do repositório. No entanto, sua desvantagem principal é a dependência do ecossistema GitHub, o que requer uma migração de plataforma para projetos hospedados em outras plataformas de gerenciamento de repositórios.
 
 \subsubsection*{Jenkins}
+% TODO:? Citar a documentacao do jenkins?
 O Jenkins é um dos sistemas de CI/CD mais bem estabelecidos e flexíveis do mercado. Sendo \emph{open-source} e auto-hospedado, ele oferece uma grande variedade de \emph{plugins} e suporte a diversas ferramentas. Os \emph{pipelines} podem ser definidos para cada projeto usando arquivos jenkinsfile, que são baseados na linguagem Groovy. Sua principal vantagem é a personalização e flexibilidade, podendo ser configurado para praticamente qualquer \emph{pipeline} de CI/CD. No entanto, essa configuração tende a ser mais complexa, exigindo maior conhecimento e manutenção por parte da equipe responsável, além da necessidade de gerenciar sua própria infraestrutura, o que aumenta a complexidade operacional.
 % https://faun.pub/github-actions-vs-jenkins-which-should-you-use-d7ba6800e8bb
 % https://www.jenkins.io/doc/book/pipeline/jenkinsfile/
@@ -208,59 +209,64 @@ Já o GitLab CI/CD oferece um meio-termo entre a simplicidade do GitHub Actions 
 %     AWS Code Pipeline https://aws.amazon.com/codepipeline/
 %     Azure (https://azure.microsoft.com/pt-br/services/devops/server/)
 
-\section{Testes}
-% Existem inúmeras coisas que podem ser testadas em um \emph{software}. 
-% Testes não necessariamente requerem uma ferramenta para serem implementados, mas usar uma pode facilitar bastante o trabalho do programador. 
-% Eles podem ser muito abrangentes ou específicos. 
-% Existem diversas ferramentas, então a escolha adequada depende do contexto.
+% >>> PARTE DE TESTES DEIXA PRA LÁ
+% \section{Testes}
+% % Existem inúmeras coisas que podem ser testadas em um \emph{software}. 
+% % Testes não necessariamente requerem uma ferramenta para serem implementados, mas usar uma pode facilitar bastante o trabalho do programador. 
+% % Eles podem ser muito abrangentes ou específicos. 
+% % Existem diversas ferramentas, então a escolha adequada depende do contexto.
 
-A escolha de uma feramenta adequada para determinado teste depende do projeto em questão e do tipo de teste a ser executado. Embora muitos testes não exijam o uso de ferramentas além de uma linguagem de programação, elas podem diminuir significativamente o trabalho necessário. Contudo, como existem inúmeras coisas que podem ser testadas em um sistema, desde a eficácia de uma única função até uma funcionalidade abrangendo todo o sistema, apenas são listados aqui algumas das ferramentas para os testes mais comuns em microsserviços.
-% o que torna a seleção de uma ferramenta adequada crucial para otimizar o processo de testes.
+% A escolha de uma feramenta adequada para determinado teste depende do projeto em questão e do tipo de teste a ser executado. Embora muitos testes não exijam o uso de ferramentas além de uma linguagem de programação, elas podem diminuir significativamente o trabalho necessário. Contudo, como existem inúmeras coisas que podem ser testadas em um sistema, desde a eficácia de uma única função até uma funcionalidade abrangendo todo o sistema, apenas são listados aqui algumas das ferramentas para os testes mais comuns em microsserviços.
+% % o que torna a seleção de uma ferramenta adequada crucial para otimizar o processo de testes.
 
-\subsection{Testes de unidade}
-Testes de unidade são mais baixo-nível e as ferramentas usadas para os implementar dependem da linguagem de programação e \emph{framework} em questão. No Java por exemplo, uma biblioteca muito comum para testes de unidade é o JUnit. No python, tem-se o pacote \emph{unittest}. No C\#, tem-se o pacote \emph{xUnit}. No Go, tem-se o pacote \emph{testing}. No JavaScript tem-se a biblioteca \emph{Jest}.
+% \subsection{Testes de unidade}
+% Testes de unidade são mais baixo-nível e as ferramentas usadas para os implementar dependem da linguagem de programação e \emph{framework} em questão. No Java por exemplo, uma biblioteca muito comum para testes de unidade é o JUnit. No python, tem-se o pacote \emph{unittest}. No C\#, tem-se o pacote \emph{xUnit}. No Go, tem-se o pacote \emph{testing}. No JavaScript tem-se a biblioteca \emph{Jest}.
 
-\subsection{Testes de serviços}
-% Testar um microsserviço pode significar diversas coisas dependendo do que se trata o microsserviço. Pode ser por exemplo testar os endpoints de uma API ou então testar se o serviço está produzindo \emph{logs} como esperado. 
-% Portanto não serão discutidas ferramentas para esses tipos de testes
+% \subsection{Testes de serviços}
+% % Testar um microsserviço pode significar diversas coisas dependendo do que se trata o microsserviço. Pode ser por exemplo testar os endpoints de uma API ou então testar se o serviço está produzindo \emph{logs} como esperado. 
+% % Portanto não serão discutidas ferramentas para esses tipos de testes
 
-\subsubsection*{Testes de APIs}
-[EM PROGRESSO]
+% \subsubsection*{Testes de APIs}
+% [EM PROGRESSO]
 
-Postman, Insomnia, Thunder Client (integrado ao VSCode), cURL.
-% programar os testes de api em uma linguagem de programação,
+% Postman, Insomnia, Thunder Client (integrado ao VSCode), cURL.
+% % programar os testes de api em uma linguagem de programação,
 
-\subsubsection*{Testes de contratos}
-[EM PROGRESSO]
+% \subsubsection*{Testes de contratos}
+% [EM PROGRESSO]
 
-Pact, Spring Cloud Contract (para o \emph{framework} Spring)
+% Pact, Spring Cloud Contract (para o \emph{framework} Spring)
 
-% \subsubsection*{TestContainers} 
-% Uma biblioteca Java usada para testes de integração com contêineres Docker, permitindo iniciar e parar serviços no Docker para simular cenários do mundo real.
+% % \subsubsection*{TestContainers} 
+% % Uma biblioteca Java usada para testes de integração com contêineres Docker, permitindo iniciar e parar serviços no Docker para simular cenários do mundo real.
 
-\subsection{Testes \emph{end-to-end} (ponta a ponta)}
-[EM PROGRESSO]
+% \subsection{Testes \emph{end-to-end} (ponta a ponta)}
+% [EM PROGRESSO]
 
-- Cypress: Uma poderosa ferramenta de teste de ponta a ponta para aplicativos da web que também pode testar APIs como parte do fluxo de trabalho de ponta a ponta.
+% - Cypress: Uma poderosa ferramenta de teste de ponta a ponta para aplicativos da web que também pode testar APIs como parte do fluxo de trabalho de ponta a ponta.
 
-- Selenium: Uma ferramenta para automatizar testes baseados em navegador para microsserviços que são expostos por meio de interfaces da web.
+% - Selenium: Uma ferramenta para automatizar testes baseados em navegador para microsserviços que são expostos por meio de interfaces da web.
 
-- Playwright: Uma biblioteca Node.js para automatizar navegadores Chromium, Firefox e WebKit, comumente usada para testes E2E de aplicativos da web.
+% - Playwright: Uma biblioteca Node.js para automatizar navegadores Chromium, Firefox e WebKit, comumente usada para testes E2E de aplicativos da web.
 
-- TestCafe: Uma ferramenta para automatizar testes da web, com suporte para testes entre navegadores e execução de testes paralelos.
+% - TestCafe: Uma ferramenta para automatizar testes da web, com suporte para testes entre navegadores e execução de testes paralelos.
 
-- Appium: Uma estrutura para testar aplicativos móveis (nativos, híbridos ou web móvel).
+% - Appium: Uma estrutura para testar aplicativos móveis (nativos, híbridos ou web móvel).
+% <<<
+
 
 \section{Comunicação}
 
 \subsection{RPC - gRPC}
 % gRPC é uma ferramenta moderna com alto desempenho que tem ganhado grande popularidade em meio aos praticantes de microsserviços e é considerada um "projeto de incubação" pela Cloud Native Computing Foundation 
 
-% TODO: Melhorar esse lixo ou então só comentar
-gRPC é uma ferramenta open-source desenvolvida pelo Google que permite o uso de Remote Procedure Call (RPC) entre sistemas distribuídos. Ele usa o formato \emph{Buffers de protocolo} para trocas de dados com menor consumo de recursos. Uma característica importante do gRPC é seu suporte a \emph{streaming} bidirecional e multiplexação, o que o torna ideal para cenários que exigem comunicação em tempo real e transferências de dados grandes entre serviços. Ele suporta tanto comunicação síncrona quanto assíncrona, oferecendo flexibilidade na interação entre os serviços. O gRPC também usa o HTTP/2, que permite recursos como \emph{streams} de dados multiplexados, compressão de cabeçalhos e gerenciamento eficiente de conexões, tornando-o mais performático do que as APIs REST tradicionais baseadas em HTTP, especialmente em ambientes com baixa latência e alto fluxo. Além disso, seu forte sistema de tipagem por meio de Protocol Buffers e suporte embutido para autenticação, balanceamento de carga e descoberta de serviços fazem do gRPC uma ferramenta poderosa para a construção de microsserviços de alto desempenho, escaláveis e seguros. \cite{grpc}
+% TODO:!!! Melhorar esse lixo ou então só comentar
+gRPC é uma ferramenta open-source desenvolvida pelo Google que permite o uso de Remote Procedure Call (RPC) entre sistemas distribuídos. Ele usa o formato \emph{Buffers de protocolo} para trocas de dados com menor consumo de recursos. Uma característica importante do gRPC é seu suporte a \emph{streaming} bidirecional e multiplexação, o que o torna ideal para cenários que exigem comunicação em tempo real e transferências de dados grandes entre serviços. Ele suporta tanto comunicação síncrona quanto assíncrona, oferecendo flexibilidade na interação entre os serviços. 
+% O gRPC também usa o HTTP/2, que permite recursos como \emph{streams} de dados multiplexados, compressão de cabeçalhos e gerenciamento eficiente de conexões, tornando-o mais performático do que as APIs REST tradicionais baseadas em HTTP, especialmente em ambientes com baixa latência e alto fluxo. 
+Além disso, seu forte sistema de tipagem por meio de Protocol Buffers e suporte embutido para autenticação, balanceamento de carga e descoberta de serviços fazem do gRPC uma ferramenta poderosa para a construção de microsserviços de alto desempenho, escaláveis e seguros. \cite{grpc}
 
 \subsection{Sistemas de mensagens}
-Sistemas de mensagens são plataformas que permitem a comunicação entre diferentes componentes ou serviços de um sistema distribuído por meio de mensagens. Eles facilitam a comunicação assíncrona entre sistemas, desacoplando produtores e consumidores de mensagens. Esses sistemas são essenciais para arquiteturas escaláveis, como microserviços, permitindo a transmissão eficiente de dados entre diferentes partes do sistema sem interdependências diretas. Aqui são apontados alguns sistemas de mensagens comumente usados em arquiteturas distribuidas, sendo a escolha entre eles dependente da forma das mensagens, requisitos de escalabilidade e se a solução é auto-hospedada ou com infraestrutura gerenciada.
+Sistemas de mensagens são plataformas que permitem a comunicação entre diferentes componentes ou serviços de um sistema distribuído por meio de mensagens. Eles facilitam a comunicação assíncrona entre sistemas, desacoplando produtores e consumidores de mensagens. Esses sistemas são essenciais para arquiteturas escaláveis, como microserviços, permitindo a transmissão eficiente de dados entre diferentes partes do sistema sem interdependências diretas. Aqui são apontados alguns sistemas de mensagens comumente usados em arquiteturas distribuídas, sendo a escolha entre eles dependente da forma das mensagens, requisitos de escalabilidade e se a solução é auto-hospedada ou com infraestrutura gerenciada.
 % CITAR AS DOCUMENTAÇÕES ?
 
 \subsubsection*{RabbitMQ}
@@ -269,7 +275,7 @@ Sistemas de mensagens são plataformas que permitem a comunicação entre difere
 O RabbitMQ é um sistema de mensagens baseado no protocolo AMQP que facilita a comunicação assíncrona entre aplicações, oferecendo funcionalidades de publicação e consumo de mensagens. Ele garante confiabilidade na entrega de mensagens e flexibilidade para diversos padrões de troca de mensagens. Contudo, RabbitMQ pode ter limitações de escalabilidade em comparação com sistemas como o Kafka, que são mais adequados para grandes fluxos de dados em tempo real.
 
 \subsubsection*{Apache Kafka}
-O Kafka é uma plataforma de \emph{streaming} distribuído de dados, projetada para lidar com grandes volumes de dados em tempo real. Ele é utilizado principalmente para publicar, armazenar e processar fluxos de dados como eventos e logs. O Kafka oferece alta escalabilidade, durabilidade e alta taxa de transferência, suportando casos de uso como rastreamento de atividades de websites, agregação de logs e processamento de fluxos de dados. Com recursos como particionamento e replicação, o Kafka é ideal para arquiteturas de microserviços e sistemas de processamento de dados distribuídos que têm grandes fluxos de dados.
+O Kafka é uma plataforma de \emph{streaming} distribuído de dados, projetada para lidar com grandes volumes de dados em tempo real. Ele é utilizado principalmente para publicar, armazenar e processar fluxos de dados como eventos e logs. O Kafka oferece alta escalabilidade, durabilidade e alta taxa de transferência, suportando casos de uso como rastreamento de atividades de websites, agregação de logs e processamento de fluxos de dados. Com recursos como particionamento e replicação, o Kafka é ideal para arquiteturas de microserviços e sistemas de processamento de dados distribuídos que têm grandes fluxos de dados. \cite{apache-kafka}
 
 \subsubsection{Sistemas de mensagens em provedores na nuvem}
 % >> Podia ter uma seção dedicada a comentar sobre provedores em nuvem e suas infinitas ferramentas para desenvolvimento de aplicações.
@@ -310,7 +316,7 @@ Nos provedores de nuvem AWS, Azure e GCP, tem-se o SQS, Azure Service Bus e Goog
 \section{Conteinerização}
 
 \subsection*{Docker}
-O Docker é uma ferramenta de conteinerização amplamente adotada devido à sua facilidade de uso, documentação abrangente e grande comunidade. Ele segue um modelo cliente-servidor, onde um \emph{daemon} (processo em segundo plano) gerencia os contêineres. Os benefícios do Docker incluem configuração simples; implantação e escalamento de contêineres independentemente; grande diversidade de imagens de contêineres disponíveis; e integração com o Kubernetes, uma ferramenta popular e poderosa para gerenciamento de infraestrutura em contêineres. Tais benefícios fazem do Docker uma excelente escolha para o desenvolvimento e implantação de microsserviços. 
+O Docker é uma ferramenta de conteinerização amplamente adotada devido à sua facilidade de uso, documentação abrangente e grande comunidade. Ele segue um modelo cliente-servidor, onde um \emph{daemon} (processo em segundo plano) gerencia os contêineres. Os benefícios do Docker incluem configuração simples; implantação e escalamento de contêineres independentemente; grande diversidade de imagens de contêineres disponíveis; e integração com o Kubernetes, uma ferramenta popular e poderosa para gerenciamento de infraestrutura em contêineres. Tais benefícios fazem do Docker uma excelente escolha para o desenvolvimento e implantação de microsserviços. \cite{lxc-vs-docker,podman-vs-docker}
 
 % Os principais casos de uso para o Docker são implantações simplificadas ou automáticas,
 % Essa abordagem facilita a orquestração de múltiplos contêineres e a integração com ferramentas como Kubernetes, tornando-o uma opção confiável para aplicações distribuídas. 
@@ -339,12 +345,12 @@ O Docker é uma ferramenta de conteinerização amplamente adotada devido à sua
 % Docker’s utility in supporting rapid development cycles and complex architectures makes it a valuable tool for developers aiming to improve efficiency and operational consistency in their projects.
 
 \subsection*{Podman}
-O Podman adota uma arquitetura sem \emph{daemon}, eliminando a necessidade de um serviço central para gerenciar os contêineres. Isso o torna mais seguro, pois permite a execução de contêineres sem privilégios de \emph{root}. O Podman também oferece compatibilidade com a CLI do Docker, facilitando a migração de projetos. Além disso, sua capacidade de gerenciar pods - um grupo de contêineres compartilhando recursos - também o torna uma opção adequada para arquiteturas de microsserviços, especialmente em ambientes com requisitos elevados de segurança.
+O Podman adota uma arquitetura sem \emph{daemon}, eliminando a necessidade de um serviço central para gerenciar os contêineres. Isso o torna mais seguro, pois permite a execução de contêineres sem privilégios de \emph{root}. O Podman também oferece compatibilidade com a CLI do Docker, facilitando a migração de projetos. Além disso, sua capacidade de gerenciar pods - um grupo de contêineres compartilhando recursos - também o torna uma opção adequada para arquiteturas de microsserviços, especialmente em ambientes com requisitos elevados de segurança. \cite{podman-vs-docker}
 % https://medium.com/@supportfly/podman-vs-docker-a-comprehensive-comparison-77b1b41e67e0
 % https://www.docker.com/blog/lxc-vs-docker/
 
 \subsection*{LXC}
-O LXC (Linux Containers) adota uma abordagem diferente, fornecendo contêineres em nível de sistema operacional, assim permitindo a criação de ambientes virtuais que se comportam como sistemas Linux completos. Isso o torna ideal para casos onde se deseja uma alternativa leve às máquinas virtuais ou um acesso altamente eficiente a recursos do \emph{hardware}, como em aplicações com enormes volumes de dados ou cargas de processamento. Entretanto, não é uma opção comum para implantação de microsserviços, que se beneficiam de contêineres mais isolados e especializados, como os oferecidos pelo Docker e pelo Podman.
+O LXC (Linux Containers) adota uma abordagem diferente, fornecendo contêineres em nível de sistema operacional, assim permitindo a criação de ambientes virtuais que se comportam como sistemas Linux completos. Isso o torna ideal para casos onde se deseja uma alternativa leve às máquinas virtuais ou um acesso altamente eficiente a recursos do \emph{hardware}, como em aplicações com enormes volumes de dados ou cargas de processamento. Entretanto, não é uma opção comum para implantação de microsserviços, que se beneficiam de contêineres mais isolados e especializados, como os oferecidos pelo Docker e pelo Podman. \cite{lxc-vs-docker}
 
 % O LXD, uma ferramenta contruída em cima do LXC, fornece uma interface mais alto-nível e recursos de gerenciamento adicionais, tornando-o mais comparável às soluções de gerenciamento de máquinas virtuadas baseadas na nuvem.
 
@@ -373,10 +379,22 @@ O LXC (Linux Containers) adota uma abordagem diferente, fornecendo contêineres 
 
 % Ferramenta para rate limiting. \cite{rapidAPI-twitter}
 
-\subsection{Orquestração de contêineres com Kubernetes}
-[EM PROGRESSO]Kubernetes
+\subsection{Gerenciamento de contêineres com Kubernetes}
+O Kubernetes é uma plataforma de orquestração de contêineres de código aberto, projetada para facilitar o gerenciamento de serviços e cargas de trabalho que envolvem contêineres, favorecendo alta disponibilidade e escalabilidade de sistemas distribuídos. Com ele, é possível definir como os contêineres devem ser implantados, monitorados e escalados de maneira declarativa e automatizada, facilitando a administração da infraestrutura. \cite{kubernetes}
 
-Além disso, o kubernetes abstrai a necessidade de um serviço de service discovery, pelo uso de services que já fazem todo o gerenciamento de DNS dos serviços
+O Kubernetes pode ter múltiplos \emph{clusters} de servidores onde os contêineres são executados, podendo distribuir cargas de trabalho de maneira eficiente e favorecendo a alta disponibilidade das aplicações. Os principais conceitos do Kubernetes são os \emph{pods}, que agrupam contêineres, os \emph{services}, que intermediam a comunicação interna e/ou externa ao \emph{cluster}, e os \emph{deployments}, que controlam a atualização e escalamento dos contêineres. \cite{kubernetes}
+
+Embora o Kubernetes compartilhe algumas características com plataformas de \emph{Platform as a Service} (PaaS), ele não impõe restrições sobre os tipos de aplicações suportadas, não constrói ou implanta código-fonte automaticamente e não fornece serviços internos, como bancos de dados ou \emph{middlewares}. Diferente de sistemas de orquestração tradicionais, o Kubernetes foca na convergência do estado desejado, favorecendo um ambiente robusto, flexível e adequado para aplicações modernas distribuídas.  \cite{kubernetes}
+
+Dessa forma, o Kubernetes pode ser utilizado em arquiteturas de microsserviços não só por facilitar a administração da infraestrutura, mas também pelas diversas ferramentas valiosas embutidas, como o gerenciamento de configurações, descoberta de serviços, balanceamento de carga, recuperação automática de falhas, alocação dinâmica de volumes e discos, entre outros. Além disso, o Kubernetes suporta diferentes ambientes de execução, como servidores físicos, máquinas virtuais e serviços de nuvem, assim sendo uma solução abrangente e flexível.
+
+% garantindo que cada microsserviço possa ser executado, atualizado e escalado independentemente. Além disso, sua integração com ferramentas de monitoramento, malha de serviços e \emph{pipelines} de CI/CD permite um fluxo de desenvolvimento mais ágil e automatizado, tornando o Kubernetes uma escolha ideal para aplicações baseadas em microsserviços.
+
+% Como os microsserviços são distribuídos, a necessidade de orquestração e escalabilidade é essencial. 
+
+
+% https://kubernetes.io/docs/concepts/overview/#why-you-need-kubernetes-and-what-can-it-do
+
 
 % \subsection{Orquestração de contêineres com Docker Swarm}
 % [EM PROGRESSO]
@@ -385,10 +403,10 @@ Além disso, o kubernetes abstrai a necessidade de um serviço de service discov
 % \subsection{Orquestração de contêineres com Conductor}
 % Conductor* (https://conductor-oss.github.io/conductor/devguide/concepts/index.html)
 
-\subsection{Orquestração de contêineres em provedores na nuvem}
-[EM PROGRESSO]
+\subsubsection{Kubernetes em provedores na nuvem}
+Provedores na núvem como AWS, Azure e GCP oferecem serviços gerenciados de Kubernetes, assim reduzindo ainda mais a complexidade operacional associada à instalação, configuração e manutenção da infraestrutura. Esses serviços facilitam a implementação de clusters Kubernetes, integrando-se com os ecossistemas das respectivas plataformas.
 
-AWS EKS, Azure Kubernetes Service (AKS)
+Além disso, os provedores podem oferecer recursos adicionais, como balanceadores de carga gerenciados e integração com sistemas de monitoramento e segurança. A elasticidade proporcionada pela nuvem garante que aplicações com arquitetura de microsserviços possam escalar globalmente sem a necessidade de gerenciar servidores físicos. Ademais, ao usar o Kubernetes em provedores na nuvem a portabilidade ainda é mantida, podendo as aplicações serem facilmente migradas entre provedores ou para infraestrutura híbrida, assim evitando o que é conhecido como \emph{vendor lock-in} (bloqueio de fornecedor).
 
 % Learn About Orchestrating Microservices Using Kubernetes
 
@@ -419,19 +437,27 @@ AWS EKS, Azure Kubernetes Service (AKS)
 
 \section{Observabilidade e Monitoramento}
 
-\subsection{Métricas: Prometheus e Grafana}
-[EM PROGRESSO]
-% Prometheus is an open-source monitoring and alerting tool designed for collecting and analyzing time-series data (metrics). It is widely used for monitoring infrastructure, applications, and services, especially in cloud-native and Kubernetes environments. \cite{prometheus-docs}
+\subsection{Métricas - Prometheus e Grafana}
+Prometheus é uma ferramenta \emph{open-source} de monitoramento e alerta projetada para coletar e analisar dados de séries temporais (métricas). Ele funciona coletando métricas de diversas fontes por meio de \emph{endpoints} instrumentados, armazenando esses dados em sua base de dados de séries temporáis (TSDB) que permite consultas eficientes. O Prometheus permite consultas avançadas usando sua linguagem própria, o PromQL, possibilitando a criação de métricas personalizadas e a definição de alertas e é amplamente usado para monitorar infraestrutura, aplicativos e serviços, especialmente em ambientes distribuidos ou na nuvem. \cite{prometheus-docs}
 
-\subsection{Logging: Grafana Loki}
-Grafana Loki, ou apenas Loki, é uma \emph{stack} para agregação e indexação de \emph{logs}, sendo composto por um conjunto de componentes independentes. Ele funciona recebendo um fluxo de \emph{logs} a partir de um agente que os captura da aplicação, e em seguida faz a indexação apenas de metadados deles, como um \emph{label} (rótulo), que apontam para os dados do \emph{log}, que são compactados e armazenados como objeto, assim consumindo pouco armazenamento. Além de consumir pouco armazenamento, o Loki também faz uso eficiente de memória; tem possibilidade para multilocação, ou seja, consegue escutar múltiplas aplicações enviando logs ao mesmo tempo, o que é importante em sistemas distribuidos; é altamente escalável, permitindo diferentes configurações de implantação; e permite que diversas outras ferramentas de observabilidade se conectem com ele. Entretanto, ele usa a própria linguagem de consulta - \emph{LogQL}, o que dificulta o aprendizado da ferramenta. Além disso, por indexar apenas metadados, a busca de \emph{logs} por conteúdo é mais dificil, e é preciso que os \emph{logs} sejam bem estruturados e rotulados para ser eficiente. \cite{grafana-loki}
+O Grafana é uma plataforma de visualização que se integra ao Prometheus e a diversas outras fontes de dados. Com ele, é possível construir \emph{dashboards} interativos e personalizados, favorecendo uma visão detalhada do desempenho da aplicação e da infraestrutura, e configurações de alertas e notificações automáticas, facilitando a identificação rápida de problemas.
 
-\subsection{Logging: Graylog}
-[EM PROGRESSO]  Graylog é um sistema de gerenciamento de \emph{logs} mais simples do que o Loki.
+A combinação do Prometheus com o Grafana é amplamente utilizada em arquiteturas de microsserviços, pois permite monitoramento escalável e descentralizado. Com a instrumentação adequada, é possível monitorar métricas de CPU, memória, latência de requisições, status de serviços, uso de banco de dados e muito mais.
 
-\subsection{\emph{Tracing} (rastremanento)}
+Por serem open-source, essa combinação de ferramentas oferece uma solução robusta e de baixo custo que é amplamente adotada para monitoramento de sistemas. A facilidade de integração com outras tecnologias e a grande comunidade de suporte fazem do Prometheus e do Grafana uma escolha ideal para monitoramento moderno de aplicações.
+
+\subsection{Logging - Grafana Loki}
+Grafana Loki, ou apenas Loki, é uma \emph{stack} para agregação e indexação de \emph{logs}, sendo composto por um conjunto de componentes independentes. Ele funciona recebendo um fluxo de \emph{logs} a partir de um agente que os captura da aplicação, e em seguida faz a indexação apenas de metadados deles, como um \emph{label} (rótulo), que apontam para os dados do \emph{log}, que são compactados e armazenados como objeto, assim consumindo pouco armazenamento. Além de consumir pouco armazenamento, o Loki também faz uso eficiente de memória; tem possibilidade para multilocação, ou seja, consegue escutar múltiplas aplicações enviando logs ao mesmo tempo, o que é importante em sistemas distribuídos; é altamente escalável, permitindo diferentes configurações de implantação; e permite que diversas outras ferramentas de observabilidade se conectem com ele. Entretanto, ele usa a própria linguagem de consulta - \emph{LogQL}, o que pode dificultar o aprendizado da ferramenta. Além disso, por indexar apenas metadados, a busca de \emph{logs} por conteúdo é mais dificil, e é preciso que os \emph{logs} sejam bem estruturados e rotulados para ser eficiente. \cite{grafana-loki}
+
+\subsection{Logging - Graylog}
+% Graylog é um sistema de gerenciamento de \emph{logs} mais simples do que o Loki.
+O Graylog utiliza o Elasticsearch para armazenar os \emph{logs}, que é uma ferramenta de pesquisa e análise de dados distribuída e altamente escalável, otimizada para realizar buscas e consultas rápidas em grandes volumes de dados. Esse modelo é poderoso para consultas complexas em \emph{logs}, mas pode ser mais exigente em termos de configuração e gerenciamento de recursos. O Graylog também possui sua própria interface de usuário para gestão dos \emph{logs}, diferente do Loki que precisa da integração com o Grafana para oferecer uma. Além disso, ele também fornece funcionalidades de alertas, \emph{dashboards} personalizados e visualizações interativas que permitem que os usuários realizem análises complexas dos \emph{logs}. Dessa forma, essa ferramenta é ideal para análise de \emph{logs} complexos e é muito utilizada em ambientes corporativos onde a análise detalhada de \emph{logs} é crítica para a resolução de problemas, auditorias e monitoramento de segurança. \cite{graylog}
+
+\subsection{\emph{Tracing} (rastremanento) - Jaeger}
 % https://www.redhat.com/en/topics/microservices/what-is-jaeger
-[EM PROGRESSO] Jaeger 
+O Jaeger é uma ferramenta \emph{open-source} de rastreamento desenvolvida para monitorar e rastrear fluxos em sistemas distribuídos, oferecendo informações detalhadas sobre cada passo do fluxo, assim facilitando a identificação de gargalos, falhas e latências que podem comprometer a performance do sistema. \cite{jaeger}
+
+Essa ferramenta oferece uma interface gráfica que permite visualizar os rastreamentos de uma forma clara, com diagramas de sequência e linhas do tempo, o que facilita a análise do comportamento dos serviços e a detecção de problemas em pontos específicos da infraestrutura. Ele é compatível com diversas linguagens de programação e é amplamente utilizado em arquiteturas de microsserviços, também podendo ser integrado com outras ferramentas de monitoramento e observabilidade, como o Prometheus e o Grafana, para fazer a correlação de rastreamentos com \emph{logs} e métricas, assim fornecendo uma visão ainda mais ampla do sistema. \cite{jaeger}
   
 % Modern tracing tools, such as Jaeger, Zipkin, and OpenTelemetry, help organizations implement distributed tracing efficiently. These tools collect, process, and visualize traces, often integrating with dashboards and monitoring platforms like Grafana or Prometheus for deeper insights. OpenTelemetry, in particular, is gaining traction as a vendor-neutral, open-source standard that unifies telemetry data across logs, metrics, and traces, making it easier to achieve full observability. As distributed systems continue to grow in complexity, tracing has become an essential practice for ensuring system reliability, minimizing downtime, and optimizing application performance.
 
@@ -448,8 +474,13 @@ Grafana Loki, ou apenas Loki, é uma \emph{stack} para agregação e indexação
 % \section{Framework arquitetural}
 % goa*, Kong*
 
-\section{Aplicações \emph{serverless} (sem servidor)}
-[EM PROGRESSO]  Claudia, Apache Openwhisk, Serverless, Kubeless, IronFunctions, AWS Lambda, OpenFaaS, Microsoft Azure Functions.
+% \section{Aplicações \emph{serverless} (sem servidor)}
+% TODO: Poderia ter uma seção dedicada a falar sobre provedores em núvem e seus papeis no desenvolvimento/implantação de uma arquitetura de microsserviços. 
+
+%    O livro \cite{livro-building-microservices} Capitulo 1 > Enabling technology > Public cloud and serverless tem informações interessantes sobre serverless 
+
+
+% Claudia (expressJS), Apache Openwhisk, Serverless, Kubeless, IronFunctions, AWS Lambda, OpenFaaS, Microsoft Azure Functions.
 
 % \section{Plataformas}
 % Microsoft Azure is a microservice platform, and it provides a fully automated dynamic infrastructure, SDKs, and runtime containers along with a large portfolio of existing microservices that you can leverage, such as DocumentDb, Redis In-Memory Cache, and Service Bus, to build your own microservices catalog. \cite{Familiar2015}
