@@ -151,7 +151,7 @@ Outro tipo de banco de dados importante para microsserviços são os em memória
 % Teams may also want to consider managed CI/CD tools, which are available from a variety of vendors. The major public cloud providers all offer CI/CD solutions, along with GitLab, CircleCI, Travis CI, Atlassian Bamboo, and many others.
 % Additionally, any tool that’s foundational to DevOps is likely to be part of a CI/CD process. Tools for configuration automation (such as Ansible, Chef, and Puppet), container runtimes (such as Docker, rkt, and cri-o), and container orchestration (Kubernetes) aren’t strictly CI/CD tools, but they’ll show up in many CI/CD workflows. \cite{redhat-ci-cd}
 
-\subsection{Sistemas de controle de versão}
+\subsection{Sistemas de controle de versão}\label{secao-vcs}
 % Usar um sistema de controle de versão é estritamente necessário para se ter integração contínua. 
 Um sistema de controle de versão é imprescindível para o desenvolvimento de \emph{software} atualmente e é impossível se ter integração contínua sem um. Os sistemas de controle de versão podem ser categorizados em distribuidos (DVCS), como o Git, ou centralizados (CVCS), como o SVN. Os centralizados mantêm um repositório central onde todas as versões são armazenadas, e os usuários precisam se conectar a ele para obter ou enviar alterações, enquanto nos distribuidos cada usuário possui uma cópia completa do repositório, permitindo trabalho offline e melhor gerenciamento de versões. 
 
@@ -256,6 +256,7 @@ Pact, Spring Cloud Contract (para o framework Spring)
 \subsection{RPC - gRPC}
 % gRPC é uma ferramenta moderna com alto desempenho que tem ganhado grande popularidade em meio aos praticantes de microsserviços e é considerada um "projeto de incubação" pela Cloud Native Computing Foundation 
 
+% TODO: Melhorar esse lixo ou então só comentar
 gRPC é uma ferramenta open-source desenvolvida pelo Google que permite o uso de Remote Procedure Call (RPC) entre sistemas distribuídos. Ele usa o formato \emph{Buffers de protocolo} para trocas de dados com menor consumo de recursos. Uma característica importante do gRPC é seu suporte a streaming bidirecional e multiplexação, o que o torna ideal para cenários que exigem comunicação em tempo real e transferências de dados grandes entre serviços. Ele suporta tanto comunicação síncrona quanto assíncrona, oferecendo flexibilidade na interação entre os serviços. O gRPC também usa o HTTP/2, que permite recursos como \emph{streams} de dados multiplexados, compressão de cabeçalhos e gerenciamento eficiente de conexões, tornando-o mais performático do que as APIs REST tradicionais baseadas em HTTP, especialmente em ambientes com baixa latência e alto fluxo. Além disso, seu forte sistema de tipagem por meio de Protocol Buffers e suporte embutido para autenticação, balanceamento de carga e descoberta de serviços fazem do gRPC uma ferramenta poderosa para a construção de microsserviços de alto desempenho, escaláveis e seguros. \cite{grpc}
 
 \subsection{Sistemas de mensagens}
@@ -271,8 +272,10 @@ O RabbitMQ é um sistema de mensagens baseado no protocolo AMQP que facilita a c
 O Kafka é uma plataforma de streaming distribuído de dados, projetada para lidar com grandes volumes de dados em tempo real. Ele é utilizado principalmente para publicar, armazenar e processar fluxos de dados como eventos e logs. O Kafka oferece alta escalabilidade, durabilidade e alta taxa de transferência, suportando casos de uso como rastreamento de atividades de websites, agregação de logs e processamento de fluxos de dados. Com recursos como particionamento e replicação, o Kafka é ideal para arquiteturas de microserviços e sistemas de processamento de dados distribuídos que têm grandes fluxos de dados.
 
 \subsubsection{Sistemas de mensagens em provedores na nuvem}
+% >> Podia ter uma seção dedicada a comentar sobre provedores em nuvem e suas infinitas ferramentas para desenvolvimento de aplicações.
+
 % Azure Service Bus, Amazon Simple Queue Service, Google Cloud Pub/Sub.
-Nos provedores de nuvem AWS, Azure e GCP, tem-se o SQS, Azure Service Bus e Google Pub/Sub, respectivamente. Esses são plataformas como serviços (PAAS) que oferecem sistemas de mensagens totalmente gerenciados, abstraindo assuntos de infraestrutura para o usuário. Eles são escaláveis e fornecem alta disponibilidade, mas podem oferecer menos opções de configuração em comparação com soluções auto-hospedadas como RabbitMQ e Kafka. Enquanto o RabbitMQ se destaca em enfileiramento de baixa latência e Kafka em streaming de eventos em tempo real, soluções em provedores na nuvem tendem a se concentrar em simplicidade, escalabilidade e fácil integração com outros serviços em seus respectivos ecossistemas.
+Nos provedores de nuvem AWS, Azure e GCP, tem-se o SQS, Azure Service Bus e Google Pub/Sub, respectivamente. Esses são plataformas como serviços (PAAS) que oferecem sistemas de mensagens totalmente gerenciados, abstraindo assuntos de infraestrutura. Eles são escaláveis e fornecem alta disponibilidade, mas podem oferecer menos opções de configuração em comparação com soluções auto-hospedadas como RabbitMQ e Kafka. Enquanto o RabbitMQ se destaca em enfileiramento de baixa latência e Kafka em streaming de eventos em tempo real, soluções em provedores na nuvem tendem a se concentrar em simplicidade, escalabilidade e fácil integração com outros serviços em seus respectivos ecossistemas.
 
 % \subsection{Streaming de Dados}
 % Apache Kafka*
@@ -371,15 +374,20 @@ O LXC (Linux Containers) adota uma abordagem diferente, fornecendo contêineres 
 % Ferramenta para rate limiting. \cite{rapidAPI-twitter}
 
 \subsection{Orquestração de contêineres com Kubernetes}
-Kubernetes*
+[EM PROGRESSO]Kubernetes
 
-\subsection{Orquestração de contêineres com Docker Swarm}
-Docker Swarm*
+Além disso, o kubernetes abstrai a necessidade de um serviço de service discovery, pelo uso de services que já fazem todo o gerenciamento de DNS dos serviços
+
+% \subsection{Orquestração de contêineres com Docker Swarm}
+% [EM PROGRESSO]
+% Docker Swarm
 
 % \subsection{Orquestração de contêineres com Conductor}
 % Conductor* (https://conductor-oss.github.io/conductor/devguide/concepts/index.html)
 
 \subsection{Orquestração de contêineres em provedores na nuvem}
+[EM PROGRESSO]
+
 AWS EKS, Azure Kubernetes Service (AKS)
 
 % Learn About Orchestrating Microservices Using Kubernetes
@@ -412,17 +420,18 @@ AWS EKS, Azure Kubernetes Service (AKS)
 \section{Observabilidade e Monitoramento}
 
 \subsection{Métricas: Prometheus e Grafana}
+[EM PROGRESSO]
 % Prometheus is an open-source monitoring and alerting tool designed for collecting and analyzing time-series data (metrics). It is widely used for monitoring infrastructure, applications, and services, especially in cloud-native and Kubernetes environments. \cite{prometheus-docs}
 
 \subsection{Logging: Grafana Loki}
 Grafana Loki, ou apenas Loki, é uma \emph{stack} para agregação e indexação de \emph{logs}, sendo composto por um conjunto de componentes independentes. Ele funciona recebendo um fluxo de \emph{logs} a partir de um agente que os captura da aplicação, e em seguida faz a indexação apenas de metadados deles, como um \emph{label} (rótulo), que apontam para os dados do \emph{log}, que são compactados e armazenados como objeto, assim consumindo pouco armazenamento. Além de consumir pouco armazenamento, o Loki também faz uso eficiente de memória; tem possibilidade para multilocação, ou seja, consegue escutar múltiplas aplicações enviando logs ao mesmo tempo, o que é importante em sistemas distribuidos; é altamente escalável, permitindo diferentes configurações de implantação; e permite que diversas outras ferramentas de observabilidade se conectem com ele. Entretanto, ele usa a própria linguagem de consulta - \emph{LogQL}, o que dificulta o aprendizado da ferramenta. Além disso, por indexar apenas metadados, a busca de \emph{logs} por conteúdo é mais dificil, e é preciso que os \emph{logs} sejam bem estruturados e rotulados para ser eficiente. \cite{grafana-loki}
 
 \subsection{Logging: Graylog}
-  Graylog é um sistema de gerenciamento de \emph{logs} mais simples do que o Loki.
+[EM PROGRESSO]  Graylog é um sistema de gerenciamento de \emph{logs} mais simples do que o Loki.
 
 \subsection{\emph{Tracing} (rastremanento)}
 % https://www.redhat.com/en/topics/microservices/what-is-jaeger
-Jaeger 
+[EM PROGRESSO] Jaeger 
   
 % Modern tracing tools, such as Jaeger, Zipkin, and OpenTelemetry, help organizations implement distributed tracing efficiently. These tools collect, process, and visualize traces, often integrating with dashboards and monitoring platforms like Grafana or Prometheus for deeper insights. OpenTelemetry, in particular, is gaining traction as a vendor-neutral, open-source standard that unifies telemetry data across logs, metrics, and traces, making it easier to achieve full observability. As distributed systems continue to grow in complexity, tracing has become an essential practice for ensuring system reliability, minimizing downtime, and optimizing application performance.
 
@@ -440,7 +449,7 @@ Jaeger
 % goa*, Kong*
 
 \section{Aplicações \emph{serverless} (sem servidor)}
-  Claudia, Apache Openwhisk, Serverless, Kubeless, IronFunctions, AWS Lambda, OpenFaaS, Microsoft Azure Functions.
+[EM PROGRESSO]  Claudia, Apache Openwhisk, Serverless, Kubeless, IronFunctions, AWS Lambda, OpenFaaS, Microsoft Azure Functions.
 
 % \section{Plataformas}
 % Microsoft Azure is a microservice platform, and it provides a fully automated dynamic infrastructure, SDKs, and runtime containers along with a large portfolio of existing microservices that you can leverage, such as DocumentDb, Redis In-Memory Cache, and Service Bus, to build your own microservices catalog. \cite{Familiar2015}

@@ -1,22 +1,5 @@
 # TCC 2
 
-Defesa: Total de 1 hora
-Apresentação é 20 minutos
-Em seguida, membros da banca por 40 minutos fazem perguntas e arguição
-
-banca composta pelo orientador/coorientador e examinador externo
-o orientador tem peso 60% (se tiver coorientador 30-30), e examinador 40%
-
-nota no sigaa é colocada pelo orientador, depois de fazer as correções no prazo devido
-
->> aprofundar mais nas ferramentas que usei
-
->> Cap 3 - Título 
-trocar para características e vantagens da arquitetura de microsserviços
-
-
-defesa segunda 31/03
-
 Perguntar:
     
     - ✅ mudar o nome do orientador? deixar os 2
@@ -67,12 +50,29 @@ Perguntar:
         > pode deixar um objetivo especifico que não tenha sido cumprido, mas tem que comentar/justificar no final, ou então pode reduzir o escopo também
         > Na conclusao pode ter menção a: trabalhos futuros a serem feitos, limitações do trabalho 
 
+
+    Defesa: Total de 1 hora
+        Apresentação é 20 minutos
+        Em seguida, membros da banca por 40 minutos fazem perguntas e arguição
+
+        banca composta pelo orientador/coorientador e examinador externo
+        o orientador tem peso 60% (se tiver coorientador 30-30), e examinador 40%
+
+        nota no sigaa é colocada pelo orientador, depois de fazer as correções no prazo devido
+
+        >> aprofundar mais nas ferramentas que usei?
+
+        defesa segunda 31/03?
+
 ## TO DO:
 
     #### Prioridade alta:
     - Terminar o trabalho escrito
+    - Logs/Caching no Nginx (gateway apenas?)
+    - Serviço de Financeiro ✅
+    - Caching na Loja (com Memcached) ✅
     - Orquestração de serviços (kubernetes ou docker swarm)
-    - API Gateway (Nginx ou AWS ElasticLoadBalancing, que pode ser feito pelo kubernetes)
+        API Gateway pelo AWS ElasticLoadBalancing, que pode ser feito pelo kubernetes ??
     - API Gateway pelo Nginx ✅
     - Monitoramento - Métricas ✅ e Logging ✅
     - CD (Kubernetes localmente? Ver o curso de EKS (aws)? Só um docker-compose?) 
@@ -85,7 +85,6 @@ Perguntar:
     - CI (com GitHub Actions) ✅
 
     #### Prioridade média
-    - Serviço de Financeiro
     - Ver pedidos no microsserviço de administração
     - Implementar salvamento de imagens dos produtos no banco de dados e gerenciamento no front de administração (?)
     - remover produto do carrinho ✅
@@ -96,7 +95,6 @@ Perguntar:
     - Implementar login de admin (front-admin) ✅
 
     #### Prioridade baixa:
-    - Caching na Loja (com Memcached)
     - Busca de produtos no front e api de loja
     - Implementar imagem/linkImagem na loja e carrinho.
     - Implementar quantidade de produtos no carrinho, pedido e loja. precisaria de uma classe intermediaria entre Pedido e Produto na ms-loja e Carrinho e Produto no ms-carrinho ..?
