@@ -3,41 +3,68 @@
 \chapterprecis{Este capítulo apresenta a aplicação exemplar com arquitetura de microsserviços desenvolvida.}\index{sinopse de capítulo}
 
 
-A aplicação desenvolvida trata-se de um sistema web de e-commerce. Nela, um cliente da loja pode buscar e comprar produtos, enquanto um administrador pode gerenciar produtos e usuários cadastrados, tudo a partir de uma interface de usuário em um navegador.
-O código fonte está disponível no repositório do GitHub com link \url{https://github.com/Jp9910/microservices_project}
+A aplicação desenvolvida trata-se de um sistema web de \emph{E-commerce}. Nela, um cliente da loja pode buscar e comprar produtos, enquanto um administrador pode gerenciar produtos e usuários cadastrados, tudo a partir de uma interface de usuário em um navegador.
+O código fonte está disponível no repositório do GitHub com link \url{https://github.com/Jp9910/microservices_project} e
+os diagramas de classes, pacotes e componentes podem ser vistos na \autoref{figura-diagrama-de-classes}, \autoref{figura-diagrama-de-pacotes} e \autoref{figura-diagrama-de-componentes}, respectivamente.
 
-Os diagramas de classes, pacotes e componentes podem ser vistos na \autoref{figura-diagrama-de-classes}, \autoref{figura-diagrama-de-pacotes} e \autoref{figura-diagrama-de-componentes}, respectivamente.
+\section{Padrões de projeto usados}
+\subsubsection*{MVC}
+Na aplicação exemplar, foi utilizado o padrão MVC (\emph{Model-View-Controller}) sempre que aplicável para organizar a estrutura dos pacotes de forma clara e modular. Devido à divisão natural do tipo de arquitetura tratado, nem todo microsserviço possui essas 3 camadas; nos microsserviços de negócio, por exemplo, não existe a camada \emph{View}. Assim sendo, a divisão foi feita da maneira aplicável a cada microsserviço, garantindo que as responsabilidades fossem bem definidas e que alterações em uma camada não afetassem as demais. Essa divisão pode ser vista no diagrama de pacotes da aplicação, apresentado na \autoref{figura-diagrama-de-pacotes}.
+
+% Essa abordagem permitiu separar a lógica de negócio (\emph{Model}), a apresentação dos dados (\emph{View}) e o controle do fluxo de execução (\emph{Controller}), facilitando a manutenção e evolução do código. 
+\subsubsection*{SOLID}
+Apesar de nem todos os microsserviços usarem exclusivamente o \emph{design} orientado a objetos (JavaScript, por exemplo, é multi-paradigma, mas tem uma tendência para a abordagem mais funcional) os princípios SOLID também foram adotados no desenvolvimento da aplicação, assim prezando para que 
+que cada módulo tivesse apenas uma responsabilidade, que o sistema fosse extensível sem a necessidade de grandes alterações e que as abstrações fossem priorizadas sobre as implementações concretas.
+% cada classe e módulo (1) tenham uma única responsabilidade, (2) sejam expandíveis, (3) herdem apenas classes adequadas, (4) implementem apenas interfaces apropriadas e (5) tenham dependências injetadas automaticamente. 
+
+O acesso ao banco de dados em memória no microsserviço de loja, por exemplo, foi encapsulado em uma classe genérica que implementa as funções específicas do Memcached, assim podendo ser substituido pelo Redis, por exemplo, apenas sendo necessário alterar a configuração e a lógica contida dentro dessa classe encapsuladora. Além disso, a dependência dessa classe é injetada no controlador de produtos, que a usará para fazer o \emph{caching} dos produtos.
+% a lógica exclusiva ao banco de dados específico (memcached) dentro de classe que encapsula suas funções específicas 
+
+% Com a aplicação dos princípios SOLID, Essa prática não só promoveu um código mais limpo e modular, mas também facilitou a realização de testes unitários e a manutenção a longo prazo da solução.
+
+\subsubsection*{CLEAN}
+Também foram implementados alguns princípios da arquitetura CLEAN, o que favoreceu ainda mais a independência entre os componentes e camadas do sistema. Ao aplicar esse padrão, foi possível isolar a lógica de domínio das dependências externas, como \emph{frameworks} e bancos de dados. Essa separação resultou em um design mais robusto, onde a lógica de negócio permanece centralizada e facilmente testável, permitindo a evolução contínua dos microserviços com risco reduzido de efeitos colaterais indesejados.
+Nos microsserviços de loja e autenticação, por exemplo, é possível alterar o banco de dados usado sem ser necessário alterações no código, apenas na configuração e dependências.
+
+% Além disso, na mesma aplicação, optei por implementar a arquitetura CLEAN, o que fortaleceu a independência entre os componentes e camadas do sistema. Ao aplicar essa arquitetura, pude isolar a lógica de domínio das dependências externas, como frameworks, bancos de dados e interfaces de usuário. Essa separação resultou em um design mais robusto, onde a lógica de negócio permanece centralizada e facilmente testável, permitindo a evolução contínua dos microserviços sem o risco de efeitos colaterais indesejados.
+
 
 \section{Divisão dos microsserviços}
-[EM PROGRESSO] Foram usados conceitos do domain-driven design para determinar os limites de cada microsserviço...
+% Para dividir os microsserviços e determinar seus limites, foram usados conceitos do ddd para determinar os limites de cada microsserviço...
 
-Falar sobre o Padrão MVC, CLEAN architecture e SOLID principles usados nos microsserviços
+Na aplicação exemplar, foram aplicados alguns princípios do \hyperref[section-ddd]{\emph{Domain-Driven Design}} para estruturar o sistema em torno dos domínios de negócio, assim sendo identificados os seguintes \emph{Bounded Contexts}: Catálogo dos produtos, Carrinho, Pedidos, Pagamentos, \emph{Marketing} e autenticação. Entretanto, para não criar um sistema complexo demais para ser desenvolvido por apenas uma pessoa, alguns desses foram mesclados em um só ou descartados. Os produtos e pedidos foram mesclados em apenas um microsserviço e o microsserviço de \emph{marketing} parecia ser o menos relevante para o funcionamento adequado do sistema, portanto foi descartado. 
 
-[EM PROGRESSO] Em especial houve uma dúvida muito grande quanto a qual microsserviço será responsável pela lógica de negócios dos pedidos e seu armazenamento. Foram considerados o microsserviço de carrinho (que viraria o microsserviço de pedidos) ou o microsserviço de loja (que sem os pedidos viraria o microsserviço de catálogo). No fim decidi implementar no microsserviço de loja porque...
+Em especial houve uma dúvida grande quanto a qual microsserviço seria mais apropriado para lidar com a lógica de negócios dos pedidos. Foram considerados o microsserviço de catálogo, que assim criaria o microsserviço de loja, e o microsserviço de carrinho, que assim criaria o microsserviço de pedidos. No fim foi decidido que eles seriam armazenados com o catálogo, pois pedidos são naturalmente relacionados com produtos e necessitam de alta consistência por envolver múltiplas operações, assim tornando um banco de dados relacional mais apropriado para o caso.
 
-\subsection*{Serviço de negócios - Loja}
+Além disso, para favorecer uma linguagem ubíqua, os nomes das entidades foram definidos de acordo com o domínio em questão. Um usuário, por exemplo, é chamado de usuário (do sistema) no microsserviço de autenticação, porém no microsserviço de loja, ele é chamado de cliente.
+
+% Em especial houve uma dúvida muito grande quanto a qual microsserviço será responsável pela lógica de negócios dos pedidos e seu armazenamento. Foram considerados o microsserviço de carrinho (que viraria o microsserviço de pedidos) ou o microsserviço de loja (que sem os pedidos viraria o microsserviço de catálogo). No fim decidi implementar no microsserviço de loja porque...
+
+% Além disso, a aplicação dos conceitos de Entidades, Value Objects, Agregados e Serviços de Domínio possibilitou uma organização mais robusta e coesa da lógica de negócio. Cada microsserviço foi projetado para encapsular um contexto bem delimitado, onde a integridade dos dados era mantida por meio de contratos claros e limites bem definidos. Dessa forma, os princípios do Domain-Driven Design contribuíram para que os microsserviços operassem de forma autônoma, escalável e facilmente adaptável às evoluções e demandas do mercado.
+
+\subsubsection*{Serviço de negócio - Loja}
 Esse microsserviço trata da lógica de negócios relacionada a produtos e pedidos.
 
-\subsection*{Serviço de negócios - Carrinho}
-Esse microsserviço trata da lógica de negócios relacionada ao carrinho e realização da compra.
+\subsubsection*{Serviço de negócio - Carrinho}
+Esse microsserviço trata da lógica de negócios relacionada ao carrinho.
 
-\subsection*{Serviço de negócios - Usuários}
+\subsubsection*{Serviço de negócio - Usuários}
 Esse microsserviço trata da lógica de negócios relacionada ao cadastro e autenticação de usuários.
 
-\subsection*{Serviço de negócios - Financeiro}
+\subsubsection*{Serviço de negócio - Financeiro}
 Esse microsserviço trata apenas do processamento (fictício) do pagamento de um pedido.
 
-\subsection*{Serviço de ponta - Clientes}
+\subsubsection*{Serviço de ponta - Clientes}
 O microsserviço de ponta de clientes é o serviço acessado diretamente pelos clientes da loja para realizar todas as operações relevantes a eles a partir de uma interface de usuário, tal como ver e buscar produtos, adicionar produtos ao carrinho e realizar um pedido a partir de um carrinho.
 
-\subsection*{Serviço de ponta - Administração}
+\subsubsection*{Serviço de ponta - Administração}
 O microsserviço de ponta de administração é o serviço usado pelos administradores da loja para realizar todas as operações relevantes a eles a partir de uma interface de usuário, tal como gerenciar produtos e usuários.
 
 
 \begin{figure}[htb]
 	\caption{\label{figura-diagrama-de-classes}Diagrama de classes da aplicação exemplar}
 	\begin{center}
-	    \includegraphics[scale=0.25]{Diagramas/imagens/Classes.png}
+	    \includegraphics[scale=0.25]{Diagramas/imagens/Classes.jpg}
 	\end{center}
 	\legend{Fonte: Autor}
 \end{figure}
@@ -84,42 +111,73 @@ Além disso, também foi usado o banco de dados em memória Memcached para reali
 \subsection*{Metodologia 12-fatores}
 A maioria dos fatores da \hyperref[metodologia-12-fatores]{metodologia 12-fatores} foram considerados e cumpridos no desenvolvimento da aplicação: I - Base de código única; II - Dependências portáteis e isoladas; III - Externalizar configurações; IV - Serviços de apoio são anexos; V - Separação entre construção, lançamento, e execução; VI - Processos sem estado (os microsserviços de ponta guardam a informação do usuário no navegador do cliente); VIII - simultaneidade; IX - Descartabilidade; X - Paridade de ambientes de execução; XI - \emph{Logs}; e XII - Processos administrativos.
 
+\subsection*{Contêinerização e orquestração de contêineres}
+Para a contêinerização dos microsserviços, foi usado o Docker. Para cada microsserviço foram declarados \emph{Dockerfiles}, que contém instruções usadas pelo Docker para a criação de imagens de contêineres do Docker, que foram usadas como artefatos que podem ser implantados em contêineres. Essas imagens foram salvas no repositório gratuito de imagens DockerHub, assim ficando facilmente disponíveis para serem baixadas onde necessário.
+% (esses artefatos contém o microsserviço e tudo que é necessário para executá-lo)
+
+Além disso, no repositório principal e no de cada microsserviço foi criado um \emph{Docker-Compose}, um arquivo que serve como forma declarativa de definir conjuntos de contêineres do Docker a serem executados. Esses conjuntos foram definidos de forma a executar todos os contêineres necessários para o funcionamento completo de um microsserviço, usando as imagens criadas pelo \emph{Dockerfile}. No repositório principal, ele inclui toda a aplicação. O \emph{Docker-Compose} facilita e portabiliza a configuração de um ambiente de execução e geralmente é usado para ambientes de desenvolvimento pois não provê muitas garantias de estabilidade e escalabilidade, porém também pode ser usado para outros ambientes se desejado.
+
+Para o ambiente de produção, foram criados arquivos de configuração do Kubernetes para orquestração dos contêineres, assim podendo-se obter diversos dos benefícios apontados na \autoref{secao-kubernetes}. Esses arquivos estão no repositório principal e definem como os contêineres serão implantados e mantidos pelo Kubernetes. Os artefatos usados para implantação dos contêineres de produção são os mesmos usados pelo \emph{Docker-Compose}, apenas com variáveis de ambiente diferentes, assim proporcionando ambientes de execução semelhantes.
+
+% assim proporcionando semelhança e fácil implantação de diferentes tipos de ambientes de execução.
+
+Sendo assim, configurações sensíveis e de ambiente foram externalizadas, e todos os microsserviços podem ser facilmente iniciados para diferentes ambientes de execução, apenas sendo necessário definir algumas variáveis de ambiente, como uma senha do banco de dados.
+
+% como o perfil de execução (“dev” ou “prod”).
+% Os serviços de ponta por exemplo, usam essas configurações para definir o endereço dos microsserviços de negócio, que é para onde vão fazer as requisições necessárias conforme o usuários interage com a interface.
+
 \subsection*{CI/CD}
 Foi usado o Git como sistema de controle de versão e o GitHub para gerenciamento de repositórios em todos os microsserviços, com configuração de proteção do ramo principal do repositório para evitar \emph{commits} indevidos, assim sendo necessário a criação de um \emph{pull request} e aprovação dele por um administrador do repositório para integração do novo código no ramo principal. 
 
-No microsserviço de ponta de administração também foi implementado um \emph{pipeline} de CI/CD com 3 etapas sequenciais, com uso do GitHub Actions como servidor de integração para executar o \emph{pipeline} automaticamente a cada novo \emph{commit} recebido. A primeiro etapa executa o \emph{linting} nos arquivos JavaScript com o ESLint e os testes de unidade com a biblioteca Karma; a segunda etapa faz a construção e upload do artefato já com o novo código. A terceira etapa usa esse artefato para criar uma imagem de container Docker pronta para implantação, que é subida para o DockerHub, um repositório publico de imagens Docker, assim podendo ser baixada facilmente em qualquer máquina. 
+No microsserviço de ponta de administração também foi implementado um \emph{pipeline} de CI/CD com 3 etapas sequenciais, com uso do GitHub Actions como servidor de integração para executar o \emph{pipeline} automaticamente a cada novo \emph{commit} recebido. A primeira etapa executa o \emph{linting} nos arquivos JavaScript com o ESLint e os testes de unidade com a biblioteca Karma; a segunda etapa faz a construção e \emph{upload} do artefato com o novo código. A terceira etapa usa esse artefato para criar uma imagem de container Docker pronta para implantação, que é subida para o DockerHub, um repositório gratuito de imagens Docker, assim podendo ser recuparada facilmente em outras máquinas. 
 
-[anotação] Poderia ter um diagrama mostrando o pipeline
+% [anotação] Poderia ter um diagrama mostrando o pipeline?
 % Deveria ter um print Mostrar o exemplo do pipeline CICD rodando no GitHub Actions, com proteções de branch e requerimento de revisão de código ?
 
-
 \subsection*{Organização do código - Multirepo}
-Para organização do código foi utilizada a técnica Multirepo com os repositórios no GitHub. Cada microsserviço possui um único repositório independente, porém também há um repositório principal que contém referências para os repositórios de cada microsserviço, reunindo tudo que é necessário para executar a aplicação inteira.
+Para a organização do código, foi utilizada a técnica Multirepo com os repositórios no GitHub. Cada microsserviço possui um único repositório independente, porém também há um repositório principal que contém referências para os repositórios de cada microsserviço, reunindo tudo que é necessário para executar a aplicação inteira.
 
-\subsection*{Contêinerização e orquestração de contêineres}
-[EM PROGRESSO]
+% \subsection*{Testes}
+% Apenas alguns testes de unidade foram implementados no microsserviço de ponta de administração.
 
-Contêirezação com Docker e orquestração com docker-compose para desenvolvimento e Kubernetes para produção
+% \subsection*{Comunicação}
+% Para a comunicação entre os microsserviços, foi implementada comunicação síncrona por meio de requisições HTTP com dados no formato JSON e comunicação assíncrona por meio do sistema de mensagens RabbitMQ. 
 
-Mencionar sobre a replicação e tudo mais do kubernetes.
 
-O kubernetes vai buscar as imagens do repositório de imagens DockerHub e usá-las para configurar os containers para implantação
+\subsection*{Comunicação síncrona}
+A comunicação síncrona é usada apenas entre os microsserviços de ponta e de negócios, proporcionando \emph{feedback} rápido sobre as operações executadas e melhorando a experiência do usuário. 
+Essa comunicação foi implementada por meio da exposição de APIs seguindo os princípios REST, que podem receber requisições HTTP com dados no formato JSON. Depois de recebida a requisição, é feita a verificação de existência do recurso requisitado e a validação dos dados recebidos. Caso sejam válidos, a lógica de negócios adequada é executada e possíveis resultados retornados são devidamente paginados pelo controlador e comprimidos pelo API \emph{gateway}. No microsserviço de usuários, também é verificada a permissão de acesso do cliente requisitante ao recurso, por meio de \emph{tokens} JWT. Assim, antes também é necessário a autenticação do cliente por meio de e-mail e senha, que se validados com sucesso, será respondido com um token JWT que deve ser enviado em todas as próximas requisições.
 
-As configurações foram externalizadas, favorecendo a portabilidade. Todos os microsserviços podem ser iniciados em modo de desenvolvimento ou produção com mínimas alterações necessárias, apenas sendo necessário definir algumas variáveis de ambiente sensíveis, tal como a senha do banco de dados. Além disso, todos os microsserviços tem configurações de desenvolvimento e produção. Os serviços de ponta por exemplo, já usam essas configurações para definir o endereço dos microsserviços de negócio para onde vão fazer as requisições.
+% Além disso, foi usado implementado um API \emph{gateway} com o Nginx, e ele comprime os dados da requisição de resposta
 
-\subsection*{Testes}
-[EM PROGRESSO]
-Testes de unidade. Selenium?
 
-\subsection*{APIs}
-[EM PROGRESSO]
-
-RESTful, 
 
 \subsection*{Comunicação assíncrona}
-[EM PROGRESSO] RabbitMQ
+Para a comunicação entre os microsserviços de negócio foi implementada exclusivamente comunicação assíncrona por meio do sistema de mensagens RabbitMQ, assim cada microserviço pode operar de forma independente, diminuindo o acoplamento entre eles e aumentando a escalabilidade do sistema.
+Também foram usadas configurações de mensagens de modo que se o RabbitMQ for afetado por uma falha ou sair do ar, as mensagens não serão perdidas.
+Sendo assim, as interações entre serviços não dependem de respostas imediatas, contribuindo para uma maior resiliência e tolerância a falhas. Portanto, é possível, por exemplo, que o microsserviço de loja se comunique com o microsserviço de carrinho mesmo que esse último esteja fora do ar, pois ao ser enviada uma mensagem pela loja, ela será armazenada no RabbitMQ, e quando o microsserviço de carrinho eventualmente voltar a funcionar ele pode buscar as mensagens armazenadas e as processar de maneira adequada. 
+
+% Além disso, a utilização do RabbitMQ possibilitou a implementação de mecanismos de retry e gerenciamento de picos de carga, assegurando que mensagens importantes, como atualizações de estoque ou confirmações de pedidos, fossem processadas mesmo em cenários de alta demanda ou instabilidades temporárias. 
+
+% Esse método de comunicação também simplifica a integração entre serviços que podem ser escritos em linguagens diferentes ou operados em ambientes distintos, mantendo a integridade dos processos e melhorando a performance geral da aplicação.
 
 \subsection*{Monitoramento}
-[EM PROGRESSO] Prometheus, grafana, loki,
+% Prometheus, grafana, loki, JAEGER??
+Para o monitoramento do sistema, foi utilizado Prometheus para captura e processamento de métricas, Loki para agregação dos \emph{logs}, e Grafana para busca e exibição gráfica desses. Por falta de tempo, apenas o microsserviço de usuários foi configurado para expor métricas para o Prometheus e para enviar os \emph{logs} para o Loki, mas ambos estão prontos para receberem informações de outros microsserviços também. 
+% Por usar o framework \emph{spring boot}, que dispõe de bibliotecas com fácil configuração de integração com essas ferramentas, o microsserviço de usuários foi escolhido.
 
-O monitoramento foi feito apenas para o microsserviço de usuários por falta de tempo, mas todos os microsserviços podem ser configurados para utilizá-los, e novos \emph{dashboards} podem ser criados para monitorá-los
+Primeiramente foi configurada a integração entre o \emph{spring boot} e o Prometheus a partir da extensão Actuator, que expõe métricas da aplicação web Java. O prometheus, então, captura essas métricas, as agrega e as disponibiliza no formato de séries temporais. Em seguida, foi instalada e configurada a extensão Loki4j, que faz o envio automático de \emph{logs} de uma aplicação Java para o Loki, por meio da API que ele expõe. Após isso, foi criado um \emph{dashboard} personalizado no Grafana que busca as métricas expostas pelo Prometheus, por meio da linguagem PromQL, e os \emph{logs} agregados no Loki, por meio da linguagem LogQL, para então os exibir graficamente. Por fim, também foi criado um \emph{script} para simulação do uso do microsserviço de usuários, para que possam ser geradas algumas métricas e \emph{logs} interessantes para serem visualizados no \emph{dashboard} criado, como pode ser visto na \autoref{figura-dashboard}. Instruções de como configurar o Grafana e importar o \emph{dashboard} personalizado estão no arquivo README do repositório do projeto.
+
+\begin{figure}[htb]
+	\caption{\label{figura-dashboard}Visualização do dashboard do Grafana personalizado}
+	\begin{center}
+	    \includegraphics[scale=0.4]{Imagens/dashboard.png}
+	\end{center}
+	\legend{Fonte: Autor}
+\end{figure}
+
+Ademais, também foi implementado \emph{logging} no API \emph{gateway}, usando a funcionalidade embutida do Nginx que grava \emph{logs} no sistema de arquivos com informações de origem da requisição, recurso solicitado, agente usado, entre outros, assim provendo informações de todas as requisições que passam por ele.
+
+% O monitoramento foi feito apenas para o microsserviço de usuários por falta de tempo, mas todos os microsserviços podem ser configurados para utilizá-los, e novos \emph{dashboards} podem ser criados para monitorá-los
+
+% Também foi criado um dashboard no grafana com diversas informações importantes de métricas e logging, usando a linguagem PromQL para as consultas ao Prometheus e LogQL para o Loki.

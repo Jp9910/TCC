@@ -18,6 +18,25 @@ Quando se está procurando por ferramentas para o desenvolvimento de aplicaçõe
 
 % asdfasdf. \cite{Tanembaum-Steen}.
 
+\section{Serviços em nuvem}
+% \section{Provedores em nuvem}
+% \section{Infraestruturas, plataformas e serviços em nuvem}
+
+% software as a SERVICE
+% platform as a SERVICE
+O uso de serviços em nuvem no desenvolvimento e lançamento de aplicações tem crescido cada vez mais na última década. As principais plataformas de nuvem, AWS, Azure e GCP, oferecem uma enorme variedade de serviços que permitem que aplicações sejam criadas, lançadas e mantidas com mais qualidade e de maneira mais simples. De interesse especial às aplicações com arquitetura de microsserviços, eles incluem serviços confiáveis e escaláveis de IaaS ou PaaS, oferencendo desde máquinas virtuais e contêineres até bancos de dados, sistemas de mensagens e soluções \emph{serverless}. Ao usar esses serviços, uma grande parte do trabalho de configuração e gerenciamento da infraestrutura ou plataforma é terceirizada para esses provedores, que quase certamente são melhores em lidar com essas questões. Além disso, a disponibilidade global dos centros de dados dos provedores de nuvem permite que aplicações sejam distribuídas geograficamente, reduzindo a latência e melhorando a experiência do usuário final. \cite{livro-building-microservices}
+
+% Os provedores de nuvem também oferecem recursos avançados de segurança e conformidade, garantindo a proteção de dados e o cumprimento de normas regulatórias. Soluções como gerenciamento de identidade e acesso, criptografia de dados e monitoramento contínuo ajudam a proteger aplicações contra ameaças e falhas. 
+% Outro fator importante que favorece o uso de serviços em nuvem é a segurança e conformidade oferecida pelos provedores, que geralmente implementam mecanismos avançados de proteção, como criptografia de dados, gerenciamento de identidade e acesso, além de auditorias e monitoramento contínuo. Isso possibilita que empresas atendam a regulamentações e padrões de segurança sem a necessidade de gerenciar a infraestrutura internamente. Dessa forma, o uso de serviços em nuvem não só otimiza o desenvolvimento e a implantação de aplicações, mas também garante maior confiabilidade, disponibilidade e inovação no ambiente digital.
+
+
+% \subsection{Aplicações \emph{serverless} (sem servidor)}
+% TODO: Poderia ter uma seção dedicada a falar sobre provedores em núvem e seus papeis no desenvolvimento/implantação de uma arquitetura de microsserviços. 
+
+%    O livro \cite{livro-building-microservices} Capitulo 1 > Enabling technology > Public cloud and serverless tem informações interessantes sobre serverless 
+
+% Soluções Serverless:  Claudia (expressJS), Apache Openwhisk, Serverless, Kubeless, IronFunctions, AWS Lambda, OpenFaaS, Microsoft Azure Functions.
+
 \section{\emph{Frameworks} e linguagens de programação}
 
 \emph{Frameworks} desempenham um papel fundamental no desenvolvimento de microsserviços, permitindo que os desenvolvedores criem sistemas modulares, escaláveis e de fácil manutenção de forma mais simples e evitando grande parte do código \emph{boilerplate}. A escolha do \emph{framework} e da linguagem pode dependender de diversos fatores, como os requisitos do sistema, a experiência da equipe e as preferências tecnológicas. Existem diversas opções disponíveis no mercado, cada uma com suas características, vantagens e desvantagens, sendo impossível abordar todas em detalhes. Dessa forma, aqui são discutidas apenas algumas das mais populares para o desenvolvimento de microsserviços.
@@ -106,9 +125,6 @@ Ademais, a decisão entre bancos de dados SQL e NoSQL deve ser feita com base no
 
 \section{Bancos de dados em memória - Memcached e Redis}
 Outro tipo de banco de dados importante para microsserviços são os em memória, como o Memcached e o Redis, que são ideais para \emph{caching}. O Memcached, apoiado pela Netflix, é simples e eficiente para armazenamento de chave-valor puro, sendo altamente escalável e consumindo pouca memória por não armazenar metadados complexos. No entanto, ele não oferece suporte a estruturas de dados avançadas, persistência, replicação nativa ou recursos como pub/sub. Já o Redis é mais versátil, suportando listas, conjuntos, hashes e permitindo também persistência dos dados no disco, além de replicação e \emph{clustering}, tornando-se útil para aplicações além do cache, como filas e contadores. Enquanto o Memcached tende a ser mais rápido para o propósito puro de \emph{cache} devido à sua leveza, o Redis é mais poderoso e flexível, mas pode exigir mais recursos dependendo do uso. \cite{memcached,redis}
-
-% \subsubsection{Memcached}
-% \subsubsection{Redis}
 
 % \subsection{Escalamento de bancos de dados}
 
@@ -318,6 +334,8 @@ Nos provedores de nuvem AWS, Azure e GCP, tem-se o SQS, Azure Service Bus e Goog
 \subsection*{Docker}
 O Docker é uma ferramenta de conteinerização amplamente adotada devido à sua facilidade de uso, documentação abrangente e grande comunidade. Ele segue um modelo cliente-servidor, onde um \emph{daemon} (processo em segundo plano) gerencia os contêineres. Os benefícios do Docker incluem configuração simples; implantação e escalamento de contêineres independentemente; grande diversidade de imagens de contêineres disponíveis; e integração com o Kubernetes, uma ferramenta popular e poderosa para gerenciamento de infraestrutura em contêineres. Tais benefícios fazem do Docker uma excelente escolha para o desenvolvimento e implantação de microsserviços. \cite{lxc-vs-docker,podman-vs-docker}
 
+% TODO:? falar sobre o docker-compose
+
 % Os principais casos de uso para o Docker são implantações simplificadas ou automáticas,
 % Essa abordagem facilita a orquestração de múltiplos contêineres e a integração com ferramentas como Kubernetes, tornando-o uma opção confiável para aplicações distribuídas. 
 
@@ -379,7 +397,7 @@ O LXC (Linux Containers) adota uma abordagem diferente, fornecendo contêineres 
 
 % Ferramenta para rate limiting. \cite{rapidAPI-twitter}
 
-\subsection{Gerenciamento de contêineres com Kubernetes}
+\subsection{Gerenciamento de contêineres com Kubernetes}\label{secao-kubernetes}
 O Kubernetes é uma plataforma de orquestração de contêineres de código aberto, projetada para facilitar o gerenciamento de serviços e cargas de trabalho que envolvem contêineres, favorecendo alta disponibilidade e escalabilidade de sistemas distribuídos. Com ele, é possível definir como os contêineres devem ser implantados, monitorados e escalados de maneira declarativa e automatizada, facilitando a administração da infraestrutura. \cite{kubernetes}
 
 O Kubernetes pode ter múltiplos \emph{clusters} de servidores onde os contêineres são executados, podendo distribuir cargas de trabalho de maneira eficiente e favorecendo a alta disponibilidade das aplicações. Os principais conceitos do Kubernetes são os \emph{pods}, que agrupam contêineres, os \emph{services}, que intermediam a comunicação interna e/ou externa ao \emph{cluster}, e os \emph{deployments}, que controlam a atualização e escalamento dos contêineres. \cite{kubernetes}
@@ -403,7 +421,7 @@ Dessa forma, o Kubernetes pode ser utilizado em arquiteturas de microsserviços 
 % \subsection{Orquestração de contêineres com Conductor}
 % Conductor* (https://conductor-oss.github.io/conductor/devguide/concepts/index.html)
 
-\subsubsection{Kubernetes em provedores na nuvem}
+\subsubsection*{Kubernetes em provedores na nuvem}
 Provedores na núvem como AWS, Azure e GCP oferecem serviços gerenciados de Kubernetes, assim reduzindo ainda mais a complexidade operacional associada à instalação, configuração e manutenção da infraestrutura. Esses serviços facilitam a implementação de clusters Kubernetes, integrando-se com os ecossistemas das respectivas plataformas.
 
 Além disso, os provedores podem oferecer recursos adicionais, como balanceadores de carga gerenciados e integração com sistemas de monitoramento e segurança. A elasticidade proporcionada pela nuvem garante que aplicações com arquitetura de microsserviços possam escalar globalmente sem a necessidade de gerenciar servidores físicos. Ademais, ao usar o Kubernetes em provedores na nuvem a portabilidade ainda é mantida, podendo as aplicações serem facilmente migradas entre provedores ou para infraestrutura híbrida, assim evitando o que é conhecido como \emph{vendor lock-in} (bloqueio de fornecedor).
@@ -473,14 +491,6 @@ Essa ferramenta oferece uma interface gráfica que permite visualizar os rastrea
 
 % \section{Framework arquitetural}
 % goa*, Kong*
-
-% \section{Aplicações \emph{serverless} (sem servidor)}
-% TODO: Poderia ter uma seção dedicada a falar sobre provedores em núvem e seus papeis no desenvolvimento/implantação de uma arquitetura de microsserviços. 
-
-%    O livro \cite{livro-building-microservices} Capitulo 1 > Enabling technology > Public cloud and serverless tem informações interessantes sobre serverless 
-
-
-% Claudia (expressJS), Apache Openwhisk, Serverless, Kubeless, IronFunctions, AWS Lambda, OpenFaaS, Microsoft Azure Functions.
 
 % \section{Plataformas}
 % Microsoft Azure is a microservice platform, and it provides a fully automated dynamic infrastructure, SDKs, and runtime containers along with a large portfolio of existing microservices that you can leverage, such as DocumentDb, Redis In-Memory Cache, and Service Bus, to build your own microservices catalog. \cite{Familiar2015}

@@ -1,14 +1,47 @@
 \chapter{Conclusão}\label{chapter-conclusao}
-[EM PROGRESSO]
+Como pôde ser constatado, a escolha da arquitetura de uma aplicação não é uma decisão simples. Assim como quase tudo na computação, trata-se de \emph{tradeoffs}; e para determinar se a arquitetura a ser escolhida é adequada, precisa-se entender seus benefícios, riscos, desvantagens e desafios para os aplicar ao contexto tratado. Apesar de não existir uma definição formal para a arquitetura de microsserviços, foram apresentadas muitas características frequentes que a diferencia de outras abordagens arquiteturais, tais como a componentização, flexibilidade de ferramentas e alta complexidade.
 
-Como pôde ser constatado, a escolha da arquitetura de uma aplicação não é uma decisão simples. Assim como quase tudo na computação, trata-se de \emph{tradeoffs}, e para determinar se a arquitetura a ser escolhida é adequada, precisa-se entender e contextualizar seus benefícios, riscos, desvantagens e desafios. Apesar de não existir uma definição formal para a arquitetura de microsserviços, há muitas características que a diferencia de outras abordagens arquiteturais, tais como a componentização, a evolução, e a complexidade.
+Também foram apresentadas e discutidas diversas práticas comumente usadas no desenvolvimento de aplicações com arquitetura de microsserviços, sendo observada uma ampla concordância entre pesquisadores e praticantes de microsserviços acerca do que é comum, do que é bem-visto, do que é considerado um anti-padrão, e de quais são os desafios envolvidos. Entretanto, foi descoberto um ponto em que há mais espaço para discussão e pesquisa - a prática de se começar uma arquitetura de microsserviços por uma arquitetura monolítica até que a aplicação e seus domínios já estejam bem definidos -, pois foi observado um certo nível de discordância entre os autores das referências utilizadas sobre o que é ou não necessário para sustentar uma arquitetura de microsserviços desde o início do desenvolvimento da aplicação e quais seriam as razões para se adotar ou não essa arquitetura.
 
-Foi observada uma ampla concordância entre pesquisadores e praticantes de microsserviços acerca do que é comum, do que é bem-visto, do que é considerado um anti-padrão, e de quais são os desafios no desenvolvimento de aplicações com arquitetura de microsserviços, assuntos os quais foram contextualizados e discutidos neste trabalho. Também foi descoberto um ponto em que há mais espaço para discussão e pesquisa - a prática de se começar uma arquitetura de microsserviços por uma arquitetura monolítica até que a aplicação e seus domínios já estejam bem definidos -, pois foi observado certo nível de discordância entre os autores das bibliográfias revisadas sobre o que é ou não necessário para sustentar uma arquitetura de microsserviços desde o início do desenvolvimento da aplicação, e quais seriam as razões para se adotar ou não essa arquitetura.
+Além disso, foram apresentadas diversas ferramentas que cumprem propósitos importantes para o sucesso de uma arquitetura de microsserviços, desde \emph{frameworks} de desenvolvimento até ferramentas de monitoramento, cujos contextos, benefícios e desvantagens devem ser compreendidos, para assim favorecer a escolha das mais adequadas ao contexto tratado. 
 
-TODO: melhorar a conclusão
+Foram escolhidas algumas dessas ferramentas e combinadas com certas práticas apresentadas e alguns padrões de projeto para ser desenvolvida, implantada e monitorada uma aplicação web de \emph{E-commerce} com arquitetura de microsserviços. Ela foi desenvolvida em diferentes linguagens de programação; usa múltiplos bancos de dados; usa um API \emph{gateway} para intermédio das requisições; cumpre a maioria dos fatores da metodologia 12-fatores; é contêinerizada e orquestrada; usa comunicação síncrona por meio de requisições HTTP e assíncrona por meio do sistema de mensagens RabbitMQ onde apropriado; segue certas práticas de CI/CD; e conta com monitoramento em um dos microsserviços, assim tendo-se uma aplicação com arquitetura de microsserviços completa e robusta, porém ainda com bastante espaço para melhorias.
+
+Dessa forma, este trabalho explorou de forma abrangente a arquitetura de microsserviços e todos os objetivos estabelecidos foram cumpridos. Entretanto, a tecnologia evolui rápida e constantemente, assim sempre surgindo novos padrões, práticas e ferramentas para o desenvolvimento de \emph{software}, especialmente para sistemas complexos como os que usam a arquitetura de microsserviços; e se manter a par deles é uma eterna tarefa dos profissionais da computação.
+
+% In conclusion, this thesis provided a comprehensive exploration of microservice architecture, highlighting both the practices and tools essential for its successful implementation. By analyzing various methodologies and integrating state-of-the-art tools, the research demonstrated how microservices can enhance scalability, resilience, and maintainability in complex systems. The development of an example application not only validated the theoretical concepts but also offered a practical blueprint for real-world deployment, showcasing the benefits and addressing the inherent challenges of distributed system design. Ultimately, the findings underscore that while the microservices approach introduces new complexities in areas such as service orchestration and data consistency, it also fosters innovation and agility, paving the way for future advancements in software architecture.
+
+% Objetivos:
+% - Caracterizar a arquitetura de microsserviços; OK - CAP2 E 3
+
+% - Apresentar e discutir práticas comumente usadas no desenvolvimento de aplicações com arquitetura de microsserviços; OK - CAP4
+
+% - Apresentar e contextualizar ferramentas que são frequentemente usadas e que cumprem propósitos importantes em aplicações com arquitetura de microsserviços; OK - CAP5
+
+% - Contextualizar essas ferramentas, apontando os problemas que resolvem e necessidades que suprem, >>assim como seus pontos positivos e negativos<<;
+% % - Contextualizar essas ferramentas COMPARATIVAMENTE(?), apontando os problemas que resolvem e necessidades que suprem;
+
+% - Desenvolver uma aplicação exemplar com arquitetura de microsserviços, usando uma combinação das ferramentas e práticas apresentadas; OK - CAP6
+
+
+% não existe escolha certa ou errada, apenas a mais adequada ou menos.
+
+% >>>
+% As conclusões constituem a parte final do texto, na qual se apresentam as considerações finais sobre o assunto, se os objetivos foram alcançados, o que se descobriu, quais outras questões surgiram a partir dos resultados e se as hipóteses se confirmaram ou não. Vale lembrar que nenhum trabalho de pesquisa encerra um tema ou problema, por isso, evite fazer afirmações redutoras ou definitivas.
+
+% Na conclusao pode ter menção a: trabalhos futuros a serem feitos, limitações do trabalho 
+% <<<
+
+% ?Comentar sobre o objetivo de Expor uma boa quantidade de ferramentas tal que supra as necessidades mais frequentes de uma arquitetura de microsserviços, com algumas alternativas.
 
 % A proposta de uma combinação de ferramentas que podem ser usadas no desenvolvimento de aplicações com arquitetura de microsserviços e suas contextualizações ficaram adiadas para serem exploradas na próxima etapa deste trabalho. Também ficaram para a próxima etapa o desenvolvimento de uma aplicação exemplar com arquitetura de microsserviços usando a combinação proposta e a discussão acerca dos pontos positivos e negativos observados no uso dessas ferramentas.
 
-% As conclusões constituem a parte final do texto, na qual se apresentam as considerações finais sobre o assunto, se os objetivos foram alcançados, o que se descobriu, quais outras questões surgiram a partir dos resultados e se as hipóteses se confirmaram ou não. Vale lembrar que nenhum trabalho de pesquisa encerra um tema ou problema, por isso, evite fazer afirmações redutoras ou definitivas.
 
-% ?Comentar sobre o objetivo de Expor uma boa quantidade de ferramentas tal que supra as necessidades mais frequentes de uma arquitetura de microsserviços, com algumas alternativas.
+% Quando se está procurando por ferramentas para o desenvolvimento de aplicações, a
+% quantidade imensa de opções disponíveis pode ser opressiva. Perguntas como "Para que serve
+% a ferramenta X"? "Qual a diferença entre a ferramenta X e a ferramenta Y", "Em qual cenário
+% eu devo usar a ferramenta X?", "Qual ferramenta funciona melhor com a ferramenta X?"são
+% muito comuns para iniciantes ou para pessoas experientes em poucas ferramentas. E apesar de
+% nem sempre existirem respostas concretas para essas perguntas ou das respostas mudarem com
+% o passar do tempo, esse capítulo provê uma orientação superficial para o desenvolvedor que
+% procure entender o contexto de cada ferramenta e o que elas têm a oferecer

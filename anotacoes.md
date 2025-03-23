@@ -67,11 +67,14 @@ Perguntar:
 ## TO DO:
 
     #### Prioridade alta:
-    - Terminar o capítulo 6
-    - Logs/Caching no Nginx (gateway apenas?)
-    - Implementar o Jaeger para tracing?
+    - Organizar o multirepo com todos os outros repositorios
+    - Incluir alguma outro microsserviço para ser monitorado
+    - Ver um serviço da amazon pra criar um dominio pra o site
+    - Logs/Caching no Nginx (gateway)
     - Terminar a orquestração de serviços com kubernetes
         API Gateway pelo AWS ElasticLoadBalancing, que pode ser feito pelo kubernetes ??
+    - Implementar o Jaeger para tracing?
+    - Terminar o capítulo 6 e conclusão ✅
     - Serviço de Financeiro ✅
     - Caching na Loja (com Memcached) ✅
     - API Gateway pelo Nginx ✅

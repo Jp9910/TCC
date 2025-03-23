@@ -35,7 +35,6 @@ Contudo, usar serviços dessa forma também traz algumas desvantagens. Uma delas
 
 \section{Portabilidade}\label{sec:portabilidade} % Flexibilidade no ambiente de execução
 
-% TODO: Melhorar essa parte?
 A portabilidade de uma aplicação diz respeito a quão facilmente ela pode ser executada em diferentes ambientes de execução com variadas configurações de plataforma e infraestrutura. Ela não é inerente aos microsserviços, mas é facilitada por terem escopo e tamanho limitados. No entanto, faz-se necessário o uso de técnicas que aumentem essa portabilidade, como por meio de \hyperref[secao-conteinerizacao]{conteinerização}, automação e externalização de configurações, para que assim os microsserviços possam ser implantados de forma fácil e eficiente em ambientes de execução variados. \cite{Familiar2015}.
 % \autoref{secao-externalizacao-de-configuracoes}
 
@@ -53,7 +52,7 @@ A erosão de \emph{software} é inevitável em qualquer aplicação - conforme u
 % Entretanto, é possível migrar de um sistema monolítico para a arquitetura de microsserviços aos poucos, um serviço por vez, identificando capacidades de negócio, implementando-as como um microsserviço, e integrando com uso de padrões de baixo acoplamento. Ao longo do tempo, mais e mais funcionalidades podem ser separadas e implementadas como microsserviço, até que o núcleo da aplicação monolítica se transforme em apenas um outro serviço, ou um microsserviço. \cite{Familiar2015}
 
 \section{Complexidade e desafios}
-% TODO: Capítulo 1 do livro \cite{livro-building-microservices} tem uma sessão Microservice Pain Points com muita informação boa
+% Capítulo 1 do livro \cite{livro-building-microservices} tem uma sessão Microservice Pain Points com muita informação boa
 
 O uso da arquitetura de microsserviços implica num grande aumento de complexidade não apenas na infraestrutura, mas também na segurança da aplicação e em muitas etapas do ciclo de desenvolvimento do \emph{software}, incluindo o desenvolvimento, testes, monitoramento e \emph{debug}. Além disso, o uso de diversas ferramentas diferentes, o que é comum nessa arquitetura, pode requerer o envolvimento de mais desenvolvedores e com mais experiência, também podendo ocasionar problemas por inexperiência deles. \cite{top10-microservices-challenges,martin-fowler-microservice-tradeoffs,livro-building-microservices}.
 
