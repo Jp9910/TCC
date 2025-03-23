@@ -1,5 +1,41 @@
 # TCC 2
 
+ver como colocar os orientadores 
+
+tirar o resumo do cap do sumário
+
+cap 2 - citar 2 exemplos: "tais como", -  OK
+
+as figuras devem aparecer depois das referencias. figura 1. - OK
+
+Geralmente se tem mais trabalhos relacionados. Se adicionar mais trabalhos relacionados, abre um novo capítulo. - OKKOKOKOKOK!!!!
+	> blogs do martin fowler?
+	> livro de continuous delivery de HUMBLE J
+	> oracle corporation
+	> blog do RICHARDSON C
+	> CAOPLE
+
+erros de grafia sao importantes. - OK
+
+cap 5. ??
+
+cap 6
+	> remover a descricao dos diagramas da intro do capitulo - OK
+
+	> colocar a figura mais perto da referencia
+
+	> começar pelo 6.2, descrevendo a aplicação, e depois explicar o que foi usado
+
+	>- ou fala da app, depois dos padroes e ferramentas
+	>- ou começa a descrever e fala da prática usada para aquilo
+
+	> diagrama de pacotes e componente devem vir na frente, pra falar da arquitetura
+
+	> justificar que existem varias sequencias, mas foi usada apenas 1 para ilustração
+
+	> algum trabalho futuro na conclusão, se alguem quisesse extender o trabalho. recuperar o limite da implementação de alguma pratica em um unico microsservico na conclusão
+
+
 Perguntar:
     
     - ✅ mudar o nome do orientador? deixar os 2

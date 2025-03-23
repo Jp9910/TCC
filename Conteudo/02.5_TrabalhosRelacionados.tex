@@ -1,0 +1,121 @@
+\chapter{Trabalhos relacionados}\label{chapter-trabalhos-relacionados}
+
+% The command \texorpdfstring takes two arguments:
+%     what should be typeset in the PDF, and
+%     what should appear in the bookmark.
+% https://tex.stackexchange.com/questions/699195/how-to-use-texorpdfstring-correctly-and-properly
+
+\section{Microservices, IoT and Azure: Leveraging DevOps and Microservice Architecture to Deliver SaaS Solutions, por \texorpdfstring{\citeonline{Familiar2015}}{Familiar (2015)}}
+
+Esse livro oferece um guia prático para a adoção de processos de entrega contínua de alta velocidade, visando criar soluções de \emph{software} como serviço (SaaS) confiáveis e escaláveis. Essas soluções são projetadas e construídas utilizando uma arquitetura de microsserviços, implantadas no provedor de nuvem Azure e gerenciadas por meio de automação.
+
+Como explicado no livro, microsserviços fazem uma coisa e fazem bem. Eles representam capacidades de negócio definidas usando o projeto orientado a domínio (DDD), são testados a cada passo do \emph{pipeline} de implantação, e lançados por meio de automação como serviços independentes, isolados, altamente escaláveis e resilientes em uma infraestrutura em nuvem distribuída. Além disso, cada microsserviço pertence a um time único de desenvolvedores, que trata o desenvolvimento do microsserviço como um produto, entregando \emph{software} de alta qualidade em um processo rápido e iterativo com envolvimento do cliente e satisfação como métrica de sucesso.
+
+Em contraste com o presente trabalho, \citeonline{Familiar2015} não aborda práticas e ferramentas usadas no desenvolvimento de microsserviços.
+
+\section{A Systematic Mapping Study on Microservices Architecture in DevOps, por \texorpdfstring{\citeonline{WASEEM2020110798}}{Waseem, Liang e Shahin (2020)} }
+
+Esse trabalho tem o objetivo de sistematicamente identificar, analisar, e classificar a literatura sobre microsserviços em DevOps. Inicialmente o leitor é contextualizado no mundo dos microsserviços e a cultura DevOps. Os autores usam a metodologia de pesquisa de um mapeamento sistemático da literatura publicada entre Janeiro de 2009 e Julho de 2018. Após selecionados 47 estudos, é feita a classificação deles de acordo com os critérios definidos pelos autores, e então é feita a discussão sobre os resultados obtidos - são expostos a quantidade de estudos sobre determinados tópicos em microsserviços, problemas e soluções, desafios, métodos de descrição, padrões de projeto, benefícios, suporte a ferramentas, domínios, e implicações para pesquisadores e praticantes. Por fim, são mapeados os desafios enfrentados e as soluções empregadas para os resolver.
+
+Em contraste com o presente trabalho, \citeonline{WASEEM2020110798} não abordam as características dos microsserviços ou ferramentas para os desenvolver.
+
+% Os principais resultados são: (1) São identificados Três temas de pesquisa em AMS com DevOps “desenvolvimento e operações de microsserviços em DevOps”, “abordagens e suporte a ferramentas para sistemas baseados em AMS em DevOps”, e “Experiência de migração de AMS em DevOps”. (2) São identificados 24 problemas e apontadas suas respectivas soluções com respeito a implementação de microsserviços com DevOps. (3) A AMS é descrita princiapalmente usando caixas e linhas. (4) A maioria das qualidades da AMS são afetadas positivamente quando aplicadas com DevOps. (5) 50 ferramentas que suportam a construção de sistemas baseados em AMS são apontados. (6) A combinação da AMS e DevOps tem sido aplicada em uma ampla variedade de domínios de aplicações.
+
+\section{Design, monitoring, and testing of microservices systems: The practitioners’ perspective, por \texorpdfstring{\citeonline{design-monitoring-testing-waseem}}{Waseem et al. (2021)}}
+
+Esse trabalho tem o objetivo de entender como sistemas de microsserviços são projetados, monitorados e testados na indústria. Foi conduzida uma pesquisa relativamente grande que obteve 106 respostas e 6 entrevistas com praticantes de microsserviços e os resultados obtidos identificam os desafios que esses praticantes enfrentam e as soluções empregadas no projeto, monitoramento e teste de microsserviços. Também é feita uma discussão profunda sobre os resultados, da perspectiva dos praticantes, e sobre as implicações para pesquisadores e praticantes.
+
+Em contraste com o presente trabalho, \citeonline{design-monitoring-testing-waseem} não abordam as características dos microsserviços ou ferramentas usadas para os desenvolver.
+
+\section{Building Microservices: Designing Fine-Grained Systems, por \texorpdfstring{\citeonline{livro-building-microservices}}{Newman (2015)}}
+
+\citeonline{livro-building-microservices} explora os conceitos fundamentais da arquitetura de microsserviços, oferecendo uma abordagem prática para projetar, implementar e gerenciar aplicações escaláveis com essa arquitetura. O autor também fornece diretrizes sobre como dividir uma aplicação monolítica em serviços menores e independentes, discutindo os benefícios e desafios dessa arquitetura desde a modelagem até a implantação.
+
+Entretanto, diferente do presente trabalho, \citeonline{livro-building-microservices} não discute ferramentas para a implementação dos conceitos e práticas discutidas, focando em ideias em vez de tecnologias, pois reconhece que detalhes de implementação e ferramentas estão sempre em mudança.
+
+\section{Continuous Delivery: reliable software releases through build, test, and deployment automation, por \texorpdfstring{\citeonline{continuous-delivery-jez-humble}}{Humble e Farley (2010)}}
+Esse livro aborda a integração contínua no desenvolvimento de \emph{software} moderno e tem como objetivo melhorar a colaboração entre as equipes responsáveis pela entrega de software. Ele aborda uma ampla gama de tópicos, desde gerenciamento de configuração, controle de versão e planejamento de lançamentos até técnicas de automação para construção, teste e implantação de software; tópicos esses que são muito relevantes no desenvolvimento de aplicações com arquitetura de microsserviços. O livro destaca que esses processos, muitas vezes vistos como secundários à programação, são essenciais para o sucesso da entrega de software e podem ter um grande impacto nos custos de produção e na eficiência do produto.
+
+Em contraste com o presente trabalho, esse livro não se aprofunda em tópicos de arquitetura de \emph{software}, porém é bastante relevante para qualquer sistema sendo desenvolvido como modelo de \emph{software} como um serviço (SaaS).
+
+\section{Building Microservices with Micronaut, por \texorpdfstring{\citeonline{relacionados-micronaut}}{Singh, Dawood e The Micronaut® Foundation (2021)}}
+Esse livro serve como um guia prática de microsserviços para desenvolvedores Java, abordando desde os conceitos fundamentais e preocupações comuns dos microserviços até a implementação prática com o Micronaut, um \emph{framework} de código aberto, baseado na JVM, e projetado para facilitar a criação rápida e eficiente de microserviços. O livro também aborda aspectos de implantação e manutenção, além de introduzir o uso do Micronaut no contexto de Internet das Coisas (IoT). Diferente do presente trabalho, ele foca em um único \emph{framework} e linguagem para a implementação de uma arquitetura de microsserviços.
+% Em resumo, "Building Microservices with Micronaut" oferece uma visão abrangente e prática sobre como desenvolver, testar, implantar e manter aplicações de microserviços utilizando o Micronaut, sendo uma leitura valiosa para desenvolvedores que buscam eficiência e desempenho em suas soluções.
+
+% By the end of this book, you'll be able to build, test, deploy, and maintain your own microservice apps using the framework. Intermediate-level knowledge of Java programming and implementing web services development in Java is required.
+
+\section{Microservices Patterns: with Examples in Java, por \texorpdfstring{\citeonline{relacionados-ms-patterns}}{Richardson (2019)}}
+
+Esse livro é um guia abrangente que aborda a arquitetura de microsserviços, discutindo 44 padrões reutilizáveis para o desenvolvimento e implantação de aplicações com arquitetura de microsserviços de alta qualidade, oferecendo também exemplos práticos na linguagem Java.
+
+O autor inicia discutindo os desafios das arquiteturas monolíticas tradicionais e os benefícios potenciais dos microsserviços, fornecendo estratégias práticas para a decomposição de serviços e a comunicação entre eles, também enfatizando a importância de desenvolver serviços prontos para produção, abordando tópicos como implantação, monitoramento e manutenção de microsserviços. Diferente do presente trabalho, esse livro foca em padrões para o desenvolvimento dos microsserviços e com a linguagem Java.
+
+% Além disso, o autor explora padrões para gerenciar transações distribuídas, como sagas, e aborda o design da lógica de negócios utilizando event sourcing. Questões relacionadas à implementação de consultas, padrões de APIs externas e estratégias eficazes de testes também são discutidas em profundidade.
+
+\section{Building Microservices with ASP.NET Core, por \texorpdfstring{\citeonline{relacionados-asp-net}}{Hoffman (2017)}}
+
+Esse livro é um guia prático que ensina como criar, testar, compilar e implantar microsserviços utilizando o \emph{framework} da Microsoft gratuito e de código aberto ASP.NET Core. A obra aborda conceitos fundamentais como desenvolvimento orientado a testes e \emph{API-first}, comunicação entre serviços por meio da criação e consumo de serviços de apoio, como bancos de dados e filas, e a construção de microsserviços que dependem de fontes de dados externas.
+
+Além disso, o autor explora o uso do \emph{framework} ASP.NET Core para desenvolver aplicações web projetadas para serem implantadas na nuvem, destacando práticas recomendadas para a criação de serviços que consomem ou são consumidos por outros serviços, aceitam configurações externas e implementam medidas de segurança eficazes.
+
+% Com exemplos práticos e orientações detalhadas, o livro é uma leitura essencial para desenvolvedores que desejam adotar a arquitetura de microsserviços utilizando o ASP.NET Core, visando a construção de aplicações escaláveis e eficientes na nuvem
+
+\section{Building Event-Driven Microservices, por \texorpdfstring{\citeonline{relacionados-event-driven}}{Bellemare (2020)}}
+Esse livro é um guia prático que aborda a construção de microserviços orientados a eventos para gerenciar e escalar dados organizacionais em tempo real. O autor explora como arquiteturas orientadas a eventos podem melhorar a agilidade e a escalabilidade dos sistemas, especialmente quando integradas a microserviços. Também são discutidos padrões de integração, desde os mais básicos até os altamente escaláveis, como Captura de Dados de Alteração (\emph{Change Data Capture} - CDC) e o padrão de tabela de \emph{outbox}, essenciais para transformar uma arquitetura de microserviços em um sistema orientado a eventos confiável. Além disso, o autor também aborda conceitos de \emph{design} de eventos, padrões de processamento de \emph{streams} e a integração de microsserviços orientados a eventos com sistemas baseados em requisição e resposta. 
+% Em resumo, "Building Event-Driven Microservices" oferece uma visão abrangente de como arquiteturas orientadas a eventos podem ser implementadas para alavancar o uso de dados em larga escala nas unidades de negócios de uma organização, proporcionando acesso quase em tempo real a esses dados
+
+Diferente do presente trabalho, esse livro tem foco em como as arquiteturas de microsserviços e orientada a eventos podem ser mescladas de modo a permitir o desenvolvimento de sistemas capazes de lidar com volumes de dados em larga escala nas unidades de negócio de uma organização.
+
+
+\section{The Art of Decoding Microservices, por \texorpdfstring{\citeonline{relacionados-decoding-microservices}}{Bhatnagar (2025)}}
+Esse livro oferece uma visão detalhada sobre a arquitetura de microserviços, abordando como projetar, construir e gerenciar sistemas com essa arquitetura, incluindo exemplos práticos. A obra é voltada para profissionais de tecnologia, especialmente aqueles que buscam adotar microserviços para construir aplicações escaláveis e resilientes. Os autores explicam as vantagens de dividir uma aplicação monolítica em serviços independentes, detalhando os aspectos técnicos de como os microserviços podem ser implementados com eficiência.
+
+Os autores exploram práticas essenciais como o \emph{design} de APIs, integração de serviços, comunicação entre microsserviços e como lidar com desafios frequentes, como a consistência de dados e a gestão de transações distribuídas. Além disso, discutem a importância de ferramentas de orquestração e automação no ciclo de vida dos microsserviços, abordando aspectos de CI/CD, testes e monitoramento, assim como questões de segurança e a importância de projetar sistemas de monitoramento eficazes para favorecer a operação contínua e a detecção rápida de falhas. 
+
+O presente trabalho é similar a esse livro, ambos abordando conceitos, práticas e ferramentas relacionadas ao desenvolvimento de microsserviços, porém neste trabalho a profundidade é menor e também é apresentada uma aplicação exemplar para demonstração da arquitetura de microsserviços de forma prática.
+
+% Por fim, o livro oferece uma série de exemplos práticos e casos de uso que ilustram como empresas estão adotando microserviços para resolver problemas específicos. Com uma abordagem clara e acessível, The Art of Decoding Microservices é uma leitura recomendada para quem deseja entender melhor a implementação de microserviços, suas vantagens e desafios, além de aprender boas práticas para criar sistemas mais ágeis e robustos.
+
+\section{The Pains and Gains of microservices: a Systematic Grey Literature Review, por \texorpdfstring{\citeonline{relacionados-pains-and-gains}}{Soldani, Tamburri e Heuvel (2018)}}
+Esse artigo apresenta uma revisão sistemática da literatura cinzenta sobre os desafios e benefícios da adoção de uma arquitetura de microsserviços. Os autores buscaram preencher a lacuna entre o que é discutido na indústria e as pesquisas acadêmicas ainda em desenvolvimento. Para isso, analisaram 51 fontes da literatura cinzenta publicadas entre 2014 e 2017, incluindo blogs técnicos, artigos de conferências industriais e relatórios de empresas.
+
+Os resultados mostram que a adoção de microsserviços traz diversos desafios, desde o \emph{design} até a operação dos serviços. No \emph{design}, há dificuldades em definir a granularidade ideal dos microsserviços, versionamento de APIs e implementação de segurança distribuída. No desenvolvimento, surgem problemas com consistência de dados, transações distribuídas e dificuldades na execução de testes de integração e desempenho. Já na operação, os principais desafios incluem monitoramento complexo, orquestração de serviços e alto consumo de rede e processamento.
+
+Apesar desses desafios, os autores identificam uma série de benefícios associados aos microsserviços. No \emph{design}, a arquitetura permite maior escalabilidade, tolerância a falhas e compatibilidade com ambientes de computação em nuvem. No desenvolvimento, os microsserviços oferecem independência tecnológica, facilitam a implementação de técnicas de CI/CD e incentivam a reutilização de componentes. Na operação, os microsserviços permitem implantação rápida, escalabilidade horizontal e isolamento de falhas, tornando as aplicações mais resilientes.
+
+O estudo conclui que, embora os microsserviços ofereçam benefícios significativos, sua adoção exige boas práticas e ferramentas adequadas para mitigar os desafios identificados. A pesquisa contribui tanto para pesquisadores, ao fornecer um panorama dos problemas e vantagens dessa arquitetura, quanto para profissionais da indústria, ao reunir percepções práticas sobre a implementação de microsserviços em larga escala.
+
+Diferente do presente trabalho, esse artigo foca na literatura cinzenta para determinar as práticas, benefícios e desafios característicos da arquitetura de microsserviços; e também não trata de ferramentas que podem ser usadas para os desenvolver.
+
+\section{How Do Microservices evolve? an Empirical Analysis of Changes in open-source Microservice Repositories, por \texorpdfstring{\citeonline{relacionados-how-evolve}}{Assunção et al. (2023)}}
+
+Esse artigo investiga como os microsserviços evoluem ao longo do tempo, por meio da análise de 7.319 \emph{commits} em 11 sistemas de código aberto, buscando entender se os microsserviços realmente evoluem de forma independente, como previsto pelo modelo arquitetural, ou se há interdependências significativas entre eles.
+
+A motivação do estudo é que apesar de os microsserviços teoricamente oferecerem modularidade, escalabilidade e independência, na prática sua manutenção e evolução podem ser mais complexas do que o esperado. O artigo, então, busca responder duas questões principais: como os sistemas baseados em microsserviços evoluem e por que essa evolução acontece dessa forma. Para isso, os pesquisadores classificaram as alterações realizadas nos sistemas em três tipos: técnicas (como atualizações de bibliotecas e configurações), de serviços (relacionadas à lógica de negócio) e diversas (mudanças que não afetam diretamente o código).
+
+Os resultados mostram que, na maioria dos sistemas analisados, a evolução dos microsserviços é predominantemente técnica, com um grande número de \emph{commits} voltados para ajustes de infraestrutura e configuração, em vez de mudanças na lógica de negócio. Além disso, embora os microsserviços sejam projetados para operar de forma independente, os dados revelam que, na prática, eles raramente evoluem isoladamente. De acordo com os autores, essa interdependência ocorre principalmente devido a APIs compartilhadas, mudanças arquiteturais globais e ajustes de infraestrutura.
+
+Outra descoberta importante é que a forma como os microsserviços evoluem muda ao longo do tempo. Nos estágios iniciais de desenvolvimento de um sistema, há muitas mudanças relacionadas à lógica de negócio, refletindo o processo de construção dos serviços. No entanto, conforme o sistema amadurece, as alterações passam a ser majoritariamente técnicas, sendo focadas em manutenção, escalabilidade e ajustes estruturais. Isso sugere que, com o tempo, os desafios da evolução dos microsserviços deixam de ser sobre inovação e passam a envolver a sustentação e a manutenção da arquitetura.
+
+O estudo conclui que, embora os microsserviços sejam teoricamente projetados para oferecer independência, a realidade é mais complexa, muitas vezes havendo forte interdependência entre serviços. Dessa forma, a fim de facilitar a manutenção dos sistemas ao longo do tempo, faz-se importante o estudo e aplicação de boas práticas e ferramentas no desenvolvimento da arquitetura de microsserviços, tópicos os quais não são abordados no artigo em questão, entretanto são abordados no presente trabalho, que foca justamente no desenvolvimento dos microsserviços.
+
+% Essas descobertas são relevantes tanto para a comunidade acadêmica, que estuda microsserviços, quanto para praticantes da indústria, que precisam lidar com os desafios reais dessa abordagem arquitetural.
+
+
+% A Word on Microservices Today
+% Microservices is a fast-moving topic. Although the idea is not new (even if the term
+% itself is), experiences from people all over the world, along with the emergence of new
+% technologies, are having a profound effect on how they are used. Due to the fast pace
+% of change, I have tried to focus this book on ideas more than specific technologies,
+% knowing that implementation details always change faster than the thoughts behind
+% them. Nonetheless, I fully expect that in a few years from now we’ll have learned even
+% more about where microservices fit, and how to use them well.
+% So while I have done my best to distill out the essence of the topic in this book, if this
+% topic interests you, be prepared for many years of continuous learning to keep on top
+% of the state of the art!
+
+% It identifies the challenges that practitioners face and the solutions employed by them when designing, monitoring, and testing microservices systems.
+
+% It provides an in-depth discussion on the findings from the microservices practitioners’ perspective and implications for researchers and practitioners.
+
+% (Comparar cada trabalho com o meu trabalho. Coisas que eles não abordam e que eu abordo)
