@@ -1,40 +1,25 @@
 # TCC 2
 
-ver como colocar os orientadores 
-
-tirar o resumo do cap do sumário
+ver como colocar os orientadores - ??
+tirar o resumo do cap do sumário - ??
 
 cap 2 - citar 2 exemplos: "tais como", -  OK
-
 as figuras devem aparecer depois das referencias. figura 1. - OK
-
 Geralmente se tem mais trabalhos relacionados. Se adicionar mais trabalhos relacionados, abre um novo capítulo. - OKKOKOKOKOK!!!!
-	> blogs do martin fowler?
 	> livro de continuous delivery de HUMBLE J
-	> oracle corporation
-	> blog do RICHARDSON C
 	> CAOPLE
-
+    > outros
 erros de grafia sao importantes. - OK
-
-cap 5. ??
-
+cap 5 ok
 cap 6
 	> remover a descricao dos diagramas da intro do capitulo - OK
-
 	> colocar a figura mais perto da referencia
-
 	> começar pelo 6.2, descrevendo a aplicação, e depois explicar o que foi usado
-
 	>- ou fala da app, depois dos padroes e ferramentas
 	>- ou começa a descrever e fala da prática usada para aquilo
-
 	> diagrama de pacotes e componente devem vir na frente, pra falar da arquitetura
-
 	> justificar que existem varias sequencias, mas foi usada apenas 1 para ilustração
-
-	> algum trabalho futuro na conclusão, se alguem quisesse extender o trabalho. recuperar o limite da implementação de alguma pratica em um unico microsservico na conclusão
-
+	> algum trabalho futuro na conclusão, se alguem quisesse extender o trabalho. falar sobre uma ferramenta ou prática que só foi implementada em um único microsservico na conclusão.
 
 Perguntar:
     
@@ -103,13 +88,15 @@ Perguntar:
 ## TO DO:
 
     #### Prioridade alta:
-    - Organizar o multirepo com todos os outros repositorios
-    - Incluir alguma outro microsserviço para ser monitorado
-    - Ver um serviço da amazon pra criar um dominio pra o site
-    - Logs/Caching no Nginx (gateway)
-    - Terminar a orquestração de serviços com kubernetes
+    - !Organizar o multirepo com todos os outros repositorios
+    - !Logs/Caching no Nginx (gateway)
+    - !Terminar a orquestração de serviços com kubernetes
         API Gateway pelo AWS ElasticLoadBalancing, que pode ser feito pelo kubernetes ??
-    - Implementar o Jaeger para tracing?
+    
+
+    - Ver um serviço da amazon pra criar um dominio pra o site?
+    - Incluir alguma outro microsserviço para ser monitorado
+
     - Terminar o capítulo 6 e conclusão ✅
     - Serviço de Financeiro ✅
     - Caching na Loja (com Memcached) ✅
@@ -125,6 +112,7 @@ Perguntar:
     - CI (com GitHub Actions) ✅
 
     #### Prioridade média
+    - Implementar o Jaeger para tracing?
     - Ver pedidos no microsserviço de administração
     - Implementar salvamento de imagens dos produtos no banco de dados e gerenciamento no front de administração (?)
     - remover produto do carrinho ✅
