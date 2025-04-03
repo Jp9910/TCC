@@ -81,19 +81,20 @@ Perguntar:
 
         nota no sigaa é colocada pelo orientador, depois de fazer as correções no prazo devido
 
-        >> aprofundar mais nas ferramentas que usei?
+        aprofundar mais nas ferramentas que usei?
 
-        defesa segunda 31/03?
+        >> defesa segunda 02/04
 
 ## TO DO:
 
     #### Prioridade alta:
-    - !Organizar o multirepo com todos os outros repositorios
+    - !Organizar o multirepo com todos os outros repositorios ✅
     - !Logs/Caching no Nginx (gateway)
-    - !Terminar a orquestração de serviços com kubernetes
+    - !Terminar a orquestração de serviços com kubernetes ✅
         API Gateway pelo AWS ElasticLoadBalancing, que pode ser feito pelo kubernetes ??
     
-
+    - README e dockerfile do Financeiro
+    - Revisar README de todos os repos
     - Ver um serviço da amazon pra criar um dominio pra o site?
     - Incluir alguma outro microsserviço para ser monitorado
 
@@ -123,6 +124,7 @@ Perguntar:
     - Implementar login de admin (front-admin) ✅
 
     #### Prioridade baixa:
+    - atualizar navbar corretamente ao clicar em logout
     - Busca de produtos no front e api de loja
     - Implementar imagem/linkImagem na loja e carrinho.
     - Implementar quantidade de produtos no carrinho, pedido e loja. precisaria de uma classe intermediaria entre Pedido e Produto na ms-loja e Carrinho e Produto no ms-carrinho ..?

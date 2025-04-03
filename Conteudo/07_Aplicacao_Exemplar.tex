@@ -51,7 +51,7 @@ Para a divisão do sistema em torno dos domínios de negócio, foram aplicados a
 
 % que os contextos de pedidos e produtos seriam mesclados para serem responsabilidade apenas do microsserviço de loja, mas essa não foi uma decisão fácil.
 
-Determinar qual desses dois contexto seria o mais apropriado para a mescla não foi fácil, e certamente terá implicações futuras na manutenção do sistema. No fim, foi decidido que eles seriam mesclados com o contexto de catálogo, assim sendo responsabilidade do microsserviço de loja, pois pedidos são naturalmente relacionados com produtos e necessitam de alta consistência por envolver múltiplas operações, assim tornando o banco de dados relacional, que foi o escolhido para o armazenamento dos produtos, mais apropriado para o caso, em contraste com o banco de dados NoSQL, que foi o escolhido para armazenamento dos carrinhos. Essa decisão está refletida no diagrama de classes da aplicação, apresentado na \autoref{figura-diagrama-de-classes}, onde podem ser vistos as classes, controladores e fronteiras da aplicação e suas associações.
+Determinar qual desses dois contextos seria o mais apropriado para a mescla não foi fácil, e certamente terá implicações futuras na manutenção do sistema. No fim, foi decidido que o contexto de pedidos seria mesclado com o contexto de catálogo, assim sendo responsabilidade do microsserviço de loja, pois pedidos são naturalmente relacionados com produtos e necessitam de alta consistência por envolver múltiplas operações, assim tornando o banco de dados relacional, que foi o escolhido para o armazenamento dos produtos, mais apropriado para o caso, em contraste com o banco de dados NoSQL, que foi o escolhido para armazenamento dos carrinhos. Essa decisão está refletida no diagrama de classes da aplicação, apresentado na \autoref{figura-diagrama-de-classes}, onde podem ser vistos as classes, controladores e fronteiras da aplicação e suas associações.
 
 \begin{figure}[htb]
 	\caption{\label{figura-diagrama-de-classes}Diagrama de classes da aplicação exemplar}
@@ -183,7 +183,7 @@ O acesso ao banco de dados em memória no microsserviço de loja, por exemplo, f
 
 \subsubsection*{CLEAN}
 Também foram implementados alguns princípios da arquitetura CLEAN, o que favoreceu ainda mais a independência entre os componentes e camadas do sistema. Ao aplicar esse padrão, foi possível isolar a lógica de domínio das dependências externas, como \emph{frameworks} e bancos de dados. Essa separação resultou em um design mais robusto, onde a lógica de negócio permanece centralizada e facilmente testável, permitindo a evolução contínua dos microserviços com risco reduzido de efeitos colaterais indesejados.
-Nos microsserviços de loja e autenticação, por exemplo, é possível alterar o banco de dados usado sem ser necessário alterações no código, apenas na configuração e dependências.
+Nos microsserviços de loja e usuários, por exemplo, é possível alterar o banco de dados usado sem ser necessário alterações no código, apenas na configuração e dependências.
 
 % O monitoramento foi feito apenas para o microsserviço de usuários por falta de tempo, mas todos os microsserviços podem ser configurados para utilizá-los, e novos \emph{dashboards} podem ser criados para monitorá-los
 
