@@ -1,0 +1,142 @@
+>> Examinador
+
+4 pontos. objetos de estudo - houve emprego ou ampliação dos saberes e competencias. foi desenvolvido conforme objetivos estabelecidos
+
+4 pontos. redaçao clara e coesa
+apresenta composição e qualidade tecnica adequada
+
+
+seminários:
+	o aluno demonstrou domínio
+	usou adequadamanete os recursos de apoio a apresentações
+	usou adequadamente o tempo de defesa
+	aluno apresentou postura (corporal e de comunicação) adequada?
+	
+
+a aplicação mostrar no final
+
+
+>>Orientador
+4 pontos. =
+
+3 pontos. =
+
+2 pontos. seminário
+
+1 ponto. 
+	cumpriu o cronograma
+
+
+____________________________
+Apresentação...
+
+- LEMBRAR DE INICIAR O SISTEMA NA MÁQUINA VIRTUAL
+- INICIAR O TUNNEL PARA O KUBERNETES
+- DESLOGAR O USUÁRIO DOS FRONTS
+- CONFIGURAR O DASHBOARD
+kubectl apply -f secrets.yaml -f services.yaml -f gateway.yaml -f ms-front-cliente.yaml -f postgres-autenticacao.yaml -f ms-autenticacao.yaml -f loadbalancer-teste.yaml -f ms-loja.yaml -f postgres-loja.yaml -f memcached.yaml -f rabbitmq.yaml -f ms-carrinho.yaml -f mongo-carrinho.yaml -f ms-front-admin.yaml -f monitoramento.yaml -f ms-financeiro.yaml
+
+>>INTRODUÇÃO
+
+(introduzir o trabalho para alguem que queira saber o que eu fiz)
+	
+	Boa tarde a todos e todas. Me chamo joão paulo secundo, e vou apresentar o meu trabalho de conclusão de curso intitulado "Desenvolvimento de aplicações com arquitetura de microsserviços". 
+
+Começando com uma introdução o tema, eu destaco o grande crescimento e popularização da internet nas últimas 2 a 3 décadas. E também no aumento do uso de computadores e smarthphones, e esses 2 fatos estão muito ligados.
+
+Esse crescimento impactou na forma como os produtos de software, ou aplicações, são disponibilizados. Há não muitos anos atrás era mais comum instalarmos um software como um pacote completo e fechado nas nossas máquinas. Mas hoje em dia o mais comum é o modelo de software as a service, onde o usuário pode acessar o software pela internet, hospedado pelo provedor do software, o que dá mais liberdade aos criadores do software pra modifica-lo mesmo depois dele ser disponibilizado pro público, e também o usuário não precisa se preocupar em configurar o software localmente.
+
+>>passar slide
+Mas e quando esse software tem uma base grande de usuários? Esses usuarios vao estar consumindo recursos do provedor pra acessar o software, em vez de recursos próprios. Então é muito importante se pensar em como manter o software o mais disponível e eficiente possível. 
+
+E isso implicou numa mudança no foco de como essas aplicações são desenvolvidas   e mantidas, agora se preza mais pela modularidade, escalabilidade, flexibilidade e disponibilidade das aplicações. Tanto pela necessidade de acomodar mais usuários quanto pela de manter a aplicação livre de falhas.
+E nesse contexto foi proposta a abordagem de arquitetura de microsserviços, que é baseada na arquitetura orientada a serviços, e oferece diversos benefícios, como os listados acima, mas também tem muitos desafios e tradeoffs envolvidos no seu uso.
+
+E com isso em mente, o meu trabalho tem o objetivo geral de Analisar o desenvolvimento de aplicações com arquitetura de microsserviços.
+
+E os objetivos específicos podem ser vistos nesse slide e no trabalho, mas resumindo eles são:
+	caracterizar a arquitetura de microsserviços; 
+	Apresentar práticas que são muito usadas pra desenvolver aplicações com essa arquitetura;
+	Apresentar ferramentas que são muito usadas;
+	Contextualizar essas ferramentas;
+	E por fim, desenvolver uma aplicação exemplar que use a arquitetura de microsserviços, usando uma combinação das práticas e ferramentas apresentadas.
+
+E porque usar a arquitetura de microsserviços? Justamente pela tendência da indústria de disponibilizar aplicações com o modelo de Software as a Service, ou SaaS. E pra assim desenvolver aplicações que sejam: Confiáveis, Altamente disponíveis, escaláveis, portáveis, e mantidas mais facilmente.
+
+Além disso, o meu trabalho também busca orientar engenheiros de software sobre o desenvolvimento de aplicações que usam essa arquitetura, e como fazer isso bem, usando práticas e ferramentas bem consolidadas na indústria.
+
+Aqui tem um exemplo de uma aplicação com arquitetura de microsserviços, onde os clientes, na camada serviços de ponta fazem requisições aos gateways, que recebem as requisições e as redirecionam pra os serviços de negócio apropriados, que por sua vez vão acessar um dos múltiplos bancos de dados, conforme a prática de descentralização de dados. Mas esses serviços de negócio só devem poder acessar diretamente um único banco de dados pra assim se ter melhor isolamento e independência entre os componentes da aplicação.
+
+Já sobre como a aplicação desenvolvida nesse trabalho foi feita,
+Antes de tudo, em qualquer aplicação, é muito importante entender e modelar o domínio dela, que é um dos problemas intrínsecos do desenvolvimento de software. E especialmente no caso dos microsserviços, onde a separação adequada é tão importante. E pra fazer essa separação, foi usado alguns princípios do domain-driven design, como os bounded contexts (contextos limitados). Esses contextos foram identificados e foram divididos em microsserviços. Em seguida, foram escolhidas ferramentas para o desenvolvimento desses microsserviços, conforme as necessidades surgiam, e tendo em vista os limites desse trabalho acadêmico.
+
+Também foram usados alguns padrões de projeto, como o MVC, CLEAN e SOLID, para se desenvolver microsserviços que sejam bem organizados, eficazes e eficientes .
+
+E agora pra falar sobre a aplicação em sí,
+Ela se trata de uma aplicação web de e-commerce, também conhecido como uma loja online.
+
+Eu começo mostrando o diagrama de componentes, cujos componentes estão separados em tipos. Eu usei MS como abreviação de microsserviço, aqui. 
+
+Um cliente que quiser comprar na loja pode acessar o microsserviço de Front Cliente, aqui à esquerda, que provê interfaces de usuário pra esse cliente realizar todas as operações relevantes a ele, tal como ver e buscar produtos, adicionar produtos ao carrinho, e realizar um pedido no carrinho. 
+
+Um administrador da loja pode acessar o microsserviço Front Administração pra realizar todas as operações que são relevantes a ele, por exemplo adicionar ou alterar produtos, e adicionar ou alterar usuários do sistema.
+
+Esses microsserviços de ponta não se comunicam com nenhum outro microsserviço diretamente, eles fazem requisições pra o gateway, e o gateway vai redirecionar as requisições pra o microsserviço de negócio apropriado, assim centralizando a comunicação do sistema. E então os microsserviços de negócio vão executar a lógica apropriada, podendo se comunicar com o servidor de mensagem, com os bancos de dados ou com os componenetes de monitoramento durante o processo.
+
+E agora passando pra o diagrama de pacotes, da pra ver um pouco melhor a organização interna de cada microsserviço, e o tipo de comunicação usada pra acessar funcionalidades entre eles. No caso dos microsserviços de ponta, aqui à esquerda, eles vão usar APIs REST para acessar funcionalidades dos microsserviços de negócios. 
+
+Já os microsserviços de negócios, pra se comunicar com outros microsserviços de negócio, usam exclusivamente comunicação assíncrona, pra assim poder operar de forma independente, o que diminui o acoplamento entre os microsserviços, porque eles não dependem de uma resposta do outro, e também aumenta a escalabilidade do sistema, porque assim eles podem ser escalados mais independentemente.
+
+Além disso, é possível, por exemplo, que o microsserviço de loja se comunique com o microsserviço de carrinho mesmo que esse ultimo esteja fora do ar no momento da mensagem. Essa mensagem seria armazenada pelo servidor de mensagens, no caso o RabbitMQ, e quando o microsserviço de carrinho eventualmente voltar ao ar, ele vai buscar essas mensagens e vai as processar de forma adequada.
+
+E ainda nesse mesmo diagrama, é possivel ver também como o microsserviço é organizado internamente. É possível ver aqui que os microsserviços de negócio, à direita, tem diretórios separados para Controladores, ou Controllers, e para Modelos, ou models. seguindo o padrão MVC, ou Model-View-Controller. Porém, devido a divisão natural dessa arquitetura, não é necessário nesses microsserviços ter diretórios para a camada de View, por que a camada de view vai ser justamente os microsserviços de ponta.
+
+E agora indo pra o diagrama de classes, dá pra ver outra perspectiva de como o sistema está organizado. Da pra ver as classes, os controles e as fronteiras do sistema, as fronteiras naturalmente estão apenas nos microsserviços de ponta, à esquerda, e os controles nos microsserviços de negócio, assim seguindo mais alguns princípios dos padrões de projeto usados na aplicação.
+
+Cada microsserviço define classes de acordo com os dados armazenados por eles. Então o microsserviço de loja, por exemplo, não define uma classe de usuário. Ele vai usar informações do usuário, mas são informações buscadas ou recebidas por outro microsserviço, como o email pra um cadastro de pedido por exemplo, que é enviado pelo microsserviço de ponta de clientes. Mas não é necessário na loja, armazenar informações do usuário, evitando a repetição.
+
+Porém, da pra ver aqui outra característica da descentralização dos dados, que é a repetição de informações. Nesse casso, informações do produto, que tem uma definição tanto no microsserviço de carrinho quanto no de loja. Embora no carrinho ele armazene menos informações, mas são informaçoes repetidas. E essa repetição é um tradeoff, diminuindo uma comunicação e acoplamento entre os microsserviços, em troca de informações duplicadas.
+
+E por fim eu mostro o diagrama de sequência da funcionalidade de comprar produtos.
+Começa com o usuário na tela de carrinho...
+
+E agora saindo da apresentação de slides,
+ 
+
+O trabalho 
+um modelo que tem ganhado destaque na engenharia de software por sua capacidade de oferecer escalabilidade, flexibilidade e resiliência a aplicações complexas. Diferente de arquiteturas monolíticas, os microsserviços segmentam uma aplicação em pequenos serviços independentes, que podem ser desenvolvidos, implantados e escalados separadamente.
+
+>> OBJETIVOS
+os mesmos do trabalho
+
+>> JUSTIFICATIVA
+
+Geralmente justifica: 
+	por que eu abordei esse tema? 
+	por que essa tecnologia é interessante?
+
+justifica para o desenvolvedor ou pra sociedade ou pra uma organização. 
+Poderia dizer que uma organização ou uma empresa precisa de aplicativos robustos e com alta disponibilidade. Também é valioso para o desenvolvedor, pelo conjunto de ferraemntas que expões disponiveis para o desenvolvedor e pra equipe. falar de custos de uso?
+manter em mente que é 15 minutos de apresentação de slides
+e 5 minutos de apresentação da aplicação
+
+15h
+>>>> PERGUNTAR COMO DEVE SER EXPLICADO O DIAGRAMA?
+
+
+erros:
+-poderiam ter sido expostas mais ferramentas...
+-as ferramentas poderiam ter sido melhor comparadas...
+-pontos positivos e negativos das ferramentas?...
+-os diagramas tao certos tecnicamente?? talvez eu devesse ter consultado algum outro professor sobre os diagramas...
+-o capitulo da aplicacao exemplar podia explicar mais, mas foi feito muito nas pressas...
+-algumas referencias tem elementos (como a data) em inglês...
+-usei mesmo esses padrões de projeto que citei?
+
+
+
+Passar a Introdução e objetivos rapidamente
+Focar na explicação da aplicação
+Não adicionar slide só pra pular. Explicar cada um
+>na intro fiquei x tempo
+>a aplicação deve levar uns 60-70%

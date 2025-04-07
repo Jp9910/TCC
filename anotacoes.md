@@ -1,5 +1,40 @@
 # TCC 2
 
+>>>
+Comentários examinador
+
+aninhamento do microsserviço -> falar sobre ser nativo da nuvem.
+
+falar da arquitetura híbrida monolito e serviço.
+complemento: falar sobre o FaaS
+
+sugestão: no contexto do teorema cap e dos bancos de dados usados. falar que para o projeto não foi feito o cluster, mas poderia ser feito cluster de bancos de dados. "a ferramenta que eu escolhi permite isso"
+
+falar que foram usados muitos frameworks, mas poderia dizer que isso aumenta muito a complexidade do sistema.
+
+falar do design pattern: SAGA
+
+sugestão de aprender sobre o DDD: event-storming
+
+Framework Java: Quartus <-> kubernetes
+
+Framework Python: fastAPI. pois alguns microsserviços são realmente apenas APIs
+
+no 6.7: rest como ferramenta de comunicação --> http.
+falar do graphql rapidamente.
+
+conclusão: parágrafo explicando que é bom poder usar várias stacks, mas lembrar que isso aumenta muito a complexidade
+<<<
+
+erros:
+-poderiam ter sido expostas mais ferramentas...
+-as ferramentas poderiam ter sido melhor comparadas...
+-pontos positivos e negativos das ferramentas?...
+-os diagramas tao certos tecnicamente?? talvez eu devesse ter consultado algum outro professor sobre os diagramas...
+-o capitulo da aplicacao exemplar podia explicar mais, mas foi feito muito nas pressas...
+-algumas referencias tem elementos (como a data) em inglês...
+-usei mesmo esses padrões de projeto que citei?
+
 ver como colocar os orientadores - ??
 tirar o resumo do cap do sumário - ??
 
