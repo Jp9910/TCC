@@ -24,18 +24,14 @@ Quando se está procurando por ferramentas para o desenvolvimento de aplicaçõe
 
 % software as a SERVICE
 % platform as a SERVICE
-O uso de serviços em nuvem no desenvolvimento e lançamento de aplicações tem crescido cada vez mais na última década. As principais plataformas de nuvem, AWS, Azure e GCP, oferecem uma enorme variedade de serviços que permitem que aplicações sejam criadas, lançadas e mantidas com mais qualidade e de maneira mais simples. De interesse especial às aplicações com arquitetura de microsserviços, eles incluem serviços confiáveis e escaláveis de IaaS ou PaaS, oferencendo desde máquinas virtuais e contêineres até bancos de dados, sistemas de mensagens e soluções \emph{serverless}. Ao usar esses serviços, uma grande parte do trabalho de configuração e gerenciamento da infraestrutura ou plataforma é terceirizada para esses provedores, que quase certamente são melhores em lidar com essas questões. Além disso, a disponibilidade global dos centros de dados dos provedores de nuvem permite que aplicações sejam distribuídas geograficamente, reduzindo a latência e melhorando a experiência do usuário final. \cite{livro-building-microservices}
 
 % TODO: Elaborar sobre FaaS e serverless
+O uso de serviços em nuvem no desenvolvimento e lançamento de aplicações tem crescido cada vez mais na última década. As principais plataformas de nuvem, AWS, Azure e GCP, oferecem uma enorme variedade de serviços que permitem que aplicações sejam criadas, lançadas e mantidas com mais qualidade e de maneira mais simples. De interesse especial às aplicações com arquitetura de microsserviços, eles incluem serviços confiáveis e escaláveis de IaaS ou PaaS, oferencendo desde máquinas virtuais e contêineres até bancos de dados, sistemas de mensagens e soluções \emph{serverless}. Ao usar esses serviços, uma grande parte do trabalho de configuração e gerenciamento da infraestrutura ou plataforma é terceirizada para esses provedores, que quase certamente são melhores em lidar com essas questões. Além disso, a disponibilidade global dos centros de dados dos provedores de nuvem permite que aplicações sejam distribuídas geograficamente, reduzindo a latência e melhorando a experiência do usuário final. \cite{livro-building-microservices}
 
 % Esse artigo fala um pouco sobre computação serverless https://www.redhat.com/pt-br/topics/microservices/what-are-microservices
 
 % Os provedores de nuvem também oferecem recursos avançados de segurança e conformidade, garantindo a proteção de dados e o cumprimento de normas regulatórias. Soluções como gerenciamento de identidade e acesso, criptografia de dados e monitoramento contínuo ajudam a proteger aplicações contra ameaças e falhas. 
 % Outro fator importante que favorece o uso de serviços em nuvem é a segurança e conformidade oferecida pelos provedores, que geralmente implementam mecanismos avançados de proteção, como criptografia de dados, gerenciamento de identidade e acesso, além de auditorias e monitoramento contínuo. Isso possibilita que empresas atendam a regulamentações e padrões de segurança sem a necessidade de gerenciar a infraestrutura internamente. Dessa forma, o uso de serviços em nuvem não só otimiza o desenvolvimento e a implantação de aplicações, mas também garante maior confiabilidade, disponibilidade e inovação no ambiente digital.
-
-
-% \subsection{Aplicações \emph{serverless} (sem servidor)}
-% TODO: Poderia ter uma seção dedicada a falar sobre provedores em núvem e seus papeis no desenvolvimento/implantação de uma arquitetura de microsserviços. 
 
 %    O livro \cite{livro-building-microservices} Capitulo 1 > Enabling technology > Public cloud and serverless tem informações interessantes sobre serverless 
 
@@ -277,13 +273,26 @@ Já o GitLab CI/CD oferece um meio-termo entre a simplicidade do GitHub Actions 
 
 \section{Comunicação}
 
-\subsection{RPC - gRPC}
+\subsection{REST e HTTP}
+Na arquitetura de microsserviços, cada microsserviço pode expor APIs que definem \emph{endpoints} específicos, permitindo que outros serviços realizem operações como criação, leitura, atualização e exclusão de recursos, normalmente por meio do protocolo HTTP.
+O uso do estilo arquitetural REST para a definição de APIs, proposto por \citeonline{rest_protocol}, em conjunto com o protocolo HTTP para acesso a essas APIs constitui uma abordagem simples, bem consolidada e amplamente adotada para a comunicação síncrona em diversos tipos de aplicações, incluindo na arquitetura de microsserviços.
+
+A simplicidade e a ubiquidade do protocolo HTTP tornam o desenvolvimento e manutenção da comunicação fácil e acessível. Além disso, APIs que seguem o estilo arquitetural REST (chamadas de APIs \emph{RESTful}) são independentes de plataforma, o que promove a interoperabilidade entre serviços desenvolvidos com diferentes ferramentas. No entanto, a sobrecarga inerente ao protocolo HTTP reduz a eficiência da comunicação, reduzindo o desempenho do sistema, especialmente em cenários onde ocorrem grandes quantidades de requisições em pouco tempo, o que é comum na arquitetura de microsserviços. Nesses casos, alternativas como gRPC ou GraphQL podem ser mais apropriadas.
+
+\subsection{GraphQL}
+% GraphQL is an open-source query language for APIs, along with a server-side runtime for executing those queries by leveraging a type system you define for your data. Developed internally by Facebook in 2012 and released publicly in 2015, GraphQL provides a more efficient, powerful, and flexible alternative to the traditional REST API architecture.
+
+GraphQL é uma linguagem de consulta e um ambiente de execução para APIs que permite a busca e manipulação de dados de forma eficiente e flexível. Ele é uma alternativa às APIs REST tradicionais para comunicação síncrona (porém também permite comunicação assíncrona) que tem o propósito de realizar uma comunicação eficiente, evitando busca excessiva ou insuficiente de dados. Assim sendo, uma das principais características do GraphQL é permitir que os clientes solicitem exatamente os dados de que precisam, evitando o carregamento e envio de informações desnecessárias. Para tanto, o GraphQL utiliza um único endpoint para atender a todas as requisições, diferentemente do protocolo REST, que utiliza \emph{endpoints} diferentes para recursos diferentes. Entretanto, isso também significa que haverá uma maior carga de trabalho do lado do servidor para processar a consulta de dados \cite{graphql_redhat}.
+
+O GraphQL é baseado em esquemas, que definem os tipos de dados disponíveis e as relações entre eles, funcionando como um contrato entre o cliente e o servidor. Essa abordagem facilita a validação das consultas e a evolução da API, reduzindo impactos negativos aos clientes devido a mudanças. Além disso, o GraphQL pode agregar dados de várias fontes em uma única chamada, simplificando a obtenção de informações necessárias, o que é particularmente útil em sistemas complexos como em aplicações com arquitetura de microsserviços, que dependem de múltiplos serviços ou bancos de dados \cite{graphql_redhat}.
+
+\subsection{gRPC}
 % gRPC é uma ferramenta moderna com alto desempenho que tem ganhado grande popularidade em meio aos praticantes de microsserviços e é considerada um "projeto de incubação" pela Cloud Native Computing Foundation 
 
-% TODO:!!! Melhorar esse lixo ou então só comentar
-gRPC é uma ferramenta \emph{open-source} desenvolvida pelo Google que permite o uso de Remote Procedure Call (RPC) entre sistemas distribuídos. Ele usa o formato \emph{Buffers de protocolo} para trocas de dados com menor consumo de recursos. Uma característica importante do gRPC é seu suporte a \emph{streaming} bidirecional e multiplexação, o que o torna ideal para cenários que exigem comunicação em tempo real e transferências de dados grandes entre serviços. Ele suporta tanto comunicação síncrona quanto assíncrona, oferecendo flexibilidade na interação entre os serviços. 
+% TODO:? Elaborar melhor sobre o gRPC
+gRPC é uma ferramenta \emph{open-source} desenvolvida pelo Google que permite o uso de Remote Procedure Call (RPC) entre sistemas distribuídos. Uma característica importante do gRPC é seu suporte a \emph{streaming} bidirecional e multiplexação, o que o torna ideal para cenários que exigem comunicação em tempo real e transferências de dados grandes entre serviços. Ele suporta tanto comunicação síncrona quanto assíncrona e usa o formato \emph{Buffers de protocolo} para trocas de dados com menor consumo de recursos, oferecendo flexibilidade e eficiência na interação entre os serviços. 
+Além disso, seu sistema de tipagem e suporte embutido para autenticação, balanceamento de carga e descoberta de serviços fazem do gRPC uma ferramenta poderosa para a construção de microsserviços de alto desempenho e escaláveis. \cite{grpc}
 % O gRPC também usa o HTTP/2, que permite recursos como \emph{streams} de dados multiplexados, compressão de cabeçalhos e gerenciamento eficiente de conexões, tornando-o mais performático do que as APIs REST tradicionais baseadas em HTTP, especialmente em ambientes com baixa latência e alto fluxo. 
-Além disso, seu sistema de tipagem e suporte embutido para autenticação, balanceamento de carga e descoberta de serviços fazem do gRPC uma ferramenta poderosa para a construção de microsserviços de alto desempenho, escaláveis e seguros. \cite{grpc}
 
 \subsection{Sistemas de mensagens}
 Sistemas de mensagens são plataformas que permitem a comunicação entre diferentes componentes ou serviços de um sistema distribuído por meio de mensagens. Eles facilitam a comunicação assíncrona entre sistemas, desacoplando produtores e consumidores de mensagens. Esses sistemas são essenciais para arquiteturas escaláveis, como microserviços, permitindo a transmissão eficiente de dados entre diferentes partes do sistema sem interdependências diretas. Aqui são apontados alguns sistemas de mensagens comumente usados em arquiteturas distribuídas, sendo a escolha entre eles dependente da forma das mensagens, requisitos de escalabilidade e se a solução é auto-hospedada ou com infraestrutura gerenciada.
