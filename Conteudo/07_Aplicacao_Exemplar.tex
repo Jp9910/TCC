@@ -90,7 +90,8 @@ Como servidor web foi usado o Nginx nos serviços de ponta para servir os arquiv
 \subsection{Bancos de dados e descentralização dos dados}
 Foram usados diferentes instâncias e tecnologias de bancos de dados na aplicação desenvolvida, assim proporcionando a descentralização dos dados. Nos microsserviços de loja e de usuários foi usado o banco de dados relacional PostgreSQL, tanto pela simplicidade de configuração quanto pela consistência de dados de operações mais importantes, como criação de um pedido ou de um usuário.
 
-No microsserviço de carrinho foi usado o banco de dados NoSQL MongoDB porque um carrinho tem uma estrutura mais dinâmica, com itens podendo ter estruturas diferentes e sendo adicionados, alterados e removidos frequentemente.
+No microsserviço de carrinho foi usado o banco de dados NoSQL MongoDB porque um carrinho tem uma estrutura mais dinâmica, com itens podendo ter estruturas diferentes e sendo adicionados, alterados e removidos frequentemente. 
+% Além disso, também é possível configurar um \emph{cluster} de bancos de dados MongoDB em servidores diferentes, assim podendo-se obter um escalamento horizontal para suprir diferentes demandas, o que pode ser importante para uma aplicação com picos e declínios de uso. 
 
 Além disso, também foi usado o banco de dados em memória Memcached para realizar o \emph{caching} da busca de produtos no microsserviço de loja, assim proporcionando menor latência e consumo de recurso nessa operação que é executada com alta frequência.
 

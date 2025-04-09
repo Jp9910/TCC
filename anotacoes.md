@@ -8,23 +8,22 @@ aninhamento do microsserviço -> falar sobre ser nativo da nuvem.
 falar da arquitetura híbrida monolito e serviço.
 complemento: falar sobre o FaaS
 
-sugestão: no contexto do teorema cap e dos bancos de dados usados. falar que para o projeto não foi feito o cluster, mas poderia ser feito cluster de bancos de dados. "não fiz, mas a ferramenta que eu escolhi permite isso"
-
-falar que foram usados muitos frameworks, mas poderia dizer que isso aumenta muito a complexidade do sistema.
-
 falar do design pattern: SAGA
-
-sugestão de aprender sobre o DDD: event-storming
 
 Framework Java: Quartus <-> kubernetes
 
 Framework Python: fastAPI. pois alguns microsserviços são realmente apenas APIs
 
+sugestão de aprender sobre o DDD: event-storming
+
 no 6.7: 
 rest como ferramenta de comunicação --> http. - OK
 falar do graphql rapidamente. - OK
 
-conclusão: parágrafo explicando que é bom poder usar várias stacks, mas lembrar que isso aumenta muito a complexidade
+sugestão: no contexto do teorema cap e dos bancos de dados usados. falar que para o projeto não foi feito o cluster, mas poderia ser feito cluster de bancos de dados. "não fiz, mas a ferramenta que eu escolhi permite isso" -- OK
+
+falar que foram usados muitos frameworks, mas poderia dizer que isso aumenta muito a complexidade do sistema. -- ok
+conclusão: destacar que é bom poder usar várias stacks, mas lembrar que isso aumenta muito a complexidade -- ok
 <<<
 
 erros:
