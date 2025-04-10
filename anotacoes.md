@@ -10,9 +10,9 @@ complemento: falar sobre o FaaS
 
 falar do design pattern: SAGA
 
-Framework Java: Quartus <-> kubernetes
+Framework Java: Quartus <-> kubernetes -- ok
 
-Framework Python: fastAPI. pois alguns microsserviços são realmente apenas APIs
+Framework Python: fastAPI. pois alguns microsserviços são realmente apenas APIs -- ok
 
 sugestão de aprender sobre o DDD: event-storming
 
