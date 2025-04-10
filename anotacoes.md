@@ -3,10 +3,11 @@
 >>>
 Comentários examinador
 
-aninhamento do microsserviço -> falar sobre ser nativo da nuvem.
+aninhamento do microsserviço -> falar sobre ser nativo da nuvem. -- ok
 
-falar da arquitetura híbrida monolito e serviço.
-complemento: falar sobre o FaaS
+falar da arquitetura híbrida monolito e serviço. -- ok
+
+complemento: falar sobre o FaaS --ok
 
 falar do design pattern: SAGA
 

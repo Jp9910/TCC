@@ -25,10 +25,23 @@ Quando se está procurando por ferramentas para o desenvolvimento de aplicaçõe
 % software as a SERVICE
 % platform as a SERVICE
 
-% TODO: Elaborar sobre FaaS e serverless
-O uso de serviços em nuvem no desenvolvimento e lançamento de aplicações tem crescido cada vez mais na última década. As principais plataformas de nuvem, AWS, Azure e GCP, oferecem uma enorme variedade de serviços que permitem que aplicações sejam criadas, lançadas e mantidas com mais qualidade e de maneira mais simples. De interesse especial às aplicações com arquitetura de microsserviços, eles incluem serviços confiáveis e escaláveis de IaaS ou PaaS, oferencendo desde máquinas virtuais e contêineres até bancos de dados, sistemas de mensagens e soluções \emph{serverless}. Ao usar esses serviços, uma grande parte do trabalho de configuração e gerenciamento da infraestrutura ou plataforma é terceirizada para esses provedores, que quase certamente são melhores em lidar com essas questões. Além disso, a disponibilidade global dos centros de dados dos provedores de nuvem permite que aplicações sejam distribuídas geograficamente, reduzindo a latência e melhorando a experiência do usuário final. \cite{livro-building-microservices}
+% TODO: Elaborar sobre FaaS e serverless. >> FaaS é um subconjunto da computação serverless
+O uso de serviços em nuvem no desenvolvimento e lançamento de aplicações tem crescido cada vez mais na última década, e é especialmente adequado para a arquitetura de microsserviços, que se adapta muito bem ao uso deles, ou para arquiteturas híbridas que estejam migrando de uma menos distribuída para a de microsserviços. As principais plataformas de nuvem, AWS, Azure e GCP, oferecem uma enorme variedade de serviços confiáveis e escaláveis que permitem que aplicações sejam criadas, lançadas e mantidas com mais qualidade e de maneira mais simples, incluindo serviços de infraestrutura (como máquinas virtuais), de plataforma (como bancos de dados), de computação \emph{serverless} (como soluções de FaaS, que executam funções em resposta a eventos), entre outros. \cite{livro-building-microservices}
+
+Ao usar esses serviços, uma grande parte do trabalho de configuração e gerenciamento da infraestrutura é terceirizada para esses provedores, que quase certamente são melhores em lidar com essas questões. No caso de serviços de computação \emph{serverless}, \textbf{todo} esse trabalho é abstraido, assim sendo de interesse especial às aplicações com arquitetura de microsserviços, por precisarem de muita infraestrutura. Outra vantagem é a disponibilidade global dos centros de dados dos provedores de nuvem, que permite que componentes da aplicação sejam distribuídos geograficamente, possivelmente reduzindo a latência e melhorando a experiência do usuário final.
+
+% (ou todo o, no caso de soluções \emph{serverless})
+% essa última que é de , por abstratir totalmente preocupações de infraestrutura.
+% podendo oferencer desde máquinas virtuais e contêineres até bancos de dados e soluções de FaaS
+
+% Na computação serverless, toda configuração e gerenciamento	da infraestrutura ou plataforma é abstraido.
+% FaaS é um subconjunto da computação serverless. Trata-se de executar código (funções) em resposta a eventos, sem precisar nem se pensar em infraestrutura.
+
+% Ao usar serviços de computação \emph{serverless}, que abstrai totalmente a configuração de infraestrutura.
 
 % Esse artigo fala um pouco sobre computação serverless https://www.redhat.com/pt-br/topics/microservices/what-are-microservices
+
+% Function as a Service (FaaS) is a cloud computing model that enables developers to execute individual functions in response to specific events without the need to manage the underlying infrastructure. Each function operates as an independent, self-contained unit of execution that is triggered by events such as HTTP requests, database changes, or message queue inputs. https://www.ibm.com/think/topics/faas?utm_source=chatgpt.com
 
 % Os provedores de nuvem também oferecem recursos avançados de segurança e conformidade, garantindo a proteção de dados e o cumprimento de normas regulatórias. Soluções como gerenciamento de identidade e acesso, criptografia de dados e monitoramento contínuo ajudam a proteger aplicações contra ameaças e falhas. 
 % Outro fator importante que favorece o uso de serviços em nuvem é a segurança e conformidade oferecida pelos provedores, que geralmente implementam mecanismos avançados de proteção, como criptografia de dados, gerenciamento de identidade e acesso, além de auditorias e monitoramento contínuo. Isso possibilita que empresas atendam a regulamentações e padrões de segurança sem a necessidade de gerenciar a infraestrutura internamente. Dessa forma, o uso de serviços em nuvem não só otimiza o desenvolvimento e a implantação de aplicações, mas também garante maior confiabilidade, disponibilidade e inovação no ambiente digital.
