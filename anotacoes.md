@@ -9,7 +9,7 @@ falar da arquitetura híbrida monolito e serviço. -- ok
 
 complemento: falar sobre o FaaS --ok
 
-falar do design pattern: SAGA
+falar do design pattern: SAGA -- ok
 
 Framework Java: Quartus <-> kubernetes -- ok
 

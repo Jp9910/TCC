@@ -130,13 +130,27 @@ Para o gerenciamento de dados, há a possibilidade de compartilhar um banco de d
 
 Entretanto, essa descentralização tem implicações para o gerenciamento de fluxos de negócios que envolvem escritas em múltiplos bancos de dados. Geralmente a abordagem para se garantir consistência nas escritas é pelo uso de transações quando atualizando múltiplos recursos, porém o uso de transações resulta em um acoplamento temporal, o que pode resultar em problemas quando existem muitos serviços envolvidos em um único fluxo. Ademais, transações distribuídas são notoriamente difíceis de implementar, portanto arquiteturas de microsserviços normalmente realizam coordenação sem transações entre serviços, com reconhecimento claro de que consistência pode ser apenas consistência eventual (em vez de estrita) e que problemas serão lidados pela compensação de operações \cite{martin-fowler-microservices}. 
 
-% \subsection{CQRS}
+\subsection{Saga}
+% Considerando que microsserviços devem possuir seu próprio banco de dados e operar de forma independente, assegurar a integridade dos dados em operações que abrangem múltiplos serviços é um desafio extremamente complexo. 
+Saga é um padrão de projeto que aborda o gerenciamento de transações distribuídas, visando manter a consistência dos dados sem depender de sistemas tradicionais de gerenciamento de transações. Nesse padrão, uma transação global é dividida em uma sequência de transações locais, cada uma executada por um serviço específico e, ao concluir com sucesso, inicia a próxima etapa por meio de eventos ou mensagens. Se uma das transações falhar, serão executadas transações compensatórias para reverter as alterações feitas pelas transações anteriores, garantindo que o sistema retorne a um estado consistente. \cite{SAGA}
+
+Existem duas abordagens principais para implementar o padrão Saga: (1) Coreografia, onde cada microsserviço executa sua transação e, ao concluir, publica um evento que aciona o próximo serviço na sequência. Embora elimine a necessidade de um coordenador central, a coreografia pode se tornar complexa à medida que o número de serviços aumenta, dificultando o rastreamento e a manutenção do fluxo de eventos; (2) Orquestração, onde um orquestrador gerencia a sequência das transações, invocando cada serviço e aguardando sua conclusão antes de prosseguir para o próximo. Embora facilite o controle e o monitoramento do fluxo transacional, a orquestração introduz um ponto central de controle que pode se tornar um ponto de grande falha se não for adequadamente gerenciado. \cite{SAGA}
+
+A implementação do padrão SAGA permite uma melhor escalabilidade horizontal dos bancos de dados e a manutenção da consistência dos dados sem a necessidade de bloqueios prolongados ou coordenação síncrona. Entretanto, a gestão de transações compensatórias e a garantia de idempotência de operações tendem a ser requisitos altamente complexos, além de ser necessário lidar com possíveis falhas transitórias na comunicação. Portanto, ao considerar a implementação desse padrão de projeto, é crucial avaliar cuidadosamente os requisitos do sistema para determinar se os benefícios justificam a complexidade resultante. \cite{SAGA}
+
+
+\subsection{CQRS}
+CQRS é um padrão arquitetural que propõe a separação entre operações de leitura (\emph{queries}) e operações de escrita (\emph{commands}) num sistema em diferentes modelos. Essa abordagem é justificada pelo fato de que normalmente as operações de leitura e de escrita possuem características e requisitos diferentes e podem ser projetadas e otimizadas de forma independente. Ao separar essas responsabilidades, é possível adaptar cada modelo a necessidades específicas de desempenho, segurança e escalabilidade, assim sendo possível, por exemplo, ter-se um banco de dados especializado para leituras rápidas e outro para garantir consistência nas escritas, ambos escalados independentemente. Além disso, o CQRS facilita a implementação de padrões como o \emph{event sourcing}, onde cada alteração de estado é registrada como um evento, permitindo a reconstrução do histórico completo das mudanças no sistema. \cite{martin-fowler-CQRS}
+
+Contudo, o uso do CQRS também traz desafios e desvantagens: a manutenção de múltiplos modelos é mais trabalhosa; pode-se haver inconsistências de dados resultantes da separação de modelos; e aumenta-se consideravelmente a complexidade do sistema. Normalmente a adoção desse padrão só é justificado em aplicações com domínios altamente complexos ou com requisitos de desempenho muito alto, onde os benefícios advindos da separação das responsabilidades de leitura e escrita justificam os desafios e desvantagens consequentes. \cite{martin-fowler-CQRS}
+
+% TODO: Falar do padrão CQRS
 % \emph{Command Query Responsibility Segregation (CQRS)} - Segregação de Responsabilidade de Consulta de Comando. 
 
 % Trata-se de usar um modelo para escrita e outro para leitura. Adiciona complexidade. 
 
 % "CQRS stands for Command Query Responsibility Segregation, which is a software design pattern that separates the operations for reading data (queries) from those for writing data (commands). This separation allows each operation to be optimized independently, improving performance and scalability in complex applications."
-
+% - ler: https://medium.com/%40marcelomg21/cqrs-command-query-responsibility-segregation-em-uma-arquitetura-de-micro-servi%C3%A7os-71dcb687a8a9
 % - ler: https://martinfowler.com/bliki/CQRS.html
 
 % - Um padrão de codificação: CQRS - Command Query Resposibility Segregation (Segregação da responsabilidade entre o comando e uma busca)
